@@ -9,6 +9,7 @@ public class BasePet : MonoBehaviour
         }
     }
     private string petName = "";
+    private bool sleeping = false;
     private Dictionary<string, float> status = new Dictionary<string, float>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +31,11 @@ public class BasePet : MonoBehaviour
     private float time = 0.1f;
     void Update()
     {
+        if (sleeping)
+        {
+            status["tiredness"] = Math.Max(0,status["tiredness"]-0.001f);
+        }
+        //tick stats
         elapsed += Time.deltaTime;
         if (elapsed > time)
         {
@@ -57,5 +63,29 @@ public class BasePet : MonoBehaviour
         {
             status["sickness"] += 0.004f;
         }
+    }
+    void CleanPet()
+    {
+        status["dirtiness"] = Math.Max(0,status["dirtiness"]-0.1f);
+    }
+    void PlayWithPet()
+    {
+        status["boredom"] = Math.Max(0,status["boredom"]-0.15f);
+    }
+    void FeedPet(float hungerRecovery)
+    {
+        status["hunger"] = Math.Max(0,status["hunger"]-hungerRecovery);
+    }
+    void CurePet(float sicknessRecovery)
+    {
+        status["sickness"] = Math.Max(0,status["sickness"]-sicknessRecovery);
+    }
+    void StartSleep()
+    {
+        sleeping = true;
+    }
+    void StopSleep()
+    {
+        sleeping = false;
     }
 }
