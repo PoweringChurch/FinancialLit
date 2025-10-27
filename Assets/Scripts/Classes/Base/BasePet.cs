@@ -20,11 +20,6 @@ public class BasePet : MonoBehaviour
         status.Add("boredom",0f);
         status.Add("hunger",0f);
         status.Add("tiredness",0f);
-
-        foreach (KeyValuePair<string, float> entry in status)
-        {
-            Debug.Log($"Status: {entry.Key}, Value: {entry.Value}");
-        }
     }
     // Update is called once per frame
     private float elapsed = 0;
@@ -41,11 +36,6 @@ public class BasePet : MonoBehaviour
         {
             elapsed = 0;
             Step();
-            Debug.Log("\n Stepped \n");
-            foreach (KeyValuePair<string, float> entry in status)
-            {
-                Debug.Log($"Status: {entry.Key}, Value: {entry.Value}");
-            }
         }
     }
     void SetName(string newPetName)
