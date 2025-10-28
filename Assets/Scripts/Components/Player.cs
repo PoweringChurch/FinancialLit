@@ -4,26 +4,67 @@ public class Player : MonoBehaviour
 {
     public Camera gameCamera;
     public Camera menuCamera;
+    public enum PlayerState {
+        Menu,
+        Viewing, //viewing pets
+        Placement
+    };
+    private PlayerState currentState;
     void Start()
     {
         menuCamera.enabled = true;
         gameCamera.enabled = false;
+        currentState = PlayerState.Menu; //start in menu
     }
-    // Update is called once per frame
     void Update()
     {
+        switch (currentState)
+        {
+            case PlayerState.Viewing:
+            case PlayerState.Placement:
+                MoveCamera();
+                break;
+        }
     }
-    public void SetActiveCam(string camname)
+    public void EnterPlacement()
     {
-        if (camname == "menu")
+        //set current state to placement
+        currentState = PlayerState.Placement;
+    }
+    public void EnterGame()
+    {
+        //set game cam to enabled
+        gameCamera.enabled = true;
+        menuCamera.enabled = false;
+        //set current state to viewing
+        currentState = PlayerState.Viewing;
+    }
+    public void EnterMenu()
+    {
+        //set menu cam to enabled
+        menuCamera.enabled = true;
+        gameCamera.enabled = false;
+        //set current state to menu
+        currentState = PlayerState.Menu;
+    }
+    private float camMovespeed = 20f;
+    private void MoveCamera()
+    {
+        var moveVect2 = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;
+        var movement = new Vector3(1,0,1) * moveVect2.y;
+        movement += gameCamera.transform.right*moveVect2.x;
+        gameCamera.transform.position += movement*Time.deltaTime*camMovespeed;
+    }
+    private Vector3 MouseHit()
+    {
+        Vector2 screenPosition = Mouse.current.position.ReadValue();
+        Ray ray = mainCamera.ScreenPointToRay(screenPosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
         {
-            menuCamera.enabled = true;
-            gameCamera.enabled = false;
+            return mouse.hit;
         }
-        else if (camname == "game")
-        {
-            gameCamera.enabled = true;
-            menuCamera.enabled = false;
-        }
+        return Vector3.zero;
     }
 }
