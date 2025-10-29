@@ -2,29 +2,47 @@ using UnityEngine;
 using System.Collections.Generic;
 public class PlacementHandler : MonoBehaviour
 {
-    public static readonly Dictionary<int, Furniture> FurnitureIDs= new()
-    {
-        [0] = new Furniture(),
-        [1] = new Furniture()
-    };
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Dictionary<int, GameObject> placeableObjectIds;
+    //selected object
+    //tell where to place
+    //tell in what room to place (where to parent instantiated object)
+
+    //place func
+    //remove func
+
+    private GameObject selectedObject;
+    private GameObject currentRoom;
+
+    public GameObject roominit;
     void Start()
     {
+        placeableObjectIds= new()
+        {
+            [0] = Resources.Load<GameObject>("Furniture/Desk"),
+        };
 
+        SetSelectedObject(0);
+        SetRoom(roominit);
     }
-    // Update is called once per frame
-    void Update()
+    public void SetSelectedObject(int id)
     {
-        
+        selectedObject = placeableObjectIds[id];
     }
-    private Furniture selectedFurniture;
-    public void SelectFurniture(int furnitureId)
+    public void SetRoom(GameObject newroom)
     {
-        selectedFurniture = FurnitureIDs[furnitureId];
+        currentRoom = newroom;
     }
-    public void PlaceFurniture(Vector3 cursorPosition, GameObject room)
+    public void Place(Vector3 at)
     {
-        Furniture newFurniture = Instantiate(selectedFurniture, cursorPosition,Quaternion.identity);
-        newFurniture.transform.SetParent(room.transform);
+        if (IsOccupied(at))
+        {
+            return;
+        }
+        var newSelectedObj = Instantiate(selectedObject, at, Quaternion.identity);
+        newSelectedObj.transform.SetParent(currentRoom.transform, true);
+    }
+    private bool IsOccupied(Vector3 at)
+    {
+        return false;
     }
 }

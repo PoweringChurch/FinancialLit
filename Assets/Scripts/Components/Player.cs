@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public Camera gameCamera;
-    public Camera menuCamera;
+    public Camera menuCamera; 
     public enum PlayerState {
         Menu,
         Viewing, //viewing pets
@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
         gameCamera.enabled = false;
         currentState = PlayerState.Menu; //start in menu
     }
+    public PlacementHandler placehandle;
     void Update()
     {
         switch (currentState)
@@ -24,6 +25,17 @@ public class Player : MonoBehaviour
             case PlayerState.Placement:
                 MoveCamera();
                 break;
+        }
+
+        if (Keyboard.current.eKey.wasPressedThisFrame) // Left mouse button click
+        {
+            Vector2 screenPosition = Mouse.current.position.ReadValue();
+            Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                placehandle.Place(hit.point);
+            }
         }
     }
     public void EnterPlacement()
@@ -54,17 +66,5 @@ public class Player : MonoBehaviour
         var movement = new Vector3(1,0,1) * moveVect2.y;
         movement += gameCamera.transform.right*moveVect2.x;
         gameCamera.transform.position += movement*Time.deltaTime*camMovespeed;
-    }
-    private Vector3 MouseHit()
-    {
-        Vector2 screenPosition = Mouse.current.position.ReadValue();
-        Ray ray = mainCamera.ScreenPointToRay(screenPosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            return mouse.hit;
-        }
-        return Vector3.zero;
     }
 }
