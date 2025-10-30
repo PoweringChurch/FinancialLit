@@ -6,8 +6,7 @@ public class Player : MonoBehaviour
     public Camera menuCamera; 
     public enum PlayerState {
         Menu,
-        Viewing, //viewing pets
-        Placement
+        Game
     };
     private PlayerState currentState;
     void Start()
@@ -16,13 +15,11 @@ public class Player : MonoBehaviour
         gameCamera.enabled = false;
         currentState = PlayerState.Menu; //start in menu
     }
-    public PlacementHandler placehandle;
     void Update()
     {
         switch (currentState)
         {
-            case PlayerState.Viewing:
-            case PlayerState.Placement:
+            case PlayerState.Game:
                 MoveCamera();
                 break;
         }
@@ -34,14 +31,13 @@ public class Player : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                placehandle.Place(hit.point);
             }
         }
     }
     public void EnterPlacement()
     {
         //set current state to placement
-        currentState = PlayerState.Placement;
+        //depricated?
     }
     public void EnterGame()
     {
@@ -49,7 +45,7 @@ public class Player : MonoBehaviour
         gameCamera.enabled = true;
         menuCamera.enabled = false;
         //set current state to viewing
-        currentState = PlayerState.Viewing;
+        currentState = PlayerState.Game;
     }
     public void EnterMenu()
     {
@@ -60,6 +56,11 @@ public class Player : MonoBehaviour
         currentState = PlayerState.Menu;
     }
     private float camMovespeed = 20f;
+    //current nonfunctional vv 
+    private float currentZoom = 1f;
+    private float minZoom = 0.1f;
+    private float maxZoom = 1f;
+    private float defaultCamsize = 20f;
     private void MoveCamera()
     {
         var moveVect2 = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;

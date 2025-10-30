@@ -32,7 +32,7 @@ public class PlacementHandler : MonoBehaviour
         _InitializeMaterials();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if (isFixed) return;
         // ignore ground objects
@@ -42,7 +42,7 @@ public class PlacementHandler : MonoBehaviour
         SetPlacementMode(PlacementMode.Invalid);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision other)
     {
         if (isFixed) return;
 
@@ -72,10 +72,12 @@ public class PlacementHandler : MonoBehaviour
         else if (mode == PlacementMode.Valid)
         {
             hasValidPlacement = true;
+            Debug.Log("valid");
         }
         else
         {
             hasValidPlacement = false;
+            Debug.Log("invalid");
         }
         SetMaterial(mode);
     }
@@ -122,6 +124,6 @@ public class PlacementHandler : MonoBehaviour
 
     private bool _IsGround(GameObject o)
     {
-        return ((1 << o.layer) & BuildingPlacer.instance.groundLayerMask.value) != 0;
+        return ((1 << o.layer) & ObjectPlacer.instance.groundLayerMask.value) != 0;
     }
 }

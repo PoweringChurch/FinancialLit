@@ -715,6 +715,54 @@ Transform:
   - {fileID: 999606150}
   m_Father: {fileID: 1809660803}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &401168718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 401168719}
+  - component: {fileID: 401168720}
+  m_Layer: 0
+  m_Name: ObjectPlacer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &401168719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401168718}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1809660803}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &401168720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401168718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7888688b7996f46318a851f8064a10f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPlacer
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  gameCamera: {fileID: 1130872541}
 --- !u!1 &448365809
 GameObject:
   m_ObjectHideFlags: 0
@@ -4495,7 +4543,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1703240752}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 401168720}
+        m_TargetAssemblyTypeName: ObjectPlacer, Assembly-CSharp
+        m_MethodName: SetObjectPrefab
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1929779725024140684, guid: 8483327a387b340ec991a7e4577a7ec9, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1703240752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4899,6 +4959,7 @@ Transform:
   - {fileID: 395478672}
   - {fileID: 166388699}
   - {fileID: 1849845316}
+  - {fileID: 401168719}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1835840285
@@ -5491,7 +5552,7 @@ GameObject:
   - component: {fileID: 2014876021}
   - component: {fileID: 2014876020}
   - component: {fileID: 2014876019}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5622,7 +5683,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   gameCamera: {fileID: 1130872541}
   menuCamera: {fileID: 448365813}
-  placehandle: {fileID: 2061597411}
 --- !u!4 &2061597410
 Transform:
   m_ObjectHideFlags: 0
@@ -5650,7 +5710,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  roominit: {fileID: 999606149}
+  validPlacementMaterial: {fileID: 0}
+  invalidPlacementMaterial: {fileID: 0}
+  meshComponents: []
+  hasValidPlacement: 0
+  isFixed: 0
 --- !u!1 &2075996075
 GameObject:
   m_ObjectHideFlags: 0
@@ -6280,17 +6344,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desk
       objectReference: {fileID: 0}
+    - target: {fileID: 4078126927169418621, guid: 8483327a387b340ec991a7e4577a7ec9, type: 3}
+      propertyPath: m_Name
+      value: Desk
+      objectReference: {fileID: 0}
     - target: {fileID: 6005668673688270245, guid: 8483327a387b340ec991a7e4577a7ec9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.766113
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6005668673688270245, guid: 8483327a387b340ec991a7e4577a7ec9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 48.475983
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6005668673688270245, guid: 8483327a387b340ec991a7e4577a7ec9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.084259
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6005668673688270245, guid: 8483327a387b340ec991a7e4577a7ec9, type: 3}
       propertyPath: m_LocalRotation.w
