@@ -14,8 +14,12 @@ public class FurnitureShop : MonoBehaviour
         {
             Debug.Log("item does not exist");
         }
-        //player.money -= shopItem.price
-        //likely just gonna be a "spend" function in player
-        playerInventory.AddItem(shopItem.item, amount);
+        bool bought = player.Spend(shopItem.price);
+        if (bought)
+        {
+            playerInventory.AddItem(shopItem.item, amount);
+            return;
+        }
+        Debug.Log("broke");
     }
 }
