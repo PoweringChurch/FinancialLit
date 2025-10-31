@@ -30,7 +30,7 @@ public class PlacementHandler : MonoBehaviour
         _nObstacles = 0;
         _InitializeMaterials();
     }
-    //this is triggerenter and not collisionenter because collisionenter requires a rigidbody.
+    //might change back to oncollisionenter.
     private void OnTriggerEnter(Collider other) {
          if (isFixed) return;
         // ignore ground objects
