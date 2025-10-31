@@ -11,6 +11,7 @@ public class ObjectPlacer : MonoBehaviour
       public LayerMask groundLayerMask;
       public Camera gameCamera;
 
+      public Inventory inventory;
       private GameObject _objectPrefab;
       private GameObject _toBuild;
       
@@ -57,6 +58,14 @@ public class ObjectPlacer : MonoBehaviour
                         PlacementHandler handler = _toBuild.GetComponent<PlacementHandler>();
                         if (Keyboard.current.eKey.wasPressedThisFrame && handler.hasValidPlacement)
                         {
+                              inventory.RemoveItem(handler.displayName, 1);
+                              if (inventory.GetItem(handler.displayName) == null)
+                              {
+                                    Destroy(_toBuild);
+                                    _toBuild = null;
+                                    _objectPrefab = null;
+                                    return;
+                              }
                               handler.SetPlacementMode(PlacementMode.Fixed);
                               _toBuild.transform.position = previewOffset + _ClampToNearest(_hit.point, cellSize);
                               _toBuild = null; // (to avoid destruction)
@@ -65,7 +74,7 @@ public class ObjectPlacer : MonoBehaviour
                   }
             }
       }
-
+      
       public void SetObjectPrefab(GameObject setPrefab)
       {
             _objectPrefab = setPrefab;

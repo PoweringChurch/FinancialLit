@@ -12,6 +12,7 @@ public enum PlacementMode
 //https://github.com/MinaPecheux/unity-tutorials/blob/main/Assets/07-BuildingPlacement/Scripts/BuildingManager.cs
 public class PlacementHandler : MonoBehaviour
 {
+    public string displayName;
     public Material validPlacementMaterial;
     public Material invalidPlacementMaterial;
 

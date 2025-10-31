@@ -23,5 +23,6 @@ public class InventoryItem
     {
         displayName = name;
         furnitureGameObject = gameObject;
+        furnitureGameObject.GetComponent<PlacementHandler>().displayName = name;
     }
 }
