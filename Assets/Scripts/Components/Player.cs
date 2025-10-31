@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     public Camera gameCamera;
     public Camera menuCamera;
-    public Inventory inventory;
+    public Inventory inventory; //currently only being used for debug.. remove?
     private PlayerState currentState;
     
     private int money;
