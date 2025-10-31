@@ -5,6 +5,7 @@ Project Files for Financial Lit pets
 
 Inventory system
 * mostly done, placement needs to reduce count of objects.
+
 Add areas to visit
 * also comes with ui; don't expect to be too bad, actually
 * Planned: furniture shop, vet, park, grocery store
