@@ -13,8 +13,7 @@ Add areas to visit
 * with this comes finally deciding what type of pet it is
 
 Buying furniture system
-* the second nightmare
-* in the perfect world this is just ui, but everything tells me it must its own area
+* must its own area
   * make a shop area where player buys furniture?
 
 Room placement
