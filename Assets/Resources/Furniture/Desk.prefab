@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 6005668673688270245}
   - component: {fileID: -6707351954639346820}
   - component: {fileID: 7425835005084693698}
-  m_Layer: 0
+  - component: {fileID: 1197613775710159731}
+  m_Layer: 7
   m_Name: Desk
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929779725024140684}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -68,12 +69,39 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1, z: 1}
+  m_Size: {x: 1.9, y: 1, z: 0.9}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &1197613775710159731
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929779725024140684}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4078125591930122721
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,7 +113,7 @@ GameObject:
   - component: {fileID: 4075130492539720139}
   - component: {fileID: 4101407021465362085}
   - component: {fileID: 4091532810202692561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: desk_drawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,8 +200,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4074901954013935167}
-  m_Layer: 0
-  m_Name: Desk Table Black
+  m_Layer: 7
+  m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,7 +235,7 @@ GameObject:
   - component: {fileID: 4074781271975068249}
   - component: {fileID: 4100939991898761977}
   - component: {fileID: 4093465712980931361}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: desk_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

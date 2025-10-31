@@ -1,19 +1,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class Player : MonoBehaviour
-{
-    public Camera gameCamera;
-    public Camera menuCamera; 
-    public enum PlayerState {
+public enum PlayerState {
         Menu,
         Game
     };
+public class Player : MonoBehaviour
+{
+    public Camera gameCamera;
+    public Camera menuCamera;
+    public Inventory inventory;
     private PlayerState currentState;
     void Start()
     {
         menuCamera.enabled = true;
         gameCamera.enabled = false;
         currentState = PlayerState.Menu; //start in menu
+        //debug
+        GameObject desk = Resources.Load<GameObject>("Furniture/Desk");
+        InventoryItem Desk = new InventoryItem("Desk", desk);
+        inventory.AddItem(Desk, 10);
+        Debug.Log($"Player now has {inventory.GetItem("Desk").Count} desks.");
     }
     void Update()
     {
@@ -21,23 +27,9 @@ public class Player : MonoBehaviour
         {
             case PlayerState.Game:
                 MoveCamera();
+                ZoomCamera();
                 break;
         }
-
-        if (Keyboard.current.eKey.wasPressedThisFrame) // Left mouse button click
-        {
-            Vector2 screenPosition = Mouse.current.position.ReadValue();
-            Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-            }
-        }
-    }
-    public void EnterPlacement()
-    {
-        //set current state to placement
-        //depricated?
     }
     public void EnterGame()
     {
@@ -56,16 +48,26 @@ public class Player : MonoBehaviour
         currentState = PlayerState.Menu;
     }
     private float camMovespeed = 20f;
-    //current nonfunctional vv 
-    private float currentZoom = 1f;
-    private float minZoom = 0.1f;
-    private float maxZoom = 1f;
-    private float defaultCamsize = 20f;
+    private float currentZoom = 10f;
+    private float minZoom = 5f;
+    private float maxZoom = 15f;
+    private float zoomSpeed = 100f;
     private void MoveCamera()
     {
         var moveVect2 = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;
-        var movement = new Vector3(1,0,1) * moveVect2.y;
-        movement += gameCamera.transform.right*moveVect2.x;
-        gameCamera.transform.position += movement*Time.deltaTime*camMovespeed;
+        var movement = new Vector3(1, 0, 1) * moveVect2.y;
+        movement += gameCamera.transform.right * moveVect2.x;
+        gameCamera.transform.position += movement * Time.deltaTime * camMovespeed;
+    }
+    private void ZoomCamera()
+    {
+        // Get zoom input (you can bind this to mouse wheel or another action)
+        Vector2 scrollInput = InputSystem.actions.FindAction("Zoom").ReadValue<Vector2>();
+        // Adjust zoom based on scroll or input
+        currentZoom -= scrollInput.y * zoomSpeed * Time.deltaTime;
+        // Clamp zoom between min and max
+        currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+        // Update camera size (for orthographic camera) or field of view (for perspective)
+        gameCamera.orthographicSize = currentZoom;
     }
 }

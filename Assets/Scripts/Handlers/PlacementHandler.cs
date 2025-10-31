@@ -28,28 +28,24 @@ public class PlacementHandler : MonoBehaviour
         hasValidPlacement = true;
         isFixed = true;
         _nObstacles = 0;
-
         _InitializeMaterials();
     }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (isFixed) return;
+    //this is triggerenter and not collisionenter because collisionenter requires a rigidbody.
+    private void OnTriggerEnter(Collider other) {
+         if (isFixed) return;
         // ignore ground objects
         // *prob gonna have to change
         if (_IsGround(other.gameObject)) return;
         _nObstacles++;
         SetPlacementMode(PlacementMode.Invalid);
     }
-
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
         if (isFixed) return;
 
         // ignore ground objects
         // *prob gonna have to change
         if (_IsGround(other.gameObject)) return;
-
         _nObstacles--;
         if (_nObstacles == 0)
             SetPlacementMode(PlacementMode.Valid);
@@ -72,12 +68,10 @@ public class PlacementHandler : MonoBehaviour
         else if (mode == PlacementMode.Valid)
         {
             hasValidPlacement = true;
-            Debug.Log("valid");
         }
         else
         {
             hasValidPlacement = false;
-            Debug.Log("invalid");
         }
         SetMaterial(mode);
     }

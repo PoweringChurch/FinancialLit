@@ -18,9 +18,10 @@ public class ObjectPlacer : MonoBehaviour
       private RaycastHit _hit;
       
       private float cellSize = 1f;
-      private Vector2 gridOffset = new(1f,1f);
+      private Vector2 gridOffset = new(0f,0f);
 
-      private Vector3 previewOffset = new(0,0.5f,0);
+      private Vector3 previewOffset = new(0, 0.5f, 0);
+      private int currentRot = 0;
       void Awake()
       {
             instance = this;
@@ -42,6 +43,7 @@ public class ObjectPlacer : MonoBehaviour
                   //rotate (upd later to work with system)
                   if (Keyboard.current.rKey.wasPressedThisFrame)
                   {
+                        currentRot ++;
                         _toBuild.transform.Rotate(Vector3.up, 90);
                   }
                   _ray = gameCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -52,10 +54,11 @@ public class ObjectPlacer : MonoBehaviour
                         //move building to mouse
                         _toBuild.transform.position = previewOffset + _ClampToNearest(_hit.point, cellSize);
                         //place (upd later to work with system)
-                        if (Keyboard.current.eKey.wasPressedThisFrame)
+                        PlacementHandler handler = _toBuild.GetComponent<PlacementHandler>();
+                        if (Keyboard.current.eKey.wasPressedThisFrame && handler.hasValidPlacement)
                         {
-                              PlacementHandler handler = _toBuild.GetComponent<PlacementHandler>();
-                              _toBuild.transform.position = _hit.point;
+                              handler.SetPlacementMode(PlacementMode.Fixed);
+                              _toBuild.transform.position = previewOffset + _ClampToNearest(_hit.point, cellSize);
                               _toBuild = null; // (to avoid destruction)
                               _PrepareObject();
                         }
@@ -84,6 +87,7 @@ public class ObjectPlacer : MonoBehaviour
             //just in case
             if (_toBuild) Destroy(_toBuild);
             _toBuild = Instantiate(_objectPrefab);
+            _toBuild.transform.Rotate(Vector3.up, currentRot*90);
             _toBuild.SetActive(false);
             //all objects should have placement handler attached
             PlacementHandler m = _toBuild.GetComponent<PlacementHandler>();
