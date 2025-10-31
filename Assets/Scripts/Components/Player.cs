@@ -10,6 +10,13 @@ public class Player : MonoBehaviour
     public Camera menuCamera;
     public Inventory inventory;
     private PlayerState currentState;
+    
+    private int money;
+    public int Money {
+        get {
+            return money;
+        }
+    }
     void Start()
     {
         menuCamera.enabled = true;
@@ -46,6 +53,16 @@ public class Player : MonoBehaviour
         gameCamera.enabled = false;
         //set current state to menu
         currentState = PlayerState.Menu;
+    }
+    public bool Spend(int amount)
+    {
+        post = money - amount;
+        if (post < 0)
+        {
+            return false; //can't buy
+        }
+        money -= amount;
+        return true; //can buy, did buy
     }
     private float camMovespeed = 20f;
     private float currentZoom = 10f;
