@@ -4,11 +4,12 @@ Project Files for Financial Lit pets
 ## TODO (prio order):
 
 ### Important:
-Deadline is quicker than originally thought, add features of taking care of pet ASAP
-Nov 14?
+Deadline is quicker than originally thought, add features of taking care of pet ASAP. Nov 14?
 
-Inventory system
-* 99% finished, just update ui
+Shop system
+* lot of the scripting work is done (?), just implement ui + testing
+
+Add furniture 
 
 Add areas to visit
 * also comes with ui; don't expect to be too bad, actually
