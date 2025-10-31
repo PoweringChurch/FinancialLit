@@ -13,6 +13,7 @@ Shop system
 Add furniture functionality
 * eg: food bowl being able to be eaten from, wash animal in bath.
 * currently priority is shop, much of it is already implemented.
+
 Add areas to visit
 * also comes with ui; don't expect to be too bad, actually
 * Planned: furniture shop, vet, park, grocery store
