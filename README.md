@@ -1,3 +1,4 @@
+nts: you picked giraffe for project in bio
 # FinancialLit
 Project Files for Financial Lit pets
 
@@ -9,8 +10,9 @@ Deadline is quicker than originally thought, add features of taking care of pet 
 Shop system
 * lot of the scripting work is done (?), just implement ui + testing
 
-Add furniture 
-
+Add furniture functionality
+* eg: food bowl being able to be eaten from, wash animal in bath.
+* currently priority is shop, much of it is already implemented.
 Add areas to visit
 * also comes with ui; don't expect to be too bad, actually
 * Planned: furniture shop, vet, park, grocery store
