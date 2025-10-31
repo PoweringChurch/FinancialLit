@@ -5,6 +5,7 @@ Project Files for Financial Lit pets
 
 ### Important:
 Deadline is quicker than originally thought, add features of taking care of pet ASAP
+Nov 14?
 
 Inventory system
 * 99% finished, just update ui
