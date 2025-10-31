@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class ShopItem
+public class FurnitureShopItem
 {
     public InventoryItem item;
     public int price;
-    public ShopItem(InventoryItem shopitem, int buyprice)
+    public FurnitureShopItem(InventoryItem shopitem, int buyprice)
     {
         item = shopItem;
         price = buyprice;
