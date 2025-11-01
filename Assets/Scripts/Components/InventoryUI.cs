@@ -1,55 +1,105 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using TMPro;
+
 public class InventoryUI : MonoBehaviour
 {
-    public GameObject itemButtonTemplate;
-    public Transform contentTransform;
-    public Inventory inventory;
-    public ObjectPlacer objectPlacer;
-
-    private Dictionary<string, GameObject> inventoryItemUI = new();
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject itemButtonTemplate;
+    [SerializeField] private Transform contentTransform;
+    
+    private Inventory inventory;
+    private readonly Dictionary<string, GameObject> inventoryItemUI = new Dictionary<string, GameObject>();
+    
+    public void SetInventory(Inventory newInventory)
     {
-        UpdateInventoryUI();
+        inventory = newInventory;
     }
-
+    
     public void UpdateInventoryUI()
     {
+        // Clear existing UI
         foreach (Transform child in contentTransform)
         {
             Destroy(child.gameObject);
         }
-        foreach (var item in inventory.GetInventoryItemsToDisplay())
+        inventoryItemUI.Clear();
+        
+        // Create UI for each item
+        foreach (var entry in inventory.GetItemsToDisplay())
         {
             GameObject newTemplate = Instantiate(itemButtonTemplate, contentTransform);
             Button itemButton = newTemplate.GetComponent<Button>();
+            
             Transform displayNameText = newTemplate.transform.Find("DisplayName");
             Transform countText = newTemplate.transform.Find("Count");
-
-            displayNameText.GetComponent<TextMeshProUGUI>().text = item.displayName;
-            countText.GetComponent<TextMeshProUGUI>().text = $"{item.Count}";
-            itemButton.onClick.AddListener(() => OnItemButtonClicked(item));
-            inventoryItemUI.Add(item.displayName, newTemplate);
+            
+            if (displayNameText != null)
+            {
+                displayNameText.GetComponent<TextMeshProUGUI>().text = entry.itemData.itemName;
+            }
+            
+            if (countText != null)
+            {
+                countText.GetComponent<TextMeshProUGUI>().text = $"{entry.count}";
+            }
+            
+            // Capture entry in closure
+            itemButton.onClick.AddListener(() => OnItemButtonClicked(entry));
+            
+            inventoryItemUI.Add(entry.itemData.itemName, newTemplate);
         }
     }
-    public void UpdateInventoryItem(string itemname)
+    
+    public void UpdateInventoryItem(string itemName)
     {
-        InventoryItem item = Inventory.GetItem(itemname);
-        GameObject itemUi = inventoryItemUI[itemname];
-        if (item == null)
+        if (!inventoryItemUI.ContainsKey(itemName))
         {
-            Debug.Log("THERE IS NO ITEM AHHH AHHHHHH");
-            Destroy(itemUi); //no idea if this works?
+            Debug.LogWarning($"UI for item {itemName} not found. Refreshing entire UI.");
+            UpdateInventoryUI();
             return;
         }
-        Transform countText = newTemplate.transform.Find("Count");
-        countText.GetComponent<TextMeshProUGUI>().text = $"{item.Count}";
         
+        InventoryEntry entry = inventory.GetEntry(itemName);
+        if (entry == null)
+        {
+            Debug.LogWarning($"Item {itemName} not found in inventory.");
+            return;
+        }
+        
+        GameObject itemUI = inventoryItemUI[itemName];
+        Transform countText = itemUI.transform.Find("Count");
+        
+        if (countText != null)
+        {
+            countText.GetComponent<TextMeshProUGUI>().text = $"{entry.count}";
+        }
+        
+        // Hide button if count is 0
+        if (entry.count <= 0)
+        {
+            itemUI.SetActive(false);
+        }
+        else
+        {
+            itemUI.SetActive(true);
+        }
     }
-    private void OnItemButtonClicked(InventoryItem item)
+    
+    private void OnItemButtonClicked(InventoryEntry entry)
     {
-        objectPlacer.SetObjectPrefab(item.furnitureGameObject);
+        if (entry.count <= 0)
+        {
+            Debug.LogWarning("Cannot place item with 0 count");
+            return;
+        }
+        
+        if (entry.itemData.prefab == null)
+        {
+            Debug.LogError($"Item {entry.itemData.itemName} has no prefab assigned!");
+            return;
+        }
+        Debug.Log(entry.itemData.itemName);
+        FurniturePlacer.Instance.SetCurrentFurniture(entry.itemData.itemName);
     }
 }

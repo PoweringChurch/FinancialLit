@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
-
+[Serializable]
 public class InventoryItem
 {
     public GameObject furnitureGameObject; // Reference to the object in the scene
-    public string displayName;             // Display name of the item
+    public string itemName;             // Display name of the item
     private int count;                     // Private backing field for count
 
     public int Count
@@ -21,8 +21,8 @@ public class InventoryItem
     // Constructor to initialize inventory items
     public InventoryItem(string name, GameObject gameObject)
     {
-        displayName = name;
+        itemName = name;
         furnitureGameObject = gameObject;
-        furnitureGameObject.GetComponent<PlacementHandler>().displayName = name;
+        furnitureGameObject.GetComponent<PlacementHandler>().itemName = name;
     }
 }

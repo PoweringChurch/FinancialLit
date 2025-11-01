@@ -8,11 +8,11 @@ public enum PlacementMode
     Valid,
     Invalid
 }
-//guess who js copied the whole class from tutorial
 //https://github.com/MinaPecheux/unity-tutorials/blob/main/Assets/07-BuildingPlacement/Scripts/BuildingManager.cs
+//modified a bit but mostly from this tutorial
 public class PlacementHandler : MonoBehaviour
 {
-    public string displayName;
+    public string itemName;
     public Material validPlacementMaterial;
     public Material invalidPlacementMaterial;
 
@@ -21,34 +21,27 @@ public class PlacementHandler : MonoBehaviour
 
     [HideInInspector] public bool hasValidPlacement;
     [HideInInspector] public bool isFixed;
-
     private int _nObstacles;
-
     private void Awake()
     {
         hasValidPlacement = true;
-        isFixed = true;
+        isFixed = false;
         _nObstacles = 0;
         _InitializeMaterials();
     }
-    //might change back to oncollisionenter.
-    private void OnTriggerEnter(Collider other) {
-         if (isFixed) return;
-        // ignore ground objects
-        // *prob gonna have to change
-        if (_IsGround(other.gameObject)) return;
+    void OnTriggerEnter(Collider other)
+    {
+        if (isFixed) return;
+        if (IsPlacementOrRoomLayer(other.gameObject)) { return; }
         _nObstacles++;
         SetPlacementMode(PlacementMode.Invalid);
     }
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (isFixed) return;
-
-        // ignore ground objects
-        // *prob gonna have to change
-        if (_IsGround(other.gameObject)) return;
+        if (IsPlacementOrRoomLayer(other.gameObject)) { return; }
         _nObstacles--;
-        if (_nObstacles == 0)
+        if (_nObstacles <= 0)
             SetPlacementMode(PlacementMode.Valid);
     }
     //no idea what this does vv
@@ -58,7 +51,6 @@ public class PlacementHandler : MonoBehaviour
         _InitializeMaterials();
     }
 #endif
-    //^^
     public void SetPlacementMode(PlacementMode mode)
     {
         if (mode == PlacementMode.Fixed)
@@ -76,7 +68,7 @@ public class PlacementHandler : MonoBehaviour
         }
         SetMaterial(mode);
     }
-    
+
     public void SetMaterial(PlacementMode mode)
     {
         if (mode == PlacementMode.Fixed)
@@ -116,9 +108,9 @@ public class PlacementHandler : MonoBehaviour
             initialMaterials[r] = new List<Material>(r.sharedMaterials);
         }
     }
-
-    private bool _IsGround(GameObject o)
+    private bool IsPlacementOrRoomLayer(GameObject o)
     {
-        return ((1 << o.layer) & ObjectPlacer.instance.groundLayerMask.value) != 0;
+        int combinedMask = FurniturePlacer.Instance.groundLayerMask.value | FurniturePlacer.Instance.roomLayerMask.value;
+        return ((1 << o.layer) & combinedMask) != 0;
     }
 }
