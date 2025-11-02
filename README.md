@@ -7,7 +7,7 @@ Project Files for Financial Lit pets
 ### Important:
 Deadline is quicker than originally thought, add features of taking care of pet ASAP. Nov 14?
 
-Room placement
+Room placement **on hold because FTS
 * Rooms should be able to move with all of its furniture in the correct place
   *  this will likely look something like;
   *  ``` room class.furniture class[]
