@@ -15,10 +15,9 @@ public class PlacementHandler : MonoBehaviour
     public string itemName;
     public Material validPlacementMaterial;
     public Material invalidPlacementMaterial;
-
     public MeshRenderer[] meshComponents;
     private Dictionary<MeshRenderer, List<Material>> initialMaterials;
-
+    [SerializeField] public Vector3 pivot;
     [HideInInspector] public bool hasValidPlacement;
     [HideInInspector] public bool isFixed;
     private int _nObstacles;
@@ -32,14 +31,14 @@ public class PlacementHandler : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (isFixed) return;
-        if (IsPlacementOrRoomLayer(other.gameObject)) { return; }
+        if (IsIgnored(other.gameObject)) { return; }
         _nObstacles++;
         SetPlacementMode(PlacementMode.Invalid);
     }
     void OnTriggerExit(Collider other)
     {
         if (isFixed) return;
-        if (IsPlacementOrRoomLayer(other.gameObject)) { return; }
+        if (IsIgnored(other.gameObject)) { return; }
         _nObstacles--;
         if (_nObstacles <= 0)
             SetPlacementMode(PlacementMode.Valid);
@@ -92,7 +91,6 @@ public class PlacementHandler : MonoBehaviour
             }
         }
     }
-
     private void _InitializeMaterials()
     {
         if (initialMaterials == null)
@@ -108,9 +106,9 @@ public class PlacementHandler : MonoBehaviour
             initialMaterials[r] = new List<Material>(r.sharedMaterials);
         }
     }
-    private bool IsPlacementOrRoomLayer(GameObject o)
+    private bool IsIgnored(GameObject o)
     {
-        int combinedMask = FurniturePlacer.Instance.groundLayerMask.value | FurniturePlacer.Instance.roomLayerMask.value;
+        int combinedMask = FurniturePlacer.Instance.groundLayerMask.value | FurniturePlacer.Instance.placementLayerMask.value;
         return ((1 << o.layer) & combinedMask) != 0;
     }
 }

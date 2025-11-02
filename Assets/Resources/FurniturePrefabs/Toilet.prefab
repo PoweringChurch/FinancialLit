@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 2987521746570204614}
   - component: {fileID: 2094914569709553059}
   - component: {fileID: 5731682039859989118}
+  - component: {fileID: 2708529447513167170}
   m_Layer: 7
   m_Name: Toilet
   m_TagString: Untagged
@@ -178,7 +179,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 1, z: 0.9}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &2987521746570204614
 MonoBehaviour:
@@ -199,6 +200,7 @@ MonoBehaviour:
   - {fileID: 3906853037738144276}
   - {fileID: 6052655562632433095}
   - {fileID: 693091864079950824}
+  pivot: {x: 0, y: 0, z: 0}
   hasValidPlacement: 0
   isFixed: 0
 --- !u!54 &2094914569709553059
@@ -240,6 +242,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbec6b54bdb7cdf46b309506cc365baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BathingFunctionality
+--- !u!114 &2708529447513167170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798342146027756745}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &4708856759531727494
 GameObject:
   m_ObjectHideFlags: 0

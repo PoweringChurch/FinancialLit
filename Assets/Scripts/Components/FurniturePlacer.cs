@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 public class FurniturePlacer : MonoBehaviour
 {
       //https://github.com/MinaPecheux/unity-tutorials/tree/main/Assets/07-BuildingPlacement
       public static FurniturePlacer Instance; //singleton pattern, this is fine because there will only ever be one of these present at any given time
+      public LayerMask placementLayerMask; //ignore
       public LayerMask groundLayerMask;
-      public LayerMask roomLayerMask;
       public Camera gameCamera;
+      public Transform furnitureHolder;
       private GameObject _objectPrefab;
       private GameObject _toBuild;
       private PlacementHandler _handler;
@@ -18,11 +21,11 @@ public class FurniturePlacer : MonoBehaviour
       private RaycastHit _hit;
 
       private float cellSize = 1f;
-      private Vector2 gridOffset = new(0f, 0f);
+      private Vector2 gridOffset = new(0.5f, 0.5f);
 
       private Vector3 previewOffset = new(0, 0.5f, 0);
       private int currentRot = 0;
-      public bool isMoving = false;
+      [HideInInspector] public bool isMoving = false;
       void Awake()
       {
             Instance = this;
@@ -42,11 +45,11 @@ public class FurniturePlacer : MonoBehaviour
             if (Keyboard.current.rKey.wasPressedThisFrame)
             {
                   currentRot++;
-                  _toBuild.transform.Rotate(Vector3.up, 90);
+                  _toBuild.transform.Rotate(Vector3.up,90f);
             }
             _ray = gameCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             //if player is hover over placement
-            if (Physics.Raycast(_ray, out _hit, 1000f, groundLayerMask))
+            if (Physics.Raycast(_ray, out _hit, 1000f, placementLayerMask))
             {
                   //set active on first frame
                   if (!_toBuild.activeSelf) _toBuild.SetActive(true);
@@ -56,6 +59,10 @@ public class FurniturePlacer : MonoBehaviour
       }
       void Place()
       {
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            {
+                  return;
+            }
             if (_objectPrefab == null || !_handler.hasValidPlacement) return;
 
             InventoryManager.Instance.RemoveItem(_handler.itemName, 1);
@@ -75,7 +82,7 @@ public class FurniturePlacer : MonoBehaviour
             PlayerStateHandler.Instance.SetState(PlayerState.Placement);
             _PrepareObject();
       }
-      private void CancelPlacement()
+      public void CancelPlacement()
       {
             Destroy(_toBuild);
             isMoving = false;
@@ -94,11 +101,12 @@ public class FurniturePlacer : MonoBehaviour
 
             return v;
       }
+      public GameObject pivotMarkerPrefab; // Assign a simple sphere/cube in Inspector
       private void _PrepareObject()
       {
             //just in case
             if (_toBuild) Destroy(_toBuild);
-            _toBuild = Instantiate(_objectPrefab);
+            _toBuild = Instantiate(_objectPrefab, furnitureHolder);
             _toBuild.transform.Rotate(Vector3.up, currentRot * 90);
             _toBuild.SetActive(false);
             //all objects should have placement handler attached

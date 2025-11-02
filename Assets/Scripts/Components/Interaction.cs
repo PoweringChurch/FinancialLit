@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using TMPro;
 
-public class RadialContextMenu : MonoBehaviour
+public class Interact : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Camera gameCamera;
@@ -19,7 +19,7 @@ public class RadialContextMenu : MonoBehaviour
     [SerializeField] private float raycastDistance = 1000f;
     
     private GameObject currentMenu;
-    
+    private Outline currentOutline;
     void Update()
     {
         // Check for right click
@@ -56,6 +56,8 @@ public class RadialContextMenu : MonoBehaviour
             // Check if object has functionality component
             if (hit.transform.TryGetComponent(out BaseFunctionality functionality))
             {
+                currentOutline = hit.transform.GetComponent<Outline>();
+                currentOutline.enabled = true;
                 ShowMenu(mousePos, functionality);
             }
         }
@@ -155,6 +157,8 @@ public class RadialContextMenu : MonoBehaviour
         {
             Destroy(currentMenu);
             currentMenu = null;
+            currentOutline.enabled = false;
+            currentOutline = null;
         }
     }
 }

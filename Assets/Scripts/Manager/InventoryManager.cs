@@ -20,6 +20,7 @@ public class InventoryManager : MonoBehaviour
 
         inventory.AddItem(ItemDatabase.GetItem("Desk"), 10);
         inventory.AddItem(ItemDatabase.GetItem("Toilet"), 10);
+        inventory.AddItem(ItemDatabase.GetItem("FoodBowl"), 10);
     }
     
     // Convenience methods that update UI automatically

@@ -3,14 +3,17 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.XR;
-
+using TMPro;
+using System.Collections;
 [RequireComponent(typeof(PlacementHandler))]
 public class BaseFunctionality : MonoBehaviour
 {
     protected Dictionary<string, Action> actions = new();
     protected bool immovable = false; //hide base actions
+    protected GameObject floatingTextPrefab;
     protected virtual void Awake()
     {
+        floatingTextPrefab = Resources.Load<GameObject>("UITemplates/Message");
         if (actions == null)
             actions = new Dictionary<string, Action>();
         if (!immovable)
@@ -35,6 +38,40 @@ public class BaseFunctionality : MonoBehaviour
         var item = ItemDatabase.GetItem(handler.itemName);
         Destroy(gameObject);
         InventoryManager.Instance.AddItem(item, 1);
+    }
+    protected void Message(string message)
+    {
+        GameObject textObj = Instantiate(floatingTextPrefab, transform.position + Vector3.up * 0.5f, Camera.main.transform.rotation);
+        TextMeshPro tmp = textObj.GetComponent<TextMeshPro>();
+        tmp.text = message;
+
+        StartCoroutine(AnimateMessage(textObj, tmp));
+    }
+    private IEnumerator AnimateMessage(GameObject textObj, TextMeshPro tmp)
+    {
+        float duration = 1.5f;
+        float riseSpeed = 2f;
+        float elapsed = 0f;
+        
+        Vector3 startPos = textObj.transform.position;
+        Color startColor = tmp.color;
+        
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            
+            textObj.transform.position = startPos + Vector3.up * (riseSpeed * elapsed);
+            
+            Color color = startColor;
+            color.a = 1f - t;
+            tmp.color = color;
+            
+            textObj.transform.rotation = Camera.main.transform.rotation;
+            
+            yield return null;
+        }
+        Destroy(textObj);
     }
     //helpers
     public void InvokeAction(string actionName)
