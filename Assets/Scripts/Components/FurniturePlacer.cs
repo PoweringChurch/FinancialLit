@@ -97,6 +97,7 @@ public class FurniturePlacer : MonoBehaviour
 
             float s = threshold * 0.5f;
             v.x += s + gridOffset.x; // (recenter in middle of cells)
+            v.y = 0;
             v.z += s + gridOffset.y;
 
             return v;

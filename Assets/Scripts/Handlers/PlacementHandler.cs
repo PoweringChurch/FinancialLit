@@ -13,8 +13,8 @@ public enum PlacementMode
 public class PlacementHandler : MonoBehaviour
 {
     public string itemName;
-    public Material validPlacementMaterial;
-    public Material invalidPlacementMaterial;
+    private Material validPlacementMaterial;
+    private Material invalidPlacementMaterial;
     public MeshRenderer[] meshComponents;
     private Dictionary<MeshRenderer, List<Material>> initialMaterials;
     [SerializeField] public Vector3 pivot;
@@ -26,6 +26,9 @@ public class PlacementHandler : MonoBehaviour
         hasValidPlacement = true;
         isFixed = false;
         _nObstacles = 0;
+
+        validPlacementMaterial = Resources.Load<Material>("Materials/ValidPlacement");
+        invalidPlacementMaterial = Resources.Load<Material>("Materials/InvalidPlacement");
         _InitializeMaterials();
     }
     void OnTriggerEnter(Collider other)
