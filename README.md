@@ -7,23 +7,6 @@ Project Files for Financial Lit pets
 ### Important:
 Deadline is quicker than originally thought, add features of taking care of pet ASAP. Nov 14?
 
-Shop system
-* lot of the scripting work is done (?), just implement ui + testing
-
-Add furniture functionality
-* eg: food bowl being able to be eaten from, wash animal in bath.
-* currently priority is shop, much of it is already implemented.
-
-Add areas to visit
-* also comes with ui; don't expect to be too bad, actually
-* Planned: furniture shop, vet, park, grocery store
-  * furniture shop is high prio
-* with this comes finally deciding what type of pet it is
-
-Buying furniture system
-* must its own area
-  * make a shop area where player buys furniture?
-
 Room placement
 * Rooms should be able to move with all of its furniture in the correct place
   *  this will likely look something like;
@@ -32,6 +15,12 @@ Room placement
      furniture.position (relative to room)
      furniture.orientation
 * Rooms will only be adjascent to other rooms
+
+Add areas to visit
+* also comes with ui; don't expect to be too bad, actually
+* Planned: furniture shop, vet, park, grocery store
+  * furniture shop is high prio
+* with this comes finally deciding what type of pet it is
 
 Pet improvement
 * Have pet randomly do things
