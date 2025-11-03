@@ -11,10 +11,15 @@ public class CameraHandler : MonoBehaviour
     private float zoomSpeed = 100f;
 
     private Renderer[] wallRenderers;
+
     void Awake()
     {
         Instance = this;
-         GameObject[] wallObjects = GameObject.FindGameObjectsWithTag("Wall");
+        RefreshWallRenderers();
+    }
+    public void RefreshWallRenderers()
+    {
+        GameObject[] wallObjects = GameObject.FindGameObjectsWithTag("Wall");
         wallRenderers = new Renderer[wallObjects.Length];
         
         for (int i = 0; i < wallObjects.Length; i++)

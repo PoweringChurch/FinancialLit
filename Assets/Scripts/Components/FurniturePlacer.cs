@@ -88,7 +88,7 @@ public class FurniturePlacer : MonoBehaviour
             isMoving = false;
             _toBuild = null;
             _objectPrefab = null;
-            PlayerStateHandler.Instance.SetState(PlayerState.Game);
+            PlayerStateHandler.Instance.SetState(PlayerState.Home);
       }
       private Vector3 _ClampToNearest(Vector3 pos, float threshold)
       {

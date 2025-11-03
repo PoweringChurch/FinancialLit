@@ -99,7 +99,6 @@ public class InventoryUI : MonoBehaviour
             Debug.LogError($"Item {entry.itemData.itemName} has no prefab assigned!");
             return;
         }
-        Debug.Log(entry.itemData.itemName);
         FurniturePlacer.Instance.SetCurrentFurniture(entry.itemData.itemName);
     }
 }

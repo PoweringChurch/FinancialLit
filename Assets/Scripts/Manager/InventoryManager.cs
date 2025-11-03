@@ -7,7 +7,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryUI inventoryUI;
     
     private Inventory inventory = new Inventory();
-    
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -17,12 +17,14 @@ public class InventoryManager : MonoBehaviour
         }
         Instance = this;
         inventoryUI.SetInventory(inventory);
-
+    }
+    void Start()
+    {
         inventory.AddItem(ItemDatabase.GetItem("Desk"), 10);
         inventory.AddItem(ItemDatabase.GetItem("Toilet"), 10);
         inventory.AddItem(ItemDatabase.GetItem("FoodBowl"), 10);
     }
-    
+
     // Convenience methods that update UI automatically
     public void AddItem(FurnitureData itemData, int count)
     {

@@ -1,5 +1,5 @@
 using UnityEngine;
-public enum PlayerState { Menu, Game, Placement };
+public enum PlayerState { Menu, Home, Placement, View};
 public class PlayerStateHandler : MonoBehaviour
 {
     public static PlayerStateHandler Instance;
@@ -20,7 +20,8 @@ public class PlayerStateHandler : MonoBehaviour
                 gameCamera.enabled = false;
                 menuCamera.enabled = true;
                 break;
-            case PlayerState.Game:
+            case PlayerState.Home:
+            case PlayerState.View:
                 gameCamera.enabled = true;
                 menuCamera.enabled = false;
                 break;

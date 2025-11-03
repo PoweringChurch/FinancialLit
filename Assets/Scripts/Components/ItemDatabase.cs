@@ -17,7 +17,7 @@ public class ItemDatabase : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //if theres more than one instance of database then destroy
         }
     }
     
@@ -32,6 +32,8 @@ public class ItemDatabase : MonoBehaviour
             }
         }
         Debug.Log($"Item database initialized with {itemLookup.Count} items");
+
+        //debugging
     }
     
     public static FurnitureData GetItem(string itemName)

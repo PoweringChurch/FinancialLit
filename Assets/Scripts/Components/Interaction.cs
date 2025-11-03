@@ -23,7 +23,7 @@ public class Interact : MonoBehaviour
     void Update()
     {
         // Check for right click
-        if (Mouse.current.leftButton.wasPressedThisFrame && PlayerStateHandler.Instance.CurrentState == PlayerState.Game)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             HandleClick();
         }
@@ -34,11 +34,14 @@ public class Interact : MonoBehaviour
             CloseMenu();
         }
     }
-    
+
     void HandleClick()
     {
         // Don't interact if clicking on UI
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        var state = PlayerStateHandler.Instance.CurrentState;
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()
+            || state == PlayerState.Placement || state == PlayerState.Menu
+        )
         {
             return;
         }
