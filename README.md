@@ -48,8 +48,9 @@ Make inputs work with InputSystem
 Organize files
 - [ ] Seperate scripts by what they do
 
-Re-Implement UI information
+Centralize UI
 - [ ] Move where and how UI information and interaction is stored & handled
+  * This is mostly a backend task, not expected to affect anything that the player sees.
 
 Stylize UI
 - [ ] Determine color scheme
