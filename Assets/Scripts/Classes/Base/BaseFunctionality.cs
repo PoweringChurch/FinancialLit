@@ -9,18 +9,22 @@ using System.Collections;
 public class BaseFunctionality : MonoBehaviour
 {
     protected Dictionary<string, Action> actions = new();
-    protected bool immovable = false; //hide base actions
+    protected Dictionary<string, Action> shoppingActions = new();
     protected GameObject floatingTextPrefab;
+    protected bool immovable = false; //hide base actions
+    public int price;
     protected virtual void Awake()
     {
         floatingTextPrefab = Resources.Load<GameObject>("UITemplates/Message");
         if (actions == null)
             actions = new Dictionary<string, Action>();
+            shoppingActions = new Dictionary<string, Action>();
         if (!immovable)
         {
             actions["Move"] = Move;
             actions["Remove"] = Remove;
         }
+        shoppingActions[$"Purchase ({price})"] = Purchase;
     }
     protected virtual void Move()
     {
@@ -31,12 +35,17 @@ public class BaseFunctionality : MonoBehaviour
         FurniturePlacer.Instance.isMoving = true;
         FurniturePlacer.Instance.SetCurrentFurniture(handler.itemName);
     }
-
     protected virtual void Remove()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
         var item = ItemDatabase.GetItem(handler.itemName);
         Destroy(gameObject);
+        InventoryManager.Instance.AddItem(item, 1);
+    }
+    protected virtual void Purchase()
+    {
+        PlacementHandler handler = GetComponent<PlacementHandler>();
+        var item = ItemDatabase.GetItem(handler.itemName);
         InventoryManager.Instance.AddItem(item, 1);
     }
     protected void Message(string message)
@@ -84,5 +93,9 @@ public class BaseFunctionality : MonoBehaviour
     public IEnumerable<string> GetAvailableActions()
     {
         return actions.Keys;
+    }
+    public IEnumerable<string> GetShoppingActions()
+    {
+        return shoppingActions.Keys;
     }
 }

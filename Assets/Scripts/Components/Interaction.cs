@@ -40,7 +40,7 @@ public class Interact : MonoBehaviour
         // Don't interact if clicking on UI
         var state = PlayerStateHandler.Instance.CurrentState;
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()
-            || state == PlayerState.Placement || state == PlayerState.Menu
+            || PlayerStateHandler.Instance.HasStatus(PlayerStatus.Placement)
         )
         {
             return;
@@ -70,7 +70,11 @@ public class Interact : MonoBehaviour
     {
         // Get available actions
         string[] actions = functionality.GetAvailableActions().ToArray();
-        
+        //intercept if shopping, swap to alternate mode
+        if (PlayerStateHandler.Instance.HasStatus(PlayerStatus.Shopping))
+        {
+            actions = functionality.GetShoppingActions().ToArray();
+        }
         if (actions.Length == 0)
         {
             Debug.LogWarning("No actions available");

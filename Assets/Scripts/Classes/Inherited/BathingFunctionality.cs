@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 public class BathingFunctionality : BaseFunctionality
-{
+{ 
     protected override void Awake()
     {
         base.Awake();

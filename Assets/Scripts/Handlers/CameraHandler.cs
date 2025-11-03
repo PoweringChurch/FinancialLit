@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
 public class CameraHandler : MonoBehaviour
 {
     public static CameraHandler Instance;
@@ -10,6 +12,7 @@ public class CameraHandler : MonoBehaviour
     private float maxZoom = 25f;
     private float zoomSpeed = 100f;
 
+    public Slider zoomSpeedMultiplier;
     private Renderer[] wallRenderers;
 
     void Awake()
@@ -46,7 +49,7 @@ public class CameraHandler : MonoBehaviour
     private void ZoomCamera()
     {
         moveSpeed = 20f * (currentZoom / 10f);
-        currentZoom = Mathf.Clamp(currentZoom - InputSystem.actions.FindAction("Zoom").ReadValue<Vector2>().y * zoomSpeed * Time.deltaTime, minZoom, maxZoom);
+        currentZoom = Mathf.Clamp(currentZoom - InputSystem.actions.FindAction("Zoom").ReadValue<Vector2>().y * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
         gameCamera.orthographicSize = currentZoom;
     }
 
