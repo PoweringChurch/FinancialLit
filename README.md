@@ -6,6 +6,10 @@ Project Files for Financial Lit pets
 
 ### Important:
 
+Functionality when travelling
+* Alternative mode when shopping? or instead make alternative gameobject
+  * mode is likely just going to be playerstate
+
 Pet improvement
 * Have pet randomly do things
   * likely just add goals to existing pet class
