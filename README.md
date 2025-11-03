@@ -7,7 +7,7 @@ Project Files for Financial Literatire Pet simulation in FBLA
 
 Functionality when travelling
 * Alternative mode when shopping? or instead make alternative gameobject
-  * mode is likely just going to be playerstate < added statuses to account for this
+  * mode is likely just going to be playerstate <-- added statuses to account for this, still not fully implemented
 
 Pet improvement
 * Have pet randomly do things
