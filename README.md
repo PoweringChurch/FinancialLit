@@ -1,10 +1,9 @@
 nts: you picked giraffe for project in bio
 # FinancialLit
-Project Files for Financial Lit pets
+Project Files for Financial Literatire Pet simulation in FBLA
 
-## TODO (prio order):
-
-### Important:
+# TODO
+### Week of 11/3
 
 Functionality when travelling
 * Alternative mode when shopping? or instead make alternative gameobject
