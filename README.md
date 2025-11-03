@@ -1,26 +1,61 @@
-nts: you picked giraffe for project in bio
 # FinancialLit
 Project Files for Financial Literatire Pet simulation in FBLA
 
 # TODO
-### Week of 11/3
 
-Functionality when travelling
-* Alternative mode when shopping? or instead make alternative gameobject
-  * mode is likely just going to be playerstate <-- added statuses to account for this, still not fully implemented
+## Week of 11/3
 
-Pet improvement
-* Have pet randomly do things
-  * likely just add goals to existing pet class
-* also make pet show needs visually. probably just going to be like thought bubbles hovering from head
-  * "I'm hungry!", "I'm bored!", "I feel bad...", "I'm sick!"
+### Development
 
-Saving game
-* and loading game
-  * json files in clutch
+Playerstate additions and adjustment
+- [ ] Re-implement playerstates and statuses throughtout codebase
 
-Pretty up the UI
-* also comes with at long last naming the project
+Functionality
+- [ ] Make Interact module take into account player state and status when determining how to interact with an object
 
+Tackle automatic pivot selection for furniture
+- [ ] Implement way of detecting pivot automatically when placing furniture
+
+Add money & money tracking
+- [ ] Add currency
+- [ ] Keep track of spending
+- [ ] Add UI
+  * Keep implementation of ui very barebones and easy to move, all ui handling will be moved into a central module
+
+Player item inventory
+- [ ] Add item inventory (different from furniture) that keeps tracks of various items, including pet food
+
+Display pet needs
+- [ ] Show pet needs visually on UI, likely best implemented as needs on list at the bottom of screen
+
+Pet personality
+- [ ] Pet AI, include
+  - [ ] States (should be very barebones, ex: moving, none. Pet should only ever be busy with 1 task at a time)
+  - [ ] Statuses (Hungry, sick, etc.) 
+  - [ ] Behaviors (Determine what to do and when)
+
+Saving & Loading
+- [ ] Implement saving and loading
+  - [ ] Player home configuration
+  - [ ] Pet states and statuses
+  - [ ] Save into json file?
+
+### Cleanup
+
+Make inputs work with InputSystem
+- [ ] Make a centalized input module
+
+Organize files
+- [ ] Seperate scripts by what they do
+
+Re-Implement UI information
+- [ ] Move where and how UI information and interaction is stored & handled
+
+Stylize UI
+- [ ] Determine color scheme
+- [ ] Select font
+- [ ] Stylize buttons
+
+### Misc
 Add support for controller
 * Mobile comes later/NEVER, too much ui work
