@@ -8,7 +8,7 @@ Project Files for Financial Lit pets
 
 Functionality when travelling
 * Alternative mode when shopping? or instead make alternative gameobject
-  * mode is likely just going to be playerstate
+  * mode is likely just going to be playerstate < added statuses to account for this
 
 Pet improvement
 * Have pet randomly do things
