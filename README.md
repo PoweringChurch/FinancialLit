@@ -1,5 +1,5 @@
 # FinancialLit
-Project Files for Financial Literatire Pet simulation in FBLA
+Project Files for Financial Literatire Pet simulation in FBLA  
 [Official Guidelines](https://www.flfbla.org/fbla-event-introduction-to-programming)
 
 # TODO
