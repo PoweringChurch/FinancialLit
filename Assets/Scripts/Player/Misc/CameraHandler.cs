@@ -6,6 +6,7 @@ public class CameraHandler : MonoBehaviour
 {
     public static CameraHandler Instance;
     [SerializeField] private Camera gameCamera;
+    [SerializeField] private Camera menuCamera;
     private float moveSpeed = 20f;
     private float currentZoom = 10f;
     private float minZoom = 2f;
@@ -19,6 +20,11 @@ public class CameraHandler : MonoBehaviour
     {
         Instance = this;
         RefreshWallRenderers();
+    }
+    public void ToggleGamecam(bool state)
+    {
+        gameCamera.enabled = state;
+        menuCamera.enabled = !state;
     }
     public void RefreshWallRenderers()
     {
@@ -39,24 +45,20 @@ public class CameraHandler : MonoBehaviour
             HideWalls();
         }
     }
-
     private void MoveCamera()
     {
         Vector2 input = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;
         gameCamera.transform.position += (new Vector3(1, 0, 1) * input.y + gameCamera.transform.right * input.x) * Time.deltaTime * moveSpeed;
     }
-
     private void ZoomCamera()
     {
         moveSpeed = 20f * (currentZoom / 10f);
         currentZoom = Mathf.Clamp(currentZoom - InputSystem.actions.FindAction("Zoom").ReadValue<Vector2>().y * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
         gameCamera.orthographicSize = currentZoom;
     }
-
     float maxDistance = 40;
     float minDistance = 30;
     float minAlpha = 0f;
-
     private void HideWalls()
     {
         // Scale distances with zoom (smaller orthoSize = zoomed in = shorter distances)

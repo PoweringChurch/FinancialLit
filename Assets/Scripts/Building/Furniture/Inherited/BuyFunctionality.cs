@@ -12,6 +12,6 @@ public class BuyFunctionality : BaseFunctionality
     }
     protected override void Purchase()
     {
-        InventoryManager.Instance.AddItem(furniture,1);
+        InventoryHelper.Instance.AddItem(furniture,1);
     }
 }

@@ -37,18 +37,13 @@ public class Interact : MonoBehaviour
 
     void HandleClick()
     {
-        // Don't interact if clicking on UI
-        var state = PlayerStateHandler.Instance.CurrentState;
+        CloseMenu();
+        // Don't interact if clicking on UI or in placement
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()
-            || PlayerStateHandler.Instance.HasStatus(PlayerStatus.Placement)
-        )
+            || PlayerStates.HasStatus(PlayerStatus.Placement))
         {
             return;
         }
-        
-        // Close existing menu first
-        CloseMenu();
-        
         // Get mouse position and create ray
         Vector2 mousePos = Mouse.current.position.ReadValue();
         Ray ray = gameCamera.ScreenPointToRay(mousePos);
@@ -71,7 +66,7 @@ public class Interact : MonoBehaviour
         // Get available actions
         string[] actions = functionality.GetAvailableActions().ToArray();
         //intercept if shopping, swap to alternate mode
-        if (PlayerStateHandler.Instance.HasStatus(PlayerStatus.Shopping))
+        if (PlayerStates.HasStatus(PlayerStatus.Shopping))
         {
             actions = functionality.GetShoppingActions().ToArray();
         }

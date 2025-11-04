@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ItemDatabase : MonoBehaviour
+public class FurnitureDatabase : MonoBehaviour
 {
     [SerializeField] private FurnitureData[] allFurniture;
     
     private static Dictionary<string, FurnitureData> itemLookup;
-    private static ItemDatabase instance;
+    private static FurnitureDatabase instance;
     
     void Awake()
     {

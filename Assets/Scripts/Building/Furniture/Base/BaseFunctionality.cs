@@ -29,24 +29,24 @@ public class BaseFunctionality : MonoBehaviour
     protected virtual void Move()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
-        var item = ItemDatabase.GetItem(handler.itemName);
+        var item = FurnitureDatabase.GetItem(handler.itemName);
         Destroy(gameObject);
-        InventoryManager.Instance.AddItem(item, 1);
+        InventoryHelper.Instance.AddItem(item, 1);
         FurniturePlacer.Instance.isMoving = true;
         FurniturePlacer.Instance.SetCurrentFurniture(handler.itemName);
     }
     protected virtual void Remove()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
-        var item = ItemDatabase.GetItem(handler.itemName);
+        var item = FurnitureDatabase.GetItem(handler.itemName);
         Destroy(gameObject);
-        InventoryManager.Instance.AddItem(item, 1);
+        InventoryHelper.Instance.AddItem(item, 1);
     }
     protected virtual void Purchase()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
-        var item = ItemDatabase.GetItem(handler.itemName);
-        InventoryManager.Instance.AddItem(item, 1);
+        var item = FurnitureDatabase.GetItem(handler.itemName);
+        InventoryHelper.Instance.AddItem(item, 1);
     }
     protected void Message(string message)
     {

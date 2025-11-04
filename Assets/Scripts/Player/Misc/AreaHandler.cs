@@ -56,7 +56,7 @@ public class AreaHandler : MonoBehaviour
         }
         
         currentArea = Instantiate(areaPrefab, gameSpace);
-        PlayerStateHandler.Instance.SetState(PlayerState.View);
+        PlayerStates.SetState(PlayerState.View);
         CameraHandler.Instance.RefreshWallRenderers();
         ButtonToggler.Instance.DisableButton("Build");
     }
@@ -69,7 +69,7 @@ public class AreaHandler : MonoBehaviour
             homeArea.SetActive(true);
         }
 
-        PlayerStateHandler.Instance.SetState(PlayerState.Home);
+        PlayerStates.SetState(PlayerState.Home);
         ButtonToggler.Instance.EnableButton("Build");
     }
 

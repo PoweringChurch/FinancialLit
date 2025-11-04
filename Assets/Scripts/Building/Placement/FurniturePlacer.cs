@@ -65,12 +65,12 @@ public class FurniturePlacer : MonoBehaviour
             }
             if (_objectPrefab == null || !_handler.hasValidPlacement) return;
 
-            InventoryManager.Instance.RemoveItem(_handler.itemName, 1);
+            InventoryHelper.Instance.RemoveItem(_handler.itemName, 1);
             _handler.SetPlacementMode(PlacementMode.Fixed);
             _toBuild.transform.position = previewOffset + _ClampToNearest(_hit.point, cellSize);
             _toBuild = null;
             _PrepareObject();
-            if (!InventoryManager.Instance.GetInventory().HasItem(_handler.itemName) || isMoving) //if the item isnt in players inventory
+            if (!InventoryHelper.Instance.GetInventory().HasItem(_handler.itemName) || isMoving) //if the item isnt in players inventory
             {
                   CancelPlacement();
                   return;
@@ -78,8 +78,8 @@ public class FurniturePlacer : MonoBehaviour
       }
       public void SetCurrentFurniture(string itemName)
       {
-            _objectPrefab = ItemDatabase.GetItem(itemName).prefab;
-            PlayerStateHandler.Instance.AddStatus(PlayerStatus.Placement);
+            _objectPrefab = FurnitureDatabase.GetItem(itemName).prefab;
+            PlayerStates.AddStatus(PlayerStatus.Placement);
             _PrepareObject();
       }
       public void CancelPlacement()
@@ -88,7 +88,7 @@ public class FurniturePlacer : MonoBehaviour
             isMoving = false;
             _toBuild = null;
             _objectPrefab = null;
-            PlayerStateHandler.Instance.RemoveStatus(PlayerStatus.Placement);
+            PlayerStates.RemoveStatus(PlayerStatus.Placement);
       }
       private Vector3 _ClampToNearest(Vector3 pos, float threshold)
       {

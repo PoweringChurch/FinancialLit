@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryHelper : MonoBehaviour
 {
-    public static InventoryManager Instance { get; private set; }
+    public static InventoryHelper Instance { get; private set; }
     
     public bool debugMode = false;
     [SerializeField] private InventoryUI inventoryUI;
@@ -24,7 +24,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (debugMode)
         {
-            FurnitureData[] allItems = ItemDatabase.GetAllItems(); 
+            FurnitureData[] allItems = FurnitureDatabase.GetAllItems(); 
             foreach (FurnitureData data in allItems)
             {
                 inventory.AddItem(data, 1000);
