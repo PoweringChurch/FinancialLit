@@ -1,5 +1,6 @@
 # FinancialLit
-Project Files for Financial Literatire Pet simulation in FBLA
+Project Files for Financial Literatire Pet simulation in FBLA  
+[Official Guidelines](https://www.flfbla.org/fbla-event-introduction-to-programming)
 
 # TODO
 
@@ -8,10 +9,10 @@ Project Files for Financial Literatire Pet simulation in FBLA
 ### Development
 
 Playerstate additions and adjustment
-- [ ] Re-implement playerstates and statuses throughtout codebase
+- [x] Re-implement playerstates and statuses throughout codebase
 
 Functionality
-- [ ] Make Interact module take into account player state and status when determining how to interact with an object
+- [x] Make Interact module take into account player state and status when determining how to interact with an object
 
 Tackle automatic pivot selection for furniture
 - [ ] Implement way of detecting pivot automatically when placing furniture
@@ -23,7 +24,7 @@ Add money & money tracking
   * Keep implementation of ui very barebones and easy to move, all ui handling will be moved into a central module
 
 Player item inventory
-- [ ] Add item inventory (different from furniture) that keeps tracks of various items, including pet food
+- [x] Add item inventory (different from furniture) that keeps tracks of various items, including pet food, shampoo, 
 
 Display pet needs
 - [ ] Show pet needs visually on UI, likely best implemented as needs on list at the bottom of screen
