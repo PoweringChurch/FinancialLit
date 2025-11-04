@@ -8,10 +8,10 @@ Project Files for Financial Literatire Pet simulation in FBLA
 ### Development
 
 Playerstate additions and adjustment
-- [ ] Re-implement playerstates and statuses throughtout codebase
+- [x] Re-implement playerstates and statuses throughout codebase
 
 Functionality
-- [ ] Make Interact module take into account player state and status when determining how to interact with an object
+- [x] Make Interact module take into account player state and status when determining how to interact with an object
 
 Tackle automatic pivot selection for furniture
 - [ ] Implement way of detecting pivot automatically when placing furniture
