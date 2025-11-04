@@ -12,7 +12,7 @@ public class BaseFunctionality : MonoBehaviour
     protected Dictionary<string, Action> shoppingActions = new();
     protected GameObject floatingTextPrefab;
     protected bool immovable = false; //hide base actions
-    public int price;
+    public float price;
     protected virtual void Awake()
     {
         floatingTextPrefab = Resources.Load<GameObject>("UITemplates/Message");

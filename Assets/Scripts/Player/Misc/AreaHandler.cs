@@ -57,6 +57,11 @@ public class AreaHandler : MonoBehaviour
         
         currentArea = Instantiate(areaPrefab, gameSpace);
         PlayerStates.SetState(PlayerState.View);
+        //extremely temporary, make an actual class later for areas
+        if (areaName == "SmartyPets")
+        {
+            PlayerStates.AddStatus(PlayerStatus.Shopping);
+        }
         CameraHandler.Instance.RefreshWallRenderers();
         ButtonToggler.Instance.DisableButton("Build");
     }
@@ -70,6 +75,13 @@ public class AreaHandler : MonoBehaviour
         }
 
         PlayerStates.SetState(PlayerState.Home);
+        //nts: doesnt work? cant tell if status is removing
+        if (PlayerStates.HasStatus(PlayerStatus.Shopping))
+        {
+            Debug.Log("has status shopping"); //gets here but doesnt remove?
+            PlayerStates.RemoveStatus(PlayerStatus.Shopping);
+        }
+        Debug.Log(PlayerStates.CurrentStatuses.ToString()); //figure this out, mayb helper func
         ButtonToggler.Instance.EnableButton("Build");
     }
 

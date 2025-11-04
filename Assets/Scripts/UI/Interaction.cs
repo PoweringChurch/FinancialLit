@@ -69,6 +69,7 @@ public class Interact : MonoBehaviour
         if (PlayerStates.HasStatus(PlayerStatus.Shopping))
         {
             actions = functionality.GetShoppingActions().ToArray();
+            Debug.Log("intercepted");
         }
         if (actions.Length == 0)
         {
