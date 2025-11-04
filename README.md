@@ -18,14 +18,14 @@ Tackle automatic pivot selection for furniture
 - [ ] Implement way of detecting pivot automatically when placing furniture
 
 Add money & money tracking
-- [ ] Add currency
-- [ ] Keep track of spending
-- [ ] Add UI
+- [x] Add currency
+- [x] Keep track of spending
+- [x] Add UI
   * Keep implementation of ui very barebones and easy to move, all ui handling will be moved into a central module
 
 Player item inventory
-- [x] Add item inventory (different from furniture) that keeps tracks of various items, including pet food, shampoo, 
-
+- [ ] Add item inventory (different from furniture) that keeps tracks of various items, including pet food, shampoo, 
+- [x] Add UI
 Display pet needs
 - [ ] Show pet needs visually on UI, likely best implemented as needs on list at the bottom of screen
 
