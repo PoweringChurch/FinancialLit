@@ -1166,6 +1166,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273152656}
   m_CullTransparentMesh: 1
+--- !u!1 &291994498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 291994499}
+  - component: {fileID: 291994502}
+  - component: {fileID: 291994501}
+  - component: {fileID: 291994500}
+  m_Layer: 0
+  m_Name: Misc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &291994499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291994498}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2061597410}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &291994500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291994498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21d70dbf0a3ffe42ad8feab20eda385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraHandler
+  gameCamera: {fileID: 1130872541}
+  menuCamera: {fileID: 448365813}
+  zoomSpeedMultiplier: {fileID: 363312345}
+--- !u!114 &291994501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291994498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3ec1445e75e2f4e867b136f9364b61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaHandler
+  homeArea: {fileID: 395478671}
+  areas:
+  - areaName: SmartyPets
+    areaPrefab: {fileID: 8831189482552316543, guid: 371efee2b74e18749813142dfa922162, type: 3}
+  gameSpace: {fileID: 1809660803}
+  pet: {fileID: 1624103055}
+--- !u!114 &291994502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291994498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e6bbef2f02f4c4e9928ba13da5a437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryHelper
+  debugMode: 1
+  inventoryUI: {fileID: 2030654948}
 --- !u!1 &363312344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,10 +2289,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1880617074}
-        m_TargetAssemblyTypeName: PlayerStateHandler, Assembly-CSharp
-        m_MethodName: SetState
-        m_Mode: 3
+      - m_Target: {fileID: 291994500}
+        m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
+        m_MethodName: ToggleGamecam
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2488,7 +2569,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1880617074}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerStateHandler, Assembly-CSharp
         m_MethodName: SetState
         m_Mode: 3
@@ -3464,7 +3545,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2061597413}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FurniturePlacer, Assembly-CSharp
         m_MethodName: CancelPlacement
         m_Mode: 1
@@ -4708,17 +4789,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1880617074}
-        m_TargetAssemblyTypeName: PlayerStateHandler, Assembly-CSharp
-        m_MethodName: SetState
-        m_Mode: 3
+      - m_Target: {fileID: 291994500}
+        m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
+        m_MethodName: ToggleGamecam
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1234134730
 MonoBehaviour:
@@ -6035,7 +6116,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 425634011}
+      - m_Target: {fileID: 2030654948}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
         m_MethodName: UpdateInventoryUI
         m_Mode: 1
@@ -6999,7 +7080,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1880617075}
+      - m_Target: {fileID: 291994500}
+        m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
+        m_MethodName: ToggleGamecam
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SmartyPets
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 291994501}
         m_TargetAssemblyTypeName: AreaHandler, Assembly-CSharp
         m_MethodName: EnterArea
         m_Mode: 5
@@ -7009,7 +7102,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: SmartyPets
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1672449745
 MonoBehaviour:
@@ -7894,9 +7987,8 @@ GameObject:
   - component: {fileID: 1880617072}
   - component: {fileID: 1880617074}
   - component: {fileID: 1880617073}
-  - component: {fileID: 1880617075}
   m_Layer: 0
-  m_Name: Handlers
+  m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7926,11 +8018,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1880617071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e21d70dbf0a3ffe42ad8feab20eda385, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e57407ddaf2f154ab2efd945f99b703, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraHandler
-  gameCamera: {fileID: 1130872541}
-  zoomSpeedMultiplier: {fileID: 363312345}
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDatabase
+  allFurniture:
+  - {fileID: 11400000, guid: 69d4ed61601f7c54fbb73e27e5d26cdf, type: 2}
+  - {fileID: 11400000, guid: af2829ec33b19b54d908a345072555f5, type: 2}
+  - {fileID: 11400000, guid: d536418478aee3148846f1ad44436438, type: 2}
+  - {fileID: 11400000, guid: fc71316f47d661f4283ac568ce49aa1d, type: 2}
 --- !u!114 &1880617074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7940,29 +8035,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1880617071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c291b8eeeb6cb6a4283bcf21667d77d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7888688b7996f46318a851f8064a10f7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStateHandler
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPlacer
+  placementLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   gameCamera: {fileID: 1130872541}
-  menuCamera: {fileID: 448365813}
---- !u!114 &1880617075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880617071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d3ec1445e75e2f4e867b136f9364b61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AreaHandler
-  homeArea: {fileID: 395478671}
-  areas:
-  - areaName: SmartyPets
-    areaPrefab: {fileID: 8831189482552316543, guid: 371efee2b74e18749813142dfa922162, type: 3}
-  gameSpace: {fileID: 1809660803}
-  pet: {fileID: 1624103055}
+  furnitureHolder: {fileID: 695506225}
+  isMoving: 0
+  pivotMarkerPrefab: {fileID: 8972850920782963876, guid: 3e25e9bf7a130f14d80abde4a3abbe4e, type: 3}
 --- !u!1 &1930246193
 GameObject:
   m_ObjectHideFlags: 0
@@ -8794,7 +8879,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1880617075}
+      - m_Target: {fileID: 291994500}
+        m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
+        m_MethodName: ToggleGamecam
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 291994501}
         m_TargetAssemblyTypeName: AreaHandler, Assembly-CSharp
         m_MethodName: EnterHome
         m_Mode: 1
@@ -8804,7 +8901,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2013850485
 MonoBehaviour:
@@ -8955,6 +9052,74 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014876017}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2030654947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2030654950}
+  - component: {fileID: 2030654948}
+  - component: {fileID: 2030654949}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2030654948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030654947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b90d95ecd3cf8f40afaddbbd56e6955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
+  itemButtonTemplate: {fileID: 629064268305734636, guid: d9737a1336e8f6a48ad4d421f8c200d6, type: 3}
+  contentTransform: {fileID: 1835840286}
+--- !u!114 &2030654949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030654947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91d65360c2ad5b4fa4bbca01d478847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction
+  gameCamera: {fileID: 1130872541}
+  canvas: {fileID: 1996418209}
+  buttonPrefab: {fileID: 3291220437287538094, guid: aa1d369602f88bc4c9151ff3492426d8, type: 3}
+  menuContainer: {fileID: 1603932561}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  menuRadius: 100
+  raycastDistance: 1000
+--- !u!4 &2030654950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030654947}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2061597410}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2061597408
 GameObject:
   m_ObjectHideFlags: 0
@@ -8964,10 +9129,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2061597410}
-  - component: {fileID: 2061597413}
-  - component: {fileID: 2061597414}
-  - component: {fileID: 2061597415}
-  - component: {fileID: 2061597416}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -8989,82 +9150,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1880617072}
+  - {fileID: 2030654950}
+  - {fileID: 291994499}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2061597413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061597408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7888688b7996f46318a851f8064a10f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectPlacer
-  placementLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  gameCamera: {fileID: 1130872541}
-  furnitureHolder: {fileID: 695506225}
-  isMoving: 0
-  pivotMarkerPrefab: {fileID: 8972850920782963876, guid: 3e25e9bf7a130f14d80abde4a3abbe4e, type: 3}
---- !u!114 &2061597414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061597408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17e6bbef2f02f4c4e9928ba13da5a437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
-  debugMode: 1
-  inventoryUI: {fileID: 425634011}
---- !u!114 &2061597415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061597408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c91d65360c2ad5b4fa4bbca01d478847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interaction
-  gameCamera: {fileID: 1130872541}
-  canvas: {fileID: 1996418209}
-  buttonPrefab: {fileID: 3291220437287538094, guid: aa1d369602f88bc4c9151ff3492426d8, type: 3}
-  menuContainer: {fileID: 1603932561}
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  menuRadius: 100
-  raycastDistance: 1000
---- !u!114 &2061597416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061597408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e57407ddaf2f154ab2efd945f99b703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemDatabase
-  allFurniture:
-  - {fileID: 11400000, guid: 69d4ed61601f7c54fbb73e27e5d26cdf, type: 2}
-  - {fileID: 11400000, guid: af2829ec33b19b54d908a345072555f5, type: 2}
-  - {fileID: 11400000, guid: d536418478aee3148846f1ad44436438, type: 2}
-  - {fileID: 11400000, guid: fc71316f47d661f4283ac568ce49aa1d, type: 2}
 --- !u!1 &2069692461
 GameObject:
   m_ObjectHideFlags: 0
