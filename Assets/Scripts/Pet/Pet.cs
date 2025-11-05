@@ -4,31 +4,39 @@ using System.Collections.Generic;
 public class Pet : MonoBehaviour
 {
     public static Pet Instance;
-    public string PetName {
-        get {
+    public string PetName
+    {
+        get
+        {
             return petName;
         }
     }
+    [Header("Decay Rates")]
+    [SerializeField] private float tirednessRate = 0.001f;
+    [SerializeField] private float hungerRate = 0.002f;
+    [SerializeField] private float boredomRate = 0.0025f;
+    [SerializeField] private float dirtinessRate = 0.0015f;
+    [SerializeField] private float sleepRecoveryRate = 0.001f;
     private string petName = "";
     private bool sleeping = false;
     private Dictionary<string, float> status = new Dictionary<string, float>();
+    public Dictionary<string, float> Status => status;
     void Awake()
     {
         Instance = this;
-        status.Add("sickness",0f);
-        status.Add("dirtiness",0f);
-        status.Add("boredom",0f);
-        status.Add("hunger",0f);
-        status.Add("tiredness",0f);
+        //adjust so 0 = needs attention and 1 = satisfied
+        status.Add("hygiene",1f);
+        status.Add("entertainment",1f);
+        status.Add("hunger",1f);
+        status.Add("energy",1f);
     }
-    // Update is called once per frame
     private float elapsed = 0;
-    private float time = 0.1f;
+    private float time = 1f;
     void Update()
     {
         if (sleeping)
         {
-            status["tiredness"] = Math.Max(0,status["tiredness"]-0.001f);
+            status["energy"] = Math.Max(0,status["energy"]+sleepRecoveryRate);
         }
         //tick stats
         elapsed += Time.deltaTime;
@@ -44,31 +52,27 @@ public class Pet : MonoBehaviour
     }
     void Step()
     {
-        status["tiredness"] = Math.Min(1,status["tiredness"]+0.001f);
-        status["hunger"] = Math.Min(1,status["hunger"]+0.002f);
-        status["boredom"] = Math.Min(1,status["boredom"]+0.003f);
-
-        bool dirty = status["dirtiness"] > 0.8f;
+        status["energy"] = Math.Max(0,status["energy"]-tirednessRate);
+        status["hunger"] = Math.Max(0,status["hunger"]-hungerRate);
+        status["entertainment"] = Math.Max(0, status["entertainment"] - boredomRate);
+        status["hygiene"] = Math.Max(0, status["hygiene"] - dirtinessRate);
+        bool dirty = status["hygiene"] < 0.2f;
         if (dirty)
         {
-            status["sickness"] += 0.004f;
+            //add chance for pet to get sick
         }
     }
     public void CleanPet(float amount)
     {
-        status["dirtiness"] = Math.Max(0,status["dirtiness"]-amount);
+        status["hygiene"] = Math.Min(1,status["hygiene"]+amount);
     }
     public void PlayWithPet(float amount)
     {
-        status["boredom"] = Math.Max(0,status["boredom"]-amount);
+        status["entertainment"] = Math.Min(1,status["entertainment"]+amount);
     }
     public void FeedPet(float amount)
     {
-        status["hunger"] = Math.Max(0,status["hunger"]-amount);
-    }
-    public void CurePet(float amount)
-    {
-        status["sickness"] = Math.Max(0,status["sickness"]-amount);
+        status["hunger"] = Math.Min(1,status["hunger"]+amount);
     }
     public void StartSleep()
     {

@@ -24,23 +24,25 @@ public class BaseFunctionality : MonoBehaviour
             actions["Move"] = Move;
             actions["Remove"] = Remove;
         }
-        shoppingActions[$"Purchase ({price})"] = Purchase;
+        shoppingActions["Purchase"] = Purchase;
     }
     protected virtual void Move()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
         var item = FurnitureDatabase.GetItem(handler.itemName);
-        Destroy(gameObject);
         InventoryHelper.Instance.AddItem(item, 1);
         FurniturePlacer.Instance.isMoving = true;
         FurniturePlacer.Instance.SetCurrentFurniture(handler.itemName);
+        Debug.Log("move");
+        Destroy(gameObject);
     }
     protected virtual void Remove()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
         var item = FurnitureDatabase.GetItem(handler.itemName);
-        Destroy(gameObject);
         InventoryHelper.Instance.AddItem(item, 1);
+        Debug.Log("remove");
+        Destroy(gameObject);
     }
     protected virtual void Purchase()
     {
@@ -85,9 +87,11 @@ public class BaseFunctionality : MonoBehaviour
     //helpers
     public void InvokeAction(string actionName)
     {
-        if (actions.TryGetValue(actionName, out Action action))
+        if (actions.TryGetValue(actionName, out Action action)) //first try regular actions
             action.Invoke();
-        else
+        else if (shoppingActions.TryGetValue(actionName, out Action shoppingAction)) //then try shopping actions
+            shoppingAction.Invoke();
+        else //otherwise js lowk kys
             Debug.LogWarning($"Action '{actionName}' not found");
     }
     public IEnumerable<string> GetAvailableActions()

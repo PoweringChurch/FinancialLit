@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
 using TMPro;
+using System;
 
 public class Interact : MonoBehaviour
 {
@@ -37,13 +38,11 @@ public class Interact : MonoBehaviour
 
     void HandleClick()
     {
+        bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        bool hasPlacement = PlayerStates.HasStatus(PlayerStatus.Placement);
+        if (isOverUi) return;
         CloseMenu();
-        // Don't interact if clicking on UI or in placement
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()
-            || PlayerStates.HasStatus(PlayerStatus.Placement))
-        {
-            return;
-        }
+        if (hasPlacement) return;
         // Get mouse position and create ray
         Vector2 mousePos = Mouse.current.position.ReadValue();
         Ray ray = gameCamera.ScreenPointToRay(mousePos);
@@ -68,6 +67,7 @@ public class Interact : MonoBehaviour
         //intercept if shopping, swap to alternate mode
         if (PlayerStates.HasStatus(PlayerStatus.Shopping))
         {
+            
             actions = functionality.GetShoppingActions().ToArray();
             Debug.Log("intercepted");
         }
@@ -113,19 +113,20 @@ public class Interact : MonoBehaviour
         
         // Set button text if it has one
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-        if (buttonText != null)
+        buttonText.text = actionName;
+        if (actionName == "Purchase")
         {
-            buttonText.text = actionName;
+            buttonText.text = $"Purchase ({functionality.price})";
         }
-        
         // Add click listener
         Button button = buttonObj.GetComponent<Button>();
         if (button != null)
         {
-            // Capture action name to avoid closure issues
+            // Capture action name to avoid closure iss
             string capturedAction = actionName;
-            button.onClick.AddListener(() => 
+            button.onClick.AddListener(() =>
             {
+                Debug.Log("pressed");
                 functionality.InvokeAction(capturedAction);
                 CloseMenu();
             });
