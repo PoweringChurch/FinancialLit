@@ -12221,6 +12221,7 @@ MonoBehaviour:
   ItemUpdater:
     shampooText: {fileID: 490231538}
     foodText: {fileID: 174027473}
+    moneyText: {fileID: 1535926489}
   PetUI:
     HungerFill: {fileID: 1394979802}
     HygieneFill: {fileID: 1301167055}
