@@ -43,10 +43,10 @@ Saving & Loading
 ### Cleanup
 
 Make inputs work with InputSystem
-- [ ] Make a centalized input module
+- [x] Make a centalized input module
 
 Organize files
-- [ ] Seperate scripts by what they do
+- [x] Seperate scripts by what they do
 
 Centralize UI
 - [x] Move where and how UI information and interaction is stored & handled
