@@ -18,7 +18,7 @@ Tackle automatic pivot selection for furniture
 Add money & money tracking
 - [x] Add currency
 - [x] Keep track of spending
-- [ ] Add UI
+- [x] Add UI
   * Keep implementation of ui very barebones and easy to move, all ui handling will be moved into a central module
 
 Player item inventory
@@ -28,12 +28,13 @@ Display pet needs
 - [x] Show pet needs visually on UI, likely best implemented as needs on list at the bottom of screen
   * Ultimately chose different method
 
-Pet personality
+Pet personality & behavior
 - [ ] Pet AI, include
   - [ ] States (should be very barebones, ex: moving, none. Pet should only ever be busy with 1 task at a time)
-  - [ ] Statuses (Hungry, sick, etc.) 
+  - [x] Statuses (Hungry, dirty, etc.)
+    * implemented in a different way than anticipated, still functional. might return to this and change how to it works
   - [ ] Behaviors (Determine what to do and when)
-
+  - [ ] Sickness chance affected by statuses
 Saving & Loading
 - [ ] Implement saving and loading
   - [ ] Player home configuration
