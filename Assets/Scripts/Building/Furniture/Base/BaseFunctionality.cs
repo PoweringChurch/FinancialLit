@@ -5,26 +5,24 @@ using Unity.VisualScripting;
 using UnityEngine.XR;
 using TMPro;
 using System.Collections;
-[RequireComponent(typeof(PlacementHandler))]
+
 public class BaseFunctionality : MonoBehaviour
 {
+    //add global actions, and then other actions for statuses.
     protected Dictionary<string, Action> actions = new();
     protected Dictionary<string, Action> shoppingActions = new();
     protected GameObject floatingTextPrefab;
-    protected bool immovable = false; //hide base actions
+    protected bool ignoreBase = false; //hide base actions
     public float price;
     protected virtual void Awake()
     {
         floatingTextPrefab = Resources.Load<GameObject>("UITemplates/Message");
-        if (actions == null)
-            actions = new Dictionary<string, Action>();
-            shoppingActions = new Dictionary<string, Action>();
-        if (!immovable)
+        if (!ignoreBase)
         {
             actions["Move"] = Move;
             actions["Remove"] = Remove;
+            shoppingActions["Purchase"] = Purchase;
         }
-        shoppingActions["Purchase"] = Purchase;
     }
     protected virtual void Move()
     {

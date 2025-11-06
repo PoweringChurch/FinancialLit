@@ -206,7 +206,6 @@ public class UIHandler : MonoBehaviour
         public void Initialize()
         {
             UpdateUI();
-            AddWarning("Hello, world!");
         }
         public void UpdateUI()
         {
@@ -265,7 +264,6 @@ public class UIHandler : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         ButtonManager.Initialize();
         InventoryManager.Initialize();

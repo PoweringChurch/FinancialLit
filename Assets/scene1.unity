@@ -3407,7 +3407,9 @@ GameObject:
   - component: {fileID: 630217136}
   - component: {fileID: 630217135}
   - component: {fileID: 630217134}
-  m_Layer: 0
+  - component: {fileID: 630217137}
+  - component: {fileID: 630217138}
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3506,6 +3508,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630217132}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &630217137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630217132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e73ae28c1e40424aa3a39c839ed9b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PetFunctionality
+  price: 90000
+--- !u!114 &630217138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630217132}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &651356270
 GameObject:
   m_ObjectHideFlags: 0
@@ -5596,7 +5629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -624.37, y: -169.50002}
+  m_AnchoredPosition: {x: -624.37, y: -369.5}
   m_SizeDelta: {x: 292.7469, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1104686952
@@ -7308,7 +7341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -628, y: -322}
+  m_AnchoredPosition: {x: -628, y: -217}
   m_SizeDelta: {x: 300, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367083315
@@ -8938,7 +8971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1624103057}
   - component: {fileID: 1624103058}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8976,8 +9009,8 @@ MonoBehaviour:
   tirednessRate: 0.001
   hungerRate: 0.002
   boredomRate: 0.003
-  dirtinessRate: 0.001
-  sleepRecoveryRate: 0.001
+  dirtinessRate: 0.0013
+  sleepRecoveryRate: 0.003
 --- !u!1 &1628560069
 GameObject:
   m_ObjectHideFlags: 0
@@ -11587,7 +11620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 633b11483a6fd435dacc27677933f8db, type: 3}
+  m_Texture: {fileID: 2800000, guid: 7e23d99d8340144fdabc3a11d36ed5ea, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -12160,7 +12193,7 @@ MonoBehaviour:
   menuContainer: {fileID: 1603932561}
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   menuRadius: 100
   raycastDistance: 1000
 --- !u!4 &2030654950
@@ -12286,7 +12319,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: b84db89d6c369449484b39bbb09c7705, type: 3}
+  m_Texture: {fileID: 2800000, guid: 03e356a6c0b424fe198258c4f3f2fd75, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
