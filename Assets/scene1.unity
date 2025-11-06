@@ -1826,6 +1826,7 @@ GameObject:
   - component: {fileID: 291994502}
   - component: {fileID: 291994501}
   - component: {fileID: 291994500}
+  - component: {fileID: 291994503}
   m_Layer: 0
   m_Name: Misc
   m_TagString: Untagged
@@ -1895,6 +1896,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryHelper
   debugMode: 1
   inventoryUI: {fileID: 2030654948}
+--- !u!114 &291994503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291994498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842a62191ada5dd4fac13deed8728158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerData
 --- !u!1 &363312344
 GameObject:
   m_ObjectHideFlags: 0
@@ -5173,7 +5186,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 241219054}
   m_HandleRect: {fileID: 241219053}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -12107,7 +12120,7 @@ GameObject:
   - component: {fileID: 2030654948}
   - component: {fileID: 2030654949}
   - component: {fileID: 2030654951}
-  - component: {fileID: 2030654952}
+  - component: {fileID: 2030654953}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -12184,7 +12197,7 @@ MonoBehaviour:
   - name: Travel
     button: {fileID: 1234134729}
     unavailableImage: {fileID: 1004246159}
---- !u!114 &2030654952
+--- !u!114 &2030654953
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12193,15 +12206,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2030654947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ac677ca0fb4c24c9f56c5d12407e49, type: 3}
+  m_Script: {fileID: 11500000, guid: ef5be6b9ed0a543419a59df58c5ed6ad, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetUI
-  HungerFill: {fileID: 1394979802}
-  HygieneFill: {fileID: 1301167055}
-  EntertainmentFill: {fileID: 89863326}
-  EnergyFill: {fileID: 1190246066}
-  warningPrefab: {fileID: 2675135118897209109, guid: 43a87ebffda032844a228c191bec38eb, type: 3}
-  warningContent: {fileID: 390566615}
+  m_EditorClassIdentifier: Assembly-CSharp::UIHandler
+  ButtonManager:
+    buttons:
+    - name: Build
+      button: {fileID: 1555366604}
+    - name: Travel
+      button: {fileID: 1234134729}
+  InventoryManager:
+    itemButtonTemplate: {fileID: 629064268305734636, guid: d9737a1336e8f6a48ad4d421f8c200d6, type: 3}
+    contentTransform: {fileID: 1835840286}
+  ItemUpdater:
+    shampooText: {fileID: 490231538}
+    foodText: {fileID: 174027473}
+  PetUI:
+    HungerFill: {fileID: 1394979802}
+    HygieneFill: {fileID: 1301167055}
+    EntertainmentFill: {fileID: 89863326}
+    EnergyFill: {fileID: 1190246066}
+    warningPrefab: {fileID: 2675135118897209109, guid: 43a87ebffda032844a228c191bec38eb, type: 3}
+    warningContent: {fileID: 390566615}
 --- !u!1 &2052040188
 GameObject:
   m_ObjectHideFlags: 0

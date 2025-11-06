@@ -4,9 +4,9 @@ using System.Collections.Generic;
 public class PlayerData : MonoBehaviour
 {
     public static PlayerData Instance;
-    private float money;
-    private int food;
-    private int shampoo;
+    private float money = 10.01f;
+    private int food = 10;
+    private int shampoo = 10;
     void Awake()
     {
         Instance = this;
@@ -34,6 +34,7 @@ public class PlayerData : MonoBehaviour
         {
             spendings[purchaseType] += cost;
             money -= cost;
+            UIHandler.Instance.ItemUpdater.UpdateText();
             return;
         }
     }
@@ -42,6 +43,7 @@ public class PlayerData : MonoBehaviour
         if (CanConsumeFood())
         {
             food -= 1;
+            UIHandler.Instance.ItemUpdater.UpdateText();
         }
     }
     public void ConsumeShampoo()
@@ -49,27 +51,26 @@ public class PlayerData : MonoBehaviour
         if (CanConsumeShampoo())
         {
             shampoo -= 1;
+            UIHandler.Instance.ItemUpdater.UpdateText();
+
         }
     }
     //helper
     public bool CanConsumeFood()
     {
-        return (food - 1) < 0;
+        return (food - 1) >= 0;
     }
     public bool CanConsumeShampoo()
     {
-        return (shampoo - 1) < 0;
+        return (shampoo - 1) >= 0;
     }
     public bool CanAfford(float cost)
     {
-        if (money - cost < 0)
-        {
-            return false;
-        }
-        return true;
+        return (money - cost) >= 0;
     }
     public void AddMoney(float amount)
     {
         money += amount;
+        UIHandler.Instance.ItemUpdater.UpdateText();
     }
 }

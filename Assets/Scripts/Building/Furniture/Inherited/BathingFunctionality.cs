@@ -9,6 +9,12 @@ public class BathingFunctionality : BaseFunctionality
     }
     protected virtual void CleanPet()
     {
-        Pet.Instance.CleanPet(0.1f);
+        if (!PlayerData.Instance.CanConsumeShampoo())
+        {
+            Message("No pet shampoo!");
+            return;
+        }
+        PlayerData.Instance.ConsumeShampoo();
+        Pet.Instance.CleanPet(0.5f);
     }
 }

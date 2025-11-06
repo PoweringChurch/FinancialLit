@@ -29,7 +29,6 @@ public static class PlayerStates
         if (!currentStatuses.Contains(status))
         {
             currentStatuses.Add(status);
-            Debug.Log($"{{{string.Join(", ", currentStatuses.Select(x => x.ToString()))}}}");
         }
         else
         {
@@ -44,10 +43,7 @@ public static class PlayerStates
     
     public static void RemoveStatus(PlayerStatus status)
     {
-        if (currentStatuses.Remove(status))
-        {
-            Debug.Log($"{{{string.Join(", ", currentStatuses.Select(x => x.ToString()))}}}");
-        }
+        currentStatuses.Remove(status);
     }
     
     public static void RemoveStatus(int statusInt)

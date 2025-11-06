@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FeedingFunctionality : BaseFunctionality
 {
-    protected bool filled = true;
+    protected bool filled = false;
     protected override void Awake()
     {
         base.Awake();
@@ -16,7 +16,7 @@ public class FeedingFunctionality : BaseFunctionality
             Message("Not filled!");
             return;
         }
-        Pet.Instance.FeedPet(0.4f);
+        Pet.Instance.FeedPet(0.2f);
         filled = false;
     }
     protected virtual void RefillBowl()
@@ -26,6 +26,12 @@ public class FeedingFunctionality : BaseFunctionality
             Message("Already filled!");
             return;
         }
+        if (!PlayerData.Instance.CanConsumeFood())
+        {
+            Message("No pet food!");
+            return;
+        }
+        PlayerData.Instance.ConsumeFood();
         filled = true;
     }
 }

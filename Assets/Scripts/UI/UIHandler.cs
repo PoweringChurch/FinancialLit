@@ -3,17 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
-// Note: This file assumes the existence of 'Inventory', 'InventoryEntry', 
-// 'ItemData', and 'FurniturePlacer' classes in your project.
-
 public class UIHandler : MonoBehaviour
 {
-    // --- 1. Singleton Instance ---
     public static UIHandler Instance;
 
-    // --- 2. Inner Class for Button Toggling (UIButtonManager) ---
-    
     [Serializable]
     public class UIButtonManager
     {
@@ -22,13 +15,11 @@ public class UIHandler : MonoBehaviour
         {
             public string name;
             public Button button;
-            public RawImage unavailableImage;
         }
 
         [SerializeField] private List<ToggleableButton> buttons;
         private Dictionary<string, ToggleableButton> buttonDict;
 
-        // Initialization method, called by UIHandler.Awake
         public void Initialize()
         {
             buttonDict = new Dictionary<string, ToggleableButton>();
@@ -56,28 +47,38 @@ public class UIHandler : MonoBehaviour
             }
 
             if (targetButton.button) targetButton.button.enabled = enabled;
-            if (targetButton.unavailableImage) targetButton.unavailableImage.enabled = !enabled;
+            RawImage unavailableImage = targetButton.button.GetComponentInChildren<RawImage>();
+            if (unavailableImage) unavailableImage.enabled = !enabled;
         }
     }
-
-
-    // --- 3. Inner Class for Inventory UI (UIInventoryManager) ---
-    
+    [Serializable]
+    public class UIItemUpdater
+    {
+        public TextMeshProUGUI shampooText;
+        public TextMeshProUGUI foodText;
+        public TextMeshProUGUI moneyText;
+        public void Initialize()
+        {
+            UpdateText();
+        }
+        public void UpdateText()
+        {
+            shampooText.text = PlayerData.Instance.Shampoo.ToString();
+            foodText.text = PlayerData.Instance.Food.ToString();
+            moneyText.text = $"Balance: ${PlayerData.Instance.Money:f2}";
+        }
+    }
     [Serializable]
     public class UIInventoryManager
     {
-        // Serialized fields required for Unity Inspector links
         [SerializeField] private GameObject itemButtonTemplate;
         [SerializeField] private Transform contentTransform;
 
-        // Private operational data
-        private Inventory inventory; 
-        private readonly Dictionary<string, GameObject> inventoryItemUI = new Dictionary<string, GameObject>();
+        private Inventory inventory;
+        private readonly Dictionary<string, GameObject> inventoryItemUI = new();
 
-        // Initialization method (can be left empty but included for consistency)
-        public void Initialize() 
+        public void Initialize()
         {
-            // Perform any initial setup here, e.g., checking for required components.
             if (itemButtonTemplate == null || contentTransform == null)
             {
                 Debug.LogError("InventoryManager components not fully linked in Inspector!");
@@ -100,11 +101,11 @@ public class UIHandler : MonoBehaviour
 
             if (inventory == null)
             {
-                Debug.LogError("Inventory not set on UIHandler!");
+                Debug.LogError("Inventory not set on UIHandler");
                 return;
             }
-            
-            foreach (var entry in inventory.GetItemsToDisplay()) 
+
+            foreach (var entry in inventory.GetItemsToDisplay())
             {
                 GameObject newTemplate = Instantiate(itemButtonTemplate, contentTransform);
                 Button itemButton = newTemplate.GetComponent<Button>();
@@ -163,7 +164,7 @@ public class UIHandler : MonoBehaviour
             {
                 tmpCount.text = $"{entry.count}";
             }
-            
+
             // Ensure UI is active if count > 0
             existingItemUI.SetActive(true);
         }
@@ -178,41 +179,98 @@ public class UIHandler : MonoBehaviour
 
             if (entry.itemData.prefab == null)
             {
-                Debug.LogError($"Item {entry.itemData.itemName} has no prefab assigned!");
+                Debug.LogError($"Item {entry.itemData.itemName} has no prefab assigned");
                 return;
             }
-            
-            // Requires the 'FurniturePlacer' class to be accessible globally
-            FurniturePlacer.Instance.SetCurrentFurniture(entry.itemData.itemName); 
+
+            FurniturePlacer.Instance.SetCurrentFurniture(entry.itemData.itemName);
+        }
+    }
+    [Serializable]
+    public class UIPetManager
+    {
+        [SerializeField]
+        private Image HungerFill;
+        [SerializeField]
+        private Image HygieneFill;
+        [SerializeField]
+        private Image EntertainmentFill;
+        [SerializeField]
+        private Image EnergyFill;
+        [SerializeField]
+        private GameObject warningPrefab;
+        [SerializeField]
+        private Transform warningContent;
+
+        private Dictionary<string, GameObject> activeWarnings = new();
+        public void Initialize()
+        {
+            UpdateUI();
+            AddWarning("Hello, world!");
+        }
+        public void UpdateUI()
+        {
+            var hygiene = Pet.Instance.Status["hygiene"];
+            var hunger = Pet.Instance.Status["hunger"];
+            var entertainment = Pet.Instance.Status["entertainment"];
+            var energy = Pet.Instance.Status["energy"];
+            HygieneFill.fillAmount = hygiene;
+            HungerFill.fillAmount = hunger;
+            EntertainmentFill.fillAmount = entertainment;
+            EnergyFill.fillAmount = energy;
+
+            if (hunger < 0.2f) TryAddWarning($"{Pet.Instance.PetName} is hungry!"); else ResolveWarning($"{Pet.Instance.PetName} is hungry!");
+            if (hygiene < 0.2f) TryAddWarning($"{Pet.Instance.PetName} is dirty!"); else ResolveWarning($"{Pet.Instance.PetName} is dirty!");
+            if (entertainment < 0.2f) TryAddWarning($"{Pet.Instance.PetName} is bored!"); else ResolveWarning($"{Pet.Instance.PetName} is bored!");
+            if (energy < 0.2f) TryAddWarning($"{Pet.Instance.PetName} is tired!"); else ResolveWarning($"{Pet.Instance.PetName} is tired!");
+        }
+        public void AddWarning(string message)
+        {
+            var newWarningMessage = Instantiate(warningPrefab, warningContent);
+            TextMeshProUGUI messagetext = newWarningMessage.GetComponentInChildren<TextMeshProUGUI>();
+            messagetext.text = message;
+            activeWarnings[message] = newWarningMessage;
+        }
+        public void TryAddWarning(string message) //checks if warning already exists before adding
+        {
+            if (!activeWarnings.ContainsKey(message))
+            {
+                AddWarning(message);
+            }
+        }
+        public void ResolveWarning(string message)
+        {
+            if (!activeWarnings.ContainsKey(message)) return;
+            Destroy(activeWarnings[message]);
+            activeWarnings.Remove(message);
+        }
+        public void ClearWarnings()
+        {
+            foreach (var warning in activeWarnings.Values) Destroy(warning);
+            activeWarnings.Clear();
         }
     }
 
-    // --- 4. Main UIHandler Serialized Managers ---
 
     [Header("Manager Settings")]
-    [Tooltip("Configuration for toggling button interactivity and visuals.")]
-    [SerializeField]
-    public UIButtonManager ButtonManager = new UIButtonManager();
-
-    [Tooltip("Configuration for dynamic inventory display and item buttons.")]
-    [SerializeField]
-    public UIInventoryManager InventoryManager = new UIInventoryManager();
-
-
-    // --- 5. MonoBehaviour Lifecycle ---
-    private void Awake()
+    public UIButtonManager ButtonManager = new();
+    public UIInventoryManager InventoryManager = new();
+    public UIItemUpdater ItemUpdater = new();
+    public UIPetManager PetUI = new();
+    void Start()
     {
-        // Singleton Initialization
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Optional: if your UI handler persists across scenes
+        DontDestroyOnLoad(gameObject);
 
-        // Initialize all nested manager logic
         ButtonManager.Initialize();
         InventoryManager.Initialize();
+        ItemUpdater.Initialize();
+        PetUI.Initialize();
+
     }
 }

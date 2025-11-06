@@ -31,7 +31,7 @@ public class Pet : MonoBehaviour
         status.Add("energy",1f);
     }
     private float elapsed = 0;
-    private float time = 1f;
+    private float tickspeed = 0.1f; //once every tickspeed seconds
     void Update()
     {
         if (sleeping)
@@ -40,10 +40,11 @@ public class Pet : MonoBehaviour
         }
         //tick stats
         elapsed += Time.deltaTime;
-        if (elapsed > time)
+        if (elapsed > tickspeed)
         {
             elapsed = 0;
             Step();
+            UIHandler.Instance.PetUI.UpdateUI();
         }
     }
     public void SetName(string newPetName)
