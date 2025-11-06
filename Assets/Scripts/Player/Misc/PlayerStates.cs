@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum PlayerState {Menu, Home, View}; //only one state
-public enum PlayerStatus {Shopping, Placement} //multiple statuses
+public enum PlayerState {Menu, Game}; //only one state
+public enum PlayerStatus {Home, Shopping, Placement} //multiple statuses
 
 public static class PlayerStates
 {
