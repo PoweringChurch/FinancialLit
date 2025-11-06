@@ -4,8 +4,6 @@ Project Files for Financial Literatire Pet simulation in FBLA
 
 # TODO
 
-## Week of 11/3
-
 ### Development
 
 Playerstate additions and adjustment
@@ -20,14 +18,15 @@ Tackle automatic pivot selection for furniture
 Add money & money tracking
 - [x] Add currency
 - [x] Keep track of spending
-- [x] Add UI
+- [ ] Add UI
   * Keep implementation of ui very barebones and easy to move, all ui handling will be moved into a central module
 
 Player item inventory
-- [ ] Add item inventory (different from furniture) that keeps tracks of various items, including pet food, shampoo, 
+- [x] Add item inventory (different from furniture) that keeps tracks of various items, including pet food, shampoo, 
 - [x] Add UI
 Display pet needs
-- [ ] Show pet needs visually on UI, likely best implemented as needs on list at the bottom of screen
+- [x] Show pet needs visually on UI, likely best implemented as needs on list at the bottom of screen
+  * Ultimately chose different method
 
 Pet personality
 - [ ] Pet AI, include
@@ -50,7 +49,7 @@ Organize files
 - [ ] Seperate scripts by what they do
 
 Centralize UI
-- [ ] Move where and how UI information and interaction is stored & handled
+- [x] Move where and how UI information and interaction is stored & handled
   * This is mostly a backend task, not expected to affect anything that the player sees.
 
 Stylize UI
