@@ -74,14 +74,10 @@ public class AreaHandler : MonoBehaviour
             homeArea.SetActive(true);
         }
 
-        PlayerStates.SetState(PlayerState.Home);
-        //nts: doesnt work? cant tell if status is removing
-        if (PlayerStates.HasStatus(PlayerStatus.Shopping))
-        {
-            Debug.Log("has status shopping"); //gets here but doesnt remove?
-            PlayerStates.RemoveStatus(PlayerStatus.Shopping);
-        }
-        Debug.Log(PlayerStates.CurrentStatuses.ToString()); //figure this out, mayb helper func
+        PlayerStates.AddStatus(PlayerStatus.Home);
+        PlayerStates.RemoveStatus(PlayerStatus.Shopping);
+        
+        Debug.Log(PlayerStates.CurrentStatuses.ToString());
         ButtonToggler.Instance.EnableButton("Build");
     }
 
