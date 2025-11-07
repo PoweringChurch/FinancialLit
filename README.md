@@ -13,8 +13,9 @@ Functionality
 - [x] Make Interact module take into account player state and status when determining how to interact with an object
 
 Tackle automatic pivot selection for furniture
-- [ ] Implement way of detecting pivot automatically when placing furniture
-
+- [x] Implement way of detecting pivot automatically when placing furniture
+  *  just doing it manually, takes less effort than initally thought so not worried about it
+ 
 Add money & money tracking
 - [x] Add currency
 - [x] Keep track of spending
@@ -30,7 +31,7 @@ Display pet needs
 
 Pet personality & behavior
 - [ ] Pet AI, include
-  - [ ] States (should be very barebones, ex: moving, none. Pet should only ever be busy with 1 task at a time)
+  - [ ] Goals (should be very barebones, ex: moving, none. Pet should only ever be busy with 1 task at a time)
   - [x] Statuses (Hungry, dirty, etc.)
     * implemented in a different way than anticipated, still functional. might return to this and change how to it works
   - [ ] Behaviors (Determine what to do and when)
