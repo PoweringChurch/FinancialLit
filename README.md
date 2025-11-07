@@ -4,6 +4,8 @@ Project Files for Financial Literatire Pet simulation in FBLA
 
 # TODO
 
+## Week of 11/3
+
 ### Development
 
 Playerstate additions and adjustment
