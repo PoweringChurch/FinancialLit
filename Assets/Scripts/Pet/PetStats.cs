@@ -41,8 +41,8 @@ public class PetStats : MonoBehaviour
         }
         //tick stats
         elapsed += Time.deltaTime;
-        if (!PetStates.HasState(PetState.Sick)) immunityTimer -= Time.deltaTime;
-        if (immunityTimer <= 0) PetStates.RemoveState(PetState.Immune);
+        if (!PetStateManager.HasState(PetState.Sick)) immunityTimer -= Time.deltaTime;
+        if (immunityTimer <= 0) PetStateManager.RemoveState(PetState.Immune);
 
         if (elapsed > tickspeed)
         {
@@ -72,15 +72,15 @@ public class PetStats : MonoBehaviour
         var tiredAffliction = calculateAffliction(status["energy"], 1.2f);
 
         var total = dirtyAffliction + hungerAffliction + boredAffliction + tiredAffliction;
-        if (total > 0.3f && !PetStates.HasState(PetState.Immune))
+        if (total > 0.3f && !PetStateManager.HasState(PetState.Immune))
         {
-            PetStates.AddState(PetState.Sick);
-            PetStates.AddState(PetState.Immune);
+            PetStateManager.AddState(PetState.Sick);
+            PetStateManager.AddState(PetState.Immune);
         }
     }
     public void CurePet()
     {
-        PetStates.RemoveState(PetState.Sick);
+        PetStateManager.RemoveState(PetState.Sick);
         immunityTimer = 40f; //when reaching 0, remove immunity
     }
     public void CleanPet(float amount)

@@ -19,7 +19,7 @@ public class PetMover : MonoBehaviour
     }
     void Update()
     {
-        if (!reachedGoal)
+        if (!reachedGoal && !PetStateManager.HasState(PetState.Sitting))
         {
             MovePet();
         }
@@ -41,9 +41,11 @@ public class PetMover : MonoBehaviour
             return;
         }
         
+        var movement = moveSpeed * Time.deltaTime * direction.normalized;
+        if (PetStateManager.HasState(PetState.Sick)) movement *= 0.5f;
         // apply movement
-        transform.position += moveSpeed * Time.deltaTime * direction.normalized;
-        
+        transform.position += movement;
+
         if (petModel != null && direction.magnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);

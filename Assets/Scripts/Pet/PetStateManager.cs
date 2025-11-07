@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum PetState {Sick, Immune}
-public static class PetStates
+public enum PetState {Sitting, Following, Sick, Immune}
+public static class PetStateManager
 {
     private static List<PetState> currentStates = new();
     public static List<PetState> CurrentStates => currentStates;

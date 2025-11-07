@@ -5,16 +5,35 @@ public class PetFunctionality : BaseFunctionality
     {
         ignoreBase = true;
         base.Awake();
-        globalActions["Toggle Follow"] = ToggleFollow;
-        globalActions["Toggle Sit"] = ToggleSit;
+        globalActions["Follow"] = Follow;
+        globalActions["Sit"] = ToggleSit;
     }
-    void ToggleFollow()
+    void Follow()
     {
-        PetBehaviour.Instance.followingCursor = !PetBehaviour.Instance.followingCursor;
+        if (PetStateManager.HasState(PetState.Sitting))
+        {
+            Message("Your pet is sitting!");
+            return;
+        }
+        PetStateManager.AddState(PetState.Following);
+        PetBehaviour.Instance.SetCursor(PetBehaviour.Instance.followingCursor);
     }
     void ToggleSit()
     {
-        Debug.Log("sitting");
+        if (PetStateManager.HasState(PetState.Sitting)) //if the pet is sitting
+        {
+            PetStateManager.RemoveState(PetState.Sitting); //remove sit state
+            globalActions.Remove("Rise"); //remove rise
+            globalActions["Sit"] = ToggleSit; //and assign sit
+            Debug.Log("rise set");
+        }
+        else //otherwise if the pet is not sitting (will NOT have sitting)
+        {
+            PetStateManager.AddState(PetState.Sitting); //add sit state
+            globalActions.Remove("Sit"); //remove sit
+            globalActions["Rise"] = ToggleSit; //and assign rise
+            Debug.Log("sit set");
+        }
     }
 
     
