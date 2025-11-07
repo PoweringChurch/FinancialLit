@@ -39,12 +39,6 @@ Pet personality & behavior
   - [ ] Behaviors (Determine what to do and when)
   - [x] Sickness affected by statuses
 
-Saving & Loading
-- [ ] Implement saving and loading
-  - [ ] Player home configuration
-  - [ ] Pet states and statuses
-  - [ ] Save into json file?
-
 ### Cleanup
 
 Make inputs work with InputSystem
@@ -61,8 +55,15 @@ Centralize UI
 
 ### Development
 
+Saving & Loading
+- [ ] Implement saving and loading
+  - [ ] Player home configuration
+  - [ ] Pet states and statuses
+  - [ ] Save into json file?
+
 Pet selection screen
 - [ ] Add screen that allows for pet selection when entering a new save file
+- [ ] Allow for pet renaming
 
 Models & animation
 - [ ] Add pet model
