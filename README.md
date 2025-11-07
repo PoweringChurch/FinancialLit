@@ -16,7 +16,7 @@ Functionality
 
 Tackle automatic pivot selection for furniture
 - [x] Implement way of detecting pivot automatically when placing furniture
-  *  just doing it manually, takes less effort than initally thought so not worried about it
+  *  instead will do it manually. it takes less effort than initally thought and automatic is not worth the time to implement
  
 Add money & money tracking
 - [x] Add currency
@@ -39,11 +39,17 @@ Pet personality & behavior
   - [ ] Behaviors (Determine what to do and when)
   - [x] Sickness affected by statuses
 
+Models
+- [ ] Add pet model
+
 Saving & Loading
 - [ ] Implement saving and loading
   - [ ] Player home configuration
   - [ ] Pet states and statuses
   - [ ] Save into json file?
+
+Furniture additions
+- [ ] Add as much furniture as possible with remaining time
 
 ### Cleanup
 
@@ -62,6 +68,5 @@ Stylize UI
 - [ ] Select font
 - [ ] Stylize buttons
 
-### Misc
+#### Extra
 Add support for controller
-* Mobile comes later/NEVER, too much ui work
