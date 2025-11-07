@@ -32,11 +32,12 @@ Display pet needs
   * Ultimately chose different method
 
 Pet personality & behavior
-- [ ] Pet AI, include
-  - [ ] Goals (should be very barebones, ex: moving, none. Pet should only ever be busy with 1 task at a time)
+- [x] Pet AI, include
+  - [x] Goals (should be very barebones, ex: moving, none. Pet should only ever be busy with 1 task at a time)
+    * chose to scrap idea, not flexible or practical for current implementation
   - [x] Statuses (Hungry, dirty, etc.)
     * implemented in a different way than anticipated, still functional. might return to this and change how to it works
-  - [ ] Behaviors (Determine what to do and when)
+  - [x] Behaviors (Determine what to do and when)
   - [x] Sickness affected by statuses
 
 ### Cleanup
