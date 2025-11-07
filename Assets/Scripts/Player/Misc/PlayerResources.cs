@@ -1,15 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerData : MonoBehaviour
+public class PlayerResources : MonoBehaviour
 {
-    public static PlayerData Instance;
+    public static PlayerResources Instance;
     private float money = 10.01f;
     private int food = 10;
     private int shampoo = 10;
     void Awake()
     {
         Instance = this;
+
+        PlayerStateManager.AddState(PlayerState.Home);
     }
     private Dictionary<string, float> spendings = new()
     {

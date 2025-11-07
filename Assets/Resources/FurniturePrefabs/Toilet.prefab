@@ -194,8 +194,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
   itemName: Toilet
-  validPlacementMaterial: {fileID: 2100000, guid: 46ac25f835fda4b929c54d06729c4c4c, type: 2}
-  invalidPlacementMaterial: {fileID: 2100000, guid: 26c7e694b6fc34ead86d6f683c1256a1, type: 2}
   meshComponents:
   - {fileID: 3906853037738144276}
   - {fileID: 6052655562632433095}
@@ -242,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbec6b54bdb7cdf46b309506cc365baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BathingFunctionality
+  price: 30
 --- !u!114 &2708529447513167170
 MonoBehaviour:
   m_ObjectHideFlags: 0

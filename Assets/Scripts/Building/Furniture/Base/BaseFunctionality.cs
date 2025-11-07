@@ -5,22 +5,25 @@ using Unity.VisualScripting;
 using UnityEngine.XR;
 using TMPro;
 using System.Collections;
+using System.Linq;
 
 public class BaseFunctionality : MonoBehaviour
 {
-    //add global actions, and then other actions for statuses.
-    protected Dictionary<string, Action> actions = new();
+    //add global actions, and then other actions for statuses
+    protected Dictionary<string, Action> globalActions = new();
+    protected Dictionary<string, Action> homeActions = new();
     protected Dictionary<string, Action> shoppingActions = new();
+
     protected GameObject floatingTextPrefab;
     protected bool ignoreBase = false; //hide base actions
-    public float price;
+    public float price = 0.15f;
     protected virtual void Awake()
     {
         floatingTextPrefab = Resources.Load<GameObject>("UITemplates/Message");
         if (!ignoreBase)
         {
-            actions["Move"] = Move;
-            actions["Remove"] = Remove;
+            homeActions["Move"] = Move;
+            homeActions["Remove"] = Remove;
             shoppingActions["Purchase"] = Purchase;
         }
     }
@@ -46,6 +49,7 @@ public class BaseFunctionality : MonoBehaviour
         PlacementHandler handler = GetComponent<PlacementHandler>();
         var item = FurnitureDatabase.GetItem(handler.itemName);
         InventoryHelper.Instance.AddItem(item, 1);
+        PlayerResources.Instance.Spend(price, "Furniture");
     }
     protected void Message(string message)
     {
@@ -82,21 +86,18 @@ public class BaseFunctionality : MonoBehaviour
         Destroy(textObj);
     }
     //helpers
-    public void InvokeAction(string actionName)
+    public Dictionary<string,Action> GetAvailableActions()
     {
-        if (actions.TryGetValue(actionName, out Action action)) //first try regular actions
-            action.Invoke();
-        else if (shoppingActions.TryGetValue(actionName, out Action shoppingAction)) //then try shopping actions
-            shoppingAction.Invoke();
-        else //otherwise js lowk kys
-            Debug.LogWarning($"Action '{actionName}' not found");
-    }
-    public IEnumerable<string> GetAvailableActions()
-    {
-        return actions.Keys;
-    }
-    public IEnumerable<string> GetShoppingActions()
-    {
-        return shoppingActions.Keys;
+        bool home = PlayerStateManager.HasState(PlayerState.Home);
+        bool shopping = PlayerStateManager.HasState(PlayerState.Shopping);
+
+        // Order matters, has to be consistent
+        var availableActions = new Dictionary<string, Action>();
+        
+        availableActions.AddRange(globalActions);
+        if (home) availableActions.AddRange(homeActions);
+        if (shopping) availableActions.AddRange(shoppingActions);
+        
+        return availableActions;
     }
 }

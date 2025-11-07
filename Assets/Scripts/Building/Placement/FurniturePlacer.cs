@@ -79,7 +79,7 @@ public class FurniturePlacer : MonoBehaviour
       public void SetCurrentFurniture(string itemName)
       {
             _objectPrefab = FurnitureDatabase.GetItem(itemName).prefab;
-            PlayerStates.AddStatus(PlayerStatus.Placement);
+            PlayerStateManager.AddState(PlayerState.Placement);
             _PrepareObject();
       }
       public void CancelPlacement()
@@ -88,7 +88,7 @@ public class FurniturePlacer : MonoBehaviour
             isMoving = false;
             _toBuild = null;
             _objectPrefab = null;
-            PlayerStates.RemoveStatus(PlayerStatus.Placement);
+            PlayerStateManager.RemoveState(PlayerState.Placement);
       }
       private Vector3 _ClampToNearest(Vector3 pos, float threshold)
       {

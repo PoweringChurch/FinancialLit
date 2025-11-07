@@ -394,7 +394,7 @@ Transform:
   m_GameObject: {fileID: 79458711}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 23, y: 1, z: 23}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1824,6 +1824,7 @@ GameObject:
   m_Component:
   - component: {fileID: 291994499}
   - component: {fileID: 291994502}
+  - component: {fileID: 291994501}
   - component: {fileID: 291994500}
   - component: {fileID: 291994503}
   m_Layer: 0
@@ -1863,6 +1864,24 @@ MonoBehaviour:
   gameCamera: {fileID: 1130872541}
   menuCamera: {fileID: 448365813}
   zoomSpeedMultiplier: {fileID: 363312345}
+--- !u!114 &291994501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291994498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3ec1445e75e2f4e867b136f9364b61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaHandler
+  homeArea: {fileID: 395478671}
+  areas:
+  - areaName: SmartyPets
+    areaPrefab: {fileID: 8831189482552316543, guid: 371efee2b74e18749813142dfa922162, type: 3}
+  gameSpace: {fileID: 1809660803}
+  pet: {fileID: 0}
 --- !u!114 &291994502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1876,6 +1895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryHelper
   debugMode: 1
+  inventoryUI: {fileID: 2030654948}
 --- !u!114 &291994503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3375,57 +3395,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585808991}
   m_CullTransparentMesh: 1
---- !u!1 &597349061
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 597349062}
-  - component: {fileID: 597349063}
-  m_Layer: 0
-  m_Name: AreaHandling
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &597349062
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597349061}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2061597410}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &597349063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597349061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d3ec1445e75e2f4e867b136f9364b61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AreaHandler
-  home: {fileID: 395478671}
-  areas:
-  - areaName: SmartyPets
-    isShop: 1
-    prefab: {fileID: 2334533824609228055, guid: 371efee2b74e18749813142dfa922162, type: 3}
-  gameSpace: {fileID: 1809660803}
-  pet: {fileID: 1624103058}
 --- !u!1 &630217132
 GameObject:
   m_ObjectHideFlags: 0
@@ -3437,7 +3406,8 @@ GameObject:
   - component: {fileID: 630217133}
   - component: {fileID: 630217136}
   - component: {fileID: 630217135}
-  m_Layer: 9
+  - component: {fileID: 630217134}
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3453,12 +3423,33 @@ Transform:
   m_GameObject: {fileID: 630217132}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1624103057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &630217134
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630217132}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &630217135
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4888,6 +4879,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: FurniturePlacer, Assembly-CSharp
+        m_MethodName: CancelPlacement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &973118668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5096,8 +5099,8 @@ Transform:
   - {fileID: 2014876018}
   - {fileID: 79458712}
   - {fileID: 1288666064}
-  - {fileID: 1558046764}
   - {fileID: 1788843490}
+  - {fileID: 1558046764}
   - {fileID: 1502174438}
   m_Father: {fileID: 395478672}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5183,7 +5186,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 241219054}
   m_HandleRect: {fileID: 241219053}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5593,7 +5596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -624.37, y: -369.5}
+  m_AnchoredPosition: {x: -624.37, y: -169.50002}
   m_SizeDelta: {x: 292.7469, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1104686952
@@ -6125,7 +6128,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130872539}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.42168033, g: 0.60441417, b: 0.8679245, a: 0}
@@ -6151,9 +6154,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 45
+  field of view: 97
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6177,13 +6180,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130872539}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.27781588, y: 0.36497167, z: -0.1150751, w: 0.8811196}
-  m_LocalPosition: {x: -17, y: 20, z: -17}
+  m_LocalRotation: {x: 0.23911765, y: 0.36964378, z: -0.09904577, w: 0.8923991}
+  m_LocalPosition: {x: 5, y: 20, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1809660803}
-  m_LocalEulerAnglesHint: {x: 35, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
 --- !u!1 &1134292033
 GameObject:
   m_ObjectHideFlags: 0
@@ -6994,7 +6997,7 @@ Transform:
   m_GameObject: {fileID: 1288666063}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12, y: 3, z: 0}
+  m_LocalPosition: {x: 32, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 5, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7046,7 +7049,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
+  - {fileID: 2100000, guid: 2ff9799e52f5c754dabef29859d229e1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7305,7 +7308,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -628, y: -217}
+  m_AnchoredPosition: {x: -628, y: -322}
   m_SizeDelta: {x: 300, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367083315
@@ -7946,7 +7949,7 @@ Transform:
   m_GameObject: {fileID: 1502174437}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: 3, z: -12}
+  m_LocalPosition: {x: 20.000017, y: 3, z: -12}
   m_LocalScale: {x: 1, y: 5, z: 23}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7998,7 +8001,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
+  - {fileID: 2100000, guid: 2ff9799e52f5c754dabef29859d229e1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8409,9 +8412,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2030654953}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: OpenBuilder
+      - m_Target: {fileID: 2030654948}
+        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
+        m_MethodName: UpdateInventoryUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8487,7 +8490,7 @@ Transform:
   m_GameObject: {fileID: 1558046763}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: 3, z: 12}
+  m_LocalPosition: {x: 19.999983, y: 3, z: 12}
   m_LocalScale: {x: 1, y: 5, z: 23}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8539,7 +8542,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
+  - {fileID: 2100000, guid: 2ff9799e52f5c754dabef29859d229e1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8935,12 +8938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1624103057}
   - component: {fileID: 1624103058}
-  - component: {fileID: 1624103062}
-  - component: {fileID: 1624103061}
-  - component: {fileID: 1624103060}
-  - component: {fileID: 1624103059}
-  - component: {fileID: 1624103063}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Pet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8956,7 +8954,7 @@ Transform:
   m_GameObject: {fileID: 1624103054}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8978,89 +8976,8 @@ MonoBehaviour:
   tirednessRate: 0.001
   hungerRate: 0.002
   boredomRate: 0.003
-  dirtinessRate: 0.0013
-  sleepRecoveryRate: 0.003
---- !u!136 &1624103059
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624103054}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1624103060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624103054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e73ae28c1e40424aa3a39c839ed9b8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetFunctionality
-  price: 0
---- !u!114 &1624103061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624103054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &1624103062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624103054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9875d7e88b180541b713668a6bfb4f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetMover
-  petModel: {fileID: 1624103057}
---- !u!114 &1624103063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624103054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00fa3b2ede9242741ab9f64a85f1ca1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetBehaviour
-  gameCamera: {fileID: 1130872541}
-  followingCursor: 0
+  dirtinessRate: 0.001
+  sleepRecoveryRate: 0.001
 --- !u!1 &1628560069
 GameObject:
   m_ObjectHideFlags: 0
@@ -9687,7 +9604,7 @@ MonoBehaviour:
           m_StringArgument: SmartyPets
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 597349063}
+      - m_Target: {fileID: 291994501}
         m_TargetAssemblyTypeName: AreaHandler, Assembly-CSharp
         m_MethodName: EnterArea
         m_Mode: 5
@@ -10481,7 +10398,7 @@ Transform:
   m_GameObject: {fileID: 1788843489}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12, y: 3, z: 0}
+  m_LocalPosition: {x: 8, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 5, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10533,7 +10450,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
+  - {fileID: 2100000, guid: 2ff9799e52f5c754dabef29859d229e1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11670,7 +11587,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7e23d99d8340144fdabc3a11d36ed5ea, type: 3}
+  m_Texture: {fileID: 2800000, guid: 633b11483a6fd435dacc27677933f8db, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -12030,7 +11947,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 597349063}
+      - m_Target: {fileID: 291994501}
         m_TargetAssemblyTypeName: AreaHandler, Assembly-CSharp
         m_MethodName: EnterHome
         m_Mode: 1
@@ -12108,7 +12025,7 @@ Transform:
   m_GameObject: {fileID: 2014876017}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 25, y: 1, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12200,7 +12117,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2030654950}
+  - component: {fileID: 2030654948}
   - component: {fileID: 2030654949}
+  - component: {fileID: 2030654951}
   - component: {fileID: 2030654953}
   m_Layer: 0
   m_Name: UI
@@ -12209,6 +12128,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2030654948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030654947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b90d95ecd3cf8f40afaddbbd56e6955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
+  itemButtonTemplate: {fileID: 629064268305734636, guid: d9737a1336e8f6a48ad4d421f8c200d6, type: 3}
+  contentTransform: {fileID: 1835840286}
 --- !u!114 &2030654949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12227,7 +12160,7 @@ MonoBehaviour:
   menuContainer: {fileID: 1603932561}
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 128
   menuRadius: 100
   raycastDistance: 1000
 --- !u!4 &2030654950
@@ -12245,6 +12178,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2061597410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2030654951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030654947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c9ae03887d26d8459726b4b80f1be9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TravelUI
+  buttons:
+  - name: Build
+    button: {fileID: 1555366604}
+    unavailableImage: {fileID: 565157909}
+  - name: Travel
+    button: {fileID: 1234134729}
+    unavailableImage: {fileID: 1004246159}
 --- !u!114 &2030654953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12334,7 +12286,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 03e356a6c0b424fe198258c4f3f2fd75, type: 3}
+  m_Texture: {fileID: 2800000, guid: b84db89d6c369449484b39bbb09c7705, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -12381,7 +12333,6 @@ Transform:
   - {fileID: 1880617072}
   - {fileID: 2030654950}
   - {fileID: 291994499}
-  - {fileID: 597349062}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2069692461

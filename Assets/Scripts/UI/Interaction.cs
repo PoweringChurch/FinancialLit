@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using TMPro;
 using System;
+using System.Collections.Generic;
 
 public class Interact : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class Interact : MonoBehaviour
     void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
-        bool hasPlacement = PlayerStates.HasStatus(PlayerStatus.Placement);
+        bool hasPlacement = PlayerStateManager.HasState(PlayerState.Placement);
         if (isOverUi) return;
         CloseMenu();
         if (hasPlacement) return;
@@ -63,20 +64,12 @@ public class Interact : MonoBehaviour
     void ShowMenu(Vector2 screenPosition, BaseFunctionality functionality)
     {
         // Get available actions
-        string[] actions = functionality.GetAvailableActions().ToArray();
-        //intercept if shopping, swap to alternate mode
-        if (PlayerStates.HasStatus(PlayerStatus.Shopping))
-        {
-            
-            actions = functionality.GetShoppingActions().ToArray();
-            Debug.Log("intercepted");
-        }
-        if (actions.Length == 0)
+        var availableActions = functionality.GetAvailableActions();
+        if (availableActions.Count == 0)
         {
             Debug.LogWarning("No actions available");
             return;
         }
-        
         // Create menu container
         currentMenu = new GameObject("RadialMenu");
         currentMenu.transform.SetParent(menuContainer, false);
@@ -92,17 +85,18 @@ public class Interact : MonoBehaviour
         
         RectTransform menuRect = currentMenu.AddComponent<RectTransform>();
         menuRect.anchoredPosition = localPoint;
-        
-        // Calculate button positions around circle
-        Vector2[] buttonPositions = CalculateRadialPositions(actions.Length, menuRadius);
-        // Create buttons
-        for (int i = 0; i < actions.Length; i++)
+
+        Vector2[] buttonPositions = CalculateRadialPositions(availableActions.Count, menuRadius);
+
+        int index = 0;
+        foreach (KeyValuePair<string, Action> pair in availableActions)
         {
-            CreateButton(actions[i], buttonPositions[i], functionality, currentMenu.transform);
+            CreateButton(pair.Key, buttonPositions[index], pair.Value, currentMenu.transform, functionality.price);
+            index++;
         }
     }
     
-    void CreateButton(string actionName, Vector2 localPosition, BaseFunctionality functionality, Transform parent)
+    void CreateButton(string actionName, Vector2 localPosition, Action action, Transform parent, float price)
     {
         // Instantiate button
         GameObject buttonObj = Instantiate(buttonPrefab, parent);
@@ -116,7 +110,7 @@ public class Interact : MonoBehaviour
         buttonText.text = actionName;
         if (actionName == "Purchase")
         {
-            buttonText.text = $"Purchase ({functionality.price})";
+            buttonText.text = $"Purchase ({price:f2})";
         }
         // Add click listener
         Button button = buttonObj.GetComponent<Button>();
@@ -126,8 +120,7 @@ public class Interact : MonoBehaviour
             string capturedAction = actionName;
             button.onClick.AddListener(() =>
             {
-                Debug.Log("pressed");
-                functionality.InvokeAction(capturedAction);
+                action();
                 CloseMenu();
             });
         }

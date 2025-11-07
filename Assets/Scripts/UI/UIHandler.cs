@@ -63,9 +63,9 @@ public class UIHandler : MonoBehaviour
         }
         public void UpdateText()
         {
-            shampooText.text = PlayerData.Instance.Shampoo.ToString();
-            foodText.text = PlayerData.Instance.Food.ToString();
-            moneyText.text = $"Balance: ${PlayerData.Instance.Money:f2}";
+            shampooText.text = PlayerResources.Instance.Shampoo.ToString();
+            foodText.text = PlayerResources.Instance.Food.ToString();
+            moneyText.text = $"Balance: ${PlayerResources.Instance.Money:f2}";
         }
     }
     [Serializable]
@@ -209,19 +209,19 @@ public class UIHandler : MonoBehaviour
         }
         public void UpdateUI()
         {
-            var hygiene = Pet.Instance.Status["hygiene"];
-            var hunger = Pet.Instance.Status["hunger"];
-            var entertainment = Pet.Instance.Status["entertainment"];
-            var energy = Pet.Instance.Status["energy"];
+            var hygiene = PetStats.Instance.Status["hygiene"];
+            var hunger = PetStats.Instance.Status["hunger"];
+            var entertainment = PetStats.Instance.Status["entertainment"];
+            var energy = PetStats.Instance.Status["energy"];
             HygieneFill.fillAmount = hygiene;
             HungerFill.fillAmount = hunger;
             EntertainmentFill.fillAmount = entertainment;
             EnergyFill.fillAmount = energy;
 
-            if (hunger < 0.2f) TryAddWarning($"{Pet.Instance.PetName} is hungry!"); else ResolveWarning($"{Pet.Instance.PetName} is hungry!");
-            if (hygiene < 0.2f) TryAddWarning($"{Pet.Instance.PetName} is dirty!"); else ResolveWarning($"{Pet.Instance.PetName} is dirty!");
-            if (entertainment < 0.2f) TryAddWarning($"{Pet.Instance.PetName} is bored!"); else ResolveWarning($"{Pet.Instance.PetName} is bored!");
-            if (energy < 0.2f) TryAddWarning($"{Pet.Instance.PetName} is tired!"); else ResolveWarning($"{Pet.Instance.PetName} is tired!");
+            if (hunger < 0.2f) TryAddWarning($"{PetStats.Instance.PetName} is hungry!"); else ResolveWarning($"{PetStats.Instance.PetName} is hungry!");
+            if (hygiene < 0.2f) TryAddWarning($"{PetStats.Instance.PetName} is dirty!"); else ResolveWarning($"{PetStats.Instance.PetName} is dirty!");
+            if (entertainment < 0.2f) TryAddWarning($"{PetStats.Instance.PetName} is bored!"); else ResolveWarning($"{PetStats.Instance.PetName} is bored!");
+            if (energy < 0.2f) TryAddWarning($"{PetStats.Instance.PetName} is tired!"); else ResolveWarning($"{PetStats.Instance.PetName} is tired!");
         }
         public void AddWarning(string message)
         {
@@ -256,7 +256,7 @@ public class UIHandler : MonoBehaviour
     public UIInventoryManager InventoryManager = new();
     public UIItemUpdater ItemUpdater = new();
     public UIPetManager PetUI = new();
-    void Start()
+    void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -269,6 +269,11 @@ public class UIHandler : MonoBehaviour
         InventoryManager.Initialize();
         ItemUpdater.Initialize();
         PetUI.Initialize();
+    }
 
+    //intermediarys
+    public void OpenBuilder()
+    {
+        InventoryManager.UpdateInventoryUI();
     }
 }

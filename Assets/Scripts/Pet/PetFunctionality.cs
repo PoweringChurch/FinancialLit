@@ -1,20 +1,21 @@
 using UnityEngine;
-
 public class PetFunctionality : BaseFunctionality
 {
     protected override void Awake()
     {
-        base.Awake();
         ignoreBase = true;
-        actions["Follow Cursor"] = Follow;
-        actions["Toggle Sit"] = ToggleSit;
+        base.Awake();
+        globalActions["Toggle Follow"] = ToggleFollow;
+        globalActions["Toggle Sit"] = ToggleSit;
     }
-    void Follow()
+    void ToggleFollow()
     {
-        Debug.Log("now following");
+        PetBehaviour.Instance.followingCursor = !PetBehaviour.Instance.followingCursor;
     }
     void ToggleSit()
     {
         Debug.Log("sitting");
     }
+
+    
 }

@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
+  price: 40
 --- !u!54 &6652341925315278465
 Rigidbody:
   m_ObjectHideFlags: 0

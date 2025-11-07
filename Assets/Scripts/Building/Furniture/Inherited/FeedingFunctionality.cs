@@ -6,8 +6,8 @@ public class FeedingFunctionality : BaseFunctionality
     protected override void Awake()
     {
         base.Awake();
-        actions["Feed Pet"] = FeedPet;
-        actions["Refill Bowl"] = RefillBowl;
+        homeActions["Feed Pet"] = FeedPet;
+        homeActions["Refill Bowl"] = RefillBowl;
     }
     protected virtual void FeedPet()
     {
@@ -16,7 +16,7 @@ public class FeedingFunctionality : BaseFunctionality
             Message("Not filled!");
             return;
         }
-        Pet.Instance.FeedPet(0.2f);
+        PetStats.Instance.FeedPet(0.2f);
         filled = false;
     }
     protected virtual void RefillBowl()
@@ -26,12 +26,12 @@ public class FeedingFunctionality : BaseFunctionality
             Message("Already filled!");
             return;
         }
-        if (!PlayerData.Instance.CanConsumeFood())
+        if (!PlayerResources.Instance.CanConsumeFood())
         {
             Message("No pet food!");
             return;
         }
-        PlayerData.Instance.ConsumeFood();
+        PlayerResources.Instance.ConsumeFood();
         filled = true;
     }
 }

@@ -2,13 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum PlayerState {Home, Shopping, Placement} //multiple statuses
-
-public static class PlayerStateManager
+public enum PetState {Sick, Immune}
+public static class PetStates
 {
-    private static List<PlayerState> currentStates = new();
-    public static List<PlayerState> CurrentStates => currentStates;
-    public static void AddState(PlayerState state)
+    private static List<PetState> currentStates = new();
+    public static List<PetState> CurrentStates => currentStates;
+    public static void AddState(PetState state)
     {
         if (!currentStates.Contains(state))
         {
@@ -22,26 +21,26 @@ public static class PlayerStateManager
     
     public static void AddState(int stateInt)
     {
-        AddState((PlayerState)stateInt);
+        AddState((PetState)stateInt);
     }
     
-    public static void RemoveState(PlayerState state)
+    public static void RemoveState(PetState state)
     {
         currentStates.Remove(state);
     }
     
     public static void RemoveState(int stateInt)
     {
-        RemoveState((PlayerState)stateInt);
+        RemoveState((PetState)stateInt);
     }
     
-    public static bool HasState(PlayerState state)
+    public static bool HasState(PetState state)
     {
         return currentStates.Contains(state);
     }
     
     public static bool HasState(int stateInt)
     {
-        return HasState((PlayerState)stateInt);
+        return HasState((PetState)stateInt);
     }
 }

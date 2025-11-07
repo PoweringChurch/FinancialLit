@@ -4,9 +4,7 @@ public class InventoryHelper : MonoBehaviour
 {
     public static InventoryHelper Instance { get; private set; }
     
-    public bool debugMode = false;
-    [SerializeField] private InventoryUI inventoryUI;
-    
+    public bool debugMode = false;    
     private Inventory inventory = new Inventory();
     
     void Awake()
@@ -17,34 +15,31 @@ public class InventoryHelper : MonoBehaviour
             return;
         }
         Instance = this;
-        inventoryUI.SetInventory(inventory);
-        
     }
     void Start()
     {
         if (debugMode)
         {
-            FurnitureData[] allItems = FurnitureDatabase.GetAllItems(); 
+            FurnitureData[] allItems = FurnitureDatabase.GetAllItems();
             foreach (FurnitureData data in allItems)
             {
                 inventory.AddItem(data, 1000);
             }
         }
+        UIHandler.Instance.InventoryManager.SetInventory(inventory);
     }
-
-    // Convenience methods that update UI automatically
+    // Helpers
     public void AddItem(FurnitureData itemData, int count)
     {
         inventory.AddItem(itemData, count);
-        inventoryUI.UpdateInventoryUI();
+        UIHandler.Instance.InventoryManager.UpdateInventoryUI();
     }
-    
+
     public void RemoveItem(string itemName, int count)
     {
         inventory.RemoveItem(itemName, count);
-        inventoryUI.UpdateInventoryItem(itemName);
+        UIHandler.Instance.InventoryManager.UpdateInventoryItem(itemName);
     }
-    
-    // Direct access to inventory for more complex operations
+
     public Inventory GetInventory() => inventory;
 }

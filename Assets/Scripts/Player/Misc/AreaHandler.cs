@@ -8,77 +8,67 @@ public class AreaHandler : MonoBehaviour
     public class AreaData
     {
         public string areaName;
-        public GameObject areaPrefab;
+        public bool isShop;
+        public GameObject prefab;
     }
-
     [Header("Area Setup")]
-    [SerializeField] private GameObject homeArea;
-    [SerializeField] private List<AreaData> areas;
+    [SerializeField] private GameObject home;
+    [SerializeField] private AreaData[] areas;
     [SerializeField] private Transform gameSpace;
+
+    private Dictionary<string, AreaData> areaDict = new();
     
     [Header("References")]
-    [SerializeField] private Pet pet;
-    
-    private GameObject currentArea;
-    private Dictionary<string, GameObject> areaDict;
+    [SerializeField] private PetStats pet;
 
+    private GameObject currentArea;
     private void Awake()
     {
-        // Build dictionary for easy lookup
-        areaDict = new Dictionary<string, GameObject>();
         foreach (var area in areas)
         {
-            if (area.areaPrefab != null)
-            {
-                areaDict[area.areaName] = area.areaPrefab;
-            }
+            areaDict[area.areaName] = area;
         }
     }
-
     private void Start()
     {
-        if (homeArea) homeArea.SetActive(true);
+        if (home) home.SetActive(true);
     }
 
     public void EnterArea(string areaName)
     {
-        if (!areaDict.TryGetValue(areaName, out GameObject areaPrefab))
+        AreaData area;
+        if (!areaDict.TryGetValue(areaName, out area))
         {
             Debug.LogError($"Area '{areaName}' not found!");
             return;
         }
 
         CleanupCurrentArea();
+        if (home && home.activeSelf)
+        {
+            home.SetActive(false);
+        }
 
-        if (homeArea && homeArea.activeSelf)
-        {
-            homeArea.SetActive(false);
-        }
-        
-        currentArea = Instantiate(areaPrefab, gameSpace);
-        PlayerStates.SetState(PlayerState.View);
-        //extremely temporary, make an actual class later for areas
-        if (areaName == "SmartyPets")
-        {
-            PlayerStates.AddStatus(PlayerStatus.Shopping);
-        }
+        currentArea = Instantiate(area.prefab, gameSpace);
+        PlayerStateManager.RemoveState(PlayerState.Home);
+        if (area.isShop) PlayerStateManager.AddState(PlayerState.Shopping);
         CameraHandler.Instance.RefreshWallRenderers();
-        ButtonToggler.Instance.DisableButton("Build");
+        UIHandler.Instance.ButtonManager.DisableButton("Build");
     }
     public void EnterHome()
     {
         CleanupCurrentArea();
         
-        if (homeArea)
+        if (home)
         {
-            homeArea.SetActive(true);
+            home.SetActive(true);
         }
 
-        PlayerStates.AddStatus(PlayerStatus.Home);
-        PlayerStates.RemoveStatus(PlayerStatus.Shopping);
-        
-        Debug.Log(PlayerStates.CurrentStatuses.ToString());
-        ButtonToggler.Instance.EnableButton("Build");
+        PlayerStateManager.AddState(PlayerState.Home);
+        PlayerStateManager.RemoveState(PlayerState.Shopping);
+
+        CameraHandler.Instance.RefreshWallRenderers();
+        UIHandler.Instance.ButtonManager.EnableButton("Build");
     }
 
     private void CleanupCurrentArea()
