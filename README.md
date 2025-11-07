@@ -39,17 +39,11 @@ Pet personality & behavior
   - [ ] Behaviors (Determine what to do and when)
   - [x] Sickness affected by statuses
 
-Models
-- [ ] Add pet model
-
 Saving & Loading
 - [ ] Implement saving and loading
   - [ ] Player home configuration
   - [ ] Pet states and statuses
   - [ ] Save into json file?
-
-Furniture additions
-- [ ] Add as much furniture as possible with remaining time
 
 ### Cleanup
 
@@ -63,10 +57,39 @@ Centralize UI
 - [x] Move where and how UI information and interaction is stored & handled
   * This is mostly a backend task, not expected to affect anything that the player sees.
 
+## Week of 11/10
+
+### Development
+
+Pet selection screen
+- [ ] Add screen that allows for pet selection when entering a new save file
+
+Models & animation
+- [ ] Add pet model
+  - [ ] Pet variation, likely breeds of species that player can select
+- [ ] Add proper pet bowl model
+  - [ ] w/ filled bowl model
+
 Stylize UI
 - [ ] Determine color scheme
 - [ ] Select font
 - [ ] Stylize buttons
 
-#### Extra
+Music and SFX
+- [ ] Find suitable sound effects
+- [ ] Find suitable music
+
+Tutorial
+- [ ] Add simple game tutorial
+
+Furniture additions
+- [ ] Add as much furniture as possible with remaining time
+
+### Cleanup
+
+Bugfixing
+- [ ] Find and resolve bugs in game
+- [ ] Get play testers to review if possible
+
+#### Extra, only do if spare time
 Add support for controller
