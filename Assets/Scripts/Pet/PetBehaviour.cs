@@ -21,14 +21,14 @@ public class PetBehaviour : MonoBehaviour
         {
             var cursorPosition = CursorToVector3(2);
             PetMover.Instance.SetGoalPosition(cursorPosition);
-            if (Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                PetStateManager.RemoveState(PetState.Following);
-                var currentPosition = PetMover.Instance.petModel.transform.position;
-                SetCursor(defaultCursor);
-                PetMover.Instance.SetGoalPosition(currentPosition);
-            }
         }
+    }
+    public void StopFollowing()
+    {
+        PetStateManager.RemoveState(PetState.Following);
+        var currentPosition = PetMover.Instance.petModel.transform.position;
+        SetCursor(defaultCursor);
+        PetMover.Instance.SetGoalPosition(currentPosition);
     }
     //helpers
     Vector3 CursorToVector3(float targetY)

@@ -24,8 +24,9 @@ public class FurniturePlacer : MonoBehaviour
       private Vector2 gridOffset = new(0.5f, 0.5f);
 
       private Vector3 previewOffset = new(0, 0.5f, 0);
-      private int currentRot = 0;
+      private Quaternion previousRotation;
       [HideInInspector] public bool isMoving = false;
+      [HideInInspector] public bool onPlacement = false;
       void Awake()
       {
             Instance = this;
@@ -33,20 +34,8 @@ public class FurniturePlacer : MonoBehaviour
       }
       void Update()
       {
-            //if we have something to place
             if (_objectPrefab == null) return;
-            // cancel build mode (upd later to work with system)
-            if (Keyboard.current.qKey.wasPressedThisFrame)
-            {
-                  CancelPlacement();
-                  return;
-            }
-            //rotate (upd later to work with system)
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-            {
-                  currentRot++;
-                  _toBuild.transform.Rotate(Vector3.up,90f);
-            }
+            onPlacement = false;
             _ray = gameCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             //if player is hover over placement
             if (Physics.Raycast(_ray, out _hit, 1000f, placementLayerMask))
@@ -54,10 +43,11 @@ public class FurniturePlacer : MonoBehaviour
                   //set active on first frame
                   if (!_toBuild.activeSelf) _toBuild.SetActive(true);
                   _toBuild.transform.position = previewOffset + _ClampToNearest(_hit.point, cellSize);
-                  if (Mouse.current.leftButton.wasPressedThisFrame) Place();
+                  onPlacement = true;
+                  Debug.Log(onPlacement);
             }
       }
-      void Place()
+      public void Place()
       {
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             {
@@ -80,16 +70,28 @@ public class FurniturePlacer : MonoBehaviour
       {
             _objectPrefab = FurnitureDatabase.GetItem(itemName).prefab;
             PlayerStateManager.AddState(PlayerState.Placement);
+            Debug.Log(_objectPrefab.name);
             _PrepareObject();
       }
       public void CancelPlacement()
       {
+            if (_objectPrefab == null) return;
             Destroy(_toBuild);
             isMoving = false;
             _toBuild = null;
             _objectPrefab = null;
             PlayerStateManager.RemoveState(PlayerState.Placement);
       }
+      public void RotateFurniture()
+      {
+            if (_objectPrefab == null) return;
+            _toBuild.transform.Rotate(Vector3.up, 90f);
+            previousRotation = _toBuild.transform.rotation;
+      }
+      public void OverrideRotation(Quaternion quaternion)
+    {
+            previousRotation = quaternion;
+    }
       private Vector3 _ClampToNearest(Vector3 pos, float threshold)
       {
             float t = 1f / threshold;
@@ -108,7 +110,7 @@ public class FurniturePlacer : MonoBehaviour
             //just in case
             if (_toBuild) Destroy(_toBuild);
             _toBuild = Instantiate(_objectPrefab, furnitureHolder);
-            _toBuild.transform.Rotate(Vector3.up, currentRot * 90);
+            _toBuild.transform.rotation = previousRotation;
             _toBuild.SetActive(false);
             //all objects should have placement handler attached
             _handler = _toBuild.GetComponent<PlacementHandler>();

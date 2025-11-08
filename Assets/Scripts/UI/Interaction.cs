@@ -7,8 +7,9 @@ using TMPro;
 using System;
 using System.Collections.Generic;
 
-public class Interact : MonoBehaviour
+public class Interaction : MonoBehaviour
 {
+    public static Interaction Instance;
     [Header("References")]
     [SerializeField] private Camera gameCamera;
     [SerializeField] private Canvas canvas;
@@ -22,22 +23,12 @@ public class Interact : MonoBehaviour
     
     private GameObject currentMenu;
     private Outline currentOutline;
-    void Update()
+    void Awake()
     {
-        // Check for right click
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            HandleClick();
-        }
-        
-        // Close menu on right click or escape
-        if (Mouse.current.rightButton.wasPressedThisFrame || Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            CloseMenu();
-        }
+        Instance = this;
     }
-
-    void HandleClick()
+    
+    public void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
         bool hasPlacement = PlayerStateManager.HasState(PlayerState.Placement);
@@ -148,7 +139,7 @@ public class Interact : MonoBehaviour
         return positions;
     }
     
-    void CloseMenu()
+    public void CloseMenu()
     {
         if (currentMenu != null)
         {

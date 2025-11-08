@@ -17,14 +17,13 @@ public class PlacementHandler : MonoBehaviour
     private Material invalidPlacementMaterial;
     public MeshRenderer[] meshComponents;
     private Dictionary<MeshRenderer, List<Material>> initialMaterials;
-    [SerializeField] public Vector3 pivot;
     [HideInInspector] public bool hasValidPlacement;
     [HideInInspector] public bool isFixed;
     private int _nObstacles;
     private void Awake()
     {
         hasValidPlacement = true;
-        isFixed = false;
+        isFixed = true;
         _nObstacles = 0;
 
         validPlacementMaterial = Resources.Load<Material>("Materials/ValidPlacement");

@@ -33,6 +33,7 @@ public class BaseFunctionality : MonoBehaviour
         var item = FurnitureDatabase.GetItem(handler.itemName);
         InventoryHelper.Instance.AddItem(item, 1);
         FurniturePlacer.Instance.isMoving = true;
+        FurniturePlacer.Instance.OverrideRotation(transform.rotation);
         FurniturePlacer.Instance.SetCurrentFurniture(handler.itemName);
         Destroy(gameObject);
     }
