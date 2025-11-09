@@ -1,13 +1,18 @@
+using System;
 using UnityEngine;
 
 public class PetMover : MonoBehaviour
 {
     public static PetMover Instance;
     public Transform petModel;
+    
+    [HideInInspector] public bool reachedGoal;
+
     private float moveSpeed = 6f;
     private Vector3 goalPosition;
-    private bool reachedGoal;
     private float stoppingDistance = 0.4f;
+
+    public event Action OnReachedGoal;
     void Awake()
     {
         Instance = this;
@@ -19,7 +24,7 @@ public class PetMover : MonoBehaviour
     }
     void Update()
     {
-        if (!reachedGoal && !PetStateManager.HasState(PetState.Sitting))
+        if (!reachedGoal)
         {
             MovePet();
         }
@@ -38,11 +43,11 @@ public class PetMover : MonoBehaviour
         if (distance <= stoppingDistance)
         {
             reachedGoal = true;
+            OnReachedGoal?.Invoke();
             return;
         }
         
         var movement = moveSpeed * Time.deltaTime * direction.normalized;
-        if (PetStateManager.HasState(PetState.Sick)) movement *= 0.5f;
         // apply movement
         transform.position += movement;
 

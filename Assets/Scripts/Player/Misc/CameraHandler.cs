@@ -15,26 +15,23 @@ public class CameraHandler : MonoBehaviour
 
     public Slider zoomSpeedMultiplier;
     private Renderer[] wallRenderers;
+    private Renderer[] hideableRenderers;
 
     void Awake()
     {
         Instance = this;
-        RefreshWallRenderers();
+        RefreshRenderers();
     }
     public void ToggleGamecam(bool state)
     {
         gameCamera.enabled = state;
         menuCamera.enabled = !state;
     }
-    public void RefreshWallRenderers()
+    public void RefreshRenderers()
     {
-        GameObject[] wallObjects = GameObject.FindGameObjectsWithTag("Wall");
-        wallRenderers = new Renderer[wallObjects.Length];
-        
-        for (int i = 0; i < wallObjects.Length; i++)
-        {
-            wallRenderers[i] = wallObjects[i].GetComponent<Renderer>();
-        }
+        Debug.Log("refreshed");
+        wallRenderers = GetRenderersFromTags("Wall");
+        hideableRenderers = GetRenderersFromTags("Hideable");
     }
     void Update()
     {
@@ -42,7 +39,7 @@ public class CameraHandler : MonoBehaviour
         {
             MoveCamera();
             ZoomCamera();
-            HideWalls();
+            HideObjects();
         }
     }
     private void MoveCamera()
@@ -57,24 +54,46 @@ public class CameraHandler : MonoBehaviour
         gameCamera.orthographicSize = currentZoom;
     }
     float maxDistance = 40;
-    float minDistance = 30;
-    float minAlpha = 0f;
-    private void HideWalls()
+    float minDistance = 25;
+
+    float hideableMinDistance = 18;
+    float minAlpha = 0.05f;
+    private void HideObjects()
     {
-        // Scale distances with zoom (smaller orthoSize = zoomed in = shorter distances)
-        float zoomScale = currentZoom / 10f; // 10f is your reference zoom level
-        
+        float zoomScale = currentZoom / 10f;
+
+        //fade walls
         foreach (Renderer renderer in wallRenderers)
         {
             if (renderer == null) continue;
-            
             float distance = Vector3.Distance(gameCamera.transform.position, renderer.transform.position);
             float t = Mathf.InverseLerp(minDistance / zoomScale, maxDistance / zoomScale, distance);
             float alpha = Mathf.Lerp(minAlpha, 1f, t);
-            
+
             Color color = renderer.material.color;
             color.a = alpha;
             renderer.material.color = color;
         }
+
+        //hide objects
+        foreach (Renderer renderer in hideableRenderers)
+        {
+            if (renderer == null) continue;
+            float distance = Vector3.Distance(gameCamera.transform.position, renderer.transform.position);
+            renderer.enabled = distance >= hideableMinDistance / zoomScale;
+        }
+    }
+    //helpers
+    Renderer[] GetRenderersFromTags(string tag)
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
+        System.Collections.Generic.List<Renderer> renderers = new System.Collections.Generic.List<Renderer>();
+        
+        foreach (GameObject obj in objects)
+        {
+            renderers.AddRange(obj.GetComponentsInChildren<Renderer>());
+        }
+        
+        return renderers.ToArray();
     }
 }

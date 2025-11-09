@@ -75,7 +75,6 @@ MonoBehaviour:
   - {fileID: 8519359116002823628}
   - {fileID: 4200568745020668800}
   - {fileID: 6600346207000547101}
-  pivot: {x: 0, y: 0, z: 0}
   hasValidPlacement: 1
   isFixed: 1
 --- !u!54 &605021783826009680
@@ -451,7 +450,6 @@ MonoBehaviour:
   itemName: FoodBowl
   meshComponents:
   - {fileID: 4846156691698902348}
-  pivot: {x: 0, y: 0, z: 0}
   hasValidPlacement: 1
   isFixed: 1
 --- !u!114 &8775071214347682712
@@ -509,7 +507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2334533824609228055}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -602,7 +600,7 @@ MeshRenderer:
   m_GameObject: {fileID: 2773029793854356493}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -618,7 +616,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -713,7 +711,7 @@ MeshRenderer:
   m_GameObject: {fileID: 2886189553628865139}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -729,7 +727,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -849,7 +847,6 @@ MonoBehaviour:
   - {fileID: 8412154020651374594}
   - {fileID: 5502842209016509155}
   - {fileID: 4943252459383470086}
-  pivot: {x: 0, y: 0, z: 0}
   hasValidPlacement: 1
   isFixed: 1
 --- !u!114 &6616558713427401269
@@ -966,7 +963,6 @@ MonoBehaviour:
   meshComponents:
   - {fileID: 6235503546688673682}
   - {fileID: 6749267541997625627}
-  pivot: {x: 0, y: 0, z: 0}
   hasValidPlacement: 1
   isFixed: 1
 --- !u!65 &8384998871593515031
@@ -1869,7 +1865,7 @@ MeshRenderer:
   m_GameObject: {fileID: 6635369846716567656}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -1885,7 +1881,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1980,7 +1976,7 @@ MeshRenderer:
   m_GameObject: {fileID: 6794382872969815578}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -1996,7 +1992,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

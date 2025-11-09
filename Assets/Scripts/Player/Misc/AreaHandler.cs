@@ -8,13 +8,19 @@ public class AreaHandler : MonoBehaviour
     public class AreaData
     {
         public string areaName;
+        public bool shadows;
+        public bool bringPet;
         public bool isShop;
         public GameObject prefab;
     }
+
     [Header("Area Setup")]
     [SerializeField] private GameObject home;
     [SerializeField] private AreaData[] areas;
     [SerializeField] private Transform gameSpace;
+    [SerializeField] private Light lighting;
+    [SerializeField] private Renderer petRenderer;
+    [SerializeField] private PetFunctionality petFunctionality;
 
     private Dictionary<string, AreaData> areaDict = new();
     
@@ -42,32 +48,59 @@ public class AreaHandler : MonoBehaviour
             Debug.LogError($"Area '{areaName}' not found!");
             return;
         }
-
-        CleanupCurrentArea();
         if (home && home.activeSelf)
         {
             home.SetActive(false);
         }
+        CleanupCurrentArea();
+        PlayerStateManager.RemoveState(PlayerState.Home);
+
+        PetStateManager.RemoveState(PetState.Playing);
+        PetStateManager.RemoveState(PetState.Sitting);
+        PetStateManager.RemoveState(PetState.Sleeping);
+        PetBehaviour.Instance.activeBehaviour = Behaviour.Roaming;
 
         currentArea = Instantiate(area.prefab, gameSpace);
-        PlayerStateManager.RemoveState(PlayerState.Home);
+        CameraHandler.Instance.RefreshRenderers();
+        
+
+        lighting.shadows = LightShadows.None;
+        petRenderer.enabled = false;
+        petFunctionality.enabled = false;
+
         if (area.isShop) PlayerStateManager.AddState(PlayerState.Shopping);
-        CameraHandler.Instance.RefreshWallRenderers();
+        if (area.shadows) lighting.shadows = LightShadows.Soft;
+        if (area.bringPet) {
+            petRenderer.enabled = true;
+            petFunctionality.enabled = true;
+            petFunctionality.transform.position = new Vector3(0, 1, 0);
+            }
+
         UIHandler.Instance.ButtonManager.DisableButton("Build");
     }
     public void EnterHome()
     {
         CleanupCurrentArea();
-        
+
         if (home)
         {
             home.SetActive(true);
         }
-
+        
+        petRenderer.enabled = true;
+        petFunctionality.enabled = true;
+        petFunctionality.transform.position = new Vector3(0, 1, 0);
         PlayerStateManager.AddState(PlayerState.Home);
         PlayerStateManager.RemoveState(PlayerState.Shopping);
 
-        CameraHandler.Instance.RefreshWallRenderers();
+        PetStateManager.RemoveState(PetState.Playing);
+        PetStateManager.RemoveState(PetState.Sitting);
+        PetStateManager.RemoveState(PetState.Sleeping);
+        PetBehaviour.Instance.activeBehaviour = Behaviour.Roaming;
+
+        lighting.shadows = LightShadows.None;
+
+        CameraHandler.Instance.RefreshRenderers();
         UIHandler.Instance.ButtonManager.EnableButton("Build");
     }
 

@@ -99,9 +99,9 @@ public class Interaction : MonoBehaviour
         // Set button text if it has one
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
         buttonText.text = actionName;
-        if (actionName == "Purchase")
+        if (actionName == "Buy")
         {
-            buttonText.text = $"Purchase ({price:f2})";
+            buttonText.text = $"Buy (${price:f2})";
         }
         // Add click listener
         Button button = buttonObj.GetComponent<Button>();

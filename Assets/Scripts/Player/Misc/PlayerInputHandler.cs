@@ -15,8 +15,8 @@ public class PlayerInputHandler : MonoBehaviour
     void Update()
     {
         HandleFurniturePlacer();
-        HandlePetBehaviour();
         HandleInteraction();
+        HandleMisc();
     }
     void HandleFurniturePlacer()
     {
@@ -31,15 +31,18 @@ public class PlayerInputHandler : MonoBehaviour
         }
         if (interact.WasPressedThisFrame() && FurniturePlacer.Instance.onPlacement)
         {
-            Debug.Log("placed");
             FurniturePlacer.Instance.Place();
         }
     }
-    void HandlePetBehaviour()
+    void HandleMisc()
     {
-        if (PetStateManager.HasState(PetState.Following) && interact.WasPressedThisFrame())
+        //setting follow
+        var (goalPosition,overInteractableLayer) = UIHandler.Instance.CursorHelper.CursorToVector3(1);
+        if (PlayerStateManager.HasState(PlayerState.SetFollow) && interact.WasPressedThisFrame() && overInteractableLayer)
         {
-            PetBehaviour.Instance.StopFollowing();
+            PlayerStateManager.RemoveState(PlayerState.SetFollow);
+            PetMover.Instance.SetGoalPosition(goalPosition);
+            UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.defaultCursor);
         }
     }
     void HandleInteraction()

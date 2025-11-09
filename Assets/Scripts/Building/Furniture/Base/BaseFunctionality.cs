@@ -24,7 +24,7 @@ public class BaseFunctionality : MonoBehaviour
         {
             homeActions["Move"] = Move;
             homeActions["Remove"] = Remove;
-            shoppingActions["Purchase"] = Purchase;
+            shoppingActions["Buy"] = Buy;
         }
     }
     protected virtual void Move()
@@ -45,7 +45,7 @@ public class BaseFunctionality : MonoBehaviour
         Debug.Log("remove");
         Destroy(gameObject);
     }
-    protected virtual void Purchase()
+    protected virtual void Buy()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
         var item = FurnitureDatabase.GetItem(handler.itemName);
@@ -87,18 +87,19 @@ public class BaseFunctionality : MonoBehaviour
         Destroy(textObj);
     }
     //helpers
-    public Dictionary<string,Action> GetAvailableActions()
+    public Dictionary<string, Action> GetAvailableActions()
     {
         bool home = PlayerStateManager.HasState(PlayerState.Home);
         bool shopping = PlayerStateManager.HasState(PlayerState.Shopping);
 
         // Order matters, has to be consistent
         var availableActions = new Dictionary<string, Action>();
-        
+
         availableActions.AddRange(globalActions);
         if (home) availableActions.AddRange(homeActions);
         if (shopping) availableActions.AddRange(shoppingActions);
-        
+
         return availableActions;
     }
+    public Vector3 PositionPetY()  { return new Vector3(transform.position.x, 1, transform.position.z);}
 }

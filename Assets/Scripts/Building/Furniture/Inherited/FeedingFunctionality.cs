@@ -6,20 +6,36 @@ public class FeedingFunctionality : BaseFunctionality
     protected override void Awake()
     {
         base.Awake();
-        homeActions["Feed Pet"] = FeedPet;
-        homeActions["Refill Bowl"] = RefillBowl;
+        homeActions["Go Eat"] = GoEat;
+        homeActions["Refill"] = Refill;
     }
-    protected virtual void FeedPet()
+    protected virtual void GoEat()
     {
         if (!filled)
         {
             Message("Not filled!");
             return;
         }
-        PetStats.Instance.FeedPet(0.2f);
+        if (PetBehaviour.Instance.activeBehaviour == Behaviour.Occupied)
+        {
+            Message($"{PetStats.Instance.PetName} is occupied!");
+            return;
+        }
+        PetMover.Instance.OnReachedGoal += OnReached;
+        PetMover.Instance.SetGoalPosition(PositionPetY());
+        
+        
+    }
+    protected virtual void OnReached()
+    {
+        PetMover.Instance.OnReachedGoal -= OnReached;
+        PetMover.Instance.petModel.position = PositionPetY();
+        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+
+        PetStats.Instance.FeedPet(0.4f);
         filled = false;
     }
-    protected virtual void RefillBowl()
+    protected virtual void Refill()
     {
         if (filled)
         {

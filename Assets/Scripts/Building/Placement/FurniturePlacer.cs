@@ -44,7 +44,6 @@ public class FurniturePlacer : MonoBehaviour
                   if (!_toBuild.activeSelf) _toBuild.SetActive(true);
                   _toBuild.transform.position = previewOffset + _ClampToNearest(_hit.point, cellSize);
                   onPlacement = true;
-                  Debug.Log(onPlacement);
             }
       }
       public void Place()
@@ -70,7 +69,6 @@ public class FurniturePlacer : MonoBehaviour
       {
             _objectPrefab = FurnitureDatabase.GetItem(itemName).prefab;
             PlayerStateManager.AddState(PlayerState.Placement);
-            Debug.Log(_objectPrefab.name);
             _PrepareObject();
       }
       public void CancelPlacement()
