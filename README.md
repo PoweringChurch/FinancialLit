@@ -55,22 +55,21 @@ Centralize UI
 ## Week of 11/10
 
 ### Development
-
-Saving & Loading
-- [ ] Implement saving and loading
-  - [ ] Player home configuration
-  - [ ] Pet states and statuses
-  - [ ] Save into json file?
-
-Pet selection screen
-- [ ] Add screen that allows for pet selection when entering a new save file
-- [ ] Allow for pet renaming
+Implement more areas
+- [ ] Park (way to gain entertainment quicker)
+- [ ] Furniture store
+- [ ] Vetinarian (cure sickness)
+- [ ] Work (earn money)
 
 Models & animation
 - [ ] Add pet model
   - [ ] Pet variation, likely breeds of species that player can select
 - [ ] Add proper pet bowl model
   - [ ] w/ filled bowl model
+ 
+Pet selection screen
+- [ ] Add screen that allows for pet selection when entering a new save file
+- [ ] Allow for pet renaming
 
 Stylize UI
 - [ ] Determine color scheme
@@ -81,8 +80,17 @@ Music and SFX
 - [ ] Find suitable sound effects
 - [ ] Find suitable music
 
+Settings
+- [ ] Add settings such as camera speed, game speed, etc.
+
 Tutorial
 - [ ] Add simple game tutorial
+
+Saving & Loading
+- [ ] Implement saving and loading
+  - [ ] Player home configuration
+  - [ ] Pet states and statuses
+  - [ ] Save into json file?
 
 Furniture additions
 - [ ] Add as much furniture as possible with remaining time
