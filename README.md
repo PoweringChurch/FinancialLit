@@ -56,14 +56,15 @@ Centralize UI
 
 ### Development
 Implement more areas
-- [ ] Park (way to gain entertainment quicker)
+- [x] Park (way to gain entertainment quicker)
 - [ ] Furniture store
 - [ ] Vetinarian (cure sickness)
 - [ ] Work (earn money)
 
 Models & animation
-- [ ] Add pet model
+- [x] Add pet model
   - [ ] Pet variation, likely breeds of species that player can select
+- [x] Add pet animation 
 - [ ] Add proper pet bowl model
   - [ ] w/ filled bowl model
  
