@@ -1,48 +1,73 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+public enum Behaviour {Default,Roaming, Occupied}
 public class PetBehaviour : MonoBehaviour
 {
-    private static Vector2 cursorHotspot = Vector2.zero;
-    private static CursorMode cursorMode = CursorMode.Auto;
-
-    [SerializeField] Camera gameCamera;
     public static PetBehaviour Instance;
-
-    public Texture2D defaultCursor;
-    public Texture2D followingCursor;
-    
+    public Behaviour activeBehaviour;
     void Awake()
     {
         Instance = this;
+        activeBehaviour = Behaviour.Roaming;
     }
+
+    private float actionTimer = 10f; //time until pet does something
     void Update()
     {
-        if (PetStateManager.HasState(PetState.Following))
+        if (!PetMover.Instance.reachedGoal) return;
+        actionTimer -= Time.deltaTime;
+        if (actionTimer <= 0)
         {
-            var cursorPosition = CursorToVector3(2);
-            PetMover.Instance.SetGoalPosition(cursorPosition);
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            switch (activeBehaviour)
             {
-                PetStateManager.RemoveState(PetState.Following);
-                var currentPosition = PetMover.Instance.petModel.transform.position;
-                SetCursor(defaultCursor);
-                PetMover.Instance.SetGoalPosition(currentPosition);
+                case Behaviour.Roaming:
+                case Behaviour.Default:
+                    RoamingAction();
+                    break;
+                case Behaviour.Occupied:
+                    actionTimer = 3f;
+                    break;
             }
         }
     }
-    //helpers
-    Vector3 CursorToVector3(float targetY)
+    void RoamingAction()
     {
-        Vector2 mousePos = Mouse.current.position.ReadValue();
-        // Create ray from camera through mouse position
-        Ray ray = gameCamera.ScreenPointToRay(mousePos);
-        // Calculate where ray intersects the target Y plane
-        float t = (targetY - ray.origin.y) / ray.direction.y;
-        Vector3 targetPos = ray.origin + ray.direction * t;
-        return targetPos;
+        actionTimer = Random.Range(4f, 9f);
+        int anim = Random.Range(0, 6);
+
+        switch (anim)
+        {
+            case 0:
+                Debug.Log("case 0");
+                break;
+            case 1:
+                Debug.Log("case 1");
+                break;
+            default:
+                //try twice, else give up
+                var targetPos = RandomPosition(20f);
+                if (!VectorOverInteractable(targetPos)) targetPos = RandomPosition(10f);
+                if (!VectorOverInteractable(targetPos)) break;
+                PetMover.Instance.SetGoalPosition(targetPos);
+                break;
+        }
     }
-    public void SetCursor(Texture2D newcursor)
+    Vector3 RandomPosition(float radius, bool conserveY = true)
     {
-        Cursor.SetCursor(newcursor, cursorHotspot, cursorMode);
+        Vector2 randomCircle = Random.insideUnitCircle * radius;
+
+        if (conserveY)
+        {
+            return transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+        }
+        else
+        {
+            Vector3 randomSphere = Random.insideUnitSphere * radius;
+            return transform.position + randomSphere;
+        }
+    }
+    [SerializeField] private LayerMask interactableLayer;
+    bool VectorOverInteractable(Vector3 vector)
+    {
+        return Physics.Raycast(vector, Vector3.down, Mathf.Infinity, interactableLayer);
     }
 }

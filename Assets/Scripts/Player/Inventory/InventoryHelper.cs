@@ -25,6 +25,7 @@ public class InventoryHelper : MonoBehaviour
             {
                 inventory.AddItem(data, 1000);
             }
+            PlayerResources.Instance.AddMoney(10000000);
         }
         UIHandler.Instance.InventoryManager.SetInventory(inventory);
     }

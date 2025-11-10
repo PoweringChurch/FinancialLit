@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fed9b62dabd544b9a59f2af7d80b0b5b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 207656
+  packageName: Stylized Plants in Pots
+  packageVersion: 1.2
+  assetPath: Assets/Stylized Plants in Pots/Settings/Build-in/Post-processing Profile
+    (Build-in).asset
+  uploadId: 734871

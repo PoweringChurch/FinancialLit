@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: de534d999fcc3c24c8eb6ea7f5bbd797
+timeCreated: 1501540407
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 90760
+  packageName: Seamless Hand-Drawn Textures
+  packageVersion: 1.0
+  assetPath: Assets/Hand Painted textures/Materials/Rock_Ground.mat
+  uploadId: 197561

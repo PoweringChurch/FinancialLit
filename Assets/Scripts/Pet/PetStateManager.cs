@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum PetState {Sitting, Following, Sick, Immune}
+public enum PetState {Sitting, Sleeping, Playing}
 public static class PetStateManager
 {
     private static List<PetState> currentStates = new();
@@ -38,9 +38,13 @@ public static class PetStateManager
     {
         return currentStates.Contains(state);
     }
-    
+
     public static bool HasState(int stateInt)
     {
         return HasState((PetState)stateInt);
+    }
+    public static void ClearStates()
+    {
+        currentStates.Clear();
     }
 }

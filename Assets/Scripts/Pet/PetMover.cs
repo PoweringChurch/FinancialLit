@@ -1,13 +1,18 @@
+using System;
 using UnityEngine;
 
 public class PetMover : MonoBehaviour
 {
     public static PetMover Instance;
     public Transform petModel;
-    private float moveSpeed = 6f;
+    
+    [HideInInspector] public bool reachedGoal;
+
+    private float moveSpeed = 3f;
     private Vector3 goalPosition;
-    private bool reachedGoal;
     private float stoppingDistance = 0.4f;
+
+    public event Action OnReachedGoal;
     void Awake()
     {
         Instance = this;
@@ -19,7 +24,7 @@ public class PetMover : MonoBehaviour
     }
     void Update()
     {
-        if (!reachedGoal && !PetStateManager.HasState(PetState.Sitting))
+        if (!reachedGoal)
         {
             MovePet();
         }
@@ -27,29 +32,31 @@ public class PetMover : MonoBehaviour
     public void SetGoalPosition(Vector3 to)
     {
         goalPosition = to;
+        PetAnimation.Instance.SetBoolParameter("IsMoving", true);
         reachedGoal = false;
     }
-    
     void MovePet()
     {
         Vector3 direction = goalPosition - transform.position;
         float distance = direction.magnitude;
-        
+
         if (distance <= stoppingDistance)
         {
             reachedGoal = true;
+            PetAnimation.Instance.SetBoolParameter("IsMoving", false);
+            OnReachedGoal?.Invoke();
             return;
         }
-        
-        var movement = moveSpeed * Time.deltaTime * direction.normalized;
-        if (PetStateManager.HasState(PetState.Sick)) movement *= 0.5f;
+
+        float energyMult = (float)(1 - Math.Max(0,3*Math.Log(-PetStats.Instance.Status["energy"]+1.4f)));
+        var movement = energyMult*moveSpeed * Time.deltaTime * direction.normalized;
         // apply movement
         transform.position += movement;
 
         if (petModel != null && direction.magnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            petModel.rotation = Quaternion.Slerp(petModel.rotation, targetRotation, Time.deltaTime * moveSpeed);
+            petModel.rotation = Quaternion.Slerp(petModel.rotation, targetRotation, Time.deltaTime * moveSpeed*4f);
         }
     }
 }

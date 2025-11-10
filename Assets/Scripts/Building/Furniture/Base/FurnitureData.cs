@@ -6,5 +6,4 @@ public class FurnitureData : ScriptableObject
     public string itemName;
     public GameObject prefab;  // The furniture prefab
     public Sprite icon;
-    public int itemID;
 }

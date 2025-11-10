@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum PlayerState {Home, Shopping, Placement} //multiple statuses
+public enum PlayerState {Home, Shopping, Placement, SetFollow}
 
 public static class PlayerStateManager
 {
@@ -39,9 +39,13 @@ public static class PlayerStateManager
     {
         return currentStates.Contains(state);
     }
-    
+
     public static bool HasState(int stateInt)
     {
         return HasState((PlayerState)stateInt);
+    }
+    public static void ClearStates()
+    {
+        currentStates.Clear();
     }
 }

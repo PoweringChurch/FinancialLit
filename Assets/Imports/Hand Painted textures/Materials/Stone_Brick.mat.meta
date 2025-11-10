@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 632ca932d5902bb4b84216d46ec78994
+timeCreated: 1501540407
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 90760
+  packageName: Seamless Hand-Drawn Textures
+  packageVersion: 1.0
+  assetPath: Assets/Hand Painted textures/Materials/Stone_Brick.mat
+  uploadId: 197561
