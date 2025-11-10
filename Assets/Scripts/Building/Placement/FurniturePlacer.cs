@@ -102,7 +102,6 @@ public class FurniturePlacer : MonoBehaviour
 
             return v;
       }
-      public GameObject pivotMarkerPrefab; // Assign a simple sphere/cube in Inspector
       private void _PrepareObject()
       {
             //just in case

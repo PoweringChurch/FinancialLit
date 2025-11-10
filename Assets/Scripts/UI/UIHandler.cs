@@ -243,9 +243,9 @@ public class UIHandler : MonoBehaviour
             var total = entertainment + hygiene + energy + hunger;
             string displaytext = "OKAY";
 
-            if (total > 3.4) displaytext = "FINE";
-            if (total > 3.6) displaytext = "GREAT";
-            if (total > 3.8) displaytext = "WONDERFUL";
+            if (total > 3.5) displaytext = "FINE";
+            if (total > 3.7) displaytext = "GREAT";
+            if (total > 3.9) displaytext = "WONDERFUL";
             if (entertainment < 0.5) displaytext = "BORED";
             if (entertainment < 0.2) displaytext = "SAD";
             if (hygiene < 0.3) displaytext = "DIRTY";

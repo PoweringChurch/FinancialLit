@@ -23,6 +23,9 @@ public class PetBehaviour : MonoBehaviour
                 case Behaviour.Default:
                     RoamingAction();
                     break;
+                case Behaviour.Occupied:
+                    actionTimer = 3f;
+                    break;
             }
         }
     }

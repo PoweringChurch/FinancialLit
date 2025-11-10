@@ -20,9 +20,18 @@ public class PetFunctionality : BaseFunctionality
             Message("Your pet is sitting!");
             return;
         }
-
+        
+        PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
         UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.followingCursor);
         PlayerStateManager.AddState(PlayerState.SetFollow);
+        PetMover.Instance.OnReachedGoal += ReachedFollowTarget;
+    }
+
+    void ReachedFollowTarget()
+    {
+        Debug.Log("reached");
+        PetMover.Instance.OnReachedGoal -= ReachedFollowTarget;
+        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
     }
     void ToggleSit()
     {
@@ -32,8 +41,9 @@ public class PetFunctionality : BaseFunctionality
             PetStateManager.RemoveState(PetState.Sitting);
             globalActions.Remove("Rise");
             globalActions["Sit"] = ToggleSit;
-            
+
             PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+            PetAnimation.Instance.SetBoolParameter("IsSitting", false);
         }
         else
         {
@@ -48,6 +58,7 @@ public class PetFunctionality : BaseFunctionality
 
             PetMover.Instance.SetGoalPosition(PetMover.Instance.petModel.transform.position);
             PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+            PetAnimation.Instance.SetBoolParameter("IsSitting", true);
         }
     }
 

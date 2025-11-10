@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum PlayerState {Home, Shopping, Placement, SetFollow} //multiple statuses
+public enum PlayerState {Home, Shopping, Placement, SetFollow}
 
 public static class PlayerStateManager
 {

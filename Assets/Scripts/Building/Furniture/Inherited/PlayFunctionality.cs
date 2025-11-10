@@ -24,6 +24,7 @@ public class PlayFunctionality : BaseFunctionality
         homeActions.Remove("Stop Playing");
         PetStats.Instance.StopPlay();
         PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+        PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
     }
     private void OnReached()
     {
@@ -32,6 +33,7 @@ public class PlayFunctionality : BaseFunctionality
         PetStats.Instance.StartPlay();
         homeActions.Remove("Go Play");
         homeActions["Stop Playing"] = StopPlaying;
+        PetAnimation.Instance.SetBoolParameter("IsPlaying", true);
     }
     //safety
     void OnDestroy()
