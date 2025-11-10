@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlasticBowl
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: PlasticBowl
-  prefab: {fileID: 1563964626244503503, guid: 3128e379a6b4a4346a9a01703cfca8c4, type: 3}
+  prefab: {fileID: 2820626507771807327, guid: 2bc6697dbe64944628dc7cfb8d60e3de, type: 3}
   icon: {fileID: 0}

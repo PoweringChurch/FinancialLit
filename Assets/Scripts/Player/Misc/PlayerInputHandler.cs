@@ -6,11 +6,17 @@ public class PlayerInputHandler : MonoBehaviour
     private InputAction interact;
     private InputAction cancel;
     private InputAction rotate;
+    private InputAction raiseFurniture;
+    private InputAction lowerFurniture;
+    private InputAction setFreemove;
     void Awake()
     {
         interact = InputSystem.actions.FindAction("Interact");
         cancel = InputSystem.actions.FindAction("Cancel");
         rotate = InputSystem.actions.FindAction("Rotate");
+        raiseFurniture = InputSystem.actions.FindAction("RaiseFurniture");
+        lowerFurniture = InputSystem.actions.FindAction("LowerFurniture");
+        setFreemove = InputSystem.actions.FindAction("SetFreemove");
     }
     void Update()
     {
@@ -33,6 +39,11 @@ public class PlayerInputHandler : MonoBehaviour
         {
             FurniturePlacer.Instance.Place();
         }
+        if (setFreemove.WasPressedThisFrame()) FurniturePlacer.Instance.SetFreemove(true);
+        else if (setFreemove.WasReleasedThisFrame()) FurniturePlacer.Instance.SetFreemove(false);
+        
+        if (raiseFurniture.IsPressed()) FurniturePlacer.Instance.AddYOffset(Time.deltaTime);
+        else if (lowerFurniture.IsPressed()) FurniturePlacer.Instance.AddYOffset(-Time.deltaTime);
     }
     void HandleMisc()
     {

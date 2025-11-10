@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -23,7 +24,11 @@ public class FurniturePlacer : MonoBehaviour
       private float cellSize = 1f;
       private Vector2 gridOffset = new(0.5f, 0.5f);
 
-      private Vector3 previewOffset = new(0, 0.5f, 0);
+      private float minyoffset = 0.5f;
+      private float maxyoffset = 3f;
+      private float currentyoffset = 0.5f;
+      private bool freemove = false;
+
       private Quaternion previousRotation;
       [HideInInspector] public bool isMoving = false;
       [HideInInspector] public bool onPlacement = false;
@@ -42,7 +47,14 @@ public class FurniturePlacer : MonoBehaviour
             {
                   //set active on first frame
                   if (!_toBuild.activeSelf) _toBuild.SetActive(true);
-                  _toBuild.transform.position = previewOffset + _ClampToNearest(_hit.point, cellSize);
+                  if (freemove)
+                  {
+                        _toBuild.transform.position = new Vector3(0,currentyoffset,0)+_hit.point;
+                  }
+                  else
+                  {
+                        _toBuild.transform.position = new Vector3(0,currentyoffset,0) + _ClampToNearest(_hit.point, cellSize);
+                  }
                   onPlacement = true;
             }
       }
@@ -56,7 +68,14 @@ public class FurniturePlacer : MonoBehaviour
 
             InventoryHelper.Instance.RemoveItem(_handler.itemName, 1);
             _handler.SetPlacementMode(PlacementMode.Fixed);
-            _toBuild.transform.position = previewOffset + _ClampToNearest(_hit.point, cellSize);
+            if (freemove)
+            {
+                  _toBuild.transform.position = new Vector3(0,currentyoffset,0)+_hit.point;
+            }
+            else
+            {
+                  _toBuild.transform.position = new Vector3(0,currentyoffset,0) + _ClampToNearest(_hit.point, cellSize);
+            }
             _toBuild = null;
             _PrepareObject();
             if (!InventoryHelper.Instance.GetInventory().HasItem(_handler.itemName) || isMoving) //if the item isnt in players inventory
@@ -87,9 +106,17 @@ public class FurniturePlacer : MonoBehaviour
             previousRotation = _toBuild.transform.rotation;
       }
       public void OverrideRotation(Quaternion quaternion)
-    {
+      {
             previousRotation = quaternion;
-    }
+      }
+      public void AddYOffset(float delta)
+      {
+            currentyoffset = Math.Clamp(currentyoffset+delta,minyoffset,maxyoffset);
+      }
+      public void SetFreemove(bool to)
+      {
+            freemove = to;
+      }
       private Vector3 _ClampToNearest(Vector3 pos, float threshold)
       {
             float t = 1f / threshold;

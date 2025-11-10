@@ -57,6 +57,21 @@ public class PlayerResources : MonoBehaviour
 
         }
     }
+    public void AddMoney(float amount)
+    {
+        money += amount;
+        UIHandler.Instance.ItemUpdater.UpdateText();
+    }
+    public void AddFood(int count)
+    {
+        food += count;
+        UIHandler.Instance.ItemUpdater.UpdateText();
+    }
+    public void AddShampoo(int count)
+    {
+        shampoo += count;
+        UIHandler.Instance.ItemUpdater.UpdateText();
+    }
     //helper
     public bool CanConsumeFood()
     {
@@ -69,10 +84,5 @@ public class PlayerResources : MonoBehaviour
     public bool CanAfford(float cost)
     {
         return (money - cost) >= 0;
-    }
-    public void AddMoney(float amount)
-    {
-        money += amount;
-        UIHandler.Instance.ItemUpdater.UpdateText();
     }
 }
