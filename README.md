@@ -55,6 +55,11 @@ Centralize UI
 ## Week of 11/10
 
 ### Development
+
+Add sickness
+- [ ] If stats are too low, add chance every tick to get sick
+  - [ ] Sickness should slow and make pet cough occasionally
+
 Implement more areas
 - [x] Park (way to gain entertainment quicker)
 - [ ] Furniture store
@@ -64,6 +69,7 @@ Implement more areas
 Models & animation
 - [x] Add pet model
   - [ ] Pet variation, likely breeds of species that player can select
+    * currently not very high priority, should be easy to implement whenever
 - [x] Add pet animation 
 - [x] Add proper pet bowl model
   - [x] w/ filled bowl model
@@ -77,6 +83,7 @@ Particles
 Pet selection screen
 - [ ] Add screen that allows for pet selection when entering a new save file
 - [ ] Allow for pet renaming
+- [ ] Add display of pet name ingame, as currently there is no way to actually see it beside notifications
 
 Stylize UI
 - [ ] Determine color scheme
