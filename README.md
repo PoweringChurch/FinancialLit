@@ -65,9 +65,15 @@ Models & animation
 - [x] Add pet model
   - [ ] Pet variation, likely breeds of species that player can select
 - [x] Add pet animation 
-- [ ] Add proper pet bowl model
-  - [ ] w/ filled bowl model
- 
+- [x] Add proper pet bowl model
+  - [x] w/ filled bowl model
+
+Particles
+- [ ] Add stench particles when pet hygiene is low
+- [ ] Add particles for certain furnitures
+  - [ ] Bathing particles
+  - [x] Eating particles
+
 Pet selection screen
 - [ ] Add screen that allows for pet selection when entering a new save file
 - [ ] Allow for pet renaming
@@ -83,6 +89,9 @@ Music and SFX
 
 Settings
 - [ ] Add settings such as camera speed, game speed, etc.
+
+Visual Overhaul
+- [ ] Make style more consistent
 
 Tutorial
 - [ ] Add simple game tutorial
