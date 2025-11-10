@@ -14,6 +14,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] private Camera gameCamera;
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject buttonPrefab;
+    [SerializeField] private GameObject selectedNamePrefab;
     [SerializeField] private Transform menuContainer;
     
     [Header("Settings")]
@@ -76,6 +77,18 @@ public class Interaction : MonoBehaviour
         
         RectTransform menuRect = currentMenu.AddComponent<RectTransform>();
         menuRect.anchoredPosition = localPoint;
+        
+        var selectedNameDisplay = Instantiate(selectedNamePrefab,currentMenu.transform);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            menuRect,
+            screenPosition+new Vector2(0,120f),
+            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : gameCamera,
+            out Vector2 localNamePoint
+        );
+        selectedNameDisplay.GetComponent<RectTransform>().anchoredPosition = localNamePoint;
+        TextMeshProUGUI objectNameText = selectedNameDisplay.GetComponentInChildren<TextMeshProUGUI>();
+        if (functionality is PetFunctionality) objectNameText.text = PetStats.Instance.PetName;
+        else objectNameText.text = functionality.GetComponent<PlacementHandler>().itemName;
 
         Vector2[] buttonPositions = CalculateRadialPositions(availableActions.Count, menuRadius);
 

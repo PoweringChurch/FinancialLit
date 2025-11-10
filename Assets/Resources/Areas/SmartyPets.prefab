@@ -11818,10 +11818,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5645745127024708699}
-  - component: {fileID: 6761717212349634916}
-  - component: {fileID: 4782521106651263007}
   - component: {fileID: 7094957065859668303}
-  - component: {fileID: 7075599251185701142}
   - component: {fileID: 3718156958332000208}
   m_Layer: 7
   m_Name: Cabinet1(Clone)
@@ -11846,48 +11843,6 @@ Transform:
   - {fileID: 3380506049109148237}
   m_Father: {fileID: 2360152296831236729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6761717212349634916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203353890805616435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 12
---- !u!114 &4782521106651263007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203353890805616435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: Cabinet1
-  meshComponents:
-  - {fileID: 8560027036360953858}
-  - {fileID: 2350657996375549235}
-  - {fileID: 7200979375053711126}
-  - {fileID: 4789738748267585657}
-  - {fileID: 9188523049207127557}
-  - {fileID: 6354274619800369176}
-  - {fileID: 7900353501033891232}
-  - {fileID: 1708182740906169169}
-  - {fileID: 195723063584307823}
-  - {fileID: 8657528277321766665}
-  - {fileID: 1676370355091759931}
-  - {fileID: 7236175035559586322}
-  - {fileID: 4745538610612064637}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!65 &7094957065859668303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11909,24 +11864,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9, y: 1, z: 0.9}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &7075599251185701142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203353890805616435}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!54 &3718156958332000208
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12544,10 +12481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9088198940290190304}
-  - component: {fileID: 3906775071472459525}
-  - component: {fileID: 58039127014732469}
   - component: {fileID: 5137483894785778234}
-  - component: {fileID: 779803369967057981}
   - component: {fileID: 3058428924919652705}
   m_Layer: 7
   m_Name: Cabinet1(Clone)
@@ -12572,48 +12506,6 @@ Transform:
   - {fileID: 6103880847757566484}
   m_Father: {fileID: 2360152296831236729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3906775071472459525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493444722712592433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 12
---- !u!114 &58039127014732469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493444722712592433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: Cabinet1
-  meshComponents:
-  - {fileID: 9150226228507576655}
-  - {fileID: 3115044125904171375}
-  - {fileID: 3496141703421810498}
-  - {fileID: 4739159516330720750}
-  - {fileID: 1070931453299207165}
-  - {fileID: 3973756493847736103}
-  - {fileID: 3819201094300046669}
-  - {fileID: 1952944359769004948}
-  - {fileID: 2492758613713803982}
-  - {fileID: 3352785877435881318}
-  - {fileID: 1211901190391276517}
-  - {fileID: 499553430345141381}
-  - {fileID: 4284235260825690035}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!65 &5137483894785778234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12635,24 +12527,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9, y: 1, z: 0.9}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &779803369967057981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493444722712592433}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!54 &3058428924919652705
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14896,10 +14770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4914059685878516787}
-  - component: {fileID: 2255022918251686929}
-  - component: {fileID: 6295945080769529021}
   - component: {fileID: 6068140452578116132}
-  - component: {fileID: 8207858488805264994}
   - component: {fileID: 1249097904321287681}
   m_Layer: 7
   m_Name: Cabinet1(Clone)
@@ -14924,48 +14795,6 @@ Transform:
   - {fileID: 4282998831635201167}
   m_Father: {fileID: 2360152296831236729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2255022918251686929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2820562695949744982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 12
---- !u!114 &6295945080769529021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2820562695949744982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: Cabinet1
-  meshComponents:
-  - {fileID: 4026787277568468166}
-  - {fileID: 1192491112273552342}
-  - {fileID: 8945695415675916935}
-  - {fileID: 750247437252757118}
-  - {fileID: 3362401345947602797}
-  - {fileID: 8944670841905206345}
-  - {fileID: 991274130035257019}
-  - {fileID: 8962690440819427762}
-  - {fileID: 8090281034423178936}
-  - {fileID: 6652352985431359793}
-  - {fileID: 3538794570853854703}
-  - {fileID: 8335601765007854040}
-  - {fileID: 2863308553802686440}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!65 &6068140452578116132
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14987,24 +14816,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9, y: 1, z: 0.9}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &8207858488805264994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2820562695949744982}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!54 &1249097904321287681
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22202,7 +22013,6 @@ GameObject:
   - component: {fileID: 4984042859912358238}
   - component: {fileID: 6203526958022299882}
   - component: {fileID: 2109610895361765889}
-  - component: {fileID: 5510238287192553506}
   m_Layer: 7
   m_Name: LaunchTable(Clone)
   m_TagString: Untagged
@@ -22309,19 +22119,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &5510238287192553506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4128637982723984074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 20
 --- !u!1 &4157792859326946697
 GameObject:
   m_ObjectHideFlags: 0
@@ -32169,7 +31966,6 @@ GameObject:
   - component: {fileID: 7602844663171799617}
   - component: {fileID: 6072774542061440970}
   - component: {fileID: 1779744919885233046}
-  - component: {fileID: 6815816219452212602}
   m_Layer: 7
   m_Name: LaunchTable(Clone)
   m_TagString: Untagged
@@ -32276,19 +32072,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &6815816219452212602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7246436339713965890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 20
 --- !u!1 &7347661352484988575
 GameObject:
   m_ObjectHideFlags: 0
@@ -33908,10 +33691,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6572986808279083074}
-  - component: {fileID: 7427849358606124176}
-  - component: {fileID: 4936766251456054741}
   - component: {fileID: 3088339934083108161}
-  - component: {fileID: 9199056861128097076}
   - component: {fileID: 711661047754379467}
   m_Layer: 7
   m_Name: Cabinet1(Clone)
@@ -33936,48 +33716,6 @@ Transform:
   - {fileID: 5521097744602105845}
   m_Father: {fileID: 2360152296831236729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7427849358606124176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8829921900795435930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 12
---- !u!114 &4936766251456054741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8829921900795435930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: Cabinet1
-  meshComponents:
-  - {fileID: 6421698469820684229}
-  - {fileID: 5470742472229131492}
-  - {fileID: 6408684563374899111}
-  - {fileID: 5342467117278807757}
-  - {fileID: 1032715042604733597}
-  - {fileID: 3244751556998701868}
-  - {fileID: 2994950318191911348}
-  - {fileID: 4814212388790614725}
-  - {fileID: 8149995737627543758}
-  - {fileID: 6067685164526178551}
-  - {fileID: 880357772702119355}
-  - {fileID: 2888697662287633813}
-  - {fileID: 3114888844517946485}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!65 &3088339934083108161
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33999,24 +33737,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9, y: 1, z: 0.9}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &9199056861128097076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8829921900795435930}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!54 &711661047754379467
 Rigidbody:
   m_ObjectHideFlags: 0
