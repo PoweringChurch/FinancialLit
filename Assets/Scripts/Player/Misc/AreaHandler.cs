@@ -55,9 +55,10 @@ public class AreaHandler : MonoBehaviour
         CleanupCurrentArea();
         PlayerStateManager.RemoveState(PlayerState.Home);
 
-        PetStateManager.RemoveState(PetState.Playing);
-        PetStateManager.RemoveState(PetState.Sitting);
-        PetStateManager.RemoveState(PetState.Sleeping);
+        PetStateManager.ClearStates();
+        PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
+        PetAnimation.Instance.SetBoolParameter("IsSitting", false);
+
         PetBehaviour.Instance.activeBehaviour = Behaviour.Roaming;
 
         currentArea = Instantiate(area.prefab, gameSpace);
@@ -93,9 +94,10 @@ public class AreaHandler : MonoBehaviour
         PlayerStateManager.AddState(PlayerState.Home);
         PlayerStateManager.RemoveState(PlayerState.Shopping);
 
-        PetStateManager.RemoveState(PetState.Playing);
-        PetStateManager.RemoveState(PetState.Sitting);
-        PetStateManager.RemoveState(PetState.Sleeping);
+        PetStateManager.ClearStates();
+        PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
+        PetAnimation.Instance.SetBoolParameter("IsSitting", false);
+        
         PetBehaviour.Instance.activeBehaviour = Behaviour.Roaming;
 
         lighting.shadows = LightShadows.None;

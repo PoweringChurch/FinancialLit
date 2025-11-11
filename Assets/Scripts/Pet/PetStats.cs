@@ -52,11 +52,11 @@ public class PetStats : MonoBehaviour
     {
         status["energy"] = Math.Max(0, status["energy"] - tirednessRate);
         if (PetStateManager.HasState(PetState.Sleeping))
-            status["energy"] = Math.Max(0, status["energy"] + sleepRecoveryRate + tirednessRate); //+rate so that i dont have to consider it
+            status["energy"] = Math.Clamp(status["energy"] + sleepRecoveryRate + tirednessRate, 0, 1); //+rate so that i dont have to consider it
         
         status["entertainment"] = Math.Max(0, status["entertainment"] - boredomRate);
         if (PetStateManager.HasState(PetState.Playing))
-            status["entertainment"] = Math.Max(0, status["entertainment"] + entertainmentRecoveryRate + boredomRate);
+            status["entertainment"] = Math.Clamp(status["entertainment"] + entertainmentRecoveryRate + boredomRate, 0,1);
         
         status["hunger"] = Math.Max(0, status["hunger"] - hungerRate);
         status["hygiene"] = Math.Max(0, status["hygiene"] - dirtinessRate);

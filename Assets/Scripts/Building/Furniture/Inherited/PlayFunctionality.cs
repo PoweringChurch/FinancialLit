@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayFunctionality : BaseFunctionality
 {
+    protected bool inUse = false;
     protected override void Awake()
     {
         base.Awake();
@@ -14,12 +15,14 @@ public class PlayFunctionality : BaseFunctionality
             Message($"{PetStats.Instance.PetName} is occupied!");
             return;
         }
+        inUse = true;
         PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
         PetMover.Instance.OnReachedGoal += OnReached;
         PetMover.Instance.SetGoalPosition(PositionPetY());
     }
     protected virtual void StopPlaying()
     {
+        inUse = false;
         homeActions["Go Play"] = GoPlay;
         homeActions.Remove("Stop Playing");
         PetStats.Instance.StopPlay();
@@ -34,6 +37,24 @@ public class PlayFunctionality : BaseFunctionality
         homeActions.Remove("Go Play");
         homeActions["Stop Playing"] = StopPlaying;
         PetAnimation.Instance.SetBoolParameter("IsPlaying", true);
+    }
+    protected override void Move()
+    {
+        if (inUse)
+        {
+            Message("In use!");
+            return;
+        }
+        base.Move();
+    }
+    protected override void Remove()
+    {
+        if (inUse)
+        {
+            Message("In use!");
+            return;
+        } 
+        base.Remove();
     }
     //safety
     void OnDestroy()

@@ -14,21 +14,56 @@ public class Interaction : MonoBehaviour
     [SerializeField] private Camera gameCamera;
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject buttonPrefab;
-    [SerializeField] private GameObject selectedNamePrefab;
+    [SerializeField] private GameObject hoveringNamePrefab;
     [SerializeField] private Transform menuContainer;
     
     [Header("Settings")]
-    [SerializeField] private LayerMask interactableLayer;
-    [SerializeField] private float menuRadius = 150f;
+    [SerializeField] private LayerMask interactableLayer; //furniture and pet
+    [SerializeField] private float menuRadius = 120f;
     [SerializeField] private float raycastDistance = 1000f;
-    
+
     private GameObject currentMenu;
+    private GameObject currentHoveringName;
     private Outline currentOutline;
     void Awake()
     {
         Instance = this;
     }
-    
+    void Update()
+    {
+        if (currentMenu || FurniturePlacer.Instance._objectPrefab) {
+            if (currentHoveringName)
+            {
+                Destroy(currentHoveringName);
+                currentHoveringName = null;
+            }
+            return;
+        }
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+        Ray ray = gameCamera.ScreenPointToRay(mousePos);
+        if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance, interactableLayer)
+        && hit.transform.TryGetComponent(out BaseFunctionality functionality))
+        {
+            if (!currentHoveringName)
+            {
+                currentHoveringName = Instantiate(hoveringNamePrefab, menuContainer);
+            }
+            var nameText = currentHoveringName.GetComponent<TextMeshPro>();
+            if (functionality is PetFunctionality)
+                nameText.text = PetStats.Instance.PetName;
+            else
+            {
+                var handler = functionality.GetComponent<PlacementHandler>();
+                nameText.text = handler.itemName;
+            }
+            currentHoveringName.transform.position = functionality.transform.position+new Vector3(0,1f,0)-(Camera.main.transform.forward*2);
+            currentHoveringName.transform.rotation = Camera.main.transform.rotation;
+        }
+        else {
+            Destroy(currentHoveringName);
+            currentHoveringName = null;
+        }
+    }
     public void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
@@ -41,15 +76,12 @@ public class Interaction : MonoBehaviour
         Ray ray = gameCamera.ScreenPointToRay(mousePos);
         
         // Raycast to find interactable object
-        if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance, interactableLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance, interactableLayer) 
+        && hit.transform.TryGetComponent(out BaseFunctionality functionality))
         {
-            // Check if object has functionality component
-            if (hit.transform.TryGetComponent(out BaseFunctionality functionality))
-            {
-                currentOutline = hit.transform.GetComponent<Outline>();
-                currentOutline.enabled = true;
-                ShowMenu(mousePos, functionality);
-            }
+            currentOutline = hit.transform.GetComponent<Outline>();
+            currentOutline.enabled = true;
+            ShowMenu(mousePos, functionality);
         }
     }
     
@@ -77,18 +109,6 @@ public class Interaction : MonoBehaviour
         
         RectTransform menuRect = currentMenu.AddComponent<RectTransform>();
         menuRect.anchoredPosition = localPoint;
-        
-        var selectedNameDisplay = Instantiate(selectedNamePrefab,currentMenu.transform);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            menuRect,
-            screenPosition+new Vector2(0,120f),
-            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : gameCamera,
-            out Vector2 localNamePoint
-        );
-        selectedNameDisplay.GetComponent<RectTransform>().anchoredPosition = localNamePoint;
-        TextMeshProUGUI objectNameText = selectedNameDisplay.GetComponentInChildren<TextMeshProUGUI>();
-        if (functionality is PetFunctionality) objectNameText.text = PetStats.Instance.PetName;
-        else objectNameText.text = functionality.GetComponent<PlacementHandler>().itemName;
 
         Vector2[] buttonPositions = CalculateRadialPositions(availableActions.Count, menuRadius);
 

@@ -48,7 +48,7 @@ public class PetMover : MonoBehaviour
             return;
         }
 
-        float energyMult = (float)(1 - Math.Max(0,3*Math.Log(-PetStats.Instance.Status["energy"]+1.4f)));
+        float energyMult = (float)(1 - Math.Max(0,3*Math.Log(-Math.Clamp(PetStats.Instance.Status["energy"],0,1)+1.4f)));
         var movement = energyMult*moveSpeed * Time.deltaTime * direction.normalized;
         // apply movement
         transform.position += movement;

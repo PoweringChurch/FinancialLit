@@ -31,16 +31,12 @@ public class PetBehaviour : MonoBehaviour
     }
     void RoamingAction()
     {
-        actionTimer = Random.Range(4f, 9f);
-        int anim = Random.Range(0, 6);
-
-        switch (anim)
+        int action = Random.Range(0, 5);
+        switch (action)
         {
             case 0:
-                Debug.Log("case 0");
-                break;
             case 1:
-                Debug.Log("case 1");
+                actionTimer = 4;
                 break;
             default:
                 //try twice, else give up
@@ -48,6 +44,7 @@ public class PetBehaviour : MonoBehaviour
                 if (!VectorOverInteractable(targetPos)) targetPos = RandomPosition(10f);
                 if (!VectorOverInteractable(targetPos)) break;
                 PetMover.Instance.SetGoalPosition(targetPos);
+                actionTimer = Random.Range(4f, 9f);
                 break;
         }
     }

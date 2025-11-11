@@ -14,7 +14,7 @@ public class FurniturePlacer : MonoBehaviour
       public LayerMask groundLayerMask;
       public Camera gameCamera;
       public Transform furnitureHolder;
-      private GameObject _objectPrefab;
+      public GameObject _objectPrefab;
       private GameObject _toBuild;
       private PlacementHandler _handler;
 

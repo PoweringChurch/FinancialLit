@@ -17802,7 +17802,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.99999815, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1554555517}
@@ -29358,6 +29358,7 @@ MonoBehaviour:
     m_Bits: 256
   gameCamera: {fileID: 1130872541}
   furnitureHolder: {fileID: 273530099}
+  _objectPrefab: {fileID: 0}
   isMoving: 0
   onPlacement: 0
 --- !u!1 &1884756911
@@ -32400,7 +32401,7 @@ MonoBehaviour:
   gameCamera: {fileID: 1130872541}
   canvas: {fileID: 1996418209}
   buttonPrefab: {fileID: 3291220437287538094, guid: aa1d369602f88bc4c9151ff3492426d8, type: 3}
-  selectedNamePrefab: {fileID: 2675135118897209109, guid: a7f0ad9aa27c746d5b2554dfe45a446a, type: 3}
+  hoveringNamePrefab: {fileID: 3405497414962219106, guid: f0d917b65aecb2c49bd4a1c6aed70edc, type: 3}
   menuContainer: {fileID: 1603932561}
   interactableLayer:
     serializedVersion: 2
