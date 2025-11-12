@@ -64,6 +64,9 @@ public class Interaction : MonoBehaviour
             currentHoveringName = null;
         }
     }
+    //not yet implemented
+    private List<GameObject> previouslyHit = new();
+    
     public void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();

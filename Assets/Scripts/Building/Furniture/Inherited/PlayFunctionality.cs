@@ -32,7 +32,6 @@ public class PlayFunctionality : BaseFunctionality
     private void OnReached()
     {
         PetMover.Instance.OnReachedGoal -= OnReached;
-        PetMover.Instance.petModel.position = PositionPetY();
         PetStats.Instance.StartPlay();
         homeActions.Remove("Go Play");
         homeActions["Stop Playing"] = StopPlaying;
