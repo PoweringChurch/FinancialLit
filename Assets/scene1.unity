@@ -3512,6 +3512,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1889706500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &354468010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 354468011}
+  m_Layer: 0
+  m_Name: Furniture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &354468011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354468010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1412636248}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &362010267
 GameObject:
   m_ObjectHideFlags: 0
@@ -5838,18 +5869,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3ec1445e75e2f4e867b136f9364b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaHandler
-  home: {fileID: 0}
+  home: {fileID: 1412636247}
   areas:
   - areaName: SmartyPets
     shadows: 0
     bringPet: 0
     isShop: 1
-    prefab: {fileID: 2619518856869832620, guid: 371efee2b74e18749813142dfa922162, type: 3}
+    prefab: {fileID: 6671826341022476424, guid: 371efee2b74e18749813142dfa922162, type: 3}
   - areaName: Park
     shadows: 1
     bringPet: 1
     isShop: 0
-    prefab: {fileID: 4031876869168816679, guid: 0f07ee4006c1d0e47a7fb507b009b704, type: 3}
+    prefab: {fileID: 2136676628559176261, guid: 0f07ee4006c1d0e47a7fb507b009b704, type: 3}
   gameSpace: {fileID: 1809660803}
   lighting: {fileID: 572829463}
   petRenderer: {fileID: 1192273610}
@@ -14019,6 +14050,7 @@ Transform:
   - {fileID: 682605440}
   - {fileID: 280984313}
   - {fileID: 93573001}
+  - {fileID: 354468011}
   m_Father: {fileID: 1809660803}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &1417578246
@@ -19366,6 +19398,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 954d6132e0b43f04d86eae7608e92b2c, type: 2}
   - {fileID: 11400000, guid: f51de92a3b3ec554e8c67273da9883ed, type: 2}
   - {fileID: 11400000, guid: c50f7d114ac3c2041a16ebedc72c5120, type: 2}
+  - {fileID: 11400000, guid: f9a6a166c87fe4fcbaed7ad71779547b, type: 2}
+  - {fileID: 11400000, guid: 2df1580b4a8284edcb48d8726f2637d5, type: 2}
+  - {fileID: 11400000, guid: bb1a9dfa5b4774a3a845e02e2e526739, type: 2}
+  - {fileID: 11400000, guid: cc3f8162247b3444d8ef43b82bd689cf, type: 2}
+  - {fileID: 11400000, guid: 8cad83c809ce947df9d068c688c2cc72, type: 2}
+  - {fileID: 11400000, guid: 0a68adb6527774af2a393f78f57aa6d4, type: 2}
+  - {fileID: 11400000, guid: 0c6560e6c235a4e0d9daf83fabfc1d6a, type: 2}
+  - {fileID: 11400000, guid: 208467c84b08f4afa87044f9496db2ba, type: 2}
+  - {fileID: 11400000, guid: 0adc5783e38fe43d39ee77bae1ce5335, type: 2}
 --- !u!114 &1880617074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19385,7 +19426,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   gameCamera: {fileID: 1130872541}
-  furnitureHolder: {fileID: 0}
+  furnitureHolder: {fileID: 354468011}
   minydisplay: {fileID: 1562322865}
   _objectPrefab: {fileID: 0}
   isMoving: 0
