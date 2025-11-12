@@ -82,7 +82,7 @@ public class UIHandler : MonoBehaviour
         {
             if (itemButtonTemplate == null || contentTransform == null)
             {
-                Debug.LogError("InventoryManager components not fully linked in Inspector!");
+                Debug.LogError("InventoryManager components not fully linked in Inspector");
             }
         }
 
@@ -99,35 +99,38 @@ public class UIHandler : MonoBehaviour
                 Destroy(child.gameObject);
             }
             inventoryItemUI.Clear();
-
             if (inventory == null)
             {
                 Debug.LogError("Inventory not set on UIHandler");
                 return;
             }
-
             foreach (var entry in inventory.GetItemsToDisplay())
             {
                 GameObject newTemplate = Instantiate(itemButtonTemplate, contentTransform);
                 Button itemButton = newTemplate.GetComponent<Button>();
-
                 // Find and set Display Name
                 Transform displayNameText = newTemplate.transform.Find("DisplayName");
                 if (displayNameText != null && displayNameText.TryGetComponent<TextMeshProUGUI>(out var tmpName))
                 {
                     tmpName.text = entry.itemData.itemName;
                 }
-
                 // Find and set Count
                 Transform countText = newTemplate.transform.Find("Count");
                 if (countText != null && countText.TryGetComponent<TextMeshProUGUI>(out var tmpCount))
                 {
                     tmpCount.text = $"{entry.count}";
                 }
-
                 itemButton.onClick.AddListener(() => OnItemButtonClicked(entry));
                 inventoryItemUI.Add(entry.itemData.itemName, newTemplate);
             }
+            
+            // Automatically resize content to fit all items
+            RectTransform contentRect = contentTransform.GetComponent<RectTransform>();
+            int itemCount = inventory.GetItemsToDisplay().Count;
+            float buttonHeight = 80f;
+            float spacing = 10f; // Adjust based on your layout spacing
+            float newHeight = Mathf.Max(300f, (buttonHeight + spacing) * (1+itemCount%10));
+            contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, newHeight);
         }
 
         public void UpdateInventoryItem(string itemName)
@@ -172,6 +175,7 @@ public class UIHandler : MonoBehaviour
 
         private void OnItemButtonClicked(InventoryEntry entry)
         {
+            //shouldnt even occur
             if (entry.count <= 0)
             {
                 Debug.LogWarning("Cannot select item with 0 count");

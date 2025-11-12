@@ -1,31 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 public class FurniturePlacer : MonoBehaviour
 {
       //https://github.com/MinaPecheux/unity-tutorials/tree/main/Assets/07-BuildingPlacement
-      public static FurniturePlacer Instance; //singleton pattern, this is fine because there will only ever be one of these present at any given time
+      public static FurniturePlacer Instance; 
       public LayerMask placementLayerMask; //ignore
       public LayerMask groundLayerMask;
       public Camera gameCamera;
       public Transform furnitureHolder;
-      public GameObject _objectPrefab;
+      public Transform minydisplay;
+      [HideInInspector] public GameObject _objectPrefab;
       private GameObject _toBuild;
       private PlacementHandler _handler;
 
       private Ray _ray;
       private RaycastHit _hit;
 
-      private float cellSize = 1f;
-      private Vector2 gridOffset = new(0.5f, 0.5f);
+      private readonly float cellSize = 0.5f;
+      private Vector2 gridOffset = new(0.25f, 0.25f);
 
-      private float minyoffset = 0.5f;
-      private float maxyoffset = 3f;
+      private readonly float minyoffset = 0.5f;
+      private readonly float maxyoffset = 3f;
       private float currentyoffset = 0.5f;
       private bool freemove = false;
 
@@ -39,7 +36,7 @@ public class FurniturePlacer : MonoBehaviour
       }
       void Update()
       {
-            if (_objectPrefab == null) return;
+            if (!_objectPrefab) return;
             onPlacement = false;
             _ray = gameCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
             //if player is hover over placement
@@ -49,11 +46,13 @@ public class FurniturePlacer : MonoBehaviour
                   if (!_toBuild.activeSelf) _toBuild.SetActive(true);
                   if (freemove)
                   {
-                        _toBuild.transform.position = new Vector3(0,currentyoffset,0)+_hit.point;
+                        _toBuild.transform.position = new Vector3(0, currentyoffset, 0) + _hit.point;
+                        minydisplay.position = new Vector3(0, minyoffset+0.02f, 0) + _hit.point;
                   }
                   else
                   {
-                        _toBuild.transform.position = new Vector3(0,currentyoffset,0) + _ClampToNearest(_hit.point, cellSize);
+                        _toBuild.transform.position = new Vector3(0, currentyoffset, 0) + _ClampToNearest(_hit.point, cellSize);
+                        minydisplay.position = new Vector3(0, minyoffset+0.02f, 0) + _ClampToNearest(_hit.point, cellSize);
                   }
                   onPlacement = true;
             }
@@ -87,6 +86,7 @@ public class FurniturePlacer : MonoBehaviour
       public void SetCurrentFurniture(string itemName)
       {
             _objectPrefab = FurnitureDatabase.GetItem(itemName).prefab;
+            minydisplay.gameObject.SetActive(true);
             PlayerStateManager.AddState(PlayerState.Placement);
             _PrepareObject();
       }
@@ -97,6 +97,8 @@ public class FurniturePlacer : MonoBehaviour
             isMoving = false;
             _toBuild = null;
             _objectPrefab = null;
+            currentyoffset = minyoffset;
+            minydisplay.gameObject.SetActive(false);
             PlayerStateManager.RemoveState(PlayerState.Placement);
       }
       public void RotateFurniture()

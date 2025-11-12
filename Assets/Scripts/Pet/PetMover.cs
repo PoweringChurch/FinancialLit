@@ -1,5 +1,6 @@
-using System;
 using UnityEngine;
+using UnityEngine.AI;
+using System;
 
 public class PetMover : MonoBehaviour
 {
@@ -7,56 +8,64 @@ public class PetMover : MonoBehaviour
     public Transform petModel;
     
     [HideInInspector] public bool reachedGoal;
-
     private float moveSpeed = 3f;
-    private Vector3 goalPosition;
     private float stoppingDistance = 0.4f;
-
+    
+    private NavMeshAgent agent;
     public event Action OnReachedGoal;
+    
     void Awake()
     {
         Instance = this;
+        agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.speed = moveSpeed;
+            agent.stoppingDistance = stoppingDistance;
+            agent.angularSpeed = 0; // We'll handle rotation manually
+            agent.updateRotation = false;
+        }
     }
+    
     void Start()
     {
-        goalPosition = transform.position;
         reachedGoal = true;
     }
+    
     void Update()
     {
-        if (!reachedGoal)
+        if (!reachedGoal && agent != null)
         {
-            MovePet();
+            // Check if reached destination
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                reachedGoal = true;
+                PetAnimation.Instance.SetBoolParameter("IsMoving", false);
+                OnReachedGoal?.Invoke();
+            }
+            else
+            {
+                // Handle rotation
+                if (agent.velocity.magnitude > 0.01f && petModel != null)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(agent.velocity.normalized);
+                    petModel.rotation = Quaternion.Slerp(petModel.rotation, targetRotation, Time.deltaTime * moveSpeed * 4f);
+                }
+            }
+            
+            // Apply energy multiplier to speed
+            float energyMult = (float)(1 - Math.Max(0, 3 * Math.Log(-Math.Clamp(PetStats.Instance.Status["energy"], 0, 1) + 1.4f)));
+            agent.speed = moveSpeed * energyMult;
         }
     }
+    
     public void SetGoalPosition(Vector3 to)
     {
-        goalPosition = to;
-        PetAnimation.Instance.SetBoolParameter("IsMoving", true);
-        reachedGoal = false;
-    }
-    void MovePet()
-    {
-        Vector3 direction = goalPosition - transform.position;
-        float distance = direction.magnitude;
-
-        if (distance <= stoppingDistance)
+        if (agent != null)
         {
-            reachedGoal = true;
-            PetAnimation.Instance.SetBoolParameter("IsMoving", false);
-            OnReachedGoal?.Invoke();
-            return;
-        }
-
-        float energyMult = (float)(1 - Math.Max(0,3*Math.Log(-Math.Clamp(PetStats.Instance.Status["energy"],0,1)+1.4f)));
-        var movement = energyMult*moveSpeed * Time.deltaTime * direction.normalized;
-        // apply movement
-        transform.position += movement;
-
-        if (petModel != null && direction.magnitude > 0.01f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            petModel.rotation = Quaternion.Slerp(petModel.rotation, targetRotation, Time.deltaTime * moveSpeed*4f);
+            agent.SetDestination(to);
+            PetAnimation.Instance.SetBoolParameter("IsMoving", true);
+            reachedGoal = false;
         }
     }
 }
