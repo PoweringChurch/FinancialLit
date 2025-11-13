@@ -57,8 +57,8 @@ Centralize UI
 ### Development
 
 Add sickness
-- [ ] If stats are too low, add chance every tick to get sick
-  - [ ] Sickness should slow and make pet cough occasionally
+- [x] If stats are too low, add chance every tick to get sick
+  - [x] Sickness should slow and make pet cough occasionally
 
 Implement more areas
 - [x] Park (way to gain entertainment quicker)
@@ -75,15 +75,15 @@ Models & animation
   - [x] w/ filled bowl model
 
 Particles
-- [ ] Add stench particles when pet hygiene is low
-- [ ] Add particles for certain furnitures
-  - [ ] Bathing particles
+- [x] Add stench particles when pet hygiene is low
+- [x] Add particles for certain furnitures
+  - [x] Bathing particles
   - [x] Eating particles
 
 Pet selection screen
-- [ ] Add screen that allows for pet selection when entering a new save file
+- [x] Add screen that allows for pet selection when entering a new save file
 - [ ] Allow for pet renaming
-- [ ] Add display of pet name ingame, as currently there is no way to actually see it beside notifications
+- [x] Add display of pet name ingame, as currently there is no way to actually see it beside notifications
 
 Stylize UI
 - [ ] Determine color scheme
@@ -98,16 +98,16 @@ Settings
 - [ ] Add settings such as camera speed, game speed, etc.
 
 Visual Overhaul
-- [ ] Make style more consistent
+- [x] Make style more consistent
 
 Tutorial
 - [ ] Add simple game tutorial
 
 Saving & Loading
-- [ ] Implement saving and loading
-  - [ ] Player home configuration
-  - [ ] Pet states and statuses
-  - [ ] Save into json file?
+- [x] Implement saving and loading
+  - [x] Player home configuration
+  - [x] Pet states and statuses
+  - [x] Save into json file?
 
 Furniture additions
 - [ ] Add as much furniture as possible with remaining time
