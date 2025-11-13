@@ -57,8 +57,8 @@ Centralize UI
 ### Development
 
 Add sickness
-- [ ] If stats are too low, add chance every tick to get sick
-  - [ ] Sickness should slow and make pet cough occasionally
+- [x] If stats are too low, add chance every tick to get sick
+  - [x] Sickness should slow and make pet cough occasionally
 
 Implement more areas
 - [x] Park (way to gain entertainment quicker)
