@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class UIHandler : MonoBehaviour
 {
     public static UIHandler Instance;
-
     [Serializable]
     public class UIButtonManager
     {
@@ -177,8 +176,9 @@ public class UIHandler : MonoBehaviour
                 Debug.LogWarning("Cannot select item with 0 count");
                 return;
             }
-
-            if (entry.data.prefab == null)
+            if (entry.
+            data.
+            prefab == null)
             {
                 Debug.LogError($"Item {entry.itemName} has no prefab assigned");
                 return;
@@ -334,6 +334,9 @@ public class UIHandler : MonoBehaviour
         public GameObject savesScreen;
         public GameObject slotTemplate;
         public TextMeshProUGUI petNameInput;
+
+        public bool debugMode = false;
+
         public void Initialize()
         {
             DisplaySaves();
@@ -417,6 +420,23 @@ public class UIHandler : MonoBehaviour
             {
                 PetName = petNameInput.text
             };
+            if (debugMode)
+            {
+                FurnitureData[] allItems = FurnitureDatabase.GetAllItems();
+                foreach (FurnitureData data in allItems)
+                {
+                    newData.PlayerInventory.AddItem(data, 1000);
+                }
+                newData.Money = 1000000;
+                newData.Shampoo = 10000;
+                newData.Food = 1000;
+
+                UIHandler.Instance.PopupManager.PopupInfo(
+                    "Hey!",
+                    "Because debug mode is enabled, you start with a bunch of resources and every furniture item in the game, obtainable or not! This can be disabled in settings.",
+                    "Sweet!"
+                );
+            }
             SaveHandler.Instance.currentPlayerData = newData;
             SaveHandler.Instance.LoadSaved(newData);
             SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";

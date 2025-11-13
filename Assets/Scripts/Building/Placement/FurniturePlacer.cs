@@ -46,13 +46,13 @@ public class FurniturePlacer : MonoBehaviour
                   if (!_toBuild.activeSelf) _toBuild.SetActive(true);
                   if (freemove)
                   {
-                        _toBuild.transform.position = new Vector3(0, currentyoffset, 0) + _hit.point;
-                        minydisplay.position = new Vector3(0, minyoffset+0.02f, 0) + _hit.point;
+                        _toBuild.transform.position = new Vector3(_hit.point.x,currentyoffset,_hit.point.z);
+                        minydisplay.position = new Vector3(_hit.point.x, minyoffset+0.02f, _hit.point.z);
                   }
                   else
                   {
-                        _toBuild.transform.position = new Vector3(0, currentyoffset, 0) + _ClampToNearest(_hit.point, cellSize);
-                        minydisplay.position = new Vector3(0, minyoffset+0.02f, 0) + _ClampToNearest(_hit.point, cellSize);
+                        _toBuild.transform.position = _ClampToNearest(_hit.point, cellSize);
+                        minydisplay.position = new Vector3(_toBuild.transform.position.x, minyoffset+0.02f, _toBuild.transform.position.z);
                   }
                   onPlacement = true;
             }
@@ -69,11 +69,11 @@ public class FurniturePlacer : MonoBehaviour
             _handler.SetPlacementMode(PlacementMode.Fixed);
             if (freemove)
             {
-                  _toBuild.transform.position = new Vector3(0,currentyoffset,0)+_hit.point;
+                  _toBuild.transform.position = new Vector3(_hit.point.x,currentyoffset,_hit.point.z);
             }
             else
             {
-                  _toBuild.transform.position = new Vector3(0,currentyoffset,0) + _ClampToNearest(_hit.point, cellSize);
+                  _toBuild.transform.position = _ClampToNearest(_hit.point, cellSize);
             }
             _toBuild = null;
             _PrepareObject();
@@ -126,7 +126,7 @@ public class FurniturePlacer : MonoBehaviour
 
             float s = threshold * 0.5f;
             v.x += s + gridOffset.x; // (recenter in middle of cells)
-            v.y = 0;
+            v.y = currentyoffset;
             v.z += s + gridOffset.y;
 
             return v;
