@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FeedingFunctionality : BaseFunctionality
 {
-    protected bool filled = false;
+    public bool filled = false;
     private ParticleSystem eatParticles;
     [SerializeField] protected Transform foodTransform;
     [SerializeField] protected float filledY;
@@ -21,9 +21,8 @@ public class FeedingFunctionality : BaseFunctionality
             Message("Not filled!");
             return;
         }
-        if (PetBehaviour.Instance.activeBehaviour == Behaviour.Occupied)
+        if (DefaultChecks())
         {
-            Message($"{PetStats.Instance.PetName} is occupied!");
             return;
         }
         PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
@@ -38,15 +37,14 @@ public class FeedingFunctionality : BaseFunctionality
 
         PetAnimation.Instance.SetTrigger("Eat");
         PetStats.Instance.FeedPet(0.4f);
-        filled = false;
         //wait for 0.5 sec
-        Invoke(nameof(LowerFood), 0.7f);
+        Invoke(nameof(EatFood), 0.7f);
     }
-    void LowerFood()
+    void EatFood()
     {
         eatParticles.Play();
-        foodTransform.localPosition = new Vector3(0, emptyY, 0);
         PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+        SetFilled(false);
     }
     protected virtual void Refill()
     {
@@ -61,7 +59,15 @@ public class FeedingFunctionality : BaseFunctionality
             return;
         }
         PlayerResources.Instance.ConsumeFood();
-        filled = true;
-        foodTransform.localPosition = new Vector3(0, filledY, 0);
+        SetFilled(true);
+        
+    }
+    public virtual void SetFilled(bool to)
+    {
+        filled = to;
+        if (filled)
+            foodTransform.localPosition = new Vector3(0, filledY, 0);
+        else
+            foodTransform.localPosition = new Vector3(0, emptyY, 0);
     }
 }

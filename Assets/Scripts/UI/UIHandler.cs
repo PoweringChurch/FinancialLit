@@ -43,7 +43,6 @@ public class UIHandler : MonoBehaviour
         {
             if (!buttonDict.TryGetValue(buttonName, out ToggleableButton targetButton))
             {
-                Debug.LogWarning($"Button '{buttonName}' not found in UIButtonManager!");
                 return;
             }
 
@@ -101,7 +100,6 @@ public class UIHandler : MonoBehaviour
             inventoryItemUI.Clear();
             if (inventory == null)
             {
-                Debug.LogError("Inventory not set on UIHandler");
                 return;
             }
             foreach (var entry in inventory.GetItemsToDisplay())
@@ -112,7 +110,7 @@ public class UIHandler : MonoBehaviour
                 Transform displayNameText = newTemplate.transform.Find("DisplayName");
                 if (displayNameText != null && displayNameText.TryGetComponent<TextMeshProUGUI>(out var tmpName))
                 {
-                    tmpName.text = entry.itemData.itemName;
+                    tmpName.text = entry.itemName;
                 }
                 // Find and set Count
                 Transform countText = newTemplate.transform.Find("Count");
@@ -121,15 +119,15 @@ public class UIHandler : MonoBehaviour
                     tmpCount.text = $"{entry.count}";
                 }
                 itemButton.onClick.AddListener(() => OnItemButtonClicked(entry));
-                inventoryItemUI.Add(entry.itemData.itemName, newTemplate);
+                inventoryItemUI.Add(entry.itemName, newTemplate);
             }
             
             // Automatically resize content to fit all items
             RectTransform contentRect = contentTransform.GetComponent<RectTransform>();
             int itemCount = inventory.GetItemsToDisplay().Count;
             float buttonHeight = 80f;
-            float spacing = 10f; // Adjust based on your layout spacing
-            float newHeight = Mathf.Max(300f, (buttonHeight + spacing) * (1+itemCount%10));
+            float spacing = 0f; // Adjust based on your layout spacing
+            float newHeight = Mathf.Max(80f, 80f+(buttonHeight + spacing) * (1+itemCount%10));
             contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, newHeight);
         }
 
@@ -137,7 +135,6 @@ public class UIHandler : MonoBehaviour
         {
             if (inventory == null)
             {
-                Debug.LogError("Inventory not set on UIHandler!");
                 return;
             }
 
@@ -157,7 +154,6 @@ public class UIHandler : MonoBehaviour
             // If the item UI doesn't exist but the item is in inventory, refresh the whole UI 
             if (!inventoryItemUI.TryGetValue(itemName, out GameObject existingItemUI))
             {
-                Debug.LogWarning($"UI for item {itemName} not found. Refreshing entire UI.");
                 UpdateInventoryUI();
                 return;
             }
@@ -182,13 +178,13 @@ public class UIHandler : MonoBehaviour
                 return;
             }
 
-            if (entry.itemData.prefab == null)
+            if (entry.data.prefab == null)
             {
-                Debug.LogError($"Item {entry.itemData.itemName} has no prefab assigned");
+                Debug.LogError($"Item {entry.itemName} has no prefab assigned");
                 return;
             }
 
-            FurniturePlacer.Instance.SetCurrentFurniture(entry.itemData.itemName);
+            FurniturePlacer.Instance.SetCurrentFurniture(entry.itemName);
         }
     }
     [Serializable]
@@ -308,12 +304,132 @@ public class UIHandler : MonoBehaviour
             Cursor.SetCursor(newcursor, cursorHotspot, cursorMode);
         }
     }
+    [Serializable]
+    public class UIPopupManager
+    {
+        public GameObject infoPanelTemplate;
+        public Transform PopupsTransform;
+
+        public void PopupInfo(string header, string body, string dismiss = "OK")
+        {
+            GameObject newInfoPanel = Instantiate(infoPanelTemplate, PopupsTransform);
+            var tmps = newInfoPanel.GetComponentsInChildren<TextMeshProUGUI>();
+
+            // Header, Body, Dismiss button text
+            tmps[0].text = header;
+            tmps[1].text = body;
+            tmps[2].text = dismiss;
+
+            // Setup dismiss button
+            Button dismissButton = newInfoPanel.GetComponentInChildren<Button>();
+            dismissButton.onClick.AddListener(() => Destroy(newInfoPanel));
+        }
+    }
+    
+    [Serializable]
+    public class UISaveManager
+    {
+        public Transform slotGrid;
+        public GameObject ingameOverlay;
+        public GameObject savesScreen;
+        public GameObject slotTemplate;
+        public TextMeshProUGUI petNameInput;
+        public void Initialize()
+        {
+            DisplaySaves();
+        }
+        public void DisplaySaves()
+        {
+            // Clear existing slots
+            foreach (Transform child in slotGrid)
+            {
+                Destroy(child.gameObject);
+            }
+            // Get all .json files in the save directory
+            string savePath = Application.persistentDataPath;
+            string[] saveFiles = System.IO.Directory.GetFiles(savePath, "*.json");
+            // Sort by last modified time (most recent first)
+            Array.Sort(saveFiles, (a, b) =>
+                System.IO.File.GetLastWriteTime(b).CompareTo(System.IO.File.GetLastWriteTime(a))
+            );
+            // Create a slot for each save file
+            foreach (string filePath in saveFiles)
+            {
+                string fileName = System.IO.Path.GetFileName(filePath);
+                // Try to load the save data to display info
+                try
+                {
+                    string json = System.IO.File.ReadAllText(filePath);
+                    PlayerData saveData = JsonUtility.FromJson<PlayerData>(json);
+
+                    // Create slot UI
+                    GameObject slot = Instantiate(slotTemplate, slotGrid);
+
+                    // Fill out slot info (adjust based on your template structure)
+                    var texts = slot.GetComponentsInChildren<TextMeshProUGUI>();
+                    texts[0].text = saveData.PetName; // Slot name/pet name
+                    texts[1].text = FormatPlaytime(saveData.TotalPlaytimeSeconds); // Playtime
+                    texts[2].text = FormatTimestamp(saveData.LastSaveTimestamp); // Last saved
+                    texts[3].text = saveData.DisplayStatus; // Status
+                    texts[4].text = $"${saveData.Money:N2}"; //money
+
+                    // Add button to load this save
+                    Button loadButton = slot.GetComponentInChildren<Button>();
+                    string capturedFileName = fileName; // Capture in local variable
+                    loadButton.onClick.AddListener(() => OnLoadClick(fileName));
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning($"Failed to load save file {fileName}: {e.Message}");
+                }
+            }
+        }
+        private void OnLoadClick(string fileName)
+        {
+            LoadThisSave(fileName);
+            ingameOverlay.SetActive(true);
+            savesScreen.SetActive(false);
+            CameraHandler.Instance.ToggleGamecam(true);
+        }
+        string FormatPlaytime(float seconds)
+        {
+            int hours = (int)(seconds / 3600);
+            int minutes = (int)(seconds % 3600 / 60);
+            return $"{hours}h {minutes}m";
+        }
+        string FormatTimestamp(long timestamp)
+        {
+            DateTime dateTime = DateTimeOffset.FromUnixTimeSeconds(timestamp).LocalDateTime;
+            return dateTime.ToString("MMM dd, HH:mm");
+        }
+        void LoadThisSave(string fileName)
+        {
+            var plrData = SaveHandler.Instance.LoadGameFromFile(fileName);
+            SaveHandler.Instance.LoadSaved(plrData);
+        }
+        public void NewSave()
+        {
+            if (petNameInput.text == "")
+            {
+                return; //cant have empty name
+            }
+            PlayerData newData = new()
+            {
+                PetName = petNameInput.text
+            };
+            SaveHandler.Instance.currentPlayerData = newData;
+            SaveHandler.Instance.LoadSaved(newData);
+            SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
+        }
+    }
     [Header("Manager Settings")]
     public UIButtonManager ButtonManager = new();
     public UIInventoryManager InventoryManager = new();
     public UIResourcesUpdater ItemUpdater = new();
     public UIPetManager PetUI = new();
     public UICursorHelper CursorHelper = new();
+    public UIPopupManager PopupManager = new();
+    public UISaveManager SaveManagerUI = new();
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -327,6 +443,7 @@ public class UIHandler : MonoBehaviour
         InventoryManager.Initialize();
         ItemUpdater.Initialize();
         PetUI.Initialize();
+        SaveManagerUI.Initialize();
     }
     void Update()
     {
@@ -341,6 +458,14 @@ public class UIHandler : MonoBehaviour
     {
         PetUI.StatusPanel.SetActive(!PetUI.StatusPanel.activeSelf);
     }
+    public void NewSave()
+    {
+        SaveManagerUI.NewSave();
+    }
+    public void SaveGame()
+    {
+        SaveHandler.Instance.SaveGame();
+        SaveManagerUI.DisplaySaves();
+    }
     //helpers
-    
 }

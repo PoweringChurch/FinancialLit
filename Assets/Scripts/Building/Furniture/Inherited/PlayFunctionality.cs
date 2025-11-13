@@ -10,9 +10,8 @@ public class PlayFunctionality : BaseFunctionality
     }
     protected virtual void GoPlay()
     {
-        if (PetBehaviour.Instance.activeBehaviour == Behaviour.Occupied)
+        if (DefaultChecks())
         {
-            Message($"{PetStats.Instance.PetName} is occupied!");
             return;
         }
         inUse = true;

@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -49,6 +51,8 @@ public class CameraHandler : MonoBehaviour
     }
     private void ZoomCamera()
     {
+        bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        if (isOverUi) return;
         moveSpeed = 20f * (currentZoom / 10f);
         currentZoom = Mathf.Clamp(currentZoom - InputSystem.actions.FindAction("Zoom").ReadValue<Vector2>().y * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
         gameCamera.orthographicSize = currentZoom;

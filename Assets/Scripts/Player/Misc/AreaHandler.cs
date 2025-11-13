@@ -19,9 +19,6 @@ public class AreaHandler : MonoBehaviour
     [SerializeField] private AreaData[] areas;
     [SerializeField] private Transform gameSpace;
     [SerializeField] private Light lighting;
-    [SerializeField] private Renderer petRenderer;
-    [SerializeField] private PetFunctionality petFunctionality;
-
     private Dictionary<string, AreaData> areaDict = new();
     
     [Header("References")]
@@ -55,7 +52,7 @@ public class AreaHandler : MonoBehaviour
         CleanupCurrentArea();
         PlayerStateManager.RemoveState(PlayerState.Home);
 
-        PetStateManager.ClearStates();
+        PetFlagManager.ClearFlags();
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
         PetAnimation.Instance.SetBoolParameter("IsSitting", false);
 
@@ -64,17 +61,14 @@ public class AreaHandler : MonoBehaviour
         currentArea = Instantiate(area.prefab, gameSpace);
         CameraHandler.Instance.RefreshRenderers();
         
-
         lighting.shadows = LightShadows.None;
-        petRenderer.enabled = false;
-        petFunctionality.enabled = false;
+        PetStats.Instance.gameObject.SetActive(false);
 
         if (area.isShop) PlayerStateManager.AddState(PlayerState.Shopping);
         if (area.shadows) lighting.shadows = LightShadows.Soft;
         if (area.bringPet) {
-            petRenderer.enabled = true;
-            petFunctionality.enabled = true;
-            petFunctionality.transform.position = new Vector3(0, 1, 0);
+            PetStats.Instance.gameObject.SetActive(true);
+            PetStats.Instance.transform.position = new Vector3(0, 1, 0);
             }
 
         UIHandler.Instance.ButtonManager.DisableButton("Build");
@@ -88,13 +82,12 @@ public class AreaHandler : MonoBehaviour
             home.SetActive(true);
         }
         
-        petRenderer.enabled = true;
-        petFunctionality.enabled = true;
-        petFunctionality.transform.position = new Vector3(0, 1, 0);
+        PetStats.Instance.gameObject.SetActive(true);
+        PetStats.Instance.transform.position = new Vector3(0, 1, 0);
         PlayerStateManager.AddState(PlayerState.Home);
         PlayerStateManager.RemoveState(PlayerState.Shopping);
 
-        PetStateManager.ClearStates();
+        PetFlagManager.ClearFlags();
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
         PetAnimation.Instance.SetBoolParameter("IsSitting", false);
         

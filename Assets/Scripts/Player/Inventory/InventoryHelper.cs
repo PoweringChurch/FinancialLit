@@ -3,10 +3,8 @@ using UnityEngine;
 public class InventoryHelper : MonoBehaviour
 {
     public static InventoryHelper Instance { get; private set; }
-    
     public bool debugMode = false;    
-    private Inventory inventory = new Inventory();
-    
+    private Inventory inventory = new();
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,6 +39,10 @@ public class InventoryHelper : MonoBehaviour
         inventory.RemoveItem(itemName, count);
         UIHandler.Instance.InventoryManager.UpdateInventoryItem(itemName);
     }
-
+    public void SetInventory(Inventory newInventory)
+    {
+        inventory = newInventory;
+        UIHandler.Instance.InventoryManager.SetInventory(inventory);
+    }
     public Inventory GetInventory() => inventory;
 }

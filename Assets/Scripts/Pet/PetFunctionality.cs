@@ -15,7 +15,7 @@ public class PetFunctionality : BaseFunctionality
             Message($"{PetStats.Instance.PetName} is occupied!");
             return;
         }
-        if (PetStateManager.HasState(PetState.Sitting))
+        if (PetFlagManager.HasFlag(PetFlag.Sitting))
         {
             Message("Your pet is sitting!");
             return;
@@ -35,10 +35,10 @@ public class PetFunctionality : BaseFunctionality
     }
     void ToggleSit()
     {
-        if (PetStateManager.HasState(PetState.Sitting))
+        if (PetFlagManager.HasFlag(PetFlag.Sitting))
         {
             //not checking for occupied as we know what its occupied with (sitting)
-            PetStateManager.RemoveState(PetState.Sitting);
+            PetFlagManager.RemoveFlag(PetFlag.Sitting);
             globalActions.Remove("Rise");
             globalActions["Sit"] = ToggleSit;
 
@@ -52,7 +52,7 @@ public class PetFunctionality : BaseFunctionality
                 Message($"{PetStats.Instance.PetName} is occupied!");
                 return;
             }
-            PetStateManager.AddState(PetState.Sitting);
+            PetFlagManager.AddFlag(PetFlag.Sitting);
             globalActions.Remove("Sit");
             globalActions["Rise"] = ToggleSit;
 

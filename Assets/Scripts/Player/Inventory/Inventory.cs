@@ -2,10 +2,20 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
+[System.Serializable]
 public class Inventory
 {
-    private readonly Dictionary<string, InventoryEntry> inventoryEntries = new Dictionary<string, InventoryEntry>();
-    
+    [SerializeField] private List<InventoryEntry> inventoryEntries = new List<InventoryEntry>();    
+    private Dictionary<string, InventoryEntry> inventoryDict = new Dictionary<string, InventoryEntry>();
+    // Call this after deserialization to rebuild the dictionary
+    public void Initialize()
+    {
+        inventoryDict.Clear();
+        foreach (var entry in inventoryEntries)
+        {
+            inventoryDict[entry.itemName] = entry;
+        }
+    }
     public void AddItem(FurnitureData itemData, int amount)
     {
         if (itemData == null)
@@ -14,21 +24,23 @@ public class Inventory
             return;
         }
         
-        if (inventoryEntries.ContainsKey(itemData.itemName))
+        if (inventoryDict.ContainsKey(itemData.itemName))
         {
-            inventoryEntries[itemData.itemName].count += amount;
+            inventoryDict[itemData.itemName].count += amount;
         }
         else
         {
-            inventoryEntries.Add(itemData.itemName, new InventoryEntry(itemData, amount));
+            var newEntry = new InventoryEntry(itemData, amount);
+            inventoryEntries.Add(newEntry);
+            inventoryDict.Add(itemData.itemName, newEntry);
         }
     }
     
     public void RemoveItem(string itemName, int amount)
     {
-        if (inventoryEntries.ContainsKey(itemName))
+        if (inventoryDict.ContainsKey(itemName))
         {
-            InventoryEntry entry = inventoryEntries[itemName];
+            InventoryEntry entry = inventoryDict[itemName];
             entry.count -= amount;
             
             if (entry.count < 0)
@@ -44,18 +56,18 @@ public class Inventory
     
     public InventoryEntry GetEntry(string itemName)
     {
-        if (inventoryEntries.ContainsKey(itemName))
+        if (inventoryDict.ContainsKey(itemName))
         {
-            return inventoryEntries[itemName];
+            return inventoryDict[itemName];
         }
         return null;
     }
     
     public int GetItemCount(string itemName)
     {
-        if (inventoryEntries.ContainsKey(itemName))
+        if (inventoryDict.ContainsKey(itemName))
         {
-            return inventoryEntries[itemName].count;
+            return inventoryDict[itemName].count;
         }
         return 0;
     }
@@ -67,13 +79,13 @@ public class Inventory
     
     public List<InventoryEntry> GetItemsToDisplay()
     {
-        return inventoryEntries.Values
+        return inventoryEntries
             .Where(entry => entry.count > 0)
             .ToList();
     }
     
     public Dictionary<string, InventoryEntry> GetAllEntries()
     {
-        return new Dictionary<string, InventoryEntry>(inventoryEntries);
+        return new Dictionary<string, InventoryEntry>(inventoryDict);
     }
 }

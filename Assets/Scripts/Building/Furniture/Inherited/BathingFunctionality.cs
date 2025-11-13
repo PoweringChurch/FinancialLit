@@ -1,35 +1,63 @@
 using UnityEngine;
 using System;
+using UnityEngine.AI;
 public class BathingFunctionality : BaseFunctionality
-{ 
+{
+    [SerializeField] GameObject waterFill;
+    protected bool inUse = false;
     protected override void Awake()
     {
         base.Awake();
-        homeActions["Go Clean"] = GoClean;
+        homeActions["Bathe"] = Bathe;
     }
-    protected virtual void GoClean()
+    protected virtual void Bathe()
     {
         if (!PlayerResources.Instance.CanConsumeShampoo())
         {
             Message("No pet shampoo!");
             return;
         }
-        if (PetBehaviour.Instance.activeBehaviour == Behaviour.Occupied)
+        if (DefaultChecks())
         {
-            Message($"{PetStats.Instance.PetName} is occupied!");
             return;
         }
         PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+
         PetMover.Instance.OnReachedGoal += OnReached;
         PetMover.Instance.SetGoalPosition(PositionPetY());
+
+        inUse = true;
     }
     protected virtual void OnReached()
     {
         PetMover.Instance.OnReachedGoal -= OnReached;
+        GetComponent<NavMeshObstacle>().enabled = false;
+
+        PetMover.Instance.petModel.LookAt(PositionPetY() + transform.right);
         PetMover.Instance.petModel.position = PositionPetY();
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
 
         PlayerResources.Instance.ConsumeShampoo();
-        PetStats.Instance.CleanPet(0.5f);
+        PetStats.Instance.StartBathing();
+        waterFill.SetActive(true);
+
+        homeActions.Remove("Bathe");
+        homeActions["Stop Bathing"] = StopBathing;
+
+        PetAnimation.Instance.SetBoolParameter("IsSitting", true);
+    }
+    protected virtual void StopBathing()
+    {
+        GetComponent<NavMeshObstacle>().enabled = true;
+
+        PetStats.Instance.StopBathing();
+        waterFill.SetActive(false);
+
+        homeActions["Bathe"] = Bathe;
+        homeActions.Remove("Stop Bathing");
+
+        PetAnimation.Instance.SetBoolParameter("IsSitting", false);
+        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+
+        inUse = false;
     }
 }

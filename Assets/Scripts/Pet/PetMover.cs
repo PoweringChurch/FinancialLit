@@ -52,10 +52,11 @@ public class PetMover : MonoBehaviour
                     petModel.rotation = Quaternion.Slerp(petModel.rotation, targetRotation, Time.deltaTime * moveSpeed * 4f);
                 }
             }
-            
+
             // Apply energy multiplier to speed
-            float energyMult = (float)(1 - Math.Max(0, 3 * Math.Log(-Math.Clamp(PetStats.Instance.Status["energy"], 0, 1) + 1.4f)));
-            agent.speed = moveSpeed * energyMult;
+            float energyMult = 0.5f + 0.5f * PetStats.Instance.Status["energy"];
+            float sickMult = PetFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
+            agent.speed = moveSpeed * energyMult * sickMult;
         }
     }
     

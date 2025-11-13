@@ -10,9 +10,8 @@ public class PetBedFunctionality : BaseFunctionality
     }
     protected virtual void GoSleep()
     {
-        if (PetBehaviour.Instance.activeBehaviour == Behaviour.Occupied)
+        if (DefaultChecks())
         {
-            Message($"{PetStats.Instance.PetName} is occupied!");
             return;
         }
         inUse = true;

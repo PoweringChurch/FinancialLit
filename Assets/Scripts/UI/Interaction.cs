@@ -65,8 +65,11 @@ public class Interaction : MonoBehaviour
         }
     }
     //not yet implemented
-    private List<GameObject> previouslyHit = new();
-    
+    private int currentHitIndex = 0;
+    private RaycastHit[] hitBuffer = new RaycastHit[10]; // Adjust size as needed
+    private Vector2 lastClickPos;
+    private float clickPositionThreshold = 5f; // Pixels
+
     public void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
@@ -74,17 +77,56 @@ public class Interaction : MonoBehaviour
         if (isOverUi) return;
         CloseMenu();
         if (hasPlacement) return;
+        
         // Get mouse position and create ray
         Vector2 mousePos = Mouse.current.position.ReadValue();
         Ray ray = gameCamera.ScreenPointToRay(mousePos);
         
-        // Raycast to find interactable object
-        if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance, interactableLayer) 
-        && hit.transform.TryGetComponent(out BaseFunctionality functionality))
+        // Check if clicking in same position (to cycle through objects)
+        bool isSamePosition = Vector2.Distance(mousePos, lastClickPos) < clickPositionThreshold;
+        if (!isSamePosition)
         {
-            currentOutline = hit.transform.GetComponent<Outline>();
-            currentOutline.enabled = true;
-            ShowMenu(mousePos, functionality);
+            currentHitIndex = 0; // Reset index for new position
+        }
+        lastClickPos = mousePos;
+        
+        // Get all overlapping objects
+        int hitCount = Physics.RaycastNonAlloc(ray, hitBuffer, raycastDistance, interactableLayer);
+        
+        if (hitCount > 0)
+        {
+            // Filter hits that have BaseFunctionality component
+            var validHits = new System.Collections.Generic.List<RaycastHit>();
+            for (int i = 0; i < hitCount; i++)
+            {
+                if (hitBuffer[i].transform.TryGetComponent(out BaseFunctionality _))
+                {
+                    validHits.Add(hitBuffer[i]);
+                }
+            }
+            
+            if (validHits.Count > 0)
+            {
+                // Sort by distance (closest first)
+                validHits.Sort((a, b) => a.distance.CompareTo(b.distance));
+                
+                // Cycle through valid hits
+                currentHitIndex = currentHitIndex % validHits.Count;
+                RaycastHit selectedHit = validHits[currentHitIndex];
+                
+                // Increment for next click
+                currentHitIndex++;
+                
+                // Get functionality component
+                selectedHit.transform.TryGetComponent(out BaseFunctionality functionality);
+
+                currentOutline = selectedHit.transform.GetComponentInChildren<Outline>();
+                if (currentOutline != null)
+                {
+                    currentOutline.enabled = true;
+                }
+                ShowMenu(mousePos, functionality);
+            }
         }
     }
     

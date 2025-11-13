@@ -101,5 +101,18 @@ public class BaseFunctionality : MonoBehaviour
 
         return availableActions;
     }
+    protected virtual bool DefaultChecks()
+    {
+        if (PetBehaviour.Instance.gameObject.activeInHierarchy == false)
+        {
+            return true;
+        }
+        if (PetBehaviour.Instance.activeBehaviour == Behaviour.Occupied)
+        {
+            Message($"{PetStats.Instance.PetName} is occupied!");
+            return true;
+        }
+        return false;
+    }
     public Vector3 PositionPetY()  { return new Vector3(transform.position.x, 1, transform.position.z);}
 }

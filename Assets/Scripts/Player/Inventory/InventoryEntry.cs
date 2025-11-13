@@ -3,12 +3,16 @@ using System;
 [Serializable]
 public class InventoryEntry
 {
-    public FurnitureData itemData;  // Reference to the definition
+    public string itemName;
     public int count;
     
-    public InventoryEntry(FurnitureData data, int initialCount = 0)
+    [NonSerialized]
+    public FurnitureData data; // Runtime reference, rebuilt after loading
+    
+    public InventoryEntry(FurnitureData itemData, int amount)
     {
-        itemData = data;
-        count = initialCount;
+        itemName = itemData.itemName;
+        data = itemData;
+        count = amount;
     }
 }

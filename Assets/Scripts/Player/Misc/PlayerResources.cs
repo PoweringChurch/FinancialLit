@@ -72,6 +72,19 @@ public class PlayerResources : MonoBehaviour
         shampoo += count;
         UIHandler.Instance.ItemUpdater.UpdateText();
     }
+
+    public void SetMoney(float to)
+    {
+        money = to;
+    }
+    public void SetShampoo(int to)
+    {
+        shampoo = to;
+    }
+    public void SetFood(int to)
+    {
+        food = to;
+    }
     //helper
     public bool CanConsumeFood()
     {
