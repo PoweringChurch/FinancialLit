@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3068439175704181517}
   - component: {fileID: 1428624435424903932}
   - component: {fileID: 6209669108752531964}
-  - component: {fileID: 9205569797507386323}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -94,19 +93,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9205569797507386323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768536342277611797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5bfcb675901bc6468cd417ef699d90e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hided: 1
 --- !u!1 &8158492441905914124
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

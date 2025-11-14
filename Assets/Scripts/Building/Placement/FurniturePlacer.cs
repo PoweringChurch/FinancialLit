@@ -85,7 +85,7 @@ public class FurniturePlacer : MonoBehaviour
       }
       public void SetCurrentFurniture(string itemName)
       {
-            _objectPrefab = FurnitureDatabase.GetItem(itemName).prefab;
+            _objectPrefab = FurnitureDatabase.GetData(itemName).prefab;
             minydisplay.gameObject.SetActive(true);
             PlayerStateManager.AddState(PlayerState.Placement);
             _PrepareObject();
