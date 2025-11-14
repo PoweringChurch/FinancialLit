@@ -336,7 +336,7 @@ public class UIHandler : MonoBehaviour
         public GameObject slotTemplate;
         public TextMeshProUGUI petNameInput;
 
-        public bool debugMode = false;
+        public Toggle debugToggle;
 
         public void Initialize()
         {
@@ -427,10 +427,10 @@ public class UIHandler : MonoBehaviour
             {
                 PetName = petNameInput.text
             };
-            if (debugMode)
+            if (debugToggle.isOn)
             {
-                FurnitureData[] allItems = FurnitureDatabase.GetAllItems();
-                foreach (FurnitureData data in allItems)
+                FurnitureData[] allData = FurnitureDatabase.GetAllData();
+                foreach (FurnitureData data in allData)
                 {
                     newData.PlayerInventory.AddItem(data, 1000);
                 }
@@ -447,6 +447,7 @@ public class UIHandler : MonoBehaviour
             SaveHandler.Instance.currentPlayerData = newData;
             SaveHandler.Instance.LoadSaved(newData);
             SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
+            UIHandler.Instance.ItemUpdater.UpdateText();
         }
     }
     [Header("Manager Settings")]
