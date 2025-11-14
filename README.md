@@ -74,10 +74,15 @@ Models & animation
 - [x] Add proper pet bowl model
   - [x] w/ filled bowl model
 
+Pet AI & improvements
+- [x] Add pet pathfinding
+- [x] Hide pet when in build mode
+
 Particles
 - [x] Add stench particles when pet hygiene is low
 - [x] Add particles for certain furnitures
   - [x] Bathing particles
+    * removed in place of a different bathing system
   - [x] Eating particles
 
 Pet selection screen
@@ -86,9 +91,9 @@ Pet selection screen
 - [x] Add display of pet name ingame, as currently there is no way to actually see it beside notifications
 
 Stylize UI
-- [ ] Determine color scheme
-- [ ] Select font
-- [ ] Stylize buttons
+- [x] Determine color scheme
+- [x] Select font
+- [x] Stylize buttons
 
 Music and SFX
 - [ ] Find suitable sound effects

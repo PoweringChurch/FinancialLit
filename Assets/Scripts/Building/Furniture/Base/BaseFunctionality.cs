@@ -30,7 +30,7 @@ public class BaseFunctionality : MonoBehaviour
     protected virtual void Move()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
-        var item = FurnitureDatabase.GetItem(handler.itemName);
+        var item = FurnitureDatabase.GetData(handler.itemName);
         InventoryHelper.Instance.AddItem(item, 1);
         FurniturePlacer.Instance.isMoving = true;
         FurniturePlacer.Instance.OverrideRotation(transform.rotation);
@@ -40,7 +40,7 @@ public class BaseFunctionality : MonoBehaviour
     protected virtual void Remove()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
-        var item = FurnitureDatabase.GetItem(handler.itemName);
+        var item = FurnitureDatabase.GetData(handler.itemName);
         InventoryHelper.Instance.AddItem(item, 1);
         Debug.Log("remove");
         Destroy(gameObject);
@@ -48,7 +48,7 @@ public class BaseFunctionality : MonoBehaviour
     protected virtual void Buy()
     {
         PlacementHandler handler = GetComponent<PlacementHandler>();
-        var item = FurnitureDatabase.GetItem(handler.itemName);
+        var item = FurnitureDatabase.GetData(handler.itemName);
         InventoryHelper.Instance.AddItem(item, 1);
         PlayerResources.Instance.Spend(price, "Furniture");
     }

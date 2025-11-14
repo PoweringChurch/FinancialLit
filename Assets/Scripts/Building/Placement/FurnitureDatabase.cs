@@ -32,11 +32,9 @@ public class FurnitureDatabase : MonoBehaviour
             }
         }
         Debug.Log($"Item database initialized with {itemLookup.Count} items");
-
-        //debugging
     }
     
-    public static FurnitureData GetItem(string itemName)
+    public static FurnitureData GetData(string itemName)
     {
         if (itemLookup != null && itemLookup.TryGetValue(itemName, out var item))
         {
@@ -46,7 +44,7 @@ public class FurnitureDatabase : MonoBehaviour
         return null;
     }
     
-    public static FurnitureData[] GetAllItems()
+    public static FurnitureData[] GetAllData()
     {
         return instance != null ? instance.allFurniture : new FurnitureData[0];
     }

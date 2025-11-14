@@ -116,7 +116,7 @@ public class SaveHandler : MonoBehaviour
         // Spawn saved furniture
         foreach (var furnitureData in playerData.PlacedFurniture)
         {
-            FurnitureData furnitureItem = FurnitureDatabase.GetItem(furnitureData.itemName);
+            FurnitureData furnitureItem = FurnitureDatabase.GetData(furnitureData.itemName);
             if (furnitureItem == null)
             {
                 continue;
@@ -143,9 +143,6 @@ public class SaveHandler : MonoBehaviour
         PlayerResources.Instance.SetShampoo(playerData.Shampoo);
 
         sessionStartTime = Time.time; // reset when loading
-
-        UIHandler.Instance.ItemUpdater.UpdateText();
-        PetMover.Instance.petModel.position = new Vector3(0, 1, 0);
     }
     public PlayerData LoadGameFromFile(string fileName)
     {

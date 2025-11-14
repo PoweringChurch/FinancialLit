@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FeedingFunctionality
   price: 0.15
+  filled: 0
   foodTransform: {fileID: 0}
   filledY: 0
   emptyY: 0
@@ -5133,7 +5134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -5168,6 +5169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FeedingFunctionality
   price: 4
+  filled: 0
   foodTransform: {fileID: 8442759117253719447}
   filledY: 0.15
   emptyY: 0

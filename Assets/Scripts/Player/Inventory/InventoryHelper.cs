@@ -32,6 +32,7 @@ public class InventoryHelper : MonoBehaviour
     public void SetInventory(Inventory newInventory)
     {
         inventory = newInventory;
+        inventory.Initialize();
         UIHandler.Instance.InventoryManager.SetInventory(inventory);
         UIHandler.Instance.ItemUpdater.UpdateText();
     }
