@@ -91,9 +91,9 @@ Pet selection screen
 - [x] Add display of pet name ingame, as currently there is no way to actually see it beside notifications
 
 Stylize UI
-- [ ] Determine color scheme
-- [ ] Select font
-- [ ] Stylize buttons
+- [x] Determine color scheme
+- [x] Select font
+- [x] Stylize buttons
 
 Music and SFX
 - [ ] Find suitable sound effects
