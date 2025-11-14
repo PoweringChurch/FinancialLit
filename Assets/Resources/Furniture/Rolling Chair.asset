@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e045837657d74f745992f2ab5ee57ed5, type: 3}
+  m_Name: Rolling Chair
+  m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
+  itemName: Rolling Chair
+  prefab: {fileID: 1553437897462323394, guid: 202782d050e9344198b3f3eada319b51, type: 3}
+  icon: {fileID: 0}

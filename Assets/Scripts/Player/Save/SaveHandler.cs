@@ -135,6 +135,8 @@ public class SaveHandler : MonoBehaviour
 
         // Inventory
         InventoryHelper.Instance.SetInventory(playerData.PlayerInventory);
+        InventoryHelper.Instance.Rebuild(); // Rebuild FurnitureData references
+
         // Resources
         PlayerResources.Instance.SetMoney(playerData.Money);
         PlayerResources.Instance.SetFood(playerData.Food);

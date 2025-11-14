@@ -3,7 +3,6 @@ using UnityEngine;
 public class InventoryHelper : MonoBehaviour
 {
     public static InventoryHelper Instance { get; private set; }
-    public bool debugMode = false;    
     private Inventory inventory = new();
     void Awake()
     {
@@ -16,15 +15,6 @@ public class InventoryHelper : MonoBehaviour
     }
     void Start()
     {
-        if (debugMode)
-        {
-            FurnitureData[] allItems = FurnitureDatabase.GetAllData();
-            foreach (FurnitureData data in allItems)
-            {
-                inventory.AddItem(data, 1000);
-            }
-            PlayerResources.Instance.AddMoney(10000000);
-        }
         UIHandler.Instance.InventoryManager.SetInventory(inventory);
     }
     // Helpers
@@ -44,6 +34,11 @@ public class InventoryHelper : MonoBehaviour
         inventory = newInventory;
         inventory.Initialize();
         UIHandler.Instance.InventoryManager.SetInventory(inventory);
+        UIHandler.Instance.ItemUpdater.UpdateText();
+    }
+    public void Rebuild()
+    {
+        inventory.Initialize();
     }
     public Inventory GetInventory() => inventory;
 }
