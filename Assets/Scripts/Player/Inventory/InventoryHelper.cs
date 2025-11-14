@@ -18,7 +18,7 @@ public class InventoryHelper : MonoBehaviour
     {
         if (debugMode)
         {
-            FurnitureData[] allItems = FurnitureDatabase.GetAllItems();
+            FurnitureData[] allItems = FurnitureDatabase.GetAllData();
             foreach (FurnitureData data in allItems)
             {
                 inventory.AddItem(data, 1000);
@@ -42,6 +42,7 @@ public class InventoryHelper : MonoBehaviour
     public void SetInventory(Inventory newInventory)
     {
         inventory = newInventory;
+        inventory.Initialize();
         UIHandler.Instance.InventoryManager.SetInventory(inventory);
     }
     public Inventory GetInventory() => inventory;

@@ -1,18 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 [System.Serializable]
 public class Inventory
 {
-    [SerializeField] private List<InventoryEntry> inventoryEntries = new List<InventoryEntry>();    
-    private Dictionary<string, InventoryEntry> inventoryDict = new Dictionary<string, InventoryEntry>();
+    [SerializeField] private List<InventoryEntry> inventoryEntries = new();    
+    [NonSerialized] private Dictionary<string, InventoryEntry> inventoryDict = new();
+    
     // Call this after deserialization to rebuild the dictionary
     public void Initialize()
     {
         inventoryDict.Clear();
         foreach (var entry in inventoryEntries)
         {
+            entry.data = FurnitureDatabase.GetData(entry.itemName);
             inventoryDict[entry.itemName] = entry;
         }
     }

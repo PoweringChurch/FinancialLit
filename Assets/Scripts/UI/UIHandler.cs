@@ -171,14 +171,17 @@ public class UIHandler : MonoBehaviour
 
         private void OnItemButtonClicked(InventoryEntry entry)
         {
+            Debug.Log(entry.count+" "+entry.itemName);
+            Debug.Log(entry.data.ToString());
+            Debug.Log(entry.data.prefab);
             //shouldnt even occur
             if (entry.count <= 0)
             {
                 Debug.LogWarning("Cannot select item with 0 count");
                 return;
             }
-
-            if (entry.data.prefab == null)
+            if (!entry.data.
+            prefab)
             {
                 Debug.LogError($"Item {entry.itemName} has no prefab assigned");
                 return;
@@ -387,9 +390,15 @@ public class UIHandler : MonoBehaviour
         private void OnLoadClick(string fileName)
         {
             LoadThisSave(fileName);
+
+            //enter game
             ingameOverlay.SetActive(true);
             savesScreen.SetActive(false);
+
             CameraHandler.Instance.ToggleGamecam(true);
+
+            Instance.ItemUpdater.UpdateText();
+            PetMover.Instance.petModel.position = new Vector3(0, 1, 0);
         }
         string FormatPlaytime(float seconds)
         {
