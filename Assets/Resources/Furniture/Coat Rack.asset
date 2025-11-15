@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Coat Rack
   prefab: {fileID: 1358144025746183762, guid: 87241e07c7a71c34a9a6f7cd10e4ad0d, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: dcfaf4e7aa40ab045bc66e2e37c4beba, type: 3}

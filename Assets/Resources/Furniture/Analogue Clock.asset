@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Analogue Clock
   prefab: {fileID: 968682067557633261, guid: 9ac7002dbeee3d74ebc9afeb454785f6, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5500c9d32e87fad439102d7f084f5e07, type: 3}

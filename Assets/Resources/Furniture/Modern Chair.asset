@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Modern Chair
   prefab: {fileID: 1814868660902937675, guid: 396a19539c07b7245a16830cb80cd3d6, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 70ae29cb635e0374d93cb50bed2f7dc3, type: 3}

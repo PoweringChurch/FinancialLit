@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Nightstand
   prefab: {fileID: 815401833892226958, guid: cec4d9d1ad574dc428f413b6cc3b93e7, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 12be5b1dd2c9358409dc3cdd36525ee6, type: 3}

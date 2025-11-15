@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Shelf
   prefab: {fileID: 2868729105116480504, guid: 7c24ee6e21ba8674993b880514155448, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 27f035917b4c85a4b8294485799b4223, type: 3}

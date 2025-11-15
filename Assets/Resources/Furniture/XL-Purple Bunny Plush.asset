@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: XL-Purple Bunny Plush
   prefab: {fileID: 7279319656284617729, guid: 56d6286800ab3459ebe6438ae9ed0974, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 49b79e1fbc348aa409f03696fa1bb161, type: 3}

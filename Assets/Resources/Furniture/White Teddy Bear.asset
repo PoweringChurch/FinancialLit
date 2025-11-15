@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: White Teddy Bear
   prefab: {fileID: 1818450928320861980, guid: 64338c1c1503f4f2e83a3ac20e7cda0b, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fc49e471561308a42a515b5959ccb5e0, type: 3}

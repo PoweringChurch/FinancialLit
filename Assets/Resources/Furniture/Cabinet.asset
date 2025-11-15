@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Cabinet
   prefab: {fileID: 542507887025088364, guid: edbb1f67cb3c5e14eb651dc6d5a839eb, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 96b002ff16472054291640ada07fc354, type: 3}

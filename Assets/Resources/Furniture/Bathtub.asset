@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Bathtub
   prefab: {fileID: 594439636702234447, guid: 88cf29581c6899c4eb5f23f868e72e88, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ec9b663a50a2b9f4cb37597c48d3d427, type: 3}

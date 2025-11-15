@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Standing Fan
   prefab: {fileID: 582714922008112823, guid: af9974f59e2fa274386319f8ed61ce55, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 89d21e68608d92c478c014874750e82e, type: 3}

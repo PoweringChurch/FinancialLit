@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Wooden Chair
   prefab: {fileID: 1357251407112483924, guid: 98cf872849eb6884e89b463e9b369189, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3e20ef676f8c9834b87cfc1e358b334b, type: 3}

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Wooden Desk
   prefab: {fileID: 7915365013973688857, guid: 613dd4b6a1a980a4da9f24243555a58c, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 7166846ed274c2e41bb066d260cdb6d0, type: 3}

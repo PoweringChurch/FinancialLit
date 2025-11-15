@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Food Bowl
   prefab: {fileID: 6063695135051191818, guid: cb51e623d29cf6446bd4220960aa21ff, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9dc95ca79d83f3340b3ef452c14159ce, type: 3}
