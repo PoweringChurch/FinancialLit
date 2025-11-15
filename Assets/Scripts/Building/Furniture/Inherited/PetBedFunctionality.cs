@@ -30,7 +30,7 @@ public class PetBedFunctionality : BaseFunctionality
     private void OnReached()
     {
         PetMover.Instance.OnReachedGoal -= OnReached;
-        PetMover.Instance.petModel.position = PositionPetY();
+        PetMover.Instance.petTransform.position = PositionPetY();
         PetStats.Instance.StartSleep();
         homeActions.Remove("Go to Sleep");
         homeActions["Stop Sleeping"] = StopSleeping;

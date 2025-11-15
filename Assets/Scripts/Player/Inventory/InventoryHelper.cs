@@ -21,7 +21,7 @@ public class InventoryHelper : MonoBehaviour
     public void AddItem(FurnitureData itemData, int count)
     {
         inventory.AddItem(itemData, count);
-        UIHandler.Instance.InventoryManager.UpdateInventoryUI();
+        UIHandler.Instance.InventoryManager.UpdateInventoryItem(itemData.itemName);
     }
 
     public void RemoveItem(string itemName, int count)

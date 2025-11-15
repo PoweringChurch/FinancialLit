@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Rectangle Table
   prefab: {fileID: 2146575221920963763, guid: 4bcdc373d4f0c44dfa7e95ccf0f29252, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 0cb4be5196bf2e0498daa65141242d6e, type: 3}

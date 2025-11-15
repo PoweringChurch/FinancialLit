@@ -46,7 +46,7 @@ public class UIHandler : MonoBehaviour
             }
 
             if (targetButton.button) targetButton.button.enabled = enabled;
-            RawImage unavailableImage = targetButton.button.GetComponentInChildren<RawImage>();
+            RawImage unavailableImage = targetButton.button.transform.Find("Unavailable").GetComponent<RawImage>();
             if (unavailableImage) unavailableImage.enabled = !enabled;
         }
     }
@@ -105,29 +105,17 @@ public class UIHandler : MonoBehaviour
             {
                 GameObject newTemplate = Instantiate(itemButtonTemplate, contentTransform);
                 Button itemButton = newTemplate.GetComponent<Button>();
-                // Find and set Display Name
-                Transform displayNameText = newTemplate.transform.Find("DisplayName");
-                if (displayNameText != null && displayNameText.TryGetComponent<TextMeshProUGUI>(out var tmpName))
-                {
-                    tmpName.text = entry.itemName;
-                }
-                // Find and set Count
-                Transform countText = newTemplate.transform.Find("Count");
-                if (countText != null && countText.TryGetComponent<TextMeshProUGUI>(out var tmpCount))
-                {
-                    tmpCount.text = $"{entry.count}";
-                }
+                //set count
+                TextMeshProUGUI countText = newTemplate.transform.GetComponentInChildren<TextMeshProUGUI>();
+                countText.text = $"{entry.count}";
+                //set img
+                Transform inner = newTemplate.transform.GetChild(1);
+                var imgPreview = inner.GetChild(0).GetComponent<Image>();
+                imgPreview.sprite = entry.data.icon;
+                //add clicking functionality
                 itemButton.onClick.AddListener(() => OnItemButtonClicked(entry));
                 inventoryItemUI.Add(entry.itemName, newTemplate);
             }
-            
-            // Automatically resize content to fit all items
-            RectTransform contentRect = contentTransform.GetComponent<RectTransform>();
-            int itemCount = inventory.GetItemsToDisplay().Count;
-            float buttonHeight = 80f;
-            float spacing = 0f; // Adjust based on your layout spacing
-            float newHeight = Mathf.Max(80f, 80f+(buttonHeight + spacing) * (1+itemCount%10));
-            contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, newHeight);
         }
 
         public void UpdateInventoryItem(string itemName)
@@ -158,11 +146,8 @@ public class UIHandler : MonoBehaviour
             }
 
             // Update the count text
-            Transform countText = existingItemUI.transform.Find("Count");
-            if (countText != null && countText.TryGetComponent<TextMeshProUGUI>(out var tmpCount))
-            {
-                tmpCount.text = $"{entry.count}";
-            }
+            TextMeshProUGUI countText = existingItemUI.GetComponentInChildren<TextMeshProUGUI>();
+            countText.text = $"{entry.count}";
 
             // Ensure UI is active if count > 0
             existingItemUI.SetActive(true);
@@ -309,6 +294,7 @@ public class UIHandler : MonoBehaviour
     public class UIPopupManager
     {
         public GameObject infoPanelTemplate;
+        public GameObject ynPanelTemplate;
         public Transform PopupsTransform;
 
         public void PopupInfo(string header, string body, string dismiss = "OK")
@@ -325,6 +311,33 @@ public class UIHandler : MonoBehaviour
             Button dismissButton = newInfoPanel.GetComponentInChildren<Button>();
             dismissButton.onClick.AddListener(() => Destroy(newInfoPanel));
         }
+        public void PopupYN(string header, string body, Action onYes, Action onNo = null, string y = "Yes", string n = "No")
+        {
+            GameObject newYNPanel = Instantiate(ynPanelTemplate, PopupsTransform);
+            var tmps = newYNPanel.GetComponentsInChildren<TextMeshProUGUI>();
+            
+            // Header, Body, Yes text, No text
+            tmps[0].text = header;
+            tmps[1].text = body;
+            tmps[2].text = y;
+            tmps[3].text = n;
+            
+            Button[] buttons = newYNPanel.GetComponentsInChildren<Button>();
+            
+            // Yes button
+            buttons[0].onClick.AddListener(() => 
+            {
+                onYes?.Invoke();
+                Destroy(newYNPanel);
+            });
+            
+            // No button
+            buttons[1].onClick.AddListener(() => 
+            {
+                onNo?.Invoke();
+                Destroy(newYNPanel);
+            });
+        }
     }
     
     [Serializable]
@@ -332,6 +345,7 @@ public class UIHandler : MonoBehaviour
     {
         public Transform slotGrid;
         public GameObject ingameOverlay;
+        public GameObject ingameMenu;
         public GameObject savesScreen;
         public GameObject slotTemplate;
         public TextMeshProUGUI petNameInput;
@@ -390,6 +404,7 @@ public class UIHandler : MonoBehaviour
         }
         private void OnLoadClick(string fileName)
         {
+            PetMover.Instance.petTransform.gameObject.SetActive(true);
             LoadThisSave(fileName);
 
             //enter game
@@ -399,7 +414,7 @@ public class UIHandler : MonoBehaviour
             CameraHandler.Instance.ToggleGamecam(true);
 
             Instance.ItemUpdater.UpdateText();
-            PetMover.Instance.petModel.position = new Vector3(0, 1, 0);
+            AreaHandler.Instance.EnterHome();
         }
         string FormatPlaytime(float seconds)
         {
@@ -438,7 +453,7 @@ public class UIHandler : MonoBehaviour
                 newData.Shampoo = 10000;
                 newData.Food = 1000;
 
-                UIHandler.Instance.PopupManager.PopupInfo(
+                Instance.PopupManager.PopupInfo(
                     "Hey!",
                     "Because debug mode is enabled, you start with a bunch of resources and every furniture item in the game, obtainable or not! This can be disabled in settings.",
                     "Sweet!"
@@ -447,7 +462,31 @@ public class UIHandler : MonoBehaviour
             SaveHandler.Instance.currentPlayerData = newData;
             SaveHandler.Instance.LoadSaved(newData);
             SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
-            UIHandler.Instance.ItemUpdater.UpdateText();
+            Instance.ItemUpdater.UpdateText();
+        }
+        public void DeleteCurrentSave()
+        {
+            Instance.PopupManager.PopupYN(
+            "Delete Save?",
+            "Are you sure you want to delete this save? This cannot be undone.",
+            onYes: () => 
+            {
+                ingameOverlay.SetActive(false);
+                savesScreen.SetActive(true);
+
+                CameraHandler.Instance.ToggleGamecam(false);
+                
+                SaveHandler.Instance.DeleteSave(SaveHandler.Instance.currentSaveFile);
+                DisplaySaves();
+                Debug.Log("Save deleted");
+            },
+            onNo: () => 
+            {
+                ingameMenu.SetActive(true);
+                Debug.Log("Cancelled");
+            }
+        );
+            
         }
     }
     [Header("Manager Settings")]
@@ -494,6 +533,10 @@ public class UIHandler : MonoBehaviour
     {
         SaveHandler.Instance.SaveGame();
         SaveManagerUI.DisplaySaves();
+    }
+    public void DeleteCurrentSave()
+    {
+        SaveManagerUI.DeleteCurrentSave();
     }
     //helpers
 }

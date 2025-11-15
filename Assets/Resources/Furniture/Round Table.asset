@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Round Table
   prefab: {fileID: 8400063152006393739, guid: 660954788b0414a7ea0e4ef4b2666f55, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 312465bed240459478a44cff3f79303a, type: 3}

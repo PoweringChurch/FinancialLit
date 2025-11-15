@@ -74,15 +74,15 @@ public class Interaction : MonoBehaviour
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
         bool hasPlacement = PlayerStateManager.HasState(PlayerState.Placement);
-        if (isOverUi) return;
+
+        if (isOverUi && IsPointerOverActionMenu()) return; //because we are over an action
         CloseMenu();
-        if (hasPlacement) return;
+        if (hasPlacement) return; //because we are in placement, so we dont want to bring up action menu while placing something
+        if (isOverUi) return; //because we are not in an action menu
         
-        // Get mouse position and create ray
         Vector2 mousePos = Mouse.current.position.ReadValue();
         Ray ray = gameCamera.ScreenPointToRay(mousePos);
         
-        // Check if clicking in same position (to cycle through objects)
         bool isSamePosition = Vector2.Distance(mousePos, lastClickPos) < clickPositionThreshold;
         if (!isSamePosition)
         {
@@ -90,13 +90,11 @@ public class Interaction : MonoBehaviour
         }
         lastClickPos = mousePos;
         
-        // Get all overlapping objects
         int hitCount = Physics.RaycastNonAlloc(ray, hitBuffer, raycastDistance, interactableLayer);
         
         if (hitCount > 0)
         {
-            // Filter hits that have BaseFunctionality component
-            var validHits = new System.Collections.Generic.List<RaycastHit>();
+            var validHits = new List<RaycastHit>();
             for (int i = 0; i < hitCount; i++)
             {
                 if (hitBuffer[i].transform.TryGetComponent(out BaseFunctionality _))
@@ -129,7 +127,29 @@ public class Interaction : MonoBehaviour
             }
         }
     }
-    
+    private bool IsPointerOverActionMenu()
+    {
+        if (currentMenu == null) return false;
+        
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
+        
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+        
+        foreach (var result in results)
+        {
+            if (result.gameObject.transform.IsChildOf(currentMenu.transform) || 
+                result.gameObject == currentMenu)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
     void ShowMenu(Vector2 screenPosition, BaseFunctionality functionality)
     {
         // Get available actions

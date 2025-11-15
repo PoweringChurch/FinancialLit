@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Toilet
   prefab: {fileID: 2816874452971834058, guid: 5e772fcc0655f42f38d0cc6ad01db8d7, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ff3c6feba80f6414ab4ab2df1c607370, type: 3}

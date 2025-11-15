@@ -33,7 +33,7 @@ public class FeedingFunctionality : BaseFunctionality
     {
         PetMover.Instance.OnReachedGoal -= OnReached;
         //PetMover.Instance.petModel.position = PositionPetY() + transform.forward;
-        PetMover.Instance.petModel.LookAt(PositionPetY());
+        PetMover.Instance.petTransform.LookAt(PositionPetY());
 
         PetAnimation.Instance.SetTrigger("Eat");
         PetStats.Instance.FeedPet(0.4f);

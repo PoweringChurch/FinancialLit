@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum PlacementMode
 {
@@ -58,14 +59,17 @@ public class PlacementHandler : MonoBehaviour
         {
             isFixed = true;
             hasValidPlacement = true;
+            GetComponent<NavMeshObstacle>().enabled = true;
         }
         else if (mode == PlacementMode.Valid)
         {
             hasValidPlacement = true;
+            GetComponent<NavMeshObstacle>().enabled = false;
         }
         else
         {
             hasValidPlacement = false;
+            GetComponent<NavMeshObstacle>().enabled = false;
         }
         SetMaterial(mode);
     }

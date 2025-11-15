@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Small Table
   prefab: {fileID: 1250211400988409481, guid: 13d2766fdbc7542d78056d4fdaab4c34, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 66e5f080d08fffe46bfe1c3115fc3ad5, type: 3}

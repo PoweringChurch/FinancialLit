@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6873425616325665638}
   - component: {fileID: 9147206285181059064}
   - component: {fileID: 7293991615675706184}
+  - component: {fileID: 5136276100231594270}
   m_Layer: 7
   m_Name: White Teddy Bear
   m_TagString: Untagged
@@ -152,6 +153,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayFunctionality
   price: 8
+--- !u!208 &5136276100231594270
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818450928320861980}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.15, y: 0.2, z: 0.15}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.2, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2270730845484426118
 GameObject:
   m_ObjectHideFlags: 0

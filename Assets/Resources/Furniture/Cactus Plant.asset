@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Cactus Plant
   prefab: {fileID: 7143686775447960879, guid: f36baa69b42024bd5b0b45b481c5e8a7, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fcc80989015f6fb469471e3fb34dc950, type: 3}

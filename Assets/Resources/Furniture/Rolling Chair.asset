@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Rolling Chair
   prefab: {fileID: 1553437897462323394, guid: 202782d050e9344198b3f3eada319b51, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fa29e2e9ceda17845bff8e84599811cd, type: 3}

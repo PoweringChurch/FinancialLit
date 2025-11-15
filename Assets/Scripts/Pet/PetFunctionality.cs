@@ -56,7 +56,7 @@ public class PetFunctionality : BaseFunctionality
             globalActions.Remove("Sit");
             globalActions["Rise"] = ToggleSit;
 
-            PetMover.Instance.SetGoalPosition(PetMover.Instance.petModel.transform.position);
+            PetMover.Instance.SetGoalPosition(PetMover.Instance.petTransform.transform.position);
             PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
             PetAnimation.Instance.SetBoolParameter("IsSitting", true);
         }

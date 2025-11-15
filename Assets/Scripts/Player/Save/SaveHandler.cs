@@ -51,8 +51,11 @@ public class SaveHandler : MonoBehaviour
 
         currentPlayerData.DisplayStatus = displayStatus;
 
-        currentPlayerData.PetFlags = PetFlagManager.CurrentFlags;
+        currentPlayerData.PetPosition = PetMover.Instance.petTransform.position;
+        currentPlayerData.PetRotation = PetMover.Instance.petTransform.rotation;
 
+        currentPlayerData.PetFlags = PetFlagManager.CurrentFlags;
+        
         // furniture
 
         List<FurnitureObjectData> placedFurnitureData = new();
@@ -104,6 +107,8 @@ public class SaveHandler : MonoBehaviour
         PetStats.Instance.Status["entertainment"] = playerData.Entertainment;
         PetStats.Instance.Status["energy"] = playerData.Energy;
 
+        PetMover.Instance.agent.Warp(playerData.PetPosition);
+        PetMover.Instance.petTransform.rotation = playerData.PetRotation;
         // Pet flags
         PetFlagManager.SetFlags(playerData.PetFlags);
 
@@ -143,6 +148,36 @@ public class SaveHandler : MonoBehaviour
         PlayerResources.Instance.SetShampoo(playerData.Shampoo);
 
         sessionStartTime = Time.time; // reset when loading
+    }
+    public bool DeleteSave(string fileName)
+    {
+        string savePath = Application.persistentDataPath + "/" + fileName;
+        
+        if (!File.Exists(savePath))
+        {
+            Debug.LogWarning($"Save file {fileName} not found, cannot delete");
+            return false;
+        }
+        
+        try
+        {
+            File.Delete(savePath);
+            Debug.Log($"Deleted save file: {savePath}");
+            
+            // If we deleted the currently active save, reset it
+            if (currentSaveFile == fileName)
+            {
+                currentSaveFile = "default.json";
+                currentPlayerData = new PlayerData();
+            }
+            
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed to delete save file: {e.Message}");
+            return false;
+        }
     }
     public PlayerData LoadGameFromFile(string fileName)
     {

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AreaHandler : MonoBehaviour
 {
+    public static AreaHandler Instance;
     [Serializable]
     public class AreaData
     {
@@ -27,6 +29,7 @@ public class AreaHandler : MonoBehaviour
     private GameObject currentArea;
     private void Awake()
     {
+        Instance = this;
         foreach (var area in areas)
         {
             areaDict[area.areaName] = area;
@@ -68,7 +71,7 @@ public class AreaHandler : MonoBehaviour
         if (area.shadows) lighting.shadows = LightShadows.Soft;
         if (area.bringPet) {
             PetStats.Instance.gameObject.SetActive(true);
-            PetStats.Instance.transform.position = new Vector3(0, 1, 0);
+            PetMover.Instance.agent.Warp(Vector3.up);
             }
 
         UIHandler.Instance.ButtonManager.DisableButton("Build");
@@ -83,7 +86,7 @@ public class AreaHandler : MonoBehaviour
         }
         
         PetStats.Instance.gameObject.SetActive(true);
-        PetStats.Instance.transform.position = new Vector3(0, 1, 0);
+        PetMover.Instance.agent.Warp(Vector3.up);
         PlayerStateManager.AddState(PlayerState.Home);
         PlayerStateManager.RemoveState(PlayerState.Shopping);
 

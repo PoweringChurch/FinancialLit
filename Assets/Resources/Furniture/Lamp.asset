@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Lamp
   prefab: {fileID: 7097550474837970839, guid: 08cf903956ebb47faa6151a59039d1c1, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fe22b4ff2dcb1364c8c849f5e02c5cef, type: 3}

@@ -18,8 +18,8 @@ public class FurniturePlacer : MonoBehaviour
       private Ray _ray;
       private RaycastHit _hit;
 
-      private readonly float cellSize = 0.5f;
-      private Vector2 gridOffset = new(0.25f, 0.25f);
+      private readonly float cellSize = 0.25f;
+      private Vector2 gridOffset = new();// = new(0.25f, 0.25f);
 
       private readonly float minyoffset = 0.5f;
       private readonly float maxyoffset = 3f;

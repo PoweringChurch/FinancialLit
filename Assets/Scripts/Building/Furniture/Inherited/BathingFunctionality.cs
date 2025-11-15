@@ -33,8 +33,8 @@ public class BathingFunctionality : BaseFunctionality
         PetMover.Instance.OnReachedGoal -= OnReached;
         GetComponent<NavMeshObstacle>().enabled = false;
 
-        PetMover.Instance.petModel.LookAt(PositionPetY() + transform.right);
-        PetMover.Instance.petModel.position = PositionPetY();
+        PetMover.Instance.petTransform.LookAt(PositionPetY() + transform.right);
+        PetMover.Instance.petTransform.position = PositionPetY();
 
         PlayerResources.Instance.ConsumeShampoo();
         PetStats.Instance.StartBathing();
