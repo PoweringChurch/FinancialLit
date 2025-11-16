@@ -49,6 +49,7 @@ public class UIHandler : MonoBehaviour
             RawImage unavailableImage = targetButton.button.transform.Find("Unavailable").GetComponent<RawImage>();
             if (unavailableImage) unavailableImage.enabled = !enabled;
         }
+        
     }
     [Serializable]
     public class UIResourcesUpdater
@@ -297,7 +298,7 @@ public class UIHandler : MonoBehaviour
         public GameObject ynPanelTemplate;
         public Transform PopupsTransform;
 
-        public void PopupInfo(string header, string body, string dismiss = "OK")
+        public void PopupInfo(string header, string body, string dismiss = "OK", Action action = null)
         {
             GameObject newInfoPanel = Instantiate(infoPanelTemplate, PopupsTransform);
             var tmps = newInfoPanel.GetComponentsInChildren<TextMeshProUGUI>();
@@ -309,7 +310,10 @@ public class UIHandler : MonoBehaviour
 
             // Setup dismiss button
             Button dismissButton = newInfoPanel.GetComponentInChildren<Button>();
-            dismissButton.onClick.AddListener(() => Destroy(newInfoPanel));
+            dismissButton.onClick.AddListener(() => {
+                Destroy(newInfoPanel);
+                if (action != null) action.Invoke();
+            });
         }
         public void PopupYN(string header, string body, Action onYes, Action onNo = null, string y = "Yes", string n = "No")
         {
@@ -405,6 +409,7 @@ public class UIHandler : MonoBehaviour
         private void OnLoadClick(string fileName)
         {
             PetMover.Instance.petTransform.gameObject.SetActive(true);
+            AreaHandler.Instance.EnterHome();
             LoadThisSave(fileName);
 
             //enter game
@@ -412,9 +417,7 @@ public class UIHandler : MonoBehaviour
             savesScreen.SetActive(false);
 
             CameraHandler.Instance.ToggleGamecam(true);
-
             Instance.ItemUpdater.UpdateText();
-            AreaHandler.Instance.EnterHome();
         }
         string FormatPlaytime(float seconds)
         {
@@ -538,5 +541,8 @@ public class UIHandler : MonoBehaviour
     {
         SaveManagerUI.DeleteCurrentSave();
     }
-    //helpers
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
