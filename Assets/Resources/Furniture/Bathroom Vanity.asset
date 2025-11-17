@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Bathroom Vanity
   prefab: {fileID: 1695637531045770638, guid: 5b041c715af6904498dde45818d9aab5, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ea510328fa408294ab4f0b75dff17d3f, type: 3}

@@ -21,7 +21,7 @@ public class BathingFunctionality : BaseFunctionality
         {
             return;
         }
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
 
         PetMover.Instance.OnReachedGoal += OnReached;
         PetMover.Instance.SetGoalPosition(PositionPetY());
@@ -33,8 +33,8 @@ public class BathingFunctionality : BaseFunctionality
         PetMover.Instance.OnReachedGoal -= OnReached;
         GetComponent<NavMeshObstacle>().enabled = false;
 
-        PetMover.Instance.petModel.LookAt(PositionPetY() + transform.right);
-        PetMover.Instance.petModel.position = PositionPetY();
+        PetMover.Instance.petTransform.LookAt(PositionPetY() + transform.right);
+        PetMover.Instance.petTransform.position = PositionPetY();
 
         PlayerResources.Instance.ConsumeShampoo();
         PetStats.Instance.StartBathing();
@@ -56,7 +56,7 @@ public class BathingFunctionality : BaseFunctionality
         homeActions.Remove("Stop Bathing");
 
         PetAnimation.Instance.SetBoolParameter("IsSitting", false);
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
 
         inUse = false;
     }

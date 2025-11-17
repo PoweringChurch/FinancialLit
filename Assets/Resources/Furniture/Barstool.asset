@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e045837657d74f745992f2ab5ee57ed5, type: 3}
+  m_Name: Barstool
+  m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
+  itemName: Barstool
+  prefab: {fileID: 7141906429506131543, guid: 18a19371fd51bfe4c818db90679fcc12, type: 3}
+  icon: {fileID: 21300000, guid: d7b88142ad9925b45962fb8486e006f3, type: 3}

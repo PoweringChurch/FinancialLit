@@ -10,20 +10,15 @@ public class PetFunctionality : BaseFunctionality
     }
     void Follow()
     {
-        if (PetBehaviour.Instance.activeBehaviour == Behaviour.Occupied)
+        if (!PetStateMachine.IsInState(PetState.Idle) || PetBehaviour.Instance.ActiveBehaviour == Behaviour.Occupied) //it IS MEANT TO CHECK HERE TRUST
         {
             Message($"{PetStats.Instance.PetName} is occupied!");
             return;
         }
-        if (PetFlagManager.HasFlag(PetFlag.Sitting))
-        {
-            Message("Your pet is sitting!");
-            return;
-        }
-        
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
+
         UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.followingCursor);
-        PlayerStateManager.AddState(PlayerState.SetFollow);
+        PlayerFlagManager.AddFlag(PlayerState.SetFollow);
         PetMover.Instance.OnReachedGoal += ReachedFollowTarget;
     }
 
@@ -31,33 +26,32 @@ public class PetFunctionality : BaseFunctionality
     {
         Debug.Log("reached");
         PetMover.Instance.OnReachedGoal -= ReachedFollowTarget;
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
     }
     void ToggleSit()
     {
-        if (PetFlagManager.HasFlag(PetFlag.Sitting))
+        if (PetStateMachine.IsInState(PetState.Sitting))
         {
-            //not checking for occupied as we know what its occupied with (sitting)
-            PetFlagManager.RemoveFlag(PetFlag.Sitting);
+            PetStateMachine.SetState(PetState.Idle);
             globalActions.Remove("Rise");
             globalActions["Sit"] = ToggleSit;
 
-            PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+            PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
             PetAnimation.Instance.SetBoolParameter("IsSitting", false);
         }
         else
         {
-            if (PetBehaviour.Instance.activeBehaviour == Behaviour.Occupied)
+            if (!PetStateMachine.IsInState(PetState.Idle))
             {
                 Message($"{PetStats.Instance.PetName} is occupied!");
                 return;
             }
-            PetFlagManager.AddFlag(PetFlag.Sitting);
+            PetStateMachine.SetState(PetState.Sitting);
             globalActions.Remove("Sit");
             globalActions["Rise"] = ToggleSit;
 
-            PetMover.Instance.SetGoalPosition(PetMover.Instance.petModel.transform.position);
-            PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+            PetMover.Instance.SetGoalPosition(PetMover.Instance.petTransform.transform.position);
+            PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
             PetAnimation.Instance.SetBoolParameter("IsSitting", true);
         }
     }

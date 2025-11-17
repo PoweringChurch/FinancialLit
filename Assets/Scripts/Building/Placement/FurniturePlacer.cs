@@ -18,8 +18,8 @@ public class FurniturePlacer : MonoBehaviour
       private Ray _ray;
       private RaycastHit _hit;
 
-      private readonly float cellSize = 0.5f;
-      private Vector2 gridOffset = new(0.25f, 0.25f);
+      private readonly float cellSize = 0.25f;
+      private Vector2 gridOffset = new();// = new(0.25f, 0.25f);
 
       private readonly float minyoffset = 0.5f;
       private readonly float maxyoffset = 3f;
@@ -87,7 +87,7 @@ public class FurniturePlacer : MonoBehaviour
       {
             _objectPrefab = FurnitureDatabase.GetData(itemName).prefab;
             minydisplay.gameObject.SetActive(true);
-            PlayerStateManager.AddState(PlayerState.Placement);
+            PlayerFlagManager.AddFlag(PlayerState.Placement);
             _PrepareObject();
       }
       public void CancelPlacement()
@@ -99,7 +99,7 @@ public class FurniturePlacer : MonoBehaviour
             _objectPrefab = null;
             currentyoffset = minyoffset;
             minydisplay.gameObject.SetActive(false);
-            PlayerStateManager.RemoveState(PlayerState.Placement);
+            PlayerFlagManager.RemoveFlag(PlayerState.Placement);
       }
       public void RotateFurniture()
       {

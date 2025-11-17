@@ -23,6 +23,8 @@ public class PlayerData
     public float Hunger;
     public float Energy;
 
+    public Vector3 PetPosition;
+    public Quaternion PetRotation;
     public string DisplayStatus;
 
     public List<PetFlag> PetFlags; //enum

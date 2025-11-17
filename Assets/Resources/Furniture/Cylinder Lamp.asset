@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Cylinder Lamp
   prefab: {fileID: 903196832959234122, guid: 8f64d560cc97743528efff226a51c7ab, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3154739f4331bf64183cddc26f38e107, type: 3}

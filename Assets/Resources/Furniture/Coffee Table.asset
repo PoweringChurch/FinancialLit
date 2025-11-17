@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Coffee Table
   prefab: {fileID: 2476102304306514081, guid: 4c9a7a963e91a4476993e3006564f1cd, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9ad5577f5de729349a6b0178ccb30e6a, type: 3}

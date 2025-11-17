@@ -55,7 +55,7 @@ MonoBehaviour:
   colliderCenter: {x: 0, y: 0.5, z: 0}
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
   hasFunctionality: 1
-  price: 10
+  price: 40
   baseFunctionality: {fileID: 0}
 --- !u!54 &1932270432738085938
 Rigidbody:
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: Double Couch
+  itemName: Couch
   meshComponents:
   - {fileID: 1826979962358187140}
   hasValidPlacement: 0

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Bed
   prefab: {fileID: 8158492441905914124, guid: d411c01360573234ebdefb735ded21d5, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c5eb1e15e34a15549891ac0bcf3bbf00, type: 3}

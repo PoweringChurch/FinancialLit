@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Couch
   prefab: {fileID: 6153659330827278417, guid: 13d3d070af1f349009e74e3152867aaf, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 31d8b58a489262748aa067c9e52c516e, type: 3}

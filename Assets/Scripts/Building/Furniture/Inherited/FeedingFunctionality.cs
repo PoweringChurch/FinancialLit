@@ -25,7 +25,7 @@ public class FeedingFunctionality : BaseFunctionality
         {
             return;
         }
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
         PetMover.Instance.OnReachedGoal += OnReached;
         PetMover.Instance.SetGoalPosition(PositionPetY());
     }
@@ -33,7 +33,7 @@ public class FeedingFunctionality : BaseFunctionality
     {
         PetMover.Instance.OnReachedGoal -= OnReached;
         //PetMover.Instance.petModel.position = PositionPetY() + transform.forward;
-        PetMover.Instance.petModel.LookAt(PositionPetY());
+        PetMover.Instance.petTransform.LookAt(PositionPetY());
 
         PetAnimation.Instance.SetTrigger("Eat");
         PetStats.Instance.FeedPet(0.4f);
@@ -43,7 +43,7 @@ public class FeedingFunctionality : BaseFunctionality
     void EatFood()
     {
         eatParticles.Play();
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
         SetFilled(false);
     }
     protected virtual void Refill()

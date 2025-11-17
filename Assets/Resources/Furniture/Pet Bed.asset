@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e045837657d74f745992f2ab5ee57ed5, type: 3}
+  m_Name: Pet Bed
+  m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
+  itemName: Pet Bed
+  prefab: {fileID: 6027164911466110093, guid: 7de731221a1a81b4285930bd95f18acf, type: 3}
+  icon: {fileID: 21300000, guid: 3ec5fc57368991d4cacc35e462c8c179, type: 3}

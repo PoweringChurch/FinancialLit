@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Mirror
   prefab: {fileID: 4165904335882504832, guid: 688a55e999eb1004ca56013060bc14cc, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 37196d38c788eb545998ed1f006c1d9d, type: 3}

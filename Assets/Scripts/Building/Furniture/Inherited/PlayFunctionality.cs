@@ -15,7 +15,7 @@ public class PlayFunctionality : BaseFunctionality
             return;
         }
         inUse = true;
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
         PetMover.Instance.OnReachedGoal += OnReached;
         PetMover.Instance.SetGoalPosition(PositionPetY());
     }
@@ -25,7 +25,7 @@ public class PlayFunctionality : BaseFunctionality
         homeActions["Go Play"] = GoPlay;
         homeActions.Remove("Stop Playing");
         PetStats.Instance.StopPlay();
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
     }
     private void OnReached()

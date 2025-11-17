@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Toilet Paper Roll
   prefab: {fileID: 2194225388701999907, guid: baa7c03f428a19d4ab47ab5525b6065f, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 63c96c29433ed8c4287238b1cdd050a2, type: 3}

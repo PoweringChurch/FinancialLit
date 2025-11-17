@@ -5,13 +5,13 @@ using System;
 public class PetMover : MonoBehaviour
 {
     public static PetMover Instance;
-    public Transform petModel;
+    public Transform petTransform;
     
     [HideInInspector] public bool reachedGoal;
     private float moveSpeed = 3f;
     private float stoppingDistance = 0.4f;
     
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     public event Action OnReachedGoal;
     
     void Awake()
@@ -46,27 +46,26 @@ public class PetMover : MonoBehaviour
             else
             {
                 // Handle rotation
-                if (agent.velocity.magnitude > 0.01f && petModel != null)
+                if (agent.velocity.magnitude > 0.01f && petTransform != null)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(agent.velocity.normalized);
-                    petModel.rotation = Quaternion.Slerp(petModel.rotation, targetRotation, Time.deltaTime * moveSpeed * 4f);
+                    petTransform.rotation = Quaternion.Slerp(petTransform.rotation, targetRotation, Time.deltaTime * moveSpeed * 4f);
                 }
             }
 
             // Apply energy multiplier to speed
             float energyMult = 0.5f + 0.5f * PetStats.Instance.Status["energy"];
             float sickMult = PetFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
-            agent.speed = moveSpeed * energyMult * sickMult;
+            float lovedMult = PetFlagManager.HasFlag(PetFlag.Loved) ? 1.05f : 1f;
+            float playfulMult = PetFlagManager.HasFlag(PetFlag.Playful) ? 1.05f : 1f;
+            agent.speed = moveSpeed * energyMult * sickMult * lovedMult * playfulMult;
         }
     }
     
     public void SetGoalPosition(Vector3 to)
     {
-        if (agent != null)
-        {
-            agent.SetDestination(to);
-            PetAnimation.Instance.SetBoolParameter("IsMoving", true);
-            reachedGoal = false;
-        }
+        agent.SetDestination(to);
+        PetAnimation.Instance.SetBoolParameter("IsMoving", true);
+        reachedGoal = false;
     }
 }

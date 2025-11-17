@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 public class UIHandler : MonoBehaviour
 {
     public static UIHandler Instance;
@@ -46,9 +48,10 @@ public class UIHandler : MonoBehaviour
             }
 
             if (targetButton.button) targetButton.button.enabled = enabled;
-            RawImage unavailableImage = targetButton.button.GetComponentInChildren<RawImage>();
+            RawImage unavailableImage = targetButton.button.transform.Find("Unavailable").GetComponent<RawImage>();
             if (unavailableImage) unavailableImage.enabled = !enabled;
         }
+        
     }
     [Serializable]
     public class UIResourcesUpdater
@@ -105,29 +108,17 @@ public class UIHandler : MonoBehaviour
             {
                 GameObject newTemplate = Instantiate(itemButtonTemplate, contentTransform);
                 Button itemButton = newTemplate.GetComponent<Button>();
-                // Find and set Display Name
-                Transform displayNameText = newTemplate.transform.Find("DisplayName");
-                if (displayNameText != null && displayNameText.TryGetComponent<TextMeshProUGUI>(out var tmpName))
-                {
-                    tmpName.text = entry.itemName;
-                }
-                // Find and set Count
-                Transform countText = newTemplate.transform.Find("Count");
-                if (countText != null && countText.TryGetComponent<TextMeshProUGUI>(out var tmpCount))
-                {
-                    tmpCount.text = $"{entry.count}";
-                }
+                //set count
+                TextMeshProUGUI countText = newTemplate.transform.GetComponentInChildren<TextMeshProUGUI>();
+                countText.text = $"{entry.count}";
+                //set img
+                Transform inner = newTemplate.transform.GetChild(1);
+                var imgPreview = inner.GetChild(0).GetComponent<Image>();
+                imgPreview.sprite = entry.data.icon;
+                //add clicking functionality
                 itemButton.onClick.AddListener(() => OnItemButtonClicked(entry));
                 inventoryItemUI.Add(entry.itemName, newTemplate);
             }
-            
-            // Automatically resize content to fit all items
-            RectTransform contentRect = contentTransform.GetComponent<RectTransform>();
-            int itemCount = inventory.GetItemsToDisplay().Count;
-            float buttonHeight = 80f;
-            float spacing = 0f; // Adjust based on your layout spacing
-            float newHeight = Mathf.Max(80f, 80f+(buttonHeight + spacing) * (1+itemCount%10));
-            contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, newHeight);
         }
 
         public void UpdateInventoryItem(string itemName)
@@ -158,11 +149,8 @@ public class UIHandler : MonoBehaviour
             }
 
             // Update the count text
-            Transform countText = existingItemUI.transform.Find("Count");
-            if (countText != null && countText.TryGetComponent<TextMeshProUGUI>(out var tmpCount))
-            {
-                tmpCount.text = $"{entry.count}";
-            }
+            TextMeshProUGUI countText = existingItemUI.GetComponentInChildren<TextMeshProUGUI>();
+            countText.text = $"{entry.count}";
 
             // Ensure UI is active if count > 0
             existingItemUI.SetActive(true);
@@ -170,9 +158,6 @@ public class UIHandler : MonoBehaviour
 
         private void OnItemButtonClicked(InventoryEntry entry)
         {
-            Debug.Log(entry.count+" "+entry.itemName);
-            Debug.Log(entry.data.ToString());
-            Debug.Log(entry.data.prefab);
             //shouldnt even occur
             if (entry.count <= 0)
             {
@@ -309,9 +294,10 @@ public class UIHandler : MonoBehaviour
     public class UIPopupManager
     {
         public GameObject infoPanelTemplate;
+        public GameObject ynPanelTemplate;
         public Transform PopupsTransform;
 
-        public void PopupInfo(string header, string body, string dismiss = "OK")
+        public void PopupInfo(string header, string body, string dismiss = "OK", Action action = null)
         {
             GameObject newInfoPanel = Instantiate(infoPanelTemplate, PopupsTransform);
             var tmps = newInfoPanel.GetComponentsInChildren<TextMeshProUGUI>();
@@ -323,7 +309,37 @@ public class UIHandler : MonoBehaviour
 
             // Setup dismiss button
             Button dismissButton = newInfoPanel.GetComponentInChildren<Button>();
-            dismissButton.onClick.AddListener(() => Destroy(newInfoPanel));
+            dismissButton.onClick.AddListener(() => {
+                Destroy(newInfoPanel);
+                if (action != null) action.Invoke();
+            });
+        }
+        public void PopupYN(string header, string body, Action onYes, Action onNo = null, string y = "Yes", string n = "No")
+        {
+            GameObject newYNPanel = Instantiate(ynPanelTemplate, PopupsTransform);
+            var tmps = newYNPanel.GetComponentsInChildren<TextMeshProUGUI>();
+            
+            // Header, Body, Yes text, No text
+            tmps[0].text = header;
+            tmps[1].text = body;
+            tmps[2].text = y;
+            tmps[3].text = n;
+            
+            Button[] buttons = newYNPanel.GetComponentsInChildren<Button>();
+            
+            // Yes button
+            buttons[0].onClick.AddListener(() => 
+            {
+                onYes?.Invoke();
+                Destroy(newYNPanel);
+            });
+            
+            // No button
+            buttons[1].onClick.AddListener(() => 
+            {
+                onNo?.Invoke();
+                Destroy(newYNPanel);
+            });
         }
     }
     
@@ -332,6 +348,7 @@ public class UIHandler : MonoBehaviour
     {
         public Transform slotGrid;
         public GameObject ingameOverlay;
+        public GameObject ingameMenu;
         public GameObject savesScreen;
         public GameObject slotTemplate;
         public TextMeshProUGUI petNameInput;
@@ -390,6 +407,8 @@ public class UIHandler : MonoBehaviour
         }
         private void OnLoadClick(string fileName)
         {
+            PetMover.Instance.petTransform.gameObject.SetActive(true);
+            AreaHandler.Instance.EnterHome();
             LoadThisSave(fileName);
 
             //enter game
@@ -397,9 +416,7 @@ public class UIHandler : MonoBehaviour
             savesScreen.SetActive(false);
 
             CameraHandler.Instance.ToggleGamecam(true);
-
             Instance.ItemUpdater.UpdateText();
-            PetMover.Instance.petModel.position = new Vector3(0, 1, 0);
         }
         string FormatPlaytime(float seconds)
         {
@@ -438,16 +455,196 @@ public class UIHandler : MonoBehaviour
                 newData.Shampoo = 10000;
                 newData.Food = 1000;
 
-                UIHandler.Instance.PopupManager.PopupInfo(
+                Instance.PopupManager.PopupInfo(
                     "Hey!",
                     "Because debug mode is enabled, you start with a bunch of resources and every furniture item in the game, obtainable or not! This can be disabled in settings.",
                     "Sweet!"
                 );
             }
             SaveHandler.Instance.currentPlayerData = newData;
+            PetMover.Instance.petTransform.gameObject.SetActive(true);
             SaveHandler.Instance.LoadSaved(newData);
             SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
-            UIHandler.Instance.ItemUpdater.UpdateText();
+            Instance.ItemUpdater.UpdateText();
+        }
+        public void DeleteCurrentSave()
+        {
+            Instance.PopupManager.PopupYN(
+            "Delete Save?",
+            "Are you sure you want to delete this save? This cannot be undone.",
+            onYes: () => 
+            {
+                ingameOverlay.SetActive(false);
+                savesScreen.SetActive(true);
+
+                CameraHandler.Instance.ToggleGamecam(false);
+                
+                SaveHandler.Instance.DeleteSave(SaveHandler.Instance.currentSaveFile);
+                DisplaySaves();
+                Debug.Log("Save deleted");
+            },
+            onNo: () => 
+            {
+                ingameMenu.SetActive(true);
+                Debug.Log("Cancelled");
+            }
+        );
+            
+        }
+    }
+    
+    [Serializable]
+    public class UIFlagManager
+    {
+
+        [Serializable]
+        public class FlagIcon
+        {
+            public GameObject gameObject; //object with rawimage
+            public string Name;
+            public string Effect; //Positive, Mixed, Negative
+            public string Description;
+            public PetFlag petFlag;
+        }
+        public Transform popupsContainer;
+        public Transform flagContainerTransform; 
+        public GameObject descriptionDisplayPrefab; //panel w/ three tmpro children, [0] = name, [1] = effect, [2] = desc
+        public FlagIcon[] flagIcons;
+
+        private GameObject currentDescription;
+        private Dictionary<PetFlag, FlagIcon> flagIconMap;
+        private FlagIcon currentDescriptionIcon;
+        //icon should show description when hovered over by mouse
+        public void Initialize()
+        {
+        flagIconMap = new Dictionary<PetFlag, FlagIcon>();
+        foreach (var icon in flagIcons)
+        {
+            flagIconMap[icon.petFlag] = icon;
+            icon.gameObject.SetActive(false);
+            
+            var eventTrigger = icon.gameObject.GetComponent<EventTrigger>();
+            if (eventTrigger == null) eventTrigger = icon.gameObject.AddComponent<EventTrigger>();
+            
+            var pointerEnter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
+            pointerEnter.callback.AddListener((data) => ShowDescription(icon));
+            eventTrigger.triggers.Add(pointerEnter);
+            
+            var pointerExit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
+            pointerExit.callback.AddListener((data) => HideDescription());
+            eventTrigger.triggers.Add(pointerExit);
+            }
+            
+            PetFlagManager.OnFlagChanged += UpdateFlags;
+            UpdateFlags();
+        }
+        void UpdateFlags()
+        {
+            foreach (var icon in flagIcons)
+            {
+                bool hasFlag = PetFlagManager.HasFlag(icon.petFlag);
+                icon.gameObject.SetActive(hasFlag);
+                
+                if (!hasFlag && currentDescription != null && currentDescriptionIcon == icon)
+                {
+                    HideDescription();
+                }
+            }
+        }
+        void ShowDescription(FlagIcon icon)
+        {
+            HideDescription();
+            currentDescriptionIcon = icon;
+            currentDescription = Instantiate(descriptionDisplayPrefab, popupsContainer);
+            var texts = currentDescription.GetComponentsInChildren<TMP_Text>();
+            texts[0].text = icon.Name;
+            texts[1].text = icon.Effect;
+            texts[2].text = icon.Description;
+        }
+        void HideDescription()
+        {
+            if (currentDescription != null) Destroy(currentDescription);
+        }
+        
+        void OnDestroy()
+        {
+            PetFlagManager.OnFlagChanged -= UpdateFlags;
+        }
+    }
+    [Serializable]
+    public class MenuAnimationManager
+    {
+        public Transform flag;
+
+        public RawImage bgScrollerImage;
+        public Vector2 scrollSpeed = new Vector2(0.1f, 0.1f);
+        public void UpdateUI()
+        {
+            //rotate flag
+            float angle = Mathf.Sin(Time.time * 0.5f) * 5f;
+            flag.localRotation = Quaternion.Euler(0, 0, angle);
+
+            //move bg scroller
+            bgScrollerImage.uvRect = new Rect(
+                bgScrollerImage.uvRect.position + scrollSpeed * Time.deltaTime,
+                bgScrollerImage.uvRect.size
+            );
+        }
+    }
+    [Serializable]
+    public class UIWorkHandler
+    {
+        public GameObject WorkingOverlay;
+        public Button pressButton;
+        public Image buttonImage;
+        public TextMeshProUGUI buttonText;
+
+        public Color pressColor;
+        public Color waitColor;
+
+        private int interval = 500; //frames before turning green
+
+        private long previousTick;
+        public void UpdateWorkUI()
+        {
+            if (interval == 0)
+            {
+                previousTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                buttonImage.color = pressColor;
+                buttonText.text = "!!!";
+            }
+            else
+            {
+                interval -= 1;
+            }
+        }
+        public void Initialize()
+        {
+            pressButton.onClick.AddListener(() => OnPressButtonClick());
+        }
+        public void EnterWork()
+        {
+            //reset
+            interval = UnityEngine.Random.Range(300, 480);  //5 to 8 secs
+            buttonImage.color = waitColor;
+            buttonText.text = "...";
+
+            WorkingOverlay.SetActive(true);
+        }
+        private void OnPressButtonClick()
+        {
+            print("pressed");
+            //reset
+            interval = UnityEngine.Random.Range(300, 480);  //5 to 8 secs
+            buttonImage.color = waitColor;
+            buttonText.text = "...";
+            if (interval != 0) return; // if pressed too early
+            //calculate money
+            long nowTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            long diff = previousTick - nowTick;
+            float depleteMult = Math.Clamp(2000-diff,200,2000)/1000;
+            PlayerResources.Instance.AddMoney(depleteMult*100f);
+            Instance.ItemUpdater.UpdateText();
         }
     }
     [Header("Manager Settings")]
@@ -458,6 +655,9 @@ public class UIHandler : MonoBehaviour
     public UICursorHelper CursorHelper = new();
     public UIPopupManager PopupManager = new();
     public UISaveManager SaveManagerUI = new();
+    public UIFlagManager FlagManager = new();
+    public MenuAnimationManager MenuAnimation = new();
+    public UIWorkHandler WorkHandler = new();
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -466,16 +666,22 @@ public class UIHandler : MonoBehaviour
             return;
         }
         Instance = this;
-
+    }
+    void Start()
+    {
         ButtonManager.Initialize();
         InventoryManager.Initialize();
         ItemUpdater.Initialize();
         PetUI.Initialize();
         SaveManagerUI.Initialize();
+        FlagManager.Initialize();
+        WorkHandler.Initialize();
     }
     void Update()
     {
         PetUI.UpdateUI();
+        MenuAnimation.UpdateUI();
+        WorkHandler.UpdateWorkUI();
     }
     //intermediarys
     public void OpenBuilder()
@@ -495,5 +701,17 @@ public class UIHandler : MonoBehaviour
         SaveHandler.Instance.SaveGame();
         SaveManagerUI.DisplaySaves();
     }
-    //helpers
+    public void DeleteCurrentSave()
+    {
+        SaveManagerUI.DeleteCurrentSave();
+    }
+    public void EnterWork()
+    {
+        WorkHandler.EnterWork();
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }

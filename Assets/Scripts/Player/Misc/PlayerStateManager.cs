@@ -4,15 +4,15 @@ using System.Linq;
 
 public enum PlayerState {Home, Shopping, Placement, SetFollow}
 
-public static class PlayerStateManager
+public static class PlayerFlagManager
 {
-    private static List<PlayerState> currentStates = new();
-    public static List<PlayerState> CurrentStates => currentStates;
-    public static void AddState(PlayerState state)
+    private static List<PlayerState> currentFlags = new();
+    public static List<PlayerState> CurrentFlags => currentFlags;
+    public static void AddFlag(PlayerState state)
     {
-        if (!currentStates.Contains(state))
+        if (!currentFlags.Contains(state))
         {
-            currentStates.Add(state);
+            currentFlags.Add(state);
         }
         else
         {
@@ -20,32 +20,32 @@ public static class PlayerStateManager
         }
     }
     
-    public static void AddState(int stateInt)
+    public static void AddFlag(int stateInt)
     {
-        AddState((PlayerState)stateInt);
+        AddFlag((PlayerState)stateInt);
     }
     
-    public static void RemoveState(PlayerState state)
+    public static void RemoveFlag(PlayerState state)
     {
-        currentStates.Remove(state);
+        currentFlags.Remove(state);
     }
     
-    public static void RemoveState(int stateInt)
+    public static void RemoveFlag(int stateInt)
     {
-        RemoveState((PlayerState)stateInt);
+        RemoveFlag((PlayerState)stateInt);
     }
     
     public static bool HasState(PlayerState state)
     {
-        return currentStates.Contains(state);
+        return currentFlags.Contains(state);
     }
 
-    public static bool HasState(int stateInt)
+    public static bool HasFlag(int stateInt)
     {
         return HasState((PlayerState)stateInt);
     }
-    public static void ClearStates()
+    public static void ClearFlag()
     {
-        currentStates.Clear();
+        currentFlags.Clear();
     }
 }

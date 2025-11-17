@@ -62,8 +62,8 @@ Add sickness
 
 Implement more areas
 - [x] Park (way to gain entertainment quicker)
-- [ ] Furniture store
-- [ ] Vetinarian (cure sickness)
+- [x] Furniture store
+- [x] Vetinarian (cure sickness)
 - [ ] Work (earn money)
 
 Models & animation
@@ -115,7 +115,7 @@ Saving & Loading
   - [x] Save into json file?
 
 Furniture additions
-- [ ] Add as much furniture as possible with remaining time
+- [x] Add as much furniture as possible with remaining time
 
 ### Cleanup
 

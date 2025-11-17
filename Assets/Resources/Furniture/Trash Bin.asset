@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Trash Bin
   prefab: {fileID: 148886516931327682, guid: 3b8d8b0b69059b54db2c37f357a3419e, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 247496df0591693489dcdcc60e4f1bbd, type: 3}

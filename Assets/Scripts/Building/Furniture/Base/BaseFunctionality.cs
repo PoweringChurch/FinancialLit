@@ -54,7 +54,7 @@ public class BaseFunctionality : MonoBehaviour
     }
     protected void Message(string message)
     {
-        GameObject textObj = Instantiate(floatingTextPrefab, transform.position + Vector3.up * 0.5f, Camera.main.transform.rotation);
+        GameObject textObj = Instantiate(floatingTextPrefab, transform.position + Vector3.up * 0.5f - (Camera.main.transform.forward*2), Camera.main.transform.rotation);
         TextMeshPro tmp = textObj.GetComponent<TextMeshPro>();
         tmp.text = message;
 
@@ -89,8 +89,8 @@ public class BaseFunctionality : MonoBehaviour
     //helpers
     public Dictionary<string, Action> GetAvailableActions()
     {
-        bool home = PlayerStateManager.HasState(PlayerState.Home);
-        bool shopping = PlayerStateManager.HasState(PlayerState.Shopping);
+        bool home = PlayerFlagManager.HasState(PlayerState.Home);
+        bool shopping = PlayerFlagManager.HasState(PlayerState.Shopping);
 
         // Order matters, has to be consistent
         var availableActions = new Dictionary<string, Action>();
@@ -107,7 +107,7 @@ public class BaseFunctionality : MonoBehaviour
         {
             return true;
         }
-        if (PetBehaviour.Instance.activeBehaviour == Behaviour.Occupied)
+        if (!PetStateMachine.IsInState(PetState.Idle))
         {
             Message($"{PetStats.Instance.PetName} is occupied!");
             return true;

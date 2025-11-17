@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
   itemName: Storage Box
   prefab: {fileID: 233755780953568081, guid: 1169fd2dc2b70da4f9432422b4cecec3, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d486317486bce484e93c835c1196af74, type: 3}
