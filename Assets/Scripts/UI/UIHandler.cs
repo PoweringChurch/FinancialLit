@@ -592,8 +592,9 @@ public class UIHandler : MonoBehaviour
         }
     }
     [Serializable]
-    public class WorkHandler
+    public class UIWorkHandler
     {
+        public GameObject WorkingOverlay;
         public Button pressButton;
         public Image buttonImage;
         public TextMeshProUGUI buttonText;
@@ -601,36 +602,49 @@ public class UIHandler : MonoBehaviour
         public Color pressColor;
         public Color waitColor;
 
-        private bool working = false;
         private int interval = 500; //frames before turning green
 
         private long previousTick;
         public void UpdateWorkUI()
         {
-            
-            if (working)
+            if (interval == 0)
             {
-                if (interval == 0)
-                {
-                    previousTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                    buttonImage.color = pressColor;
-                    buttonText.text = "...";
-                }
-                else
-                {
-                    interval -= 1;
-                }
+                previousTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                buttonImage.color = pressColor;
+                buttonText.text = "!!!";
+            }
+            else
+            {
+                interval -= 1;
             }
         }
-        private void OnButtonClick()
+        public void Initialize()
         {
+            pressButton.onClick.AddListener(() => OnPressButtonClick());
+        }
+        public void EnterWork()
+        {
+            //reset
             interval = UnityEngine.Random.Range(300, 480);  //5 to 8 secs
             buttonImage.color = waitColor;
-            buttonText.text = "!!!";
+            buttonText.text = "...";
+
+            WorkingOverlay.SetActive(true);
+        }
+        private void OnPressButtonClick()
+        {
+            print("pressed");
+            //reset
+            interval = UnityEngine.Random.Range(300, 480);  //5 to 8 secs
+            buttonImage.color = waitColor;
+            buttonText.text = "...";
+            if (interval != 0) return; // if pressed too early
+            //calculate money
             long nowTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             long diff = previousTick - nowTick;
-            float deplete = Math.Clamp(2000-diff,200,2000)/1000;
-            PlayerResources.Instance.AddMoney(deplete*50f);
+            float depleteMult = Math.Clamp(2000-diff,200,2000)/1000;
+            PlayerResources.Instance.AddMoney(depleteMult*100f);
+            Instance.ItemUpdater.UpdateText();
         }
     }
     [Header("Manager Settings")]
@@ -643,6 +657,7 @@ public class UIHandler : MonoBehaviour
     public UISaveManager SaveManagerUI = new();
     public UIFlagManager FlagManager = new();
     public MenuAnimationManager MenuAnimation = new();
+    public UIWorkHandler WorkHandler = new();
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -660,11 +675,13 @@ public class UIHandler : MonoBehaviour
         PetUI.Initialize();
         SaveManagerUI.Initialize();
         FlagManager.Initialize();
+        WorkHandler.Initialize();
     }
     void Update()
     {
         PetUI.UpdateUI();
         MenuAnimation.UpdateUI();
+        WorkHandler.UpdateWorkUI();
     }
     //intermediarys
     public void OpenBuilder()
@@ -688,8 +705,13 @@ public class UIHandler : MonoBehaviour
     {
         SaveManagerUI.DeleteCurrentSave();
     }
+    public void EnterWork()
+    {
+        WorkHandler.EnterWork();
+    }
     public void QuitGame()
     {
         Application.Quit();
     }
+
 }

@@ -6,7 +6,7 @@ public class AppointingFunctionality : BaseFunctionality
     {
         ignoreBase = true;
         base.Awake();
-        globalActions["Cure pet"] = Schedule;
+        globalActions["Talk to Vet"] = Schedule;
     }
     protected void Schedule()
     {
