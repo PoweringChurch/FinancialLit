@@ -115,7 +115,7 @@ Saving & Loading
   - [x] Save into json file?
 
 Furniture additions
-- [ ] Add as much furniture as possible with remaining time
+- [x] Add as much furniture as possible with remaining time
 
 ### Cleanup
 
