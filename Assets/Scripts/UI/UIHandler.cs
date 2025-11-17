@@ -591,6 +591,48 @@ public class UIHandler : MonoBehaviour
             );
         }
     }
+    [Serializable]
+    public class WorkHandler
+    {
+        public Button pressButton;
+        public Image buttonImage;
+        public TextMeshProUGUI buttonText;
+
+        public Color pressColor;
+        public Color waitColor;
+
+        private bool working = false;
+        private int interval = 500; //frames before turning green
+
+        private long previousTick;
+        public void UpdateWorkUI()
+        {
+            
+            if (working)
+            {
+                if (interval == 0)
+                {
+                    previousTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                    buttonImage.color = pressColor;
+                    buttonText.text = "...";
+                }
+                else
+                {
+                    interval -= 1;
+                }
+            }
+        }
+        private void OnButtonClick()
+        {
+            interval = UnityEngine.Random.Range(300, 480);  //5 to 8 secs
+            buttonImage.color = waitColor;
+            buttonText.text = "!!!";
+            long nowTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            long diff = previousTick - nowTick;
+            float deplete = Math.Clamp(2000-diff,200,2000)/1000;
+            PlayerResources.Instance.AddMoney(deplete*50f);
+        }
+    }
     [Header("Manager Settings")]
     public UIButtonManager ButtonManager = new();
     public UIInventoryManager InventoryManager = new();

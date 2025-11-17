@@ -17,6 +17,8 @@ public class CameraHandler : MonoBehaviour
     private float zoomSpeed = 100f;
 
     public Slider zoomSpeedMultiplier;
+    public Slider camSpeedMultiplier;
+
     private Renderer[] wallRenderers;
     private Renderer[] hideableRenderers;
 
@@ -49,7 +51,7 @@ public class CameraHandler : MonoBehaviour
     private void MoveCamera()
     {
         Vector2 input = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;
-        gameCamera.transform.position += (new Vector3(1, 0, 1) * input.y + gameCamera.transform.right * input.x) * Time.deltaTime * moveSpeed;
+        gameCamera.transform.position += (new Vector3(1, 0, 1) * input.y + gameCamera.transform.right * input.x) * Time.deltaTime * moveSpeed * camSpeedMultiplier.value;
     }
     private void ZoomCamera()
     {
