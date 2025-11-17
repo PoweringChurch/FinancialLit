@@ -25,7 +25,7 @@ public class FeedingFunctionality : BaseFunctionality
         {
             return;
         }
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
         PetMover.Instance.OnReachedGoal += OnReached;
         PetMover.Instance.SetGoalPosition(PositionPetY());
     }
@@ -43,7 +43,7 @@ public class FeedingFunctionality : BaseFunctionality
     void EatFood()
     {
         eatParticles.Play();
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
         SetFilled(false);
     }
     protected virtual void Refill()

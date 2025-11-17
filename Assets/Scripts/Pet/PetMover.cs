@@ -56,7 +56,9 @@ public class PetMover : MonoBehaviour
             // Apply energy multiplier to speed
             float energyMult = 0.5f + 0.5f * PetStats.Instance.Status["energy"];
             float sickMult = PetFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
-            agent.speed = moveSpeed * energyMult * sickMult;
+            float lovedMult = PetFlagManager.HasFlag(PetFlag.Loved) ? 1.05f : 1f;
+            float playfulMult = PetFlagManager.HasFlag(PetFlag.Playful) ? 1.05f : 1f;
+            agent.speed = moveSpeed * energyMult * sickMult * lovedMult * playfulMult;
         }
     }
     

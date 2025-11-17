@@ -21,7 +21,7 @@ public class BathingFunctionality : BaseFunctionality
         {
             return;
         }
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
 
         PetMover.Instance.OnReachedGoal += OnReached;
         PetMover.Instance.SetGoalPosition(PositionPetY());
@@ -56,7 +56,7 @@ public class BathingFunctionality : BaseFunctionality
         homeActions.Remove("Stop Bathing");
 
         PetAnimation.Instance.SetBoolParameter("IsSitting", false);
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
 
         inUse = false;
     }

@@ -53,13 +53,13 @@ public class AreaHandler : MonoBehaviour
             home.SetActive(false);
         }
         CleanupCurrentArea();
-        PlayerStateManager.RemoveState(PlayerState.Home);
+        PlayerFlagManager.RemoveFlag(PlayerState.Home);
 
-        PetFlagManager.ClearFlags();
+        PetStateMachine.SetState(PetState.Idle);
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
         PetAnimation.Instance.SetBoolParameter("IsSitting", false);
 
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Roaming;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Roaming;
 
         currentArea = Instantiate(area.prefab, gameSpace);
         CameraHandler.Instance.RefreshRenderers();
@@ -67,7 +67,7 @@ public class AreaHandler : MonoBehaviour
         lighting.shadows = LightShadows.None;
         PetStats.Instance.gameObject.SetActive(false);
 
-        if (area.isShop) PlayerStateManager.AddState(PlayerState.Shopping);
+        if (area.isShop) PlayerFlagManager.AddFlag(PlayerState.Shopping);
         if (area.shadows) lighting.shadows = LightShadows.Soft;
         if (area.bringPet) {
             PetStats.Instance.gameObject.SetActive(true);
@@ -87,14 +87,15 @@ public class AreaHandler : MonoBehaviour
         
         PetStats.Instance.gameObject.SetActive(true);
         PetMover.Instance.agent.Warp(Vector3.up);
-        PlayerStateManager.AddState(PlayerState.Home);
-        PlayerStateManager.RemoveState(PlayerState.Shopping);
+        PlayerFlagManager.AddFlag(PlayerState.Home);
+        PlayerFlagManager.RemoveFlag(PlayerState.Shopping);
 
-        PetFlagManager.ClearFlags();
+        PetStateMachine.SetState(PetState.Idle);
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
         PetAnimation.Instance.SetBoolParameter("IsSitting", false);
+
         
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Roaming;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Roaming;
 
         lighting.shadows = LightShadows.None;
 

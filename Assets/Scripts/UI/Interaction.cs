@@ -73,7 +73,7 @@ public class Interaction : MonoBehaviour
     public void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
-        bool hasPlacement = PlayerStateManager.HasState(PlayerState.Placement);
+        bool hasPlacement = PlayerFlagManager.HasState(PlayerState.Placement);
 
         if (isOverUi && IsPointerOverActionMenu()) return; //because we are over an action
         CloseMenu();
@@ -220,8 +220,8 @@ public class Interaction : MonoBehaviour
         Vector2[] positions = new Vector2[count];
         // Calculate angle between each button
         float angleStep = 360f / count;
-        // Offset to start at top (optional - remove the -90f to start at right)
-        float startAngle = -90f;
+        // Offset to start at top (remove the -90f to start at right)
+        float startAngle = 90f; //-90f;
         
         for (int i = 0; i < count; i++)
         {

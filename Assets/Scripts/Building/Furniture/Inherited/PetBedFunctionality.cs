@@ -15,7 +15,7 @@ public class PetBedFunctionality : BaseFunctionality
             return;
         }
         inUse = true;
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Occupied;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
         PetMover.Instance.OnReachedGoal += OnReached;
         PetMover.Instance.SetGoalPosition(PositionPetY());
     }
@@ -25,7 +25,7 @@ public class PetBedFunctionality : BaseFunctionality
         homeActions["Go to Sleep"] = GoSleep;
         homeActions.Remove("Stop Sleeping");
         PetStats.Instance.StopSleep();
-        PetBehaviour.Instance.activeBehaviour = Behaviour.Default;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
     }
     private void OnReached()
     {

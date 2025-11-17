@@ -49,9 +49,9 @@ public class PlayerInputHandler : MonoBehaviour
     {
         //setting follow
         var (goalPosition,overInteractableLayer) = UIHandler.Instance.CursorHelper.CursorToVector3(1);
-        if (PlayerStateManager.HasState(PlayerState.SetFollow) && interact.WasPressedThisFrame() && overInteractableLayer)
+        if (PlayerFlagManager.HasState(PlayerState.SetFollow) && interact.WasPressedThisFrame() && overInteractableLayer)
         {
-            PlayerStateManager.RemoveState(PlayerState.SetFollow);
+            PlayerFlagManager.RemoveFlag(PlayerState.SetFollow);
             PetMover.Instance.SetGoalPosition(goalPosition);
             UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.defaultCursor);
         }

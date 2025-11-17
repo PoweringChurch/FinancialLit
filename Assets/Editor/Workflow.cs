@@ -26,8 +26,8 @@ public class FurnitureWorkflowWindow : EditorWindow
     private string previewOutputFolder = "Assets/Resources/FurniturePreviews";
     private int previewSize = 512;
     private Color backgroundColor = new Color(0.2f, 0.2f, 0.2f, 1f);
-    private bool useTransparentBackground = false;
-    private Vector3 cameraAngle = new Vector3(20, -30, 0);
+    private bool useTransparentBackground = true;
+    private Vector3 cameraAngle = new Vector3(20, -210, 0);
     
     private Vector2 scrollPos;
     
@@ -45,7 +45,7 @@ public class FurnitureWorkflowWindow : EditorWindow
         GUIStyle headerStyle = new GUIStyle(EditorStyles.boldLabel);
         headerStyle.fontSize = 16;
         headerStyle.alignment = TextAnchor.MiddleCenter;
-        GUILayout.Label("🛋️ Furniture Workflow Manager", headerStyle);
+        GUILayout.Label("Furniture Workflow", headerStyle);
         GUILayout.Space(10);
         
         // Tabs
@@ -74,7 +74,6 @@ public class FurnitureWorkflowWindow : EditorWindow
     void DrawBatchSetupTab()
     {
         GUILayout.Label("Batch Furniture Setup", EditorStyles.boldLabel);
-        EditorGUILayout.HelpBox("Process all furniture prefabs in one go! This will handle everything from component setup to preview generation.", MessageType.Info);
         GUILayout.Space(10);
         
         // Folder Selection
@@ -132,7 +131,7 @@ public class FurnitureWorkflowWindow : EditorWindow
         
         // Big Action Button
         GUI.backgroundColor = new Color(0.4f, 0.8f, 0.4f);
-        if (GUILayout.Button("🚀 PROCESS ALL FURNITURE", GUILayout.Height(50)))
+        if (GUILayout.Button("Batch process furniture", GUILayout.Height(50)))
         {
             BatchProcessAllFurniture();
         }
@@ -269,10 +268,11 @@ public class FurnitureWorkflowWindow : EditorWindow
             if (box == null)
             {
                 box = prefabInstance.AddComponent<BoxCollider>();
-                // Auto-calculate bounds
                 Bounds bounds = CalculateBounds(prefabInstance);
-                box.center = bounds.center - prefabInstance.transform.position;
                 box.size = bounds.size;
+                box.center = new Vector3(0,box.size.y/2,0);
+                //adjust child model to fit center
+                prefabInstance.transform.GetChild(0).localPosition = new Vector3(0,box.size.y/2,0);
             }
             box.isTrigger = true;
             
@@ -295,7 +295,20 @@ public class FurnitureWorkflowWindow : EditorWindow
                 obstacle.center = box.center;
                 obstacle.size = box.size;
             }
-            
+            // Add outline
+            Outline outline = prefabInstance.GetComponent<Outline>();
+            if (outline == null)
+            {
+                outline = prefabInstance.AddComponent<Outline>();
+                outline.enabled = false;
+                outline.OutlineWidth = 1;
+                outline.OutlineColor = Color.sandyBrown;
+            }
+            BaseFunctionality baseFunctionality = prefabInstance.GetComponent<BaseFunctionality>();
+            if (baseFunctionality == null)
+            {
+                baseFunctionality = prefabInstance.AddComponent<BaseFunctionality>();
+            }
             // Set layer
             prefabInstance.layer = 7; // Furniture layer
             
@@ -454,8 +467,10 @@ public class FurnitureWorkflowWindow : EditorWindow
         {
             box = obj.AddComponent<BoxCollider>();
             Bounds bounds = CalculateBounds(obj);
-            box.center = bounds.center - obj.transform.position;
             box.size = bounds.size;
+            box.center = new Vector3(0,box.size.y/2,0);
+            //adjust child model to fit center
+            obj.transform.GetChild(0).localPosition = new Vector3(0,box.size.y/2,0);
         }
         box.isTrigger = true;
         
@@ -478,9 +493,24 @@ public class FurnitureWorkflowWindow : EditorWindow
             obstacle.center = box.center;
             obstacle.size = box.size;
         }
-        
+        //Outline
+        Outline outline = obj.GetComponent<Outline>();
+        if (outline == null)
+        {
+            outline = obj.AddComponent<Outline>();
+            outline.enabled = false;
+            outline.OutlineWidth = 1;
+            outline.OutlineColor = Color.sandyBrown;
+        }
+        //Base functionality
+        BaseFunctionality baseFunctionality = obj.GetComponent<BaseFunctionality>();
+        if (baseFunctionality == null)
+        {
+            baseFunctionality = obj.AddComponent<BaseFunctionality>();
+        }
+        //set layer
         obj.layer = 7;
-        
+        //remove colliders
         Collider[] childColliders = obj.GetComponentsInChildren<Collider>();
         foreach (Collider childCollider in childColliders)
         {

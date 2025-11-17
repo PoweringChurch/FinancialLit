@@ -9,6 +9,7 @@ public class CameraHandler : MonoBehaviour
     public static CameraHandler Instance;
     [SerializeField] private Camera gameCamera;
     [SerializeField] private Camera menuCamera;
+    [SerializeField] private GameObject scrollGameobj;
     private float moveSpeed = 20f;
     private float currentZoom = 10f;
     private float minZoom = 2f;
@@ -28,6 +29,7 @@ public class CameraHandler : MonoBehaviour
     {
         gameCamera.enabled = state;
         menuCamera.enabled = !state;
+        scrollGameobj.SetActive(!state); 
     }
     public void RefreshRenderers()
     {

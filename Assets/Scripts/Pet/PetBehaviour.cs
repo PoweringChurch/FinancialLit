@@ -1,9 +1,15 @@
 using UnityEngine;
 public enum Behaviour {Default,Roaming, Occupied}
+//determines what to do and when. NOT like the state machine
 public class PetBehaviour : MonoBehaviour
 {
     public static PetBehaviour Instance;
-    public Behaviour activeBehaviour;
+    private Behaviour activeBehaviour;
+    public Behaviour ActiveBehaviour
+    {
+        set { activeBehaviour = value; }
+        get { return activeBehaviour;}
+    }
     void Awake()
     {
         Instance = this;

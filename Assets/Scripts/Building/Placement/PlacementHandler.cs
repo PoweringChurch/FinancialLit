@@ -36,6 +36,7 @@ public class PlacementHandler : MonoBehaviour
         if (isFixed) return;
         if (IsIgnored(other.gameObject)) { return; }
         _nObstacles++;
+        if (UIHandler.Instance.SaveManagerUI.debugToggle.enabled) return;
         SetPlacementMode(PlacementMode.Invalid);
     }
     void OnTriggerExit(Collider other)

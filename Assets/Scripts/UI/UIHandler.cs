@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 public class UIHandler : MonoBehaviour
 {
     public static UIHandler Instance;
@@ -156,9 +158,6 @@ public class UIHandler : MonoBehaviour
 
         private void OnItemButtonClicked(InventoryEntry entry)
         {
-            Debug.Log(entry.count+" "+entry.itemName);
-            Debug.Log(entry.data.ToString());
-            Debug.Log(entry.data.prefab);
             //shouldnt even occur
             if (entry.count <= 0)
             {
@@ -463,6 +462,7 @@ public class UIHandler : MonoBehaviour
                 );
             }
             SaveHandler.Instance.currentPlayerData = newData;
+            PetMover.Instance.petTransform.gameObject.SetActive(true);
             SaveHandler.Instance.LoadSaved(newData);
             SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
             Instance.ItemUpdater.UpdateText();
@@ -492,6 +492,105 @@ public class UIHandler : MonoBehaviour
             
         }
     }
+    
+    [Serializable]
+    public class UIFlagManager
+    {
+
+        [Serializable]
+        public class FlagIcon
+        {
+            public GameObject gameObject; //object with rawimage
+            public string Name;
+            public string Effect; //Positive, Mixed, Negative
+            public string Description;
+            public PetFlag petFlag;
+        }
+        public Transform popupsContainer;
+        public Transform flagContainerTransform; 
+        public GameObject descriptionDisplayPrefab; //panel w/ three tmpro children, [0] = name, [1] = effect, [2] = desc
+        public FlagIcon[] flagIcons;
+
+        private GameObject currentDescription;
+        private Dictionary<PetFlag, FlagIcon> flagIconMap;
+        private FlagIcon currentDescriptionIcon;
+        //icon should show description when hovered over by mouse
+        public void Initialize()
+        {
+        flagIconMap = new Dictionary<PetFlag, FlagIcon>();
+        foreach (var icon in flagIcons)
+        {
+            flagIconMap[icon.petFlag] = icon;
+            icon.gameObject.SetActive(false);
+            
+            var eventTrigger = icon.gameObject.GetComponent<EventTrigger>();
+            if (eventTrigger == null) eventTrigger = icon.gameObject.AddComponent<EventTrigger>();
+            
+            var pointerEnter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
+            pointerEnter.callback.AddListener((data) => ShowDescription(icon));
+            eventTrigger.triggers.Add(pointerEnter);
+            
+            var pointerExit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
+            pointerExit.callback.AddListener((data) => HideDescription());
+            eventTrigger.triggers.Add(pointerExit);
+            }
+            
+            PetFlagManager.OnFlagChanged += UpdateFlags;
+            UpdateFlags();
+        }
+        void UpdateFlags()
+        {
+            foreach (var icon in flagIcons)
+            {
+                bool hasFlag = PetFlagManager.HasFlag(icon.petFlag);
+                icon.gameObject.SetActive(hasFlag);
+                
+                if (!hasFlag && currentDescription != null && currentDescriptionIcon == icon)
+                {
+                    HideDescription();
+                }
+            }
+        }
+        void ShowDescription(FlagIcon icon)
+        {
+            HideDescription();
+            currentDescriptionIcon = icon;
+            currentDescription = Instantiate(descriptionDisplayPrefab, popupsContainer);
+            var texts = currentDescription.GetComponentsInChildren<TMP_Text>();
+            texts[0].text = icon.Name;
+            texts[1].text = icon.Effect;
+            texts[2].text = icon.Description;
+        }
+        void HideDescription()
+        {
+            if (currentDescription != null) Destroy(currentDescription);
+        }
+        
+        void OnDestroy()
+        {
+            PetFlagManager.OnFlagChanged -= UpdateFlags;
+        }
+    }
+    [Serializable]
+    public class MenuAnimationManager
+    {
+        public Transform flag;
+
+        public RawImage bgScrollerImage;
+        public Vector2 scrollSpeed = new Vector2(0.1f, 0.1f);
+        public void UpdateUI()
+        {
+            //rotate flag
+            float angle = Mathf.Sin(Time.time * 0.5f) * 5f;
+            flag.localRotation = Quaternion.Euler(0, 0, angle);
+
+            //move bg scroller
+            bgScrollerImage.uvRect = new Rect(
+                bgScrollerImage.uvRect.position + scrollSpeed * Time.deltaTime,
+                bgScrollerImage.uvRect.size
+            );
+        }
+    }
     [Header("Manager Settings")]
     public UIButtonManager ButtonManager = new();
     public UIInventoryManager InventoryManager = new();
@@ -500,6 +599,8 @@ public class UIHandler : MonoBehaviour
     public UICursorHelper CursorHelper = new();
     public UIPopupManager PopupManager = new();
     public UISaveManager SaveManagerUI = new();
+    public UIFlagManager FlagManager = new();
+    public MenuAnimationManager MenuAnimation = new();
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -508,16 +609,20 @@ public class UIHandler : MonoBehaviour
             return;
         }
         Instance = this;
-
+    }
+    void Start()
+    {
         ButtonManager.Initialize();
         InventoryManager.Initialize();
         ItemUpdater.Initialize();
         PetUI.Initialize();
         SaveManagerUI.Initialize();
+        FlagManager.Initialize();
     }
     void Update()
     {
         PetUI.UpdateUI();
+        MenuAnimation.UpdateUI();
     }
     //intermediarys
     public void OpenBuilder()
