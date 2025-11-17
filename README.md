@@ -62,8 +62,8 @@ Add sickness
 
 Implement more areas
 - [x] Park (way to gain entertainment quicker)
-- [ ] Furniture store
-- [ ] Vetinarian (cure sickness)
+- [x] Furniture store
+- [x] Vetinarian (cure sickness)
 - [ ] Work (earn money)
 
 Models & animation
