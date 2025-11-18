@@ -36,7 +36,8 @@ public class PlacementHandler : MonoBehaviour
         if (isFixed) return;
         if (IsIgnored(other.gameObject)) { return; }
         _nObstacles++;
-        if (UIHandler.Instance.SaveManagerUI.debugToggle.enabled) return;
+        if (UIHandler.Instance.SaveManagerUI.debugToggle.isOn) 
+        {print("debug mode is enabled"); return;}
         SetPlacementMode(PlacementMode.Invalid);
     }
     void OnTriggerExit(Collider other)
@@ -56,21 +57,25 @@ public class PlacementHandler : MonoBehaviour
 #endif
     public void SetPlacementMode(PlacementMode mode)
     {
+        bool hasNavMesh = GetComponent<NavMeshObstacle>() != null;
         if (mode == PlacementMode.Fixed)
         {
             isFixed = true;
             hasValidPlacement = true;
-            GetComponent<NavMeshObstacle>().enabled = true;
+            if (hasNavMesh)
+                GetComponent<NavMeshObstacle>().enabled = true;
         }
         else if (mode == PlacementMode.Valid)
         {
             hasValidPlacement = true;
-            GetComponent<NavMeshObstacle>().enabled = false;
+            if (hasNavMesh)
+                GetComponent<NavMeshObstacle>().enabled = false;
         }
         else
         {
             hasValidPlacement = false;
-            GetComponent<NavMeshObstacle>().enabled = false;
+            if (hasNavMesh)
+                GetComponent<NavMeshObstacle>().enabled = false;
         }
         SetMaterial(mode);
     }

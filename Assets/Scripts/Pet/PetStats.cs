@@ -22,9 +22,13 @@ public class PetStats : MonoBehaviour
     [SerializeField] private float entertainmentRecoveryRate;
     [SerializeField] private float hygieneRecoveryRate;
     private string petName = "Foobar";
+
+    public bool atPark = false;
     private int immuneTickTimer = 0;
     private int playfulTickTimer = 0;
     private int lovedTickTimer = 0;
+    private int wornOutTickTimer = 0;
+    private int atParkWornOutTimer = 40; //if at park for 40 ticks
     private Dictionary<string, float> status = new()
     {
         ["hygiene"] = 0.8f,
@@ -70,10 +74,11 @@ public class PetStats : MonoBehaviour
         }
 
         status["entertainment"] = Math.Max(0, status["entertainment"] - boredomRate * drainMultiplier);
-        if (PetStateMachine.IsInState(PetState.Playing))
+        if (PetStateMachine.IsInState(PetState.Playing) || atPark)
         {
             float playBonus = PetFlagManager.HasFlag(PetFlag.Playful) ? 1.1f : 1f;
-            status["entertainment"] = Math.Clamp(status["entertainment"] + (entertainmentRecoveryRate + boredomRate) * recoveryMultiplier * playBonus, 0, 1);
+            float parkBonus = atPark ? 1.05f : 1f;
+            status["entertainment"] = Math.Clamp(status["entertainment"] + (entertainmentRecoveryRate + boredomRate) * recoveryMultiplier * playBonus*parkBonus, 0, 1);
         }
 
         status["hygiene"] = Math.Max(0, status["hygiene"] - dirtinessRate * drainMultiplier);
@@ -127,8 +132,22 @@ public class PetStats : MonoBehaviour
             UIHandler.Instance.PopupManager.PopupInfo(
                 "Oh no",
                 "Your pet is sick! Recovery from eating, playing, and sleeping is halved. Visit the vet!");
+        }  
+        if (atPark)
+        {
+            atParkWornOutTimer--;
+            if (atParkWornOutTimer <= 0)
+            {
+                PetFlagManager.AddFlag(PetFlag.WornOut);
+                wornOutTickTimer = 50;
+            }
         }
+        else atParkWornOutTimer = 40;
 
+        wornOutTickTimer--;
+        if (wornOutTickTimer <= 0 && PetFlagManager.HasFlag(PetFlag.WornOut))
+            PetFlagManager.RemoveFlag(PetFlag.WornOut);
+        
         immuneTickTimer -= 1;
         if (immuneTickTimer <= 0 && PetFlagManager.HasFlag(PetFlag.Immune))
             PetFlagManager.RemoveFlag(PetFlag.Immune);

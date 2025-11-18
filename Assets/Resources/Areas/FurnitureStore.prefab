@@ -2108,7 +2108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 0.15
+  price: 20
 --- !u!1 &1250931889918808798
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,7 +2748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 0.15
+  price: 20
 --- !u!1 &1527401462247449844
 GameObject:
   m_ObjectHideFlags: 0
@@ -5338,10 +5338,8 @@ Transform:
   - {fileID: 5613922280943775479}
   - {fileID: 8022271110867598724}
   - {fileID: 4026510483314008316}
-  - {fileID: 869675361211628995}
   - {fileID: 2759897856271932130}
   - {fileID: 6347709326239952738}
-  - {fileID: 7276869854317098792}
   - {fileID: 1697623846801539614}
   - {fileID: 1836782619986552301}
   - {fileID: 2496097526296448278}
@@ -7467,11 +7465,11 @@ Transform:
   m_GameObject: {fileID: 3881330202828481742}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6250023, y: 1.128, z: 4.3749995}
+  m_LocalPosition: {x: 0, y: 0.628, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6289798853945025112}
+  m_Father: {fileID: 6347709326239952738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2943445173302183499
 MeshFilter:
@@ -8507,7 +8505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 0.15
+  price: 20
 --- !u!1 &4217330914256147790
 GameObject:
   m_ObjectHideFlags: 0
@@ -11765,7 +11763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 0.15
+  price: 20
 --- !u!1 &5685992054586635908
 GameObject:
   m_ObjectHideFlags: 0
@@ -11961,7 +11959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 0.15
+  price: 15
 --- !u!1 &5791440438174138806
 GameObject:
   m_ObjectHideFlags: 0
@@ -12261,7 +12259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 0.15
+  price: 15
 --- !u!1 &5830151792638863836
 GameObject:
   m_ObjectHideFlags: 0
@@ -13582,7 +13580,8 @@ Transform:
   m_LocalPosition: {x: 1.6249964, y: 0.5, z: 6.625001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 869675361211628995}
   m_Father: {fileID: 6289798853945025112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1379316846120438352
@@ -13681,7 +13680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: Double Couch
+  itemName: Couch
   meshComponents:
   - {fileID: 8668431488959438316}
   hasValidPlacement: 1
@@ -13698,7 +13697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 10
+  price: 45
 --- !u!208 &860137907004032900
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -17743,7 +17742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 0.15
+  price: 20
 --- !u!1 &8481742801658252405
 GameObject:
   m_ObjectHideFlags: 0
@@ -18894,7 +18893,8 @@ Transform:
   m_LocalPosition: {x: -0.6250023, y: 0.5, z: 4.3749995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7276869854317098792}
   m_Father: {fileID: 6289798853945025112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5024184140411997415
@@ -19010,7 +19010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 25
+  price: 35
 --- !u!208 &636943199071514515
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -19707,7 +19707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 0.15
+  price: 60
 --- !u!1 &9138128057508208352
 GameObject:
   m_ObjectHideFlags: 0
@@ -19828,12 +19828,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9201376914363507197}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 1.6249964, y: 1.1, z: 6.625001}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6289798853945025112}
+  m_Father: {fileID: 4026510483314008316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8066334102337713706
 MeshFilter:

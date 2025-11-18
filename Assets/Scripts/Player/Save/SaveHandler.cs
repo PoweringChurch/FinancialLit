@@ -5,10 +5,11 @@ using System.Linq;
 using UnityEngine;
 
 public class SaveHandler : MonoBehaviour
-{    
+{
     public static SaveHandler Instance;
     public Transform homeFurnitureTransform;
     public PlayerData currentPlayerData = new();
+    public const string DEFAULT_SAVE_FILE = "default.json";
     public string currentSaveFile = "default.json";
     private float sessionStartTime;
     void Awake()
@@ -21,7 +22,7 @@ public class SaveHandler : MonoBehaviour
     }
     public void SaveGame()
     {
-        currentPlayerData.NewSlot = false;
+        currentPlayerData.IsNewSave = false;
         //pet stats
         currentPlayerData.PetName = PetStats.Instance.PetName;
         currentPlayerData.Hygiene = PetStats.Instance.Status["hygiene"];
@@ -101,6 +102,7 @@ public class SaveHandler : MonoBehaviour
     }
     public void LoadSaved(PlayerData playerData)
     {
+        playerData.IsNewSave = false;
         // Pet stats
         PetStats.Instance.SetName(playerData.PetName);
         PetStats.Instance.Status["hygiene"] = playerData.Hygiene;

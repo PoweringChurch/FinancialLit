@@ -41,7 +41,7 @@ public class PlayerData
     public float TotalPlaytimeSeconds;
     public long LastSaveTimestamp;
 
-    public bool NewSlot = true;
+    public bool IsNewSave = true;
 
     public PlayerData()
     {
@@ -57,5 +57,7 @@ public class PlayerData
         Food = 8;
         TotalPlaytimeSeconds = 0f;
         LastSaveTimestamp = System.DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+        IsNewSave = true;
     }
 }
