@@ -121,7 +121,7 @@ public class OrderHandler : MonoBehaviour
         
         // Calculate payment based on time remaining
         float timeBonus = Mathf.Clamp01(orderTimer / timePerOrder);
-        float payment = 25f + (timeBonus * 25f); // Base 25 + up to 25 bonus
+        float payment = 10f + (timeBonus * 10f); // Base 25 + up to 25 bonus
         totalEarned += payment;
         // Update UI with new count
         UIHandler.Instance.WorkManager.UpdateCompletedOrders(completedOrderCount, totalOrders);

@@ -57,9 +57,17 @@ public class UIHandler : MonoBehaviour
     [Serializable]
     public class UIResourcesUpdater
     {
+        public GameObject spendingsPanel;
+
         public TextMeshProUGUI shampooText;
         public TextMeshProUGUI foodText;
         public TextMeshProUGUI moneyText;
+
+        public TextMeshProUGUI foodspendings;
+        public TextMeshProUGUI hygieneSpendings;
+        public TextMeshProUGUI furnitureSpendings;
+        public TextMeshProUGUI healthcareSpendings;
+
         public void Initialize()
         {
             UpdateText();
@@ -69,6 +77,11 @@ public class UIHandler : MonoBehaviour
             shampooText.text = PlayerResources.Instance.Shampoo.ToString();
             foodText.text = PlayerResources.Instance.Food.ToString();
             moneyText.text = $"Balance: ${PlayerResources.Instance.Money:N2}";
+
+            foodspendings.text = $"${PlayerResources.Instance.Spendings["Food"].ToString()}";
+            hygieneSpendings.text = $"${PlayerResources.Instance.Spendings["Hygiene"].ToString()}";
+            healthcareSpendings.text = $"${PlayerResources.Instance.Spendings["Healthcare"].ToString()}";
+            furnitureSpendings.text = $"${PlayerResources.Instance.Spendings["Furniture"].ToString()}";
         }
     }
     [Serializable]
@@ -376,7 +389,8 @@ public class UIHandler : MonoBehaviour
                                 () => {
                                     // Working from home
                                     PopupInfo("Money", 
-                                        "You can work from home to earn money! Just click any monitor and press \"Go to work\".",
+                                        "You can work from home to earn money! Just click any monitor and press \"Go to work\". \n\n" +
+                                        "You can also see how you spend your earnings by pressing on your balance in the top left!",
                                         "Nice!", 
                                         () => {
                                             // Placement mode
@@ -930,7 +944,10 @@ public class UIHandler : MonoBehaviour
     {
         WorkManager.CancelWork();
     }
-
+    public void ToggleSpendingsPanel()
+    {
+        ItemUpdater.spendingsPanel.SetActive(!ItemUpdater.spendingsPanel.activeSelf);
+    }
     public void QuitGame()
     {
         Application.Quit();

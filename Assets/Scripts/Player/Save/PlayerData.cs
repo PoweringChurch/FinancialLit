@@ -52,7 +52,7 @@ public class PlayerData
         PetFlags = new List<PetFlag>();
         PlacedFurniture = new List<FurnitureObjectData>();
         PlayerInventory = new Inventory();
-        Money = 500f;
+        Money = 200f;
         Shampoo = 8;
         Food = 8;
         TotalPlaytimeSeconds = 0f;

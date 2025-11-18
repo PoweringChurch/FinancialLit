@@ -62,7 +62,7 @@ public class PetStats : MonoBehaviour
     void Step()
     {
         float recoveryMultiplier = PetFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
-        float drainMultiplier = 1f;
+        float drainMultiplier = 1.3f;
         if (PetFlagManager.HasFlag(PetFlag.Content)) drainMultiplier *= 0.9f;
         if (PetFlagManager.HasFlag(PetFlag.Loved)) drainMultiplier *= 0.95f;
 

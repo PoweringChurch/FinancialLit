@@ -8,12 +8,10 @@ public class DropZone : MonoBehaviour
         if (correct)
         {
             // Visual/audio feedback for correct item
-            Debug.Log("✓ Correct item!");
         }
         else
         {
             // Visual/audio feedback for wrong item
-            Debug.Log("✗ Wrong item!");
         }
 }
 }

@@ -35,7 +35,6 @@ public class CameraHandler : MonoBehaviour
     }
     public void RefreshRenderers()
     {
-        Debug.Log("refreshed");
         wallRenderers = GetRenderersFromTags("Wall");
         hideableRenderers = GetRenderersFromTags("Hideable");
     }

@@ -48,7 +48,6 @@ public class DraggableItem : MonoBehaviour
     
     private void StartDrag()
     {
-        Debug.Log("Started dragging: " + gameObject.name);
         isDragging = true;
         
         // Create a duplicate
@@ -94,7 +93,6 @@ public class DraggableItem : MonoBehaviour
     
     private void EndDrag()
     {
-        Debug.Log("Stopped dragging: " + gameObject.name);
         isDragging = false;
         
         // Check if dropped on a drop zone
