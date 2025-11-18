@@ -74,16 +74,19 @@ public class AreaHandler : MonoBehaviour
             PetMover.Instance.agent.Warp(Vector3.up);
             }
 
+        if (area.areaName == "Park")
+            PetStats.Instance.atPark = true;
+        else
+            PetStats.Instance.atPark = false;
+
         UIHandler.Instance.ButtonManager.DisableButton("Build");
     }
     public void EnterHome()
     {
         CleanupCurrentArea();
 
-        if (home)
-        {
-            home.SetActive(true);
-        }
+        home.SetActive(true);
+        PetStats.Instance.atPark = false;
         
         PetStats.Instance.gameObject.SetActive(true);
         PetMover.Instance.agent.Warp(Vector3.up);

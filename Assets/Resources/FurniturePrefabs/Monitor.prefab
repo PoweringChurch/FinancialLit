@@ -102,8 +102,8 @@ GameObject:
   - component: {fileID: 4147131795026590831}
   - component: {fileID: 123156767730632110}
   - component: {fileID: 6165060074228077923}
-  - component: {fileID: 1298679385515481502}
   - component: {fileID: 4546443725771530466}
+  - component: {fileID: 484601483769786172}
   m_Layer: 7
   m_Name: Monitor
   m_TagString: Untagged
@@ -208,19 +208,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.32496634, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &1298679385515481502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7723717357768951309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 40
 --- !u!114 &4546443725771530466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,3 +226,16 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &484601483769786172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7723717357768951309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29bfb5ca66b8c4921b6870a9431a05a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorkingFunctionality
+  price: 40

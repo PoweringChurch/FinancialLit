@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine.EventSystems;
+using System.Collections;
 public class UIHandler : MonoBehaviour
 {
     public static UIHandler Instance;
@@ -341,6 +342,67 @@ public class UIHandler : MonoBehaviour
                 Destroy(newYNPanel);
             });
         }
+
+        public void AskTutorial()
+        {
+            PopupYN("Tutorial", 
+            "Would you like to learn how to play?", 
+            () => StartTutorial(), 
+            null, 
+            "Teach me!", 
+            "Skip");
+        }
+        public void StartTutorial()
+        {
+            // Welcome
+            PopupInfo("Welcome!", 
+                "Let's learn how to take care of your new pet!", 
+                "Next", 
+                () => {
+                    // Pet care basics
+                    PopupInfo("Pet Care Basics", 
+                        "Keep your pet healthy by managing four needs:\n\n" +
+                        "• Hygiene - Bathe your pet regularly\n" +
+                        "• Hunger - Feed your pet when hungry\n" +
+                        "• Energy - Send them to sleep on a dog bed\n" +
+                        "• Entertainment - Play at the park or with toys", 
+                        "Got it!", 
+                        () => {
+                            // Health warning
+                            PopupInfo("Stay Healthy", 
+                                "If your pet's needs get too low, they might get sick and need a trip to the vet. Keep those stats up! \n\n" +
+                                "You're able to view your pet's needs at any time by pressing on the mood display on the bottom left.", 
+                                "Understood", 
+                                () => {
+                                    // Working from home
+                                    PopupInfo("Money", 
+                                        "You can work from home to earn money! Just click any monitor and press \"Go to work\".",
+                                        "Nice!", 
+                                        () => {
+                                            // Placement mode
+                                            PopupInfo("Furniture & Items", 
+                                                "Want to add furniture and decor?\n\n" +
+                                                "Expand the arrow on the bottom right and select the yellow button with tools to enter placement mode.\n\n" +
+                                                "You've been given some basic furniture items to start building up your home with.", 
+                                                "Cool!", 
+                                                () => {
+                                                    // Travel
+                                                    PopupInfo("Explore & Shop", 
+                                                        "Travel to different locations by expanding the arrow on the bottom right and selecting the blue map.\n\n" +
+                                                        "Different areas offer different services - explore them all!", 
+                                                        "Let's go!", 
+                                                        () => {
+                                                            // Final message
+                                                            PopupInfo("You're Ready!", 
+                                                                "That's everything you need to know. Have fun taking care of your pet!", 
+                                                                "Enter game");
+                                                        });
+                                                });
+                                        });
+                                });
+                        });
+                });
+        }
     }
     
     [Serializable]
@@ -417,6 +479,10 @@ public class UIHandler : MonoBehaviour
 
             CameraHandler.Instance.ToggleGamecam(true);
             Instance.ItemUpdater.UpdateText();
+            PetStateMachine.SetState(PetState.Idle);
+
+            PetAnimation.Instance.SetBoolParameter("IsSitting",false);
+            PetAnimation.Instance.SetBoolParameter("IsSick",false);
         }
         string FormatPlaytime(float seconds)
         {
@@ -461,10 +527,33 @@ public class UIHandler : MonoBehaviour
                     "Sweet!"
                 );
             }
+            else
+            {
+                Instance.PopupManager.AskTutorial();
+            }
+            //give starter items
+            string[] starterItems = { 
+                "Pet Bed", "Small Bed", "Work Computer", "Food Bowl", 
+                "Bathroom Vanity", "Box Bath", "Toy Train", "Couch", 
+                "Toilet", "Rectangle Table" 
+            };
+            foreach (string itemName in starterItems)
+            {
+                FurnitureData data = FurnitureDatabase.GetData(itemName);
+                if (data != null) newData.PlayerInventory.AddItem(data, 1);
+            }
+            //set as new data
             SaveHandler.Instance.currentPlayerData = newData;
-            PetMover.Instance.petTransform.gameObject.SetActive(true);
             SaveHandler.Instance.LoadSaved(newData);
             SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
+
+            //upd external
+            PetFlagManager.ClearFlags();
+            PetStateMachine.SetState(PetState.Idle);
+            PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
+
+            PetMover.Instance.petTransform.gameObject.SetActive(true);
+            //upd ui
             Instance.ItemUpdater.UpdateText();
         }
         public void DeleteCurrentSave()
@@ -591,60 +680,190 @@ public class UIHandler : MonoBehaviour
             );
         }
     }
+
     [Serializable]
-    public class UIWorkHandler
+    public class UIWorkManager
     {
-        public GameObject WorkingOverlay;
-        public Button pressButton;
-        public Image buttonImage;
-        public TextMeshProUGUI buttonText;
-
-        public Color pressColor;
-        public Color waitColor;
-
-        private int interval = 500; //frames before turning green
-
-        private long previousTick;
-        public void UpdateWorkUI()
+        public GameObject workoverlayUI;
+        public GameObject ingameOverlayUI;
+        public TextMeshProUGUI completedOrders;
+        public TextMeshProUGUI timerText;
+        public GameObject ballItemUI;
+        public GameObject brushItemUI;
+        public GameObject treatItemUI;
+        public GameObject shampooItemUI;        
+        public Transform reqHolder;
+        public RectTransform boxTransform;
+        private Dictionary<Items, GameObject> itemUIMap;        
+        public void Initialize()
+        {            
+            itemUIMap = new Dictionary<Items, GameObject>
+            {
+                { Items.Ball, ballItemUI },
+                { Items.Brush, brushItemUI },
+                { Items.Treat, treatItemUI },
+                { Items.Shampoo, shampooItemUI }
+            };
+        }
+        
+        public void NextBox()
         {
-            if (interval == 0)
+            Instance.StartCoroutine(BoxTransitionAnimation());
+        }
+        private IEnumerator BoxTransitionAnimation()
+        {
+            float duration = 0.5f;
+            float elapsed = 0f;
+            
+            // Get screen width for off-screen positions
+            float screenWidth = Screen.width;
+            Vector2 centerPos = boxTransform.anchoredPosition;
+            Vector2 rightOffScreen = new Vector2(screenWidth, centerPos.y);
+            Vector2 leftOffScreen = new Vector2(-screenWidth, centerPos.y);
+            
+            // Slide current box off to the right
+            while (elapsed < duration)
             {
-                previousTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                buttonImage.color = pressColor;
-                buttonText.text = "!!!";
+                elapsed += Time.deltaTime;
+                float t = elapsed / duration;
+                boxTransform.anchoredPosition = Vector2.Lerp(centerPos, rightOffScreen, t);
+                yield return null;
             }
-            else
+            
+            // Teleport box to left side (off screen)
+            boxTransform.anchoredPosition = leftOffScreen;
+            
+            // Reset elapsed time for slide in
+            elapsed = 0f;
+            
+            // Slide new box in from the left
+            while (elapsed < duration)
             {
-                interval -= 1;
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0, 1, elapsed / duration);
+                boxTransform.anchoredPosition = Vector2.Lerp(leftOffScreen, centerPos, t);
+                yield return null;
+            }
+            // Ensure it's exactly centered
+            boxTransform.anchoredPosition = centerPos;
+        }
+        public void StartWorking()
+        {
+            workoverlayUI.SetActive(true);
+            OrderHandler.Instance.BeginShift();
+        }
+        
+        public void UpdateTimer(float timeRemaining)
+        {
+            if (timerText != null)
+            {
+                timerText.text = $"Time: {timeRemaining:F1}s";
             }
         }
-        public void Initialize()
+        public void UpdateOrderDisplay(List<Items> currentOrder)
         {
-            pressButton.onClick.AddListener(() => OnPressButtonClick());
+            for (int i = reqHolder.childCount - 1; i >= 0; i--)
+            {
+                Destroy(reqHolder.GetChild(i).gameObject);
+            }
+            foreach (Items item in currentOrder)
+            {
+                Instantiate(itemUIMap[item],reqHolder);
+            }
+        }
+        public void UpdateCompletedOrders(int completed, int total)
+        {
+            if (completedOrders != null)
+            {
+                completedOrders.text = $"Orders: {completed}/{total}";
+            }
+        }
+        public void CancelWork()
+        {
+            string header = "Stop working?";
+            string body = "Are you sure you want to stop working? You will lose any earned money.";
+            Instance.PopupManager.PopupYN(header,body, () =>
+            {
+                OrderHandler.Instance.CancelShift();
+                CameraHandler.Instance.ToggleGamecam(true);
+                ingameOverlayUI.SetActive(true);
+                workoverlayUI.SetActive(false);
+            }, () => {});
         }
         public void EnterWork()
         {
-            //reset
-            interval = UnityEngine.Random.Range(300, 480);  //5 to 8 secs
-            buttonImage.color = waitColor;
-            buttonText.text = "...";
-
-            WorkingOverlay.SetActive(true);
+            string header = "Start working";
+            string body = "Fulfill customer orders by dragging the requested items into the delivery box. Work fast for bonus earnings!";
+            Instance.PopupManager.PopupYN(header,body, () =>
+            {
+                OrderHandler.Instance.BeginShift();
+                CameraHandler.Instance.ToggleGamecam(false);
+                workoverlayUI.SetActive(true);
+                ingameOverlayUI.SetActive(false);
+            }, null, "Start", "Nevermind");
         }
-        private void OnPressButtonClick()
+        public void EndShift(float totalEarned)
         {
-            print("pressed");
-            //reset
-            interval = UnityEngine.Random.Range(300, 480);  //5 to 8 secs
-            buttonImage.color = waitColor;
-            buttonText.text = "...";
-            if (interval != 0) return; // if pressed too early
-            //calculate money
-            long nowTick = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            long diff = previousTick - nowTick;
-            float depleteMult = Math.Clamp(2000-diff,200,2000)/1000;
-            PlayerResources.Instance.AddMoney(depleteMult*100f);
-            Instance.ItemUpdater.UpdateText();
+            string body = $"Great work! You earned ${totalEarned:F2} for your hard work!";
+            Instance.PopupManager.PopupInfo("Job well done!",body,"Yay!",() =>
+            {
+                CameraHandler.Instance.ToggleGamecam(true);
+                ingameOverlayUI.SetActive(true);
+                workoverlayUI.SetActive(false);
+            });
+        }
+    }
+    [Serializable]
+    public class SettingsUIManager
+    {
+        public Toggle fullScreenToggle;
+        public Toggle vsyncToggle;
+        public TMP_Dropdown antiAliasingDropdown;
+        public Toggle anisotropicFilteringToggle;
+        public TMP_Dropdown textureQualityDropdown;
+        public Toggle realtimeReflectionsToggle;
+
+        public void Initialize()
+        {
+            fullScreenToggle.onValueChanged.AddListener(SetFullscreen);
+            vsyncToggle.onValueChanged.AddListener(SetVsync);
+            antiAliasingDropdown.onValueChanged.AddListener(SetAntiAliasing);
+            anisotropicFilteringToggle.onValueChanged.AddListener(SetAnisotropicFiltering);
+            textureQualityDropdown.onValueChanged.AddListener(SetTextureQuality);
+            realtimeReflectionsToggle.onValueChanged.AddListener(SetRealtimeReflections);
+        }
+        //settings
+        public void SetFullscreen(bool to)
+        {
+            Screen.fullScreen = to;
+        }
+
+        public void SetVsync(bool to)
+        {
+            QualitySettings.vSyncCount = to ? 1 : 0;
+        }
+
+        public void SetAntiAliasing(int level)
+        {
+            // Dropdown: 0=Off, 1=2x, 2=4x, 3=8x
+            int[] aaLevels = { 0, 2, 4, 8 };
+            QualitySettings.antiAliasing = aaLevels[level];
+        }
+
+        public void SetAnisotropicFiltering(bool enabled)
+        {
+            QualitySettings.anisotropicFiltering = enabled ? AnisotropicFiltering.Enable : AnisotropicFiltering.Disable;
+        }
+
+        public void SetTextureQuality(int quality)
+        {
+            // 0 = full res, 1 = half res, 2 = quarter res, 3 = eighth res
+            QualitySettings.globalTextureMipmapLimit = quality;
+        }
+
+        public void SetRealtimeReflections(bool enabled)
+        {
+            QualitySettings.realtimeReflectionProbes = enabled;
         }
     }
     [Header("Manager Settings")]
@@ -656,8 +875,10 @@ public class UIHandler : MonoBehaviour
     public UIPopupManager PopupManager = new();
     public UISaveManager SaveManagerUI = new();
     public UIFlagManager FlagManager = new();
+    public UIWorkManager WorkManager = new();
     public MenuAnimationManager MenuAnimation = new();
-    public UIWorkHandler WorkHandler = new();
+    public SettingsUIManager SettingsManager = new();
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -675,13 +896,13 @@ public class UIHandler : MonoBehaviour
         PetUI.Initialize();
         SaveManagerUI.Initialize();
         FlagManager.Initialize();
-        WorkHandler.Initialize();
+        WorkManager.Initialize();
+        SettingsManager.Initialize();
     }
     void Update()
     {
         PetUI.UpdateUI();
         MenuAnimation.UpdateUI();
-        WorkHandler.UpdateWorkUI();
     }
     //intermediarys
     public void OpenBuilder()
@@ -705,10 +926,11 @@ public class UIHandler : MonoBehaviour
     {
         SaveManagerUI.DeleteCurrentSave();
     }
-    public void EnterWork()
+    public void CancelWorking()
     {
-        WorkHandler.EnterWork();
+        WorkManager.CancelWork();
     }
+
     public void QuitGame()
     {
         Application.Quit();

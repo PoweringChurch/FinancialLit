@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 9023894983627822055}
   - component: {fileID: 3772354185491020652}
   - component: {fileID: 4521612780162981126}
-  - component: {fileID: 4051754134380185640}
+  - component: {fileID: -5935178932818357369}
   m_Layer: 7
   m_Name: Laptop
   m_TagString: Untagged
@@ -226,7 +226,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &4051754134380185640
+--- !u!114 &-5935178932818357369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5616870848837682093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b293bdec0a3645ac18db2e0f0df02, type: 3}
+  m_Script: {fileID: 11500000, guid: 29bfb5ca66b8c4921b6870a9431a05a4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseFunctionality
-  price: 80
+  m_EditorClassIdentifier: Assembly-CSharp::WorkingFunctionality
+  price: 50
