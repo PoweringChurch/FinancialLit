@@ -64,7 +64,7 @@ Implement more areas
 - [x] Park (way to gain entertainment quicker)
 - [x] Furniture store
 - [x] Vetinarian (cure sickness)
-- [ ] Work (earn money)
+- [x] Work (earn money)
 
 Models & animation
 - [x] Add pet model
@@ -100,13 +100,13 @@ Music and SFX
 - [ ] Find suitable music
 
 Settings
-- [ ] Add settings such as camera speed, game speed, etc.
+- [x] Add settings such as camera speed, game speed, etc.
 
 Visual Overhaul
 - [x] Make style more consistent
 
 Tutorial
-- [ ] Add simple game tutorial
+- [x] Add simple game tutorial
 
 Saving & Loading
 - [x] Implement saving and loading
@@ -120,7 +120,7 @@ Furniture additions
 ### Cleanup
 
 Bugfixing
-- [ ] Find and resolve bugs in game
+- [x] Find and resolve bugs in game
 - [ ] Get play testers to review if possible
 
 #### Extra, only do if spare time
