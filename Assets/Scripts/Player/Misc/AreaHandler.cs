@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AreaHandler : MonoBehaviour
@@ -97,8 +96,7 @@ public class AreaHandler : MonoBehaviour
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
         PetAnimation.Instance.SetBoolParameter("IsSitting", false);
 
-        
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Roaming;
+        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
 
         lighting.shadows = LightShadows.None;
 

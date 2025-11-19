@@ -1,13 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
 public enum Behaviour {Default,Roaming, Occupied}
 //determines what to do and when. NOT like the state machine
 public class PetBehaviour : MonoBehaviour
 {
+    public AudioClip[] barks;
+    public AudioClip[] whimper;
     public static PetBehaviour Instance;
     private Behaviour activeBehaviour;
     public Behaviour ActiveBehaviour
     {
-        set { activeBehaviour = value; }
+        set { print(value.HumanName());
+            activeBehaviour = value;
+             }
         get { return activeBehaviour;}
     }
     void Awake()
@@ -20,6 +25,7 @@ public class PetBehaviour : MonoBehaviour
     void Update()
     {
         if (!PetMover.Instance.reachedGoal) return;
+        if (!CameraHandler.Instance.GameCamEnabled()) return;
         actionTimer -= Time.deltaTime;
         if (actionTimer <= 0)
         {
@@ -30,22 +36,40 @@ public class PetBehaviour : MonoBehaviour
                     RoamingAction();
                     break;
                 case Behaviour.Occupied:
-                    actionTimer = 3f;
+                    actionTimer = 5f;
                     break;
             }
         }
     }
     void RoamingAction()
     {
-        int action = Random.Range(0, 5);
+        int action = Random.Range(0, 6);
         switch (action)
         {
             case 0:
+                if (PetFlagManager.HasFlag(PetFlag.Sick))
+                {
+                    actionTimer = 6;
+                    SFXPlayer.Instance.Play(whimper[Random.Range(0,whimper.Length)]);
+                    break;
+                }
+                actionTimer = 2;
+                SFXPlayer.Instance.Play(barks[Random.Range(0,barks.Length)]); 
+                break;
             case 1:
+                // Idle in place
                 actionTimer = 4;
                 break;
+            case 2:
+                // Sit down for a bit
+                PetAnimation.Instance.SetBoolParameter("IsSitting", true);
+                actionTimer = Random.Range(5f, 10f);
+                break;
             default:
-                //try twice, else give up
+                // Stand up if  sitting
+                PetAnimation.Instance.SetBoolParameter("IsSitting", false);
+                
+                // Try twice, else give up
                 var targetPos = RandomPosition(20f);
                 if (!VectorOverInteractable(targetPos)) targetPos = RandomPosition(10f);
                 if (!VectorOverInteractable(targetPos)) break;
@@ -53,6 +77,11 @@ public class PetBehaviour : MonoBehaviour
                 actionTimer = Random.Range(4f, 9f);
                 break;
         }
+        float energyMult = PetStats.Instance.Status["energy"] < 0.8f 
+            ? 1.0f + (0.8f - PetStats.Instance.Status["energy"]) * 0.1875f 
+            : 1.0f;
+        
+        actionTimer *= energyMult;
     }
     Vector3 RandomPosition(float radius, bool conserveY = true)
     {

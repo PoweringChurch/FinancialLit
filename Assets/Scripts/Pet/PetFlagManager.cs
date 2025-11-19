@@ -1,4 +1,3 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System;
 
@@ -22,10 +21,6 @@ public static class PetFlagManager
         {
             currentFlags.Add(state);
             OnFlagChanged?.Invoke();
-        }
-        else
-        {
-            Debug.LogWarning($"Status {state} is already active");
         }
     }
     

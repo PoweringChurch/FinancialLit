@@ -1,4 +1,5 @@
-using UnityEngine;
+using Unity.VisualScripting;
+
 public class PetFunctionality : BaseFunctionality
 {
     protected override void Awake()
@@ -10,11 +11,16 @@ public class PetFunctionality : BaseFunctionality
     }
     void Follow()
     {
-        if (!PetStateMachine.IsInState(PetState.Idle) || PetBehaviour.Instance.ActiveBehaviour == Behaviour.Occupied) //it IS MEANT TO CHECK HERE TRUST
+        if (!PetStateMachine.IsInState(PetState.Idle) || PetBehaviour.Instance.ActiveBehaviour == Behaviour.Occupied) //it IS MEANT TO CHECK HERE FUTURE ME DONT DELETE
         {
             Message($"{PetStats.Instance.PetName} is occupied!");
+
+            print(PetBehaviour.Instance.ActiveBehaviour.HumanName());
+            print(PetStateMachine.CurrentState.HumanName());
             return;
         }
+        
+        PetAnimation.Instance.SetBoolParameter("IsSitting",false);
         PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
 
         UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.followingCursor);
@@ -24,7 +30,6 @@ public class PetFunctionality : BaseFunctionality
 
     void ReachedFollowTarget()
     {
-        Debug.Log("reached");
         PetMover.Instance.OnReachedGoal -= ReachedFollowTarget;
         PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
     }

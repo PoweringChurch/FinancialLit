@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
 public class SaveHandler : MonoBehaviour
@@ -9,7 +8,6 @@ public class SaveHandler : MonoBehaviour
     public static SaveHandler Instance;
     public Transform homeFurnitureTransform;
     public PlayerData currentPlayerData = new();
-    public const string DEFAULT_SAVE_FILE = "default.json";
     public string currentSaveFile = "default.json";
     private float sessionStartTime;
     void Awake()
@@ -182,7 +180,7 @@ public class SaveHandler : MonoBehaviour
             return false;
         }
     }
-    public PlayerData LoadGameFromFile(string fileName)
+    public PlayerData PlayerDataFromFile(string fileName)
     {
         string savePath = Application.persistentDataPath + "/"+ fileName;
 

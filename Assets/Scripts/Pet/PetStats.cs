@@ -1,8 +1,6 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
 public class PetStats : MonoBehaviour
 {
     public static PetStats Instance;
@@ -61,6 +59,7 @@ public class PetStats : MonoBehaviour
     }
     void Step()
     {
+        if (!CameraHandler.Instance.GameCamEnabled()) return;
         float recoveryMultiplier = PetFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
         float drainMultiplier = 1.3f;
         if (PetFlagManager.HasFlag(PetFlag.Content)) drainMultiplier *= 0.9f;

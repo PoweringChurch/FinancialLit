@@ -1,11 +1,9 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine.XR;
 using TMPro;
 using System.Collections;
-using System.Linq;
+using Unity.VisualScripting;
 
 public class BaseFunctionality : MonoBehaviour
 {

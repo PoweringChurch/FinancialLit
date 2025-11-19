@@ -1,12 +1,10 @@
-using UnityEngine;
-
 public class PlayFunctionality : BaseFunctionality
 {
     protected bool inUse = false;
     protected override void Awake()
     {
         base.Awake();
-        homeActions["Go Play"] = GoPlay;
+        homeActions["Go play"] = GoPlay;
     }
     protected virtual void GoPlay()
     {
@@ -22,8 +20,8 @@ public class PlayFunctionality : BaseFunctionality
     protected virtual void StopPlaying()
     {
         inUse = false;
-        homeActions["Go Play"] = GoPlay;
-        homeActions.Remove("Stop Playing");
+        homeActions["Go play"] = GoPlay;
+        homeActions.Remove("Stop playing");
         PetStats.Instance.StopPlay();
         PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
@@ -32,8 +30,8 @@ public class PlayFunctionality : BaseFunctionality
     {
         PetMover.Instance.OnReachedGoal -= OnReached;
         PetStats.Instance.StartPlay();
-        homeActions.Remove("Go Play");
-        homeActions["Stop Playing"] = StopPlaying;
+        homeActions.Remove("Go play");
+        homeActions["Stop playing"] = StopPlaying;
         PetAnimation.Instance.SetBoolParameter("IsPlaying", true);
     }
     protected override void Move()

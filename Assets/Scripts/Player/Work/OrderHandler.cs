@@ -6,7 +6,7 @@ public enum Items { Ball, Brush, Treat, Shampoo }
 public class OrderHandler : MonoBehaviour
 {
     public static OrderHandler Instance;
-    
+    public AudioClip nextOrder;
     private List<Items> currentOrder;
     private int completedOrderCount = 0;
     private int totalOrders = 10;
@@ -62,6 +62,11 @@ public class OrderHandler : MonoBehaviour
     
     public void NextOrder()
     {
+        // dont play completed order if its not ocmpleted because you dont get the fun jingle if u dont work pal
+        if (completedOrderCount > 0)
+        {
+            UISFXPlayer.Instance.Play(nextOrder);
+        }
         // Check if shift is complete
         if (completedOrderCount >= totalOrders)
         {

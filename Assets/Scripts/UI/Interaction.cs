@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Linq;
 using TMPro;
 using System;
 using System.Collections.Generic;

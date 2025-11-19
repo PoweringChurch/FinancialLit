@@ -1,22 +1,31 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class DraggableItem : MonoBehaviour
 {
+    public static AudioClip correctSound;
+    public static AudioClip incorrectSound;
+
+    public bool template = false;
+    public AudioClip correctSFX;
+    public AudioClip incorrectSFX;
+
     public Items itemType;
-    
     private Canvas canvas;
     private RectTransform rectTransform;
     private GameObject draggedCopy;
     private bool isDragging = false;
-    private Camera mainCamera;
     
     void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
         rectTransform = GetComponent<RectTransform>();
-        mainCamera = Camera.main;
+
+        if (template)
+        {
+            incorrectSound = incorrectSFX;
+            correctSound = correctSFX;
+        }
     }
     
     void Update()
@@ -97,14 +106,16 @@ public class DraggableItem : MonoBehaviour
         
         // Check if dropped on a drop zone
         Vector2 mousePos = Mouse.current.position.ReadValue();
-        DropZone dropZone = GetDropZoneAtPosition(mousePos);
+        GameObject dropZone = GetDropZoneAtPosition(mousePos);
         
         if (dropZone != null && draggedCopy != null)
         {
-            // Notify the drop zone
-            dropZone.HandleDrop(itemType);
+            bool isCorrect = OrderHandler.Instance.CheckItem(itemType);
+            if (isCorrect)
+                UISFXPlayer.Instance.Play(correctSound);
+            else
+                UISFXPlayer.Instance.Play(incorrectSound);
         }
-        
         // Always destroy the copy when letting go
         if (draggedCopy != null)
         {
@@ -112,21 +123,17 @@ public class DraggableItem : MonoBehaviour
             draggedCopy = null;
         }
     }
-    
-    private DropZone GetDropZoneAtPosition(Vector2 screenPos)
+    //really could just return a bool but i dont want to just in case right
+    private GameObject GetDropZoneAtPosition(Vector2 screenPos)
     {
         GameObject[] dropZoneObjects = GameObject.FindGameObjectsWithTag("DropZone");
         
         foreach (GameObject obj in dropZoneObjects)
         {
-            DropZone zone = obj.GetComponent<DropZone>();
-            if (zone != null)
+            RectTransform zoneRect = obj.GetComponent<RectTransform>();
+            if (RectTransformUtility.RectangleContainsScreenPoint(zoneRect, screenPos, canvas.worldCamera))
             {
-                RectTransform zoneRect = zone.GetComponent<RectTransform>();
-                if (RectTransformUtility.RectangleContainsScreenPoint(zoneRect, screenPos, canvas.worldCamera))
-                {
-                    return zone;
-                }
+                return obj;
             }
         }
         return null;

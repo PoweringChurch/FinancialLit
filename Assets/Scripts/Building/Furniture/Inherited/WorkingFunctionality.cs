@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class WorkingFunctionality : BaseFunctionality
 {
     protected override void Awake()

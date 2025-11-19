@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 using UnityEngine.AI;
 public class BathingFunctionality : BaseFunctionality
 {
@@ -41,7 +40,7 @@ public class BathingFunctionality : BaseFunctionality
         waterFill.SetActive(true);
 
         homeActions.Remove("Bathe");
-        homeActions["Stop Bathing"] = StopBathing;
+        homeActions["Stop bathing"] = StopBathing;
 
         PetAnimation.Instance.SetBoolParameter("IsSitting", true);
     }
@@ -53,7 +52,7 @@ public class BathingFunctionality : BaseFunctionality
         waterFill.SetActive(false);
 
         homeActions["Bathe"] = Bathe;
-        homeActions.Remove("Stop Bathing");
+        homeActions.Remove("Stop bathing");
 
         PetAnimation.Instance.SetBoolParameter("IsSitting", false);
         PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;

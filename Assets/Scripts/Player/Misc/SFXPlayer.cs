@@ -5,8 +5,8 @@ public class SFXPlayer : MonoBehaviour
 {
     public static SFXPlayer Instance;
     public AudioSource audioSource;
-    
-    private float volume = 0.15f;
+    public Slider sfxVolSlider;
+    private float volume = 0.2f;
     //public Slider sfxVolSlider;
     
     void Awake()
@@ -24,8 +24,7 @@ public class SFXPlayer : MonoBehaviour
     
     void Update()
     {
-        // Update volume in real-time if changed in inspector
-        audioSource.volume = volume;//*sfxVolSlider.value;
+        audioSource.volume = volume*sfxVolSlider.value;
     }
     
     public void Play(AudioClip clip)

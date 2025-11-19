@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class PetFoodBuyFunctionality : BaseFunctionality
 {
     protected override void Awake()

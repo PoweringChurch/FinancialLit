@@ -26,7 +26,6 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void HandleFurniturePlacer()
     {
-        bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
         if (cancel.WasPressedThisFrame())
         {
             FurniturePlacer.Instance.CancelPlacement();
@@ -47,10 +46,19 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void HandleMisc()
     {
+        
         //setting follow
         var (goalPosition,overInteractableLayer) = UIHandler.Instance.CursorHelper.CursorToVector3(1);
         if (PlayerFlagManager.HasState(PlayerState.SetFollow) && interact.WasPressedThisFrame() && overInteractableLayer)
         {
+            bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+            if (isOverUi)
+            {   
+                UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.defaultCursor);
+                PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
+                PlayerFlagManager.RemoveFlag(PlayerState.SetFollow);
+                return;
+            }
             PlayerFlagManager.RemoveFlag(PlayerState.SetFollow);
             PetMover.Instance.SetGoalPosition(goalPosition);
             UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.defaultCursor);

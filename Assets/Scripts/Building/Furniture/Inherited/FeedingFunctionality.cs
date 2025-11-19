@@ -11,7 +11,7 @@ public class FeedingFunctionality : BaseFunctionality
     {
         base.Awake();
         eatParticles = GetComponentInChildren<ParticleSystem>();
-        homeActions["Go Eat"] = GoEat;
+        homeActions["Go eat"] = GoEat;
         homeActions["Refill"] = Refill;
     }
     protected virtual void GoEat()

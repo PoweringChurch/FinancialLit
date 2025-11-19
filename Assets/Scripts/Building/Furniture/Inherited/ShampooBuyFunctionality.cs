@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class ShampooBuyFunctionality : BaseFunctionality
 {
     protected override void Awake()

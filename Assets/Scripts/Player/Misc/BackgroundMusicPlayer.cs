@@ -5,7 +5,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
 {
     public AudioClip[] musicTracks;
     public AudioSource audioSource;
-    private float volume = 0.2f;
+    private float volume = 0.15f;
     public Slider musicMultSlider;
     
     private int currentTrackIndex = 0;
@@ -30,7 +30,6 @@ public class BackgroundMusicPlayer : MonoBehaviour
     {
         // Update volume in real-time if changed in inspector
         audioSource.volume = volume*musicMultSlider.value;
-        
         // Check if current track finished, play next
         if (!audioSource.isPlaying && musicTracks.Length > 0)
         {

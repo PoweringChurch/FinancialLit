@@ -8,7 +8,7 @@ public class PetMover : MonoBehaviour
     public Transform petTransform;
     
     [HideInInspector] public bool reachedGoal;
-    private float moveSpeed = 3f;
+    private float moveSpeed = 2.5f;
     private float stoppingDistance = 0.4f;
     
     public NavMeshAgent agent;

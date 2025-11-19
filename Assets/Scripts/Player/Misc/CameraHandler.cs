@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -91,6 +90,10 @@ public class CameraHandler : MonoBehaviour
         }
     }
     //helpers
+    public bool GameCamEnabled()
+    {
+        return gameCamera.enabled;
+    }
     Renderer[] GetRenderersFromTags(string tag)
     {
         GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
