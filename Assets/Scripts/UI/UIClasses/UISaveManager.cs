@@ -128,7 +128,7 @@ public class UISaveManager
         }
         else
         {
-            UIHandler.Instance.PopupManager.AskTutorial();
+            TutorialHandler.Instance.AskTutorial();
         }
         //give starter items
         string[] starterItems = { 
