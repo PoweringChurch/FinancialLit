@@ -45,6 +45,7 @@ public class UIHandler : MonoBehaviour
     public void OpenBuilder()
     {
         InventoryManager.UpdateInventoryUI();
+        PlayerFlagManager.AddFlag(PlayerState.Placement);
     }
     public void ToggleStatusPanel()
     {
@@ -70,6 +71,14 @@ public class UIHandler : MonoBehaviour
     public void ToggleSpendingsPanel()
     {
         ItemUpdater.spendingsPanel.SetActive(!ItemUpdater.spendingsPanel.activeSelf);
+    }
+    public void AddPlayerFlag(int flagint)
+    {
+        PlayerFlagManager.AddFlag((PlayerState)flagint);
+    }
+    public void RemovePlayerFlag(int flagint)
+    {
+        PlayerFlagManager.RemoveFlag((PlayerState)flagint);
     }
     public void QuitGame()
     {

@@ -66,7 +66,16 @@ public class AreaHandler : MonoBehaviour
         lighting.shadows = LightShadows.None;
         PetStats.Instance.gameObject.SetActive(false);
 
-        if (area.isShop) PlayerFlagManager.AddFlag(PlayerState.Shopping);
+        if (area.isShop) {
+            if (!SaveHandler.Instance.currentPlayerData.VisitedShop)
+            {
+                string header = "Shop";
+                string body = "In a shop you can purchase items and furniture by clicking on the item you wish to buy and selecting buy!";
+                UIHandler.Instance.PopupManager.PopupInfo(header,body);
+            }
+            SaveHandler.Instance.currentPlayerData.VisitedShop = true;
+            PlayerFlagManager.AddFlag(PlayerState.Shopping);
+            }
         if (area.shadows) lighting.shadows = LightShadows.Soft;
         if (area.bringPet) {
             PetStats.Instance.gameObject.SetActive(true);
@@ -74,10 +83,27 @@ public class AreaHandler : MonoBehaviour
             }
 
         if (area.areaName == "Park")
-            PetStats.Instance.atPark = true;
+            {if (!SaveHandler.Instance.currentPlayerData.VisitedPark)
+                {
+                    string header = "Park";
+                    string body = "At the park, your dog passively gains entertainment, and can get worn out if you stay here for a while. After getting worn out, you pet will sleep much easier!";
+                    UIHandler.Instance.PopupManager.PopupInfo(header,body);
+                }
+            SaveHandler.Instance.currentPlayerData.VisitedPark = true;
+            PetStats.Instance.atPark = true;}
         else
             PetStats.Instance.atPark = false;
 
+        if (area.areaName == "Veterinary")
+        {
+            if (!SaveHandler.Instance.currentPlayerData.VisitedVet)
+            {
+                string header = "Veterinary";
+                string body = "If your pet ever gets sick, you can visit the vet to cure them for a fee!";
+                UIHandler.Instance.PopupManager.PopupInfo(header,body);
+            }
+            SaveHandler.Instance.currentPlayerData.VisitedVet = true;
+        }
         UIHandler.Instance.ButtonManager.DisableButton("Build");
     }
     public void EnterHome()

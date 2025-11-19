@@ -87,7 +87,6 @@ public class FurniturePlacer : MonoBehaviour
       {
             _objectPrefab = FurnitureDatabase.GetData(itemName).prefab;
             minydisplay.gameObject.SetActive(true);
-            PlayerFlagManager.AddFlag(PlayerState.Placement);
             _PrepareObject();
       }
       public void CancelPlacement()
@@ -99,7 +98,6 @@ public class FurniturePlacer : MonoBehaviour
             _objectPrefab = null;
             currentyoffset = minyoffset;
             minydisplay.gameObject.SetActive(false);
-            PlayerFlagManager.RemoveFlag(PlayerState.Placement);
       }
       public void RotateFurniture()
       {

@@ -10436,6 +10436,9 @@ MonoBehaviour:
     TotalPlaytimeSeconds: 0
     LastSaveTimestamp: 1763516380
     IsNewSave: 1
+    VisitedPark: 0
+    VisitedVet: 0
+    VisitedShop: 0
   currentSaveFile: default.json
 --- !u!1 &293063963
 GameObject:
@@ -27650,6 +27653,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2030654953}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: RemovePlayerFlag
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1

@@ -41,7 +41,11 @@ public class PlayerData
     public float TotalPlaytimeSeconds;
     public long LastSaveTimestamp;
 
-    public bool IsNewSave = true;
+    public bool IsNewSave;
+
+    public bool VisitedPark;
+    public bool VisitedVet;
+    public bool VisitedShop;
 
     public PlayerData()
     {
@@ -59,5 +63,9 @@ public class PlayerData
         LastSaveTimestamp = System.DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
         IsNewSave = true;
+
+        VisitedPark = false;
+        VisitedVet = false;
+        VisitedShop = false;
     }
 }

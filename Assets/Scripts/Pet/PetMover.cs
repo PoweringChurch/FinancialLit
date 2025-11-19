@@ -65,6 +65,7 @@ public class PetMover : MonoBehaviour
     public void SetGoalPosition(Vector3 to)
     {
         agent.SetDestination(to);
+        PetAnimation.Instance.SetBoolParameter("IsSitting", false);
         PetAnimation.Instance.SetBoolParameter("IsMoving", true);
         reachedGoal = false;
     }
