@@ -10,9 +10,7 @@ public class PetBehaviour : MonoBehaviour
     private Behaviour activeBehaviour;
     public Behaviour ActiveBehaviour
     {
-        set { print(value.HumanName());
-            activeBehaviour = value;
-             }
+        set { activeBehaviour = value; }
         get { return activeBehaviour;}
     }
     void Awake()

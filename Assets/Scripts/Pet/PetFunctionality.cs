@@ -14,9 +14,6 @@ public class PetFunctionality : BaseFunctionality
         if (!PetStateMachine.IsInState(PetState.Idle) || PetBehaviour.Instance.ActiveBehaviour == Behaviour.Occupied) //it IS MEANT TO CHECK HERE FUTURE ME DONT DELETE
         {
             Message($"{PetStats.Instance.PetName} is occupied!");
-
-            print(PetBehaviour.Instance.ActiveBehaviour.HumanName());
-            print(PetStateMachine.CurrentState.HumanName());
             return;
         }
         
