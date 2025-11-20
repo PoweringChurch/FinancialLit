@@ -19,7 +19,7 @@ public class PetBehaviour : MonoBehaviour
         activeBehaviour = Behaviour.Roaming;
     }
 
-    private float actionTimer = 10f; //time until pet does something
+    private float actionTimer = 5f; //time until pet does something
     void Update()
     {
         if (!PetMover.Instance.reachedGoal) return;
@@ -41,7 +41,7 @@ public class PetBehaviour : MonoBehaviour
     }
     void RoamingAction()
     {
-        int action = Random.Range(0, 6);
+        int action = Random.Range(0, 10);
         switch (action)
         {
             case 0:
@@ -51,17 +51,17 @@ public class PetBehaviour : MonoBehaviour
                     SFXPlayer.Instance.Play(whimper[Random.Range(0,whimper.Length)]);
                     break;
                 }
-                actionTimer = 2;
+                actionTimer = 2f;
                 SFXPlayer.Instance.Play(barks[Random.Range(0,barks.Length)]); 
                 break;
             case 1:
                 // Idle in place
-                actionTimer = 4;
+                actionTimer = 2;
                 break;
             case 2:
                 // Sit down for a bit
                 PetAnimation.Instance.SetBoolParameter("IsSitting", true);
-                actionTimer = Random.Range(5f, 10f);
+                actionTimer = Random.Range(4f, 8f);
                 break;
             default:
                 // Stand up if  sitting
@@ -72,7 +72,7 @@ public class PetBehaviour : MonoBehaviour
                 if (!VectorOverInteractable(targetPos)) targetPos = RandomPosition(10f);
                 if (!VectorOverInteractable(targetPos)) break;
                 PetMover.Instance.SetGoalPosition(targetPos);
-                actionTimer = Random.Range(4f, 9f);
+                actionTimer = Random.Range(3f, 6f);
                 break;
         }
         float energyMult = PetStats.Instance.Status["energy"] < 0.8f 

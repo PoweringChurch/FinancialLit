@@ -11,7 +11,7 @@ public class PlayerResources : MonoBehaviour
     {
         Instance = this;
 
-        PlayerFlagManager.AddFlag(PlayerState.Home);
+        PlayerFlagManager.AddFlag(PlayerFlag.Home);
     }
     private Dictionary<string, float> spendings = new()
     {

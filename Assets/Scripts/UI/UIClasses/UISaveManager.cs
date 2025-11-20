@@ -128,11 +128,11 @@ public class UISaveManager
         }
         else
         {
-            UIHandler.Instance.PopupManager.AskTutorial();
+            TutorialManager.Instance.AskTutorial();
         }
         //give starter items
         string[] starterItems = { 
-            "Pet Bed", "Small Bed", "Work Computer", "Food Bowl", 
+            "Pet Bed", "Small Bed", "Old Monitor", "Food Bowl", 
             "Bathroom Vanity", "Box Bath", "Toy Train", "Couch", 
             "Toilet", "Rectangle Table" 
         };

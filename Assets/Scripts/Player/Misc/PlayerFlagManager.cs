@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 
-public enum PlayerState {Home, Shopping, Placement, SetFollow}
+public enum PlayerFlag {Tutorial,Home, Shopping, Placement, SetFollow}
 
 public static class PlayerFlagManager
 {
-    private static List<PlayerState> currentFlags = new();
-    public static List<PlayerState> CurrentFlags => currentFlags;
-    public static void AddFlag(PlayerState state)
+    private static List<PlayerFlag> currentFlags = new();
+    public static List<PlayerFlag> CurrentFlags => currentFlags;
+    public static void AddFlag(PlayerFlag state)
     {
         if (!currentFlags.Contains(state))
         {
@@ -16,27 +16,27 @@ public static class PlayerFlagManager
     
     public static void AddFlag(int stateInt)
     {
-        AddFlag((PlayerState)stateInt);
+        AddFlag((PlayerFlag)stateInt);
     }
     
-    public static void RemoveFlag(PlayerState state)
+    public static void RemoveFlag(PlayerFlag state)
     {
         currentFlags.Remove(state);
     }
     
     public static void RemoveFlag(int stateInt)
     {
-        RemoveFlag((PlayerState)stateInt);
+        RemoveFlag((PlayerFlag)stateInt);
     }
     
-    public static bool HasState(PlayerState state)
+    public static bool HasState(PlayerFlag state)
     {
         return currentFlags.Contains(state);
     }
 
     public static bool HasFlag(int stateInt)
     {
-        return HasState((PlayerState)stateInt);
+        return HasState((PlayerFlag)stateInt);
     }
     public static void ClearFlag()
     {

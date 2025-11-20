@@ -2,16 +2,21 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 [Serializable]
 public class UIPopupManager
 {
     public GameObject infoPanelTemplate;
     public GameObject ynPanelTemplate;
+    public GameObject taskPanelTemplate;
     public Transform PopupsTransform;
+    public AudioClip popupsfx;
 
     public void PopupInfo(string header, string body, string dismiss = "OK", Action action = null)
     {
+        UISFXPlayer.Instance.Play(popupsfx);
+        
         GameObject newInfoPanel = UnityEngine.Object.Instantiate(infoPanelTemplate, PopupsTransform);
         var tmps = newInfoPanel.GetComponentsInChildren<TextMeshProUGUI>();
 
@@ -29,6 +34,8 @@ public class UIPopupManager
     }
     public void PopupYN(string header, string body, Action onYes, Action onNo = null, string y = "Yes", string n = "No")
     {
+        UISFXPlayer.Instance.Play(popupsfx);
+
         GameObject newYNPanel = UnityEngine.Object.Instantiate(ynPanelTemplate, PopupsTransform);
         var tmps = newYNPanel.GetComponentsInChildren<TextMeshProUGUI>();
         
@@ -54,66 +61,28 @@ public class UIPopupManager
             UnityEngine.Object.Destroy(newYNPanel);
         });
     }
+    public GameObject PopupTask(string header, string body) 
+    {
+        UISFXPlayer.Instance.Play(popupsfx);
 
-    public void AskTutorial()
-    {
-        PopupYN("Tutorial", 
-        "Would you like to learn how to play?", 
-        () => StartTutorial(), 
-        null, 
-        "Teach me!", 
-        "Skip");
+        GameObject newTaskPanel = UnityEngine.Object.Instantiate(taskPanelTemplate, PopupsTransform);
+        var tmps = newTaskPanel.GetComponentsInChildren<TextMeshProUGUI>();
+        tmps[0].text = header;
+        tmps[1].text = body;
+
+        return newTaskPanel;
     }
-    public void StartTutorial()
+    public void CloseAllPopups()
     {
-        // Welcome
-        PopupInfo("Welcome!", 
-            "Let's learn how to take care of your new pet!", 
-            "Next", 
-            () => {
-                // Pet care basics
-                PopupInfo("Pet Care Basics", 
-                    "Keep your pet healthy by managing four needs:\n\n" +
-                    "• Hygiene - Bathe your pet regularly\n" +
-                    "• Hunger - Feed your pet when hungry\n" +
-                    "• Energy - Send them to rest on a dog bed\n" +
-                    "• Entertainment - Play at the park or with toys", 
-                    "Got it!", 
-                    () => {
-                        // Health warning
-                        PopupInfo("Stay Healthy", 
-                            "If your pet's needs get too low, they might get sick and need a trip to the vet. Keep those stats up! \n\n" +
-                            "You're able to view your pet's needs at any time by pressing on the mood display on the bottom left.", 
-                            "Understood", 
-                            () => {
-                                // Working from home
-                                PopupInfo("Money", 
-                                    "You can work from home to earn money! Just click any monitor and press \"Go to work\". \n\n" +
-                                    "You can also see how you spend your earnings by pressing on your balance in the top left!",
-                                    "Nice!", 
-                                    () => {
-                                        // Placement mode
-                                        PopupInfo("Furniture & Items", 
-                                            "Want to add furniture and decor?\n\n" +
-                                            "Expand the arrow on the bottom right and select the yellow button with tools to enter placement mode.\n\n" +
-                                            "You've been given some basic furniture items to start building up your home with.", 
-                                            "Cool!", 
-                                            () => {
-                                                // Travel
-                                                PopupInfo("Explore & Shop", 
-                                                    "Travel to different locations by expanding the arrow on the bottom right and selecting the blue map.\n\n" +
-                                                    "Different areas offer different services - explore them all!", 
-                                                    "Let's go!", 
-                                                    () => {
-                                                        // Final message
-                                                        PopupInfo("You're Ready!", 
-                                                            "That's everything you need to know. Have fun taking care of your pet!", 
-                                                            "Enter game");
-                                                    });
-                                            });
-                                    });
-                            });
-                    });
-            });
+        if (PopupsTransform == null) return;
+
+        for (int i = PopupsTransform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = PopupsTransform.GetChild(i);
+            if (child != null)
+            {
+                UnityEngine.Object.Destroy(child.gameObject);
+            }
+        }
     }
 }

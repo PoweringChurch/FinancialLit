@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e045837657d74f745992f2ab5ee57ed5, type: 3}
   m_Name: Work Computer
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureData
-  itemName: Work Computer
+  itemName: Old Monitor
   prefab: {fileID: 1085955106570834731, guid: 5d7fe264ac9cd6042822326e15d9f658, type: 3}
   icon: {fileID: 21300000, guid: 57759fae15e97ed48a4385d96301fa4b, type: 3}

@@ -52,7 +52,7 @@ public class AreaHandler : MonoBehaviour
             home.SetActive(false);
         }
         CleanupCurrentArea();
-        PlayerFlagManager.RemoveFlag(PlayerState.Home);
+        PlayerFlagManager.RemoveFlag(PlayerFlag.Home);
 
         PetStateMachine.SetState(PetState.Idle);
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
@@ -66,7 +66,9 @@ public class AreaHandler : MonoBehaviour
         lighting.shadows = LightShadows.None;
         PetStats.Instance.gameObject.SetActive(false);
 
-        if (area.isShop) PlayerFlagManager.AddFlag(PlayerState.Shopping);
+        if (area.isShop) {
+            PlayerFlagManager.AddFlag(PlayerFlag.Shopping);
+            }
         if (area.shadows) lighting.shadows = LightShadows.Soft;
         if (area.bringPet) {
             PetStats.Instance.gameObject.SetActive(true);
@@ -74,10 +76,47 @@ public class AreaHandler : MonoBehaviour
             }
 
         if (area.areaName == "Park")
-            PetStats.Instance.atPark = true;
+            {if (!SaveHandler.Instance.currentPlayerData.VisitedPark)
+                {
+                    string header = "Park";
+                    string body = "At the park, your dog passively gains entertainment, and can get worn out if you stay here for a while. After getting worn out, you pet will sleep much easier!";
+                    UIHandler.Instance.PopupManager.PopupInfo(header,body);
+                }
+            SaveHandler.Instance.currentPlayerData.VisitedPark = true;
+            PetStats.Instance.atPark = true;}
         else
             PetStats.Instance.atPark = false;
 
+        if (area.areaName == "Veterinary")
+        {
+            if (!SaveHandler.Instance.currentPlayerData.VisitedVet)
+            {
+                string header = "Veterinary";
+                string body = "If your pet ever gets sick, you can visit the vet to cure them for a fee!";
+                UIHandler.Instance.PopupManager.PopupInfo(header,body);
+            }
+            SaveHandler.Instance.currentPlayerData.VisitedVet = true;
+        }
+        if (area.areaName == "SmartyPets")
+        {
+            if (!SaveHandler.Instance.currentPlayerData.VisitedSmartyPets)
+            {
+                string header = "SmartyPets";
+                string body = "Welcome to SmartyPets! Here you can purchase pet-related items, like pet beds, food, shampoo, or pet toys. Purchase items by selecting the item you wish to purchase and pressing buy.";
+                UIHandler.Instance.PopupManager.PopupInfo(header,body);
+            }
+            SaveHandler.Instance.currentPlayerData.VisitedSmartyPets = true;
+        }
+        if (area.areaName == "FurnitureStore")
+        {
+            if (!SaveHandler.Instance.currentPlayerData.VisitedFurnitureStore)
+            {
+                string header = "Furniture Store";
+                string body = "At the furniture store, you can purchase furniture to place in your home. Purchased furniture gets added to your inventory for placement in the placement menu.";
+                UIHandler.Instance.PopupManager.PopupInfo(header,body);
+            }
+            SaveHandler.Instance.currentPlayerData.VisitedFurnitureStore = true;
+        }
         UIHandler.Instance.ButtonManager.DisableButton("Build");
     }
     public void EnterHome()
@@ -89,8 +128,8 @@ public class AreaHandler : MonoBehaviour
         
         PetStats.Instance.gameObject.SetActive(true);
         PetMover.Instance.agent.Warp(Vector3.up);
-        PlayerFlagManager.AddFlag(PlayerState.Home);
-        PlayerFlagManager.RemoveFlag(PlayerState.Shopping);
+        PlayerFlagManager.AddFlag(PlayerFlag.Home);
+        PlayerFlagManager.RemoveFlag(PlayerFlag.Shopping);
 
         PetStateMachine.SetState(PetState.Idle);
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);

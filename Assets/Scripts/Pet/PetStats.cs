@@ -61,7 +61,7 @@ public class PetStats : MonoBehaviour
     {
         if (!CameraHandler.Instance.GameCamEnabled()) return;
         float recoveryMultiplier = PetFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
-        float drainMultiplier = 1.3f;
+        float drainMultiplier = 1.6f;
         if (PetFlagManager.HasFlag(PetFlag.Content)) drainMultiplier *= 0.9f;
         if (PetFlagManager.HasFlag(PetFlag.Loved)) drainMultiplier *= 0.95f;
 
@@ -76,7 +76,7 @@ public class PetStats : MonoBehaviour
         if (PetStateMachine.IsInState(PetState.Playing) || atPark)
         {
             float playBonus = PetFlagManager.HasFlag(PetFlag.Playful) ? 1.1f : 1f;
-            float parkBonus = atPark ? 1.05f : 1f;
+            float parkBonus = atPark ? 1.1f : 1f;
             status["entertainment"] = Math.Clamp(status["entertainment"] + (entertainmentRecoveryRate + boredomRate) * recoveryMultiplier * playBonus*parkBonus, 0, 1);
         }
 

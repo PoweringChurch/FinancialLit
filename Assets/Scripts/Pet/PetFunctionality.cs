@@ -1,13 +1,16 @@
 using Unity.VisualScripting;
+using UnityEngine;
 
 public class PetFunctionality : BaseFunctionality
 {
+    public ParticleSystem loveParticles;
     protected override void Awake()
     {
         ignoreBase = true;
         base.Awake();
         globalActions["Follow"] = Follow;
         globalActions["Sit"] = ToggleSit;
+
     }
     void Follow()
     {
@@ -21,7 +24,7 @@ public class PetFunctionality : BaseFunctionality
         PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
 
         UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.followingCursor);
-        PlayerFlagManager.AddFlag(PlayerState.SetFollow);
+        PlayerFlagManager.AddFlag(PlayerFlag.SetFollow);
         PetMover.Instance.OnReachedGoal += ReachedFollowTarget;
     }
 
@@ -57,6 +60,4 @@ public class PetFunctionality : BaseFunctionality
             PetAnimation.Instance.SetBoolParameter("IsSitting", true);
         }
     }
-
-    
 }
