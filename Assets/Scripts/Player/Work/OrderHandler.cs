@@ -12,9 +12,9 @@ public class OrderHandler : MonoBehaviour
 
     private List<Items> currentOrder;
     private int completedOrderCount = 0;
-    private int totalOrders = 10;
+    private int totalOrders = 7;
     private float orderTimer;
-    private float timePerOrder = 8f;
+    private float timePerOrder = 12f;
     private float countdown = 0f;
     private bool shiftActive = false;
     

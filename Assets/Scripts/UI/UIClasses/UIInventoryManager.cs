@@ -40,6 +40,11 @@ public class UIInventoryManager
         }
         foreach (var entry in inventory.GetItemsToDisplay())
         {
+            if (entry.data == null)
+            {
+                Debug.LogWarning("Entry item not found");
+                continue;
+            }
             GameObject newTemplate = UnityEngine.Object.Instantiate(itemButtonTemplate, contentTransform);
             Button itemButton = newTemplate.GetComponent<Button>();
             //set count
@@ -48,6 +53,8 @@ public class UIInventoryManager
             //set img
             Transform inner = newTemplate.transform.GetChild(1);
             var imgPreview = inner.GetChild(0).GetComponent<Image>();
+
+            
             imgPreview.sprite = entry.data.icon;
             //add clicking functionality
             itemButton.onClick.AddListener(() => OnItemButtonClicked(entry));

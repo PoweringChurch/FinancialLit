@@ -15474,8 +15474,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -100}
-  m_SizeDelta: {x: 640, y: 140}
+  m_AnchoredPosition: {x: 350, y: -90.165}
+  m_SizeDelta: {x: 640, y: 120.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569199506
 MonoBehaviour:
@@ -23428,8 +23428,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -394.36295}
-  m_SizeDelta: {x: 700, y: 200}
+  m_AnchoredPosition: {x: 0, y: -383}
+  m_SizeDelta: {x: 700, y: 180.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &723633819
 MonoBehaviour:
@@ -29636,7 +29636,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2030654953}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: DeleteCurrentSave
+        m_MethodName: ClosePopups
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29648,7 +29648,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2030654953}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: ClosePopups
+        m_MethodName: DeleteCurrentSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -31492,7 +31492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 467.88092}
+  m_AnchoredPosition: {x: 0, y: 371}
   m_SizeDelta: {x: 525.7618, y: 88.5596}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1164119435
@@ -32660,7 +32660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12.880888, y: 380.0918}
+  m_AnchoredPosition: {x: 0, y: 301}
   m_SizeDelta: {x: 525.7618, y: 56.6482}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1232737063

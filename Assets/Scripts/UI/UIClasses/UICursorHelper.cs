@@ -26,7 +26,6 @@ public class UICursorHelper
 
     public void SetCursor(Texture2D newcursor)
     {
-        Debug.Log(newcursor.name);
         Cursor.SetCursor(newcursor, cursorHotspot, cursorMode);
     }
 }

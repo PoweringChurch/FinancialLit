@@ -9,11 +9,11 @@ public class CameraHandler : MonoBehaviour
     [SerializeField] private Camera gameCamera;
     [SerializeField] private Camera menuCamera;
     [SerializeField] private GameObject scrollGameobj;
-    private float moveSpeed = 20f;
+    private float moveSpeed = 15f;
     private float currentZoom = 10f;
     private float minZoom = 2f;
-    private float maxZoom = 25f;
-    private float zoomSpeed = 100f;
+    private float maxZoom = 20f;
+    private float zoomSpeed = 75f;
 
     public Slider zoomSpeedMultiplier;
     public Slider camSpeedMultiplier;
@@ -59,8 +59,8 @@ public class CameraHandler : MonoBehaviour
         currentZoom = Mathf.Clamp(currentZoom - InputSystem.actions.FindAction("Zoom").ReadValue<Vector2>().y * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
         gameCamera.orthographicSize = currentZoom;
     }
-    float maxDistance = 40;
-    float minDistance = 25;
+    float maxDistance = 30;
+    float minDistance = 20;
 
     float hideableMinDistance = 18;
     float minAlpha = 0.05f;

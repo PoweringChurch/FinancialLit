@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -3826,7 +3826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -5309,14 +5309,12 @@ Transform:
   - {fileID: 2073168650689334588}
   - {fileID: 4150396401845659509}
   - {fileID: 4166043002060626842}
-  - {fileID: 4671664306825204022}
   - {fileID: 4720423914985793806}
   - {fileID: 8842632144524860772}
   - {fileID: 4608487040271599107}
   - {fileID: 8897285436550284516}
   - {fileID: 6130049747821726316}
   - {fileID: 3012364621478420108}
-  - {fileID: 3545994754948832261}
   - {fileID: 2536268801715694494}
   - {fileID: 2902919178165831901}
   - {fileID: 8750819396006628353}
@@ -5479,7 +5477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -6124,7 +6122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -6828,7 +6826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -7238,7 +7236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -8217,7 +8215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -8630,7 +8628,8 @@ Transform:
   m_LocalPosition: {x: -7.8749924, y: 0.5, z: -14.125005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4671664306825204022}
   m_Father: {fileID: 6289798853945025112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2246674790403139521
@@ -8713,7 +8712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -8990,12 +8989,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4420167750090271047}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -7.3749967, y: 0.5, z: -6.3750033}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.50000006, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6289798853945025112}
+  m_Father: {fileID: 3012364621478420108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3598608680571161199
 MeshFilter:
@@ -11325,7 +11324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -12715,7 +12714,8 @@ Transform:
   m_LocalPosition: {x: -7.3749967, y: 0.5, z: -5.8750033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3545994754948832261}
   m_Father: {fileID: 6289798853945025112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4450767077570151141
@@ -13664,7 +13664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -14411,7 +14411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
-  outlineColor: {r: 0.03529412, g: 0.5176471, b: 0.8901961, a: 1}
+  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
   outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
@@ -15022,7 +15022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -15430,7 +15430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -15599,7 +15599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -16192,7 +16192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -18977,7 +18977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -19053,12 +19053,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8823457795512502509}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -7.8749924, y: 0.5, z: -14.125005}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6289798853945025112}
+  m_Father: {fileID: 4166043002060626842}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2152858325801760140
 MeshFilter:
@@ -19235,7 +19235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 0
   outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
