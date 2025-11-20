@@ -57,9 +57,17 @@ public class TutorialManager : MonoBehaviour
         string header = "Welcome";
         string body = "Let's learn how to take care of your new pet!";
         string dismiss = "OK";
+        PopupManager.PopupInfo(header, body, dismiss, ShowControls);
+    }
+    // Step 1.5
+    void ShowControls()
+    {
+        string header = "Controls";
+        string body = "You can use WASD to move the camera around, use the scroll wheel to zoom in and out.\n\n"+
+        "You can interact with objects by clicking on them with the left mouse button.";
+        string dismiss = "OK";
         PopupManager.PopupInfo(header, body, dismiss, ShowPetCareBasics);
     }
-    
     // Step 2
     void ShowPetCareBasics()
     {
@@ -125,6 +133,10 @@ public class TutorialManager : MonoBehaviour
         
         if (FurniturePlacer.Instance != null)
             FurniturePlacer.Instance.OnItemPlaced += ShowPlacementAcknowledgement;
+        if (FurniturePlacer.Instance.IsItemPlaced("Old Monitor"))
+        {
+            ShowPlacementAcknowledgement("Old Monitor");
+        }
     }
     
     void ShowPlacementAcknowledgement(string itemName)

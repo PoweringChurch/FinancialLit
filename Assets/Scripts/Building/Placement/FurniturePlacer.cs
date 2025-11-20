@@ -151,4 +151,20 @@ public class FurniturePlacer : MonoBehaviour
             _handler.SetPlacementMode(PlacementMode.Valid);
             _handler.isFixed = false;
       }
+      public bool IsItemPlaced(string itemName)
+      {
+      if (furnitureHolder == null) return false;
+
+      // Loop through all children under furnitureHolder
+      foreach (Transform child in furnitureHolder)
+      {
+            PlacementHandler handler = child.GetComponent<PlacementHandler>();
+            if (handler != null && handler.itemName == itemName && handler.isFixed)
+            {
+                  return true;
+            }
+      }
+
+      return false;
+      }
 }
