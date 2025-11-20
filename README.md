@@ -2,6 +2,8 @@
 
 You are viewing the markdown file version of the docs!
 
+This is an OLD VERSION! Refer to the pdf version of the game docs for the final version of the docs.
+
 Project Files for Financial Literature Pet Simulation in FBLA  
 [Official Guidelines](https://www.flfbla.org/fbla-event-introduction-to-programming)
 

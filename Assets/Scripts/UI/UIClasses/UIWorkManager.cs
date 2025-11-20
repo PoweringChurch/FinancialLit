@@ -125,11 +125,13 @@ public class UIWorkManager
             ingameOverlayUI.SetActive(false);
         }, null, "Start", "Nevermind");
     }
-    public void EndShift(float totalEarned)
+    public void EndShift()
     {
-        string body = $"Great work! You earned ${totalEarned:F2} for your hard work!";
+        float total = OrderHandler.Instance.totalEarned;
+        string body = $"Great work! You earned ${total:F2} for your hard work!";
         UIHandler.Instance.PopupManager.PopupInfo("Job well done!",body,"Yay!",() =>
         {
+            OrderHandler.Instance.EndShift();
             CameraHandler.Instance.ToggleGamecam(true);
             ingameOverlayUI.SetActive(true);
             workoverlayUI.SetActive(false);

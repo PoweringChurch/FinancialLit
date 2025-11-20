@@ -52,7 +52,7 @@ public class AreaHandler : MonoBehaviour
             home.SetActive(false);
         }
         CleanupCurrentArea();
-        PlayerFlagManager.RemoveFlag(PlayerState.Home);
+        PlayerFlagManager.RemoveFlag(PlayerFlag.Home);
 
         PetStateMachine.SetState(PetState.Idle);
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
@@ -67,14 +67,7 @@ public class AreaHandler : MonoBehaviour
         PetStats.Instance.gameObject.SetActive(false);
 
         if (area.isShop) {
-            if (!SaveHandler.Instance.currentPlayerData.VisitedShop)
-            {
-                string header = "Shop";
-                string body = "In a shop you can purchase items and furniture by clicking on the item you wish to buy and selecting buy!";
-                UIHandler.Instance.PopupManager.PopupInfo(header,body);
-            }
-            SaveHandler.Instance.currentPlayerData.VisitedShop = true;
-            PlayerFlagManager.AddFlag(PlayerState.Shopping);
+            PlayerFlagManager.AddFlag(PlayerFlag.Shopping);
             }
         if (area.shadows) lighting.shadows = LightShadows.Soft;
         if (area.bringPet) {
@@ -104,6 +97,26 @@ public class AreaHandler : MonoBehaviour
             }
             SaveHandler.Instance.currentPlayerData.VisitedVet = true;
         }
+        if (area.areaName == "SmartyPets")
+        {
+            if (!SaveHandler.Instance.currentPlayerData.VisitedSmartyPets)
+            {
+                string header = "SmartyPets";
+                string body = "Welcome to SmartyPets! Here you can purchase pet-related items, like pet beds, food, shampoo, or pet toys. Purchase items by selecting the item you wish to purchase and pressing buy.";
+                UIHandler.Instance.PopupManager.PopupInfo(header,body);
+            }
+            SaveHandler.Instance.currentPlayerData.VisitedSmartyPets = true;
+        }
+        if (area.areaName == "FurnitureStore")
+        {
+            if (!SaveHandler.Instance.currentPlayerData.VisitedFurnitureStore)
+            {
+                string header = "Furniture Store";
+                string body = "At the furniture store, you can purchase furniture to place in your home. Purchased furniture gets added to your inventory for placement in the placement menu.";
+                UIHandler.Instance.PopupManager.PopupInfo(header,body);
+            }
+            SaveHandler.Instance.currentPlayerData.VisitedFurnitureStore = true;
+        }
         UIHandler.Instance.ButtonManager.DisableButton("Build");
     }
     public void EnterHome()
@@ -115,8 +128,8 @@ public class AreaHandler : MonoBehaviour
         
         PetStats.Instance.gameObject.SetActive(true);
         PetMover.Instance.agent.Warp(Vector3.up);
-        PlayerFlagManager.AddFlag(PlayerState.Home);
-        PlayerFlagManager.RemoveFlag(PlayerState.Shopping);
+        PlayerFlagManager.AddFlag(PlayerFlag.Home);
+        PlayerFlagManager.RemoveFlag(PlayerFlag.Shopping);
 
         PetStateMachine.SetState(PetState.Idle);
         PetAnimation.Instance.SetBoolParameter("IsPlaying", false);

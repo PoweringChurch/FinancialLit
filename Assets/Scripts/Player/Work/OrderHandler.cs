@@ -1,21 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using System;
+using Random = UnityEngine.Random;
 public enum Items { Ball, Brush, Treat, Shampoo }
 
 public class OrderHandler : MonoBehaviour
 {
     public static OrderHandler Instance;
     public AudioClip nextOrder;
+    public float totalEarned = 0f;
+
     private List<Items> currentOrder;
     private int completedOrderCount = 0;
     private int totalOrders = 10;
     private float orderTimer;
     private float timePerOrder = 8f;
-    private float totalEarned = 0f;
     private float countdown = 0f;
     private bool shiftActive = false;
     
+    public event Action OnWorkStarted;
+    public event Action OnWorkEnded;
     void Start()
     {
         Instance = this;
@@ -57,6 +61,7 @@ public class OrderHandler : MonoBehaviour
         completedOrderCount = 0;
         totalEarned = 0f;
         shiftActive = false;
+        OnWorkStarted?.Invoke();
         UIHandler.Instance.WorkManager.UpdateCompletedOrders(0, totalOrders);
     }
     
@@ -70,7 +75,7 @@ public class OrderHandler : MonoBehaviour
         // Check if shift is complete
         if (completedOrderCount >= totalOrders)
         {
-            EndShift();
+            UIHandler.Instance.WorkManager.EndShift();
             return;
         }
         
@@ -91,7 +96,7 @@ public class OrderHandler : MonoBehaviour
         
         for (int i = 0; i < itemCount; i++)
         {
-            Items randomItem = (Items)Random.Range(0, System.Enum.GetValues(typeof(Items)).Length);
+            Items randomItem = (Items)Random.Range(0, Enum.GetValues(typeof(Items)).Length);
             order.Add(randomItem);
         }
         
@@ -139,12 +144,17 @@ public class OrderHandler : MonoBehaviour
         countdown = 0f;
         totalEarned = 0f;
         currentOrder = null;
+
+        OnWorkEnded?.Invoke();
+
     }
-    private void EndShift()
+    public void EndShift()
     {
         shiftActive = false;
-        UIHandler.Instance.WorkManager.EndShift(totalEarned);
         PlayerResources.Instance.AddMoney(totalEarned);
         totalEarned = 0f;
+
+        OnWorkEnded?.Invoke();
+
     }
 }

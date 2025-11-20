@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: Work Computer
+  itemName: Old Monitor
   meshComponents:
   - {fileID: 7252951783647516563}
   hasValidPlacement: 0

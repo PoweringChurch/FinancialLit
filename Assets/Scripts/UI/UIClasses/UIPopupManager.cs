@@ -11,9 +11,12 @@ public class UIPopupManager
     public GameObject ynPanelTemplate;
     public GameObject taskPanelTemplate;
     public Transform PopupsTransform;
+    public AudioClip popupsfx;
 
     public void PopupInfo(string header, string body, string dismiss = "OK", Action action = null)
     {
+        UISFXPlayer.Instance.Play(popupsfx);
+        
         GameObject newInfoPanel = UnityEngine.Object.Instantiate(infoPanelTemplate, PopupsTransform);
         var tmps = newInfoPanel.GetComponentsInChildren<TextMeshProUGUI>();
 
@@ -31,6 +34,8 @@ public class UIPopupManager
     }
     public void PopupYN(string header, string body, Action onYes, Action onNo = null, string y = "Yes", string n = "No")
     {
+        UISFXPlayer.Instance.Play(popupsfx);
+
         GameObject newYNPanel = UnityEngine.Object.Instantiate(ynPanelTemplate, PopupsTransform);
         var tmps = newYNPanel.GetComponentsInChildren<TextMeshProUGUI>();
         
@@ -56,19 +61,28 @@ public class UIPopupManager
             UnityEngine.Object.Destroy(newYNPanel);
         });
     }
-    public UnityEvent PopupTask(string header, string body, Action onComplete)
+    public GameObject PopupTask(string header, string body) 
     {
+        UISFXPlayer.Instance.Play(popupsfx);
+
         GameObject newTaskPanel = UnityEngine.Object.Instantiate(taskPanelTemplate, PopupsTransform);
         var tmps = newTaskPanel.GetComponentsInChildren<TextMeshProUGUI>();
         tmps[0].text = header;
         tmps[1].text = body;
 
-        UnityEvent OnCompletion = new();
-        OnCompletion.AddListener(() => 
+        return newTaskPanel;
+    }
+    public void CloseAllPopups()
+    {
+        if (PopupsTransform == null) return;
+
+        for (int i = PopupsTransform.childCount - 1; i >= 0; i--)
         {
-            onComplete.Invoke();
-            UnityEngine.Object.Destroy(newTaskPanel);
-        });
-        return OnCompletion;
+            Transform child = PopupsTransform.GetChild(i);
+            if (child != null)
+            {
+                UnityEngine.Object.Destroy(child.gameObject);
+            }
+        }
     }
 }

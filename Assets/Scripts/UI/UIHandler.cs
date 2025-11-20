@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 public class UIHandler : MonoBehaviour
 {
     public static UIHandler Instance;
@@ -15,7 +16,7 @@ public class UIHandler : MonoBehaviour
     public UIWorkManager WorkManager = new();
     public UIAnimationManager MenuAnimation = new();
     public UISettingsManager SettingsManager = new();
-    
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -45,7 +46,7 @@ public class UIHandler : MonoBehaviour
     public void OpenBuilder()
     {
         InventoryManager.UpdateInventoryUI();
-        PlayerFlagManager.AddFlag(PlayerState.Placement);
+        PlayerFlagManager.AddFlag(PlayerFlag.Placement);
     }
     public void ToggleStatusPanel()
     {
@@ -72,17 +73,16 @@ public class UIHandler : MonoBehaviour
     {
         ItemUpdater.spendingsPanel.SetActive(!ItemUpdater.spendingsPanel.activeSelf);
     }
-    public void AddPlayerFlag(int flagint)
+    public void CloseBuilder()
     {
-        PlayerFlagManager.AddFlag((PlayerState)flagint);
-    }
-    public void RemovePlayerFlag(int flagint)
-    {
-        PlayerFlagManager.RemoveFlag((PlayerState)flagint);
+        PlayerFlagManager.RemoveFlag(PlayerFlag.Placement);
     }
     public void QuitGame()
     {
         Application.Quit();
     }
-
+    public void ClosePopups()
+    {
+        PopupManager.CloseAllPopups();
+    }
 }

@@ -45,7 +45,8 @@ public class PlayerData
 
     public bool VisitedPark;
     public bool VisitedVet;
-    public bool VisitedShop;
+    public bool VisitedSmartyPets;
+    public bool VisitedFurnitureStore;
 
     public PlayerData()
     {
@@ -66,6 +67,7 @@ public class PlayerData
 
         VisitedPark = false;
         VisitedVet = false;
-        VisitedShop = false;
+        VisitedSmartyPets = false;
+        VisitedFurnitureStore = false;
     }
 }

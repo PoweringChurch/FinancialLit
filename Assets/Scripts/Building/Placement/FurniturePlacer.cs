@@ -11,6 +11,7 @@ public class FurniturePlacer : MonoBehaviour
       public Camera gameCamera;
       public Transform furnitureHolder;
       public Transform minydisplay;
+      public AudioClip placeSfx;
       [HideInInspector] public GameObject _objectPrefab;
       private GameObject _toBuild;
       private PlacementHandler _handler;
@@ -29,6 +30,7 @@ public class FurniturePlacer : MonoBehaviour
       private Quaternion previousRotation;
       [HideInInspector] public bool isMoving = false;
       [HideInInspector] public bool onPlacement = false;
+      public event Action<string> OnItemPlaced;
       void Awake()
       {
             Instance = this;
@@ -65,7 +67,9 @@ public class FurniturePlacer : MonoBehaviour
             }
             if (_objectPrefab == null || !_handler.hasValidPlacement) return;
 
-            InventoryHelper.Instance.RemoveItem(_handler.itemName, 1);
+            string itemName = _handler.itemName;
+            
+            InventoryHelper.Instance.RemoveItem(itemName, 1);
             _handler.SetPlacementMode(PlacementMode.Fixed);
             if (freemove)
             {
@@ -75,6 +79,11 @@ public class FurniturePlacer : MonoBehaviour
             {
                   _toBuild.transform.position = _ClampToNearest(_hit.point, cellSize);
             }
+            
+            // Trigger the event
+            OnItemPlaced?.Invoke(itemName);
+            UISFXPlayer.Instance.Play(placeSfx);
+            
             _toBuild = null;
             _PrepareObject();
             if (!InventoryHelper.Instance.GetInventory().HasItem(_handler.itemName) || isMoving) //if the item isnt in players inventory
@@ -83,6 +92,7 @@ public class FurniturePlacer : MonoBehaviour
                   return;
             }
       }
+
       public void SetCurrentFurniture(string itemName)
       {
             _objectPrefab = FurnitureDatabase.GetData(itemName).prefab;
