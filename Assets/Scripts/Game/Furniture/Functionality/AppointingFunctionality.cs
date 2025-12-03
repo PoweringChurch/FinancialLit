@@ -23,13 +23,13 @@ public class AppointingFunctionality : BaseFunctionality
         float avgHealth = (status["hunger"] + status["energy"] + status["hygiene"] + status["entertainment"]) / 4f;
         fee = baseline * (1.5f - avgHealth * 0.5f); 
         string body = $"Scheduling an appointment costs ${fee:N2}. You can reduce treatment costs by keeping your pet healthy. Do you want to proceed with the treatment?";
-        UIHandler.Instance.PopupManager.PopupYN(header,body,OnYes,() => {},"Yes","No");
+        UIPopups.Instance.PopupYN(header,body,OnYes,() => {},"Yes","No");
     }
     protected void OnYes()
     {
         if (!PlayerResources.Instance.CanAfford(fee))
         {
-            UIHandler.Instance.PopupManager.PopupInfo("Cannot afford","You cannot afford an appointment.");
+            UIPopups.Instance.PopupInfo("Cannot afford","You cannot afford an appointment.");
             return;
         }
         Message("Pet cured!");    

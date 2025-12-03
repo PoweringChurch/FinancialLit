@@ -36,7 +36,7 @@ public class PlayerResources : MonoBehaviour
         {
             spendings[purchaseType] += cost;
             money -= cost;
-            UIHandler.Instance.ItemUpdater.UpdateText();
+            UIResourcesUpdater.Instance.UpdateText();
             return;
         }
     }
@@ -45,7 +45,7 @@ public class PlayerResources : MonoBehaviour
         if (CanConsumeFood())
         {
             food -= 1;
-            UIHandler.Instance.ItemUpdater.UpdateText();
+            UIResourcesUpdater.Instance.UpdateText();
         }
     }
     public void ConsumeShampoo()
@@ -53,24 +53,24 @@ public class PlayerResources : MonoBehaviour
         if (CanConsumeShampoo())
         {
             shampoo -= 1;
-            UIHandler.Instance.ItemUpdater.UpdateText();
+            UIResourcesUpdater.Instance.UpdateText();
 
         }
     }
     public void AddMoney(float amount)
     {
         money += amount;
-        UIHandler.Instance.ItemUpdater.UpdateText();
+        UIResourcesUpdater.Instance.UpdateText();
     }
     public void AddFood(int count)
     {
         food += count;
-        UIHandler.Instance.ItemUpdater.UpdateText();
+        UIResourcesUpdater.Instance.UpdateText();
     }
     public void AddShampoo(int count)
     {
         shampoo += count;
-        UIHandler.Instance.ItemUpdater.UpdateText();
+        UIResourcesUpdater.Instance.UpdateText();
     }
 
     public void SetMoney(float to)

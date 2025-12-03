@@ -31,7 +31,7 @@ public class OrderHandler : MonoBehaviour
         if (countdown > 0)
         {
             countdown -= Time.deltaTime;
-            UIHandler.Instance.WorkManager.UpdateTimer(countdown);
+            UIWorkManager.Instance.UpdateTimer(countdown);
             
             if (countdown <= 0)
             {
@@ -46,7 +46,7 @@ public class OrderHandler : MonoBehaviour
         if (shiftActive && currentOrder != null && currentOrder.Count > 0)
         {
             orderTimer -= Time.deltaTime;
-            UIHandler.Instance.WorkManager.UpdateTimer(orderTimer);
+            UIWorkManager.Instance.UpdateTimer(orderTimer);
             
             if (orderTimer <= 0)
             {
@@ -62,7 +62,7 @@ public class OrderHandler : MonoBehaviour
         totalEarned = 0f;
         shiftActive = false;
         OnWorkStarted?.Invoke();
-        UIHandler.Instance.WorkManager.UpdateCompletedOrders(0, totalOrders);
+        UIWorkManager.Instance.UpdateCompletedOrders(0, totalOrders);
     }
     
     public void NextOrder()
@@ -75,7 +75,7 @@ public class OrderHandler : MonoBehaviour
         // Check if shift is complete
         if (completedOrderCount >= totalOrders)
         {
-            UIHandler.Instance.WorkManager.EndShift();
+            UIWorkManager.Instance.EndShift();
             return;
         }
         
@@ -83,10 +83,10 @@ public class OrderHandler : MonoBehaviour
         currentOrder = GenerateRandomOrder();
         orderTimer = timePerOrder;
                 
-        UIHandler.Instance.WorkManager.UpdateOrderDisplay(currentOrder);
-        UIHandler.Instance.WorkManager.UpdateTimer(orderTimer);
+        UIWorkManager.Instance.UpdateOrderDisplay(currentOrder);
+        UIWorkManager.Instance.UpdateTimer(orderTimer);
 
-        UIHandler.Instance.WorkManager.NextBox();
+        UIWorkManager.Instance.NextBox();
     }
     
     private List<Items> GenerateRandomOrder()
@@ -111,7 +111,7 @@ public class OrderHandler : MonoBehaviour
         if (currentOrder.Contains(droppedItem))
         {
             currentOrder.Remove(droppedItem);
-            UIHandler.Instance.WorkManager.UpdateOrderDisplay(currentOrder);
+            UIWorkManager.Instance.UpdateOrderDisplay(currentOrder);
             
             // If order is complete
             if (currentOrder.Count == 0)
@@ -134,7 +134,7 @@ public class OrderHandler : MonoBehaviour
         float payment = 10f + (timeBonus * 10f); // Base 25 + up to 25 bonus
         totalEarned += payment;
         // Update UI with new count
-        UIHandler.Instance.WorkManager.UpdateCompletedOrders(completedOrderCount, totalOrders);
+        UIWorkManager.Instance.UpdateCompletedOrders(completedOrderCount, totalOrders);
         NextOrder();
     }
     

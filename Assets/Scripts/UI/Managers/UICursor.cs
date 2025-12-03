@@ -3,14 +3,23 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [Serializable]
-public class UICursorHelper
+public class UICursor : MonoBehaviour
 {
+    public static UICursor Instance;
+
     private static Vector2 cursorHotspot = new(-1, -1);
     private static CursorMode cursorMode = CursorMode.Auto;
+
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] Camera gameCamera;
+
     public Texture2D defaultCursor;
     public Texture2D followingCursor;
+
+    public void Awake()
+    {
+        Instance = this;
+    }
     public (Vector3, bool) CursorToVector3(float targetY)
     {
         bool overInteractableLayer = false;

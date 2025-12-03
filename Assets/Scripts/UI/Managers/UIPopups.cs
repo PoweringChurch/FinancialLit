@@ -5,14 +5,19 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 [Serializable]
-public class UIPopupManager
+public class UIPopups : MonoBehaviour
 {
+    public static UIPopups Instance;
     public GameObject infoPanelTemplate;
     public GameObject ynPanelTemplate;
     public GameObject taskPanelTemplate;
     public Transform PopupsTransform;
     public AudioClip popupsfx;
 
+    public void Awake()
+    {
+        Instance = this;
+    }
     public void PopupInfo(string header, string body, string dismiss = "OK", Action action = null)
     {
         UISFXPlayer.Instance.Play(popupsfx);

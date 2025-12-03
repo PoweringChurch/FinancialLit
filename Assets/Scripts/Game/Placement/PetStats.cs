@@ -128,7 +128,7 @@ public class PetStats : MonoBehaviour
         {
             PetFlagManager.AddFlag(PetFlag.Sick);
             PetAnimation.Instance.SetBoolParameter("IsSick", true);
-            UIHandler.Instance.PopupManager.PopupInfo(
+            UIPopups.Instance.PopupInfo(
                 "Oh no",
                 "Your pet is sick! Recovery from eating, playing, and sleeping is halved. Visit the vet!");
         }  

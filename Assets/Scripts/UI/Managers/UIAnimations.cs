@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class UIAnimationManager
+public class UIAnimations : MonoBehaviour
 {
     public Transform flag;
 
     public RawImage bgScrollerImage;
     public Vector2 scrollSpeed = new Vector2(0.1f, 0.1f);
-    public void UpdateUI()
+    public void Update()
     {
         //rotate flag
         float angle = Mathf.Sin(Time.time * 0.5f) * 5f;

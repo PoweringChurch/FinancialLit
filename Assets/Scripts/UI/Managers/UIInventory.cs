@@ -5,16 +5,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class UIInventoryManager
+public class UIInventory : MonoBehaviour
 {
+    public static UIInventory Instance;
+
     [SerializeField] private GameObject itemButtonTemplate;
     [SerializeField] private Transform contentTransform;
 
     private Inventory inventory;
     private readonly Dictionary<string, GameObject> inventoryItemUI = new();
 
-    public void Initialize()
+    public void Awake()
     {
+        Instance = this;
         if (itemButtonTemplate == null || contentTransform == null)
         {
             Debug.LogError("InventoryManager components not fully linked in Inspector");

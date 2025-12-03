@@ -35,7 +35,7 @@ public class PlacementHandler : MonoBehaviour
         if (isFixed) return;
         if (IsIgnored(other.gameObject)) { return; }
         _nObstacles++;
-        if (UIHandler.Instance.SaveManagerUI.debugToggle.isOn) 
+        if (UISave.Instance.debugToggle.isOn) 
         {print("debug mode is enabled"); return;}
         SetPlacementMode(PlacementMode.Invalid);
     }

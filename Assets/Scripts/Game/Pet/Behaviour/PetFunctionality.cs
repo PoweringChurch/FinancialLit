@@ -23,7 +23,7 @@ public class PetFunctionality : BaseFunctionality
         PetAnimation.Instance.SetBoolParameter("IsSitting",false);
         PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
 
-        UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.followingCursor);
+        UICursor.Instance.SetCursor(UICursor.Instance.followingCursor);
         PlayerFlagManager.AddFlag(PlayerFlag.SetFollow);
         PetMover.Instance.OnReachedGoal += ReachedFollowTarget;
     }

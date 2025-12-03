@@ -48,20 +48,20 @@ public class PlayerInputHandler : MonoBehaviour
     {
         
         //setting follow
-        var (goalPosition,overInteractableLayer) = UIHandler.Instance.CursorHelper.CursorToVector3(1);
+        var (goalPosition,overInteractableLayer) = UICursor.Instance.CursorToVector3(1);
         if (PlayerFlagManager.HasState(PlayerFlag.SetFollow) && interact.WasPressedThisFrame() && overInteractableLayer)
         {
             bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
             if (isOverUi)
             {   
-                UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.defaultCursor);
+                UICursor.Instance.SetCursor(UICursor.Instance.defaultCursor);
                 PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
                 PlayerFlagManager.RemoveFlag(PlayerFlag.SetFollow);
                 return;
             }
             PlayerFlagManager.RemoveFlag(PlayerFlag.SetFollow);
             PetMover.Instance.SetGoalPosition(goalPosition);
-            UIHandler.Instance.CursorHelper.SetCursor(UIHandler.Instance.CursorHelper.defaultCursor);
+            UICursor.Instance.SetCursor(UICursor.Instance.defaultCursor);
         }
     }
     void HandleInteraction()

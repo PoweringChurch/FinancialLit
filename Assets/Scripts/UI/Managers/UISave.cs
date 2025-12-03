@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class UISaveManager
+public class UISave : MonoBehaviour
 {
+    public static UISave Instance;
+
     public Transform slotGrid;
     public GameObject ingameOverlay;
     public GameObject ingameMenu;
@@ -15,10 +17,12 @@ public class UISaveManager
 
     public Toggle debugToggle;
 
-    public void Initialize()
+    public void Awake()
     {
+        Instance = this;
         DisplaySaves();
     }
+
     public void DisplaySaves()
     {
         // Clear existing slots
@@ -76,7 +80,7 @@ public class UISaveManager
         savesScreen.SetActive(false);
 
         CameraHandler.Instance.ToggleGamecam(true);
-        UIHandler.Instance.ItemUpdater.UpdateText();
+        UIResourcesUpdater.Instance.UpdateText();
 
         PetStateMachine.SetState(PetState.Idle);
 
@@ -120,7 +124,7 @@ public class UISaveManager
             newData.Shampoo = 10000;
             newData.Food = 1000;
 
-            UIHandler.Instance.PopupManager.PopupInfo(
+            UIPopups.Instance.PopupInfo(
                 "Hey!",
                 "Because debug mode is enabled, you start with a bunch of resources and every furniture item in the game, obtainable or not! This can be disabled in settings.",
                 "Sweet!"
@@ -153,11 +157,11 @@ public class UISaveManager
 
         PetMover.Instance.petTransform.gameObject.SetActive(true);
         //upd ui
-        UIHandler.Instance.ItemUpdater.UpdateText();
+        UIResourcesUpdater.Instance.UpdateText();
     }
     public void DeleteCurrentSave()
     {
-        UIHandler.Instance.PopupManager.PopupYN(
+        UIPopups.Instance.PopupYN(
         "Delete Save?",
         "Are you sure you want to delete this save? This cannot be undone.",
         onYes: () => 

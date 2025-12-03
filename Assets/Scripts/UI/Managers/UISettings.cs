@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class UISettingsManager
+public class UISettings : MonoBehaviour
 {
     public Toggle fullScreenToggle;
     public Toggle vsyncToggle;

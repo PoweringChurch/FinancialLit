@@ -5,8 +5,10 @@ using TMPro;
 using UnityEngine;
 
 [Serializable]
-public class UIWorkManager
+public class UIWorkManager : MonoBehaviour
 {
+    public static UIWorkManager Instance;
+
     public GameObject workoverlayUI;
     public GameObject ingameOverlayUI;
     public TextMeshProUGUI completedOrders;
@@ -17,9 +19,11 @@ public class UIWorkManager
     public GameObject shampooItemUI;        
     public Transform reqHolder;
     public RectTransform boxTransform;
-    private Dictionary<Items, GameObject> itemUIMap;        
-    public void Initialize()
-    {            
+    private Dictionary<Items, GameObject> itemUIMap;
+
+    public void Awake()
+    {
+        Instance = this;
         itemUIMap = new Dictionary<Items, GameObject>
         {
             { Items.Ball, ballItemUI },
@@ -31,7 +35,7 @@ public class UIWorkManager
     
     public void NextBox()
     {
-        UIHandler.Instance.StartCoroutine(BoxTransitionAnimation());
+        StartCoroutine(BoxTransitionAnimation());
     }
     private IEnumerator BoxTransitionAnimation()
     {
@@ -105,7 +109,7 @@ public class UIWorkManager
     {
         string header = "Stop working?";
         string body = "Are you sure you want to stop working? You will lose any earned money.";
-        UIHandler.Instance.PopupManager.PopupYN(header,body, () =>
+        UIPopups.Instance.PopupYN(header,body, () =>
         {
             OrderHandler.Instance.CancelShift();
             CameraHandler.Instance.ToggleGamecam(true);
@@ -117,7 +121,7 @@ public class UIWorkManager
     {
         string header = "Start working";
         string body = "Fulfill customer orders by dragging the requested items into the delivery box. Work fast for bonus earnings!";
-        UIHandler.Instance.PopupManager.PopupYN(header,body, () =>
+        UIPopups.Instance.PopupYN(header,body, () =>
         {
             OrderHandler.Instance.BeginShift();
             CameraHandler.Instance.ToggleGamecam(false);
@@ -129,7 +133,7 @@ public class UIWorkManager
     {
         float total = OrderHandler.Instance.totalEarned;
         string body = $"Great work! You earned ${total:F2} for your hard work!";
-        UIHandler.Instance.PopupManager.PopupInfo("Job well done!",body,"Yay!",() =>
+        UIPopups.Instance.PopupInfo("Job well done!",body,"Yay!",() =>
         {
             OrderHandler.Instance.EndShift();
             CameraHandler.Instance.ToggleGamecam(true);

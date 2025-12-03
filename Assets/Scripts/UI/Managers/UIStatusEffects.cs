@@ -5,9 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [Serializable]
-public class UIFlagManager
+public class UIStatusEffects : MonoBehaviour
 {
-
     [Serializable]
     public class FlagIcon
     {

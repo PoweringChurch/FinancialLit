@@ -7,6 +7,6 @@ public class WorkingFunctionality : BaseFunctionality
     }
     protected void BeginWork()
     {
-        UIHandler.Instance.WorkManager.EnterWork();
+        UIWorkManager.Instance.EnterWork();
     }
 }

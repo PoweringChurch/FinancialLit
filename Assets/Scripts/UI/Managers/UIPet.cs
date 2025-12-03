@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class UIPetManager
+public class UIPet : MonoBehaviour
 {
     public GameObject StatusPanel;
     [SerializeField]
