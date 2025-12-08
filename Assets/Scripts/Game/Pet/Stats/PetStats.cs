@@ -93,7 +93,7 @@ public class PetStats : MonoBehaviour
         }
         else
             PetFlagManager.RemoveFlag(PetFlag.Content);
-        // Check for Playful flag
+        // Check for playful flag
         if (status["energy"] > 0.6f && status["entertainment"] > 0.6f && UnityEngine.Random.Range(0f, 1f) < 0.004f)
         {
             playfulTickTimer = 30;
@@ -101,7 +101,7 @@ public class PetStats : MonoBehaviour
                 PetFlagManager.AddFlag(PetFlag.Playful);
         }
 
-        // Check for Loved flag
+        // Check for loved flag
         if (status["hunger"] > 0.6f && status["hygiene"] > 0.6f && UnityEngine.Random.Range(0f, 1f) < 0.004f)
         {
             lovedTickTimer = 40;
