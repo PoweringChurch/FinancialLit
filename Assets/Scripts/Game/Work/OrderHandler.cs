@@ -12,7 +12,7 @@ public class OrderHandler : MonoBehaviour
 
     private List<Items> currentOrder;
     private int completedOrderCount = 0;
-    private int totalOrders = 7;
+    private int totalOrders = 5;
     private float orderTimer;
     private float timePerOrder = 12f;
     private float countdown = 0f;
@@ -92,7 +92,7 @@ public class OrderHandler : MonoBehaviour
     private List<Items> GenerateRandomOrder()
     {
         List<Items> order = new List<Items>();
-        int itemCount = Random.Range(3, 6); 
+        int itemCount = Random.Range(2, 4); 
         
         for (int i = 0; i < itemCount; i++)
         {

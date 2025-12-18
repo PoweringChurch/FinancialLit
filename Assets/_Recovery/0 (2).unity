@@ -7950,7 +7950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7277b73c4b9714823a5494c489433e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
-  Popups: {fileID: 1731053393}
+  Popups: {fileID: 0}
   moodDisplay: {fileID: 1921165806}
 --- !u!1 &166351840
 GameObject:
@@ -10652,7 +10652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UICursor
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   gameCamera: {fileID: 1130872541}
   defaultCursor: {fileID: 2800000, guid: cf7063f1152d745b590dfd43c288aefb, type: 3}
   followingCursor: {fileID: 2800000, guid: 773a1b45f62d042f0909d0128e61cdae, type: 3}
@@ -10804,58 +10804,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &307103645
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 307103646}
-  - component: {fileID: 307103647}
-  m_Layer: 0
-  m_Name: UIResources
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &307103646
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307103645}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 928189235}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &307103647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307103645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 608ca2380fc8bdf42aa2f0a829470b16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIResourcesUpdater
-  spendingsPanel: {fileID: 2043811308}
-  shampooText: {fileID: 490231538}
-  foodText: {fileID: 174027473}
-  moneyText: {fileID: 1535926489}
-  foodspendings: {fileID: 135570320}
-  hygieneSpendings: {fileID: 650644773}
-  furnitureSpendings: {fileID: 1381990643}
-  healthcareSpendings: {fileID: 1724134942}
 --- !u!1 &307287546
 GameObject:
   m_ObjectHideFlags: 0
@@ -26849,9 +26797,9 @@ MonoBehaviour:
           m_StringArgument: menu
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1287184872}
-        m_TargetAssemblyTypeName: UISave, Assembly-CSharp
-        m_MethodName: DisplaySaves
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: ClosePopups
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27644,7 +27592,6 @@ Transform:
   - {fileID: 1498780752}
   - {fileID: 276261168}
   - {fileID: 1879710942}
-  - {fileID: 307103646}
   m_Father: {fileID: 1085192028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &937383331
@@ -29839,9 +29786,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1287184872}
-        m_TargetAssemblyTypeName: UISave, Assembly-CSharp
-        m_MethodName: DisplaySaves
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+        m_MethodName: DeleteCurrentSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34413,7 +34360,7 @@ GameObject:
   - component: {fileID: 1325084186}
   - component: {fileID: 1325084185}
   m_Layer: 5
-  m_Name: Collapse
+  m_Name: Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37018,8 +36965,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIPet
   StatusPanel: {fileID: 1367083313}
-  collapseArrow: {fileID: 1325084183}
-  expandArrow: {fileID: 2120807757}
   DisplayImage: {fileID: 1921165807}
   DisplayText: {fileID: 1608669692}
   HungerFill: {fileID: 1394979802}
@@ -42760,7 +42705,7 @@ GameObject:
   - component: {fileID: 1731053392}
   - component: {fileID: 1731053393}
   m_Layer: 0
-  m_Name: UIPopups
+  m_Name: UIPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44574,8 +44519,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307103647}
-        m_TargetAssemblyTypeName: UIResourcesUpdater, Assembly-CSharp
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
         m_MethodName: ToggleSpendingsPanel
         m_Mode: 1
         m_Arguments:
@@ -45505,10 +45450,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1504868467}
-        m_TargetAssemblyTypeName: UIPet, Assembly-CSharp
-        m_MethodName: ToggleStatusPanel
-        m_Mode: 1
+      - m_Target: {fileID: 1367083313}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -50023,18 +49968,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1287184872}
-        m_TargetAssemblyTypeName: UISave, Assembly-CSharp
-        m_MethodName: DisplaySaves
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

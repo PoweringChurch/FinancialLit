@@ -86,6 +86,8 @@ public class UISave : MonoBehaviour
 
         PetAnimation.Instance.SetBoolParameter("IsSitting",false);
         PetAnimation.Instance.SetBoolParameter("IsSick",false);
+
+        UIInventory.Instance.UpdateInventoryUI();
     }
     string FormatPlaytime(float seconds)
     {
@@ -150,7 +152,7 @@ public class UISave : MonoBehaviour
         SaveHandler.Instance.LoadSaved(newData);
         SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
 
-        //upd external
+        //upd external (?? what did this mean)
         PetFlagManager.ClearFlags();
         PetStateMachine.SetState(PetState.Idle);
         PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
@@ -158,6 +160,7 @@ public class UISave : MonoBehaviour
         PetMover.Instance.petTransform.gameObject.SetActive(true);
         //upd ui
         UIResourcesUpdater.Instance.UpdateText();
+        UIInventory.Instance.UpdateInventoryUI();
     }
     public void DeleteCurrentSave()
     {

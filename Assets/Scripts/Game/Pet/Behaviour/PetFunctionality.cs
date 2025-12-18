@@ -25,6 +25,7 @@ public class PetFunctionality : BaseFunctionality
 
         UICursor.Instance.SetCursor(UICursor.Instance.followingCursor);
         PlayerFlagManager.AddFlag(PlayerFlag.SetFollow);
+        print("added set follow flag");
         PetMover.Instance.OnReachedGoal += ReachedFollowTarget;
     }
 

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class UIPet : MonoBehaviour
 {
     public GameObject StatusPanel;
+    public GameObject collapseArrow;
+    public GameObject expandArrow;
     [SerializeField]
     private Image DisplayImage;
     [SerializeField]
@@ -33,9 +35,8 @@ public class UIPet : MonoBehaviour
         currentHunger = PetStats.Instance.Status["hunger"];
         currentEntertainment = PetStats.Instance.Status["entertainment"];
         currentEnergy = PetStats.Instance.Status["energy"];
-        UpdateUI();
     }
-    public void UpdateUI()
+    private void Update()
     {
         var hygiene = PetStats.Instance.Status["hygiene"];
         var hunger = PetStats.Instance.Status["hunger"];
@@ -92,5 +93,12 @@ public class UIPet : MonoBehaviour
         currentDisplayColor = Color.Lerp(currentDisplayColor, targetColor, Time.deltaTime * lerpSpeed);
         DisplayImage.color = currentDisplayColor;
         DisplayText.text = displaytext;
+    }
+    public void ToggleStatusPanel()
+    {
+        bool panelActive = StatusPanel.activeSelf;
+        StatusPanel.SetActive(!panelActive);
+        collapseArrow.SetActive(!panelActive);
+        expandArrow.SetActive(panelActive);
     }
 }

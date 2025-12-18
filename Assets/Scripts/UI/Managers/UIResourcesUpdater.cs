@@ -18,10 +18,14 @@ public class UIResourcesUpdater : MonoBehaviour
     public TextMeshProUGUI furnitureSpendings;
     public TextMeshProUGUI healthcareSpendings;
 
-    public void Awake()
+    public void Start()
     {
         Instance = this;
         UpdateText();
+    }
+    public void ToggleSpendingsPanel()
+    {
+        spendingsPanel.SetActive(!spendingsPanel.activeSelf);
     }
     public void UpdateText()
     {
