@@ -47,4 +47,7 @@ public class UIButtons : MonoBehaviour
         RawImage unavailableImage = targetButton.button.transform.Find("Unavailable").GetComponent<RawImage>();
         if (unavailableImage) unavailableImage.enabled = !enabled;
     }
+    public void Quit() {
+        Application.Quit();
+    }
 }
