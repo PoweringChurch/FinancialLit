@@ -47,7 +47,6 @@ public class PlacementHandler : MonoBehaviour
         if (_nObstacles <= 0)
             SetPlacementMode(PlacementMode.Valid);
     }
-    //no idea what this does vv
 #if UNITY_EDITOR
     private void OnValidate()
     {

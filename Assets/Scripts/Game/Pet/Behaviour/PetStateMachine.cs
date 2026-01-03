@@ -1,13 +1,13 @@
 using System;
 public enum PetState {Idle, Sitting, Sleeping, Playing, Bathing }
-public static class PetStateMachine
+public  class PetStateMachine
 {
-    private static PetState currentState = PetState.Sitting;
-    public static PetState CurrentState => currentState;
+    private  PetState currentState = PetState.Sitting;
+    public  PetState CurrentState => currentState;
     
-    public static event Action<PetState, PetState> OnStateChanged;
+    public  event Action<PetState, PetState> OnStateChanged;
     
-    public static void SetState(PetState newState)
+    public  void SetState(PetState newState)
     {
         if (currentState == newState) return;
         
@@ -15,5 +15,5 @@ public static class PetStateMachine
         currentState = newState;
         OnStateChanged?.Invoke(oldState, newState);
     }
-    public static bool IsInState(PetState state) => currentState == state;
+    public  bool IsInState(PetState state) => currentState == state;
 }

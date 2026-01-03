@@ -104,19 +104,15 @@ public class Interaction : MonoBehaviour
             
             if (validHits.Count > 0)
             {
-                // Sort by distance (closest first)
+                //sort by distance (closest first)
                 validHits.Sort((a, b) => a.distance.CompareTo(b.distance));
-                
                 // Cycle through valid hits
                 currentHitIndex = currentHitIndex % validHits.Count;
                 RaycastHit selectedHit = validHits[currentHitIndex];
-                
                 // Increment for next click
                 currentHitIndex++;
-                
                 // Get functionality component
                 selectedHit.transform.TryGetComponent(out BaseFunctionality functionality);
-
                 currentOutline = selectedHit.transform.GetComponentInChildren<Outline>();
                 if (currentOutline != null)
                 {

@@ -17,7 +17,7 @@ public class InventoryHelper : MonoBehaviour
     {
         UIInventory.Instance.SetInventory(inventory);
     }
-    // Helpers
+    // helpers
     public void AddItem(FurnitureData itemData, int count)
     {
         inventory.AddItem(itemData, count);

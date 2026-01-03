@@ -35,7 +35,7 @@ public class OrderHandler : MonoBehaviour
             
             if (countdown <= 0)
             {
-                // Countdown finished, start first order
+                // countdown finished, start first order
                 shiftActive = true;
                 NextOrder();
             }

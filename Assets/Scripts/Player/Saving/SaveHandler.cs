@@ -113,7 +113,7 @@ public class SaveHandler : MonoBehaviour
         // Pet flags
         PetFlagManager.SetFlags(playerData.PetFlags);
 
-        // Clear existing furniture
+        //clear existing furniture
         for (int i = homeFurnitureTransform.childCount - 1; i >= 0; i--)
         {
             Destroy(homeFurnitureTransform.GetChild(i).gameObject);
@@ -131,7 +131,7 @@ public class SaveHandler : MonoBehaviour
             GameObject spawnedFurniture = Instantiate(furnitureItem.prefab, homeFurnitureTransform);
             spawnedFurniture.transform.SetPositionAndRotation(furnitureData.position, furnitureData.rotation);
 
-            // Restore furniture-specific data
+            // Restore furniture data
             var functionality = spawnedFurniture.GetComponent<BaseFunctionality>();
             if (functionality is FeedingFunctionality feedingFunctionality)
             {
@@ -165,7 +165,7 @@ public class SaveHandler : MonoBehaviour
             File.Delete(savePath);
             Debug.Log($"Deleted save file: {savePath}");
             
-            // If we deleted the currently active save, reset it
+            //if deleted the currently active save, reset it (should happen but juuust in case)
             if (currentSaveFile == fileName)
             {
                 currentSaveFile = "default.json";

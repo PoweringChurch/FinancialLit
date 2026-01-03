@@ -31,7 +31,7 @@ public class UIInventory : MonoBehaviour
 
     public void UpdateInventoryUI()
     {
-        // Clear existing UI
+        //clear existing UI
         foreach (Transform child in contentTransform)
         {
             UnityEngine.Object.Destroy(child.gameObject);
@@ -76,7 +76,7 @@ public class UIInventory : MonoBehaviour
 
         if (entry == null || entry.count <= 0)
         {
-            // If item is removed or count is zero, clean up the UI element
+            //if item is removed or count is zero, clean up the UI element
             if (inventoryItemUI.TryGetValue(itemName, out GameObject itemUI))
             {
                 UnityEngine.Object.Destroy(itemUI);

@@ -30,14 +30,14 @@ public class UISave : MonoBehaviour
         {
             UnityEngine.Object.Destroy(child.gameObject);
         }
-        // Get all .json files in the save directory
+        //get all .json files in the save directory
         string savePath = Application.persistentDataPath;
         string[] saveFiles = System.IO.Directory.GetFiles(savePath, "*.json");
-        // Sort by last modified time (most recent first)
+        //sort by last modified time
         Array.Sort(saveFiles, (a, b) =>
             System.IO.File.GetLastWriteTime(b).CompareTo(System.IO.File.GetLastWriteTime(a))
         );
-        // Create a slot for each save file
+        //create a slot for each save file
         foreach (string filePath in saveFiles)
         {
             string fileName = System.IO.Path.GetFileName(filePath);
@@ -47,20 +47,19 @@ public class UISave : MonoBehaviour
                 string json = System.IO.File.ReadAllText(filePath);
                 PlayerData saveData = JsonUtility.FromJson<PlayerData>(json);
 
-                // Create slot UI
+                // create slot UI
                 GameObject slot = UnityEngine.Object.Instantiate(slotTemplate, slotGrid);
 
-                // Fill out slot info (adjust based on your template structure)
                 var texts = slot.GetComponentsInChildren<TextMeshProUGUI>();
-                texts[0].text = saveData.PetName; // Slot name/pet name
-                texts[1].text = FormatPlaytime(saveData.TotalPlaytimeSeconds); // Playtime
+                texts[0].text = saveData.PetName; // pet name
+                texts[1].text = FormatPlaytime(saveData.TotalPlaytimeSeconds); // playtime
                 texts[2].text = FormatTimestamp(saveData.LastSaveTimestamp); // Last saved
                 texts[3].text = saveData.DisplayStatus; // Status
                 texts[4].text = $"${saveData.Money:N2}"; //money
 
-                // Add button to load this save
+                // add button to load this save
                 Button loadButton = slot.GetComponentInChildren<Button>();
-                string capturedFileName = fileName; // Capture in local variable
+                string capturedFileName = fileName; // capture in local variable
                 loadButton.onClick.AddListener(() => OnLoadClick(fileName));
             }
             catch (Exception e)
@@ -152,7 +151,7 @@ public class UISave : MonoBehaviour
         SaveHandler.Instance.LoadSaved(newData);
         SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
 
-        //upd external (?? what did this mean)
+        //upd external (?? what did this mean) (however many weeks later still no idea what this means)
         PetFlagManager.ClearFlags();
         PetStateMachine.SetState(PetState.Idle);
         PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;

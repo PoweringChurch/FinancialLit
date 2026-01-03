@@ -42,13 +42,13 @@ public class UIWorkManager : MonoBehaviour
         float duration = 0.5f;
         float elapsed = 0f;
         
-        // Get screen width for off-screen positions
+        // get screen width for off-screen positions
         float screenWidth = Screen.width;
         Vector2 centerPos = boxTransform.anchoredPosition;
         Vector2 rightOffScreen = new Vector2(screenWidth, centerPos.y);
         Vector2 leftOffScreen = new Vector2(-screenWidth, centerPos.y);
         
-        // Slide current box off to the right
+        //slide current box off to the right
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
@@ -57,13 +57,13 @@ public class UIWorkManager : MonoBehaviour
             yield return null;
         }
         
-        // Teleport box to left side (off screen)
+        //teleport box to left side (off screen)
         boxTransform.anchoredPosition = leftOffScreen;
         
-        // Reset elapsed time for slide in
+        //reset elapsed time for slide in
         elapsed = 0f;
         
-        // Slide new box in from the left
+        // slide new box in from the left
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
@@ -71,7 +71,7 @@ public class UIWorkManager : MonoBehaviour
             boxTransform.anchoredPosition = Vector2.Lerp(leftOffScreen, centerPos, t);
             yield return null;
         }
-        // Ensure it's exactly centered
+        //center
         boxTransform.anchoredPosition = centerPos;
     }
     public void StartWorking()
