@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager Instance;
-    private UIPopupManager PopupManager => UIHandler.Instance.PopupManager;
+    public UIPopups Popups;
     private GameObject currentTaskUI;
     public Button moodDisplay;
     void Awake()
@@ -18,7 +18,7 @@ public class TutorialManager : MonoBehaviour
     
     public void AskTutorial()
     {
-        UIHandler.Instance.PopupManager.PopupYN("Tutorial", 
+        Popups.PopupYN("Tutorial", 
             "Would you like to learn how to play?", 
             () => StartTutorial(), 
             null, 
@@ -57,7 +57,7 @@ public class TutorialManager : MonoBehaviour
         string header = "Welcome";
         string body = "Let's learn how to take care of your new pet!";
         string dismiss = "OK";
-        PopupManager.PopupInfo(header, body, dismiss, ShowControls);
+     Popups.PopupInfo(header, body, dismiss, ShowControls);
     }
     // Step 1.5
     void ShowControls()
@@ -66,7 +66,7 @@ public class TutorialManager : MonoBehaviour
         string body = "You can use WASD to move the camera around, use the scroll wheel to zoom in and out.\n\n"+
         "You can interact with objects by clicking on them with the left mouse button.";
         string dismiss = "OK";
-        PopupManager.PopupInfo(header, body, dismiss, ShowPetCareBasics);
+     Popups.PopupInfo(header, body, dismiss, ShowPetCareBasics);
     }
     // Step 2
     void ShowPetCareBasics()
@@ -78,7 +78,7 @@ public class TutorialManager : MonoBehaviour
             "• Energy - Let them rest\n" +
             "• Fun - Play with toys or at the park";
         string dismiss = "Next";
-        PopupManager.PopupInfo(header, body, dismiss, ShowHealthWarning);
+     Popups.PopupInfo(header, body, dismiss, ShowHealthWarning);
     }
     
     void ShowHealthWarning()
@@ -87,14 +87,14 @@ public class TutorialManager : MonoBehaviour
         string body = "If your pet's needs ever get too low, they might get sick and need a trip to the vet, which can be expensive!\n\n" +
             "You can check out your pet's stats by clicking on the mood display in the bottom left.";
         string dismiss = "Next";
-        PopupManager.PopupInfo(header, body, dismiss, TaskOpenNeeds);
+     Popups.PopupInfo(header, body, dismiss, TaskOpenNeeds);
     }
     
     void TaskOpenNeeds()
     {
         string header = "View pet needs";
         string body = "Press on the mood display on the bottom left to view your pet's needs";
-        currentTaskUI = PopupManager.PopupTask(header, body);
+        currentTaskUI = Popups.PopupTask(header, body);
         
         if (moodDisplay != null)
             moodDisplay.onClick.AddListener(ShowNeedsAcknowledgement);
@@ -112,7 +112,7 @@ public class TutorialManager : MonoBehaviour
         if (currentTaskUI != null)
             Destroy(currentTaskUI);
         
-        PopupManager.PopupInfo(header, body, dismiss, ShowPlacement);
+     Popups.PopupInfo(header, body, dismiss, ShowPlacement);
     }
     
     // Step 3
@@ -122,14 +122,14 @@ public class TutorialManager : MonoBehaviour
         string body = "Your home is empty!\n" +
             "To start building, expand the arrow on the bottom right and select the yellow button to enter placement mode.";
         string dismiss = "Next";
-        PopupManager.PopupInfo(header, body, dismiss, TaskPlaceOldMonitor);
+     Popups.PopupInfo(header, body, dismiss, TaskPlaceOldMonitor);
     }
     
     void TaskPlaceOldMonitor()
     {
         string header = "Placement system";
         string body = "Open the placement menu and place down an old monitor";
-        currentTaskUI = PopupManager.PopupTask(header, body);
+        currentTaskUI = Popups.PopupTask(header, body);
         
         if (FurniturePlacer.Instance != null)
             FurniturePlacer.Instance.OnItemPlaced += ShowPlacementAcknowledgement;
@@ -154,7 +154,7 @@ public class TutorialManager : MonoBehaviour
         if (currentTaskUI != null)
             Destroy(currentTaskUI);
         
-        PopupManager.PopupInfo(header, body, dismiss, ShowWorking);
+     Popups.PopupInfo(header, body, dismiss, ShowWorking);
     }
     
     // Step 4
@@ -163,14 +163,14 @@ public class TutorialManager : MonoBehaviour
         string header = "Money";
         string body = "You can work from home to earn money! To begin working, click any monitor and press \"Go to work\".";
         string dismiss = "Next";
-        PopupManager.PopupInfo(header, body, dismiss, TaskBeginWorking);
+     Popups.PopupInfo(header, body, dismiss, TaskBeginWorking);
     }
     
     void TaskBeginWorking()
     {
         string header = "Money";
         string body = "Close the placement menu, and select the placed monitor to begin working";
-        currentTaskUI = PopupManager.PopupTask(header, body);
+        currentTaskUI = Popups.PopupTask(header, body);
         
         if (OrderHandler.Instance != null)
         {
@@ -196,7 +196,7 @@ public class TutorialManager : MonoBehaviour
         string header = "Money";
         string body = "You can view how you spend your money by clicking on your balance in the top left.\n\nBe sure to spend responsibly!";
         string dismiss = "Got it";
-        PopupManager.PopupInfo(header, body, dismiss, ShowResources);
+     Popups.PopupInfo(header, body, dismiss, ShowResources);
     }
     // Step 5
     void ShowResources()
@@ -205,7 +205,7 @@ public class TutorialManager : MonoBehaviour
         string body = "Underneath your balance shows the amount of pet shampoo and pet food you have. \n\n"+
         "Make sure you have enough of both of these at all times, as you are unable to bathe or feed your pet if you run out.";
         string dismiss = "Next";
-        PopupManager.PopupInfo(header,body,dismiss,ShowTravel);
+     Popups.PopupInfo(header,body,dismiss,ShowTravel);
     }
     // Step 6
     void ShowTravel()
@@ -213,7 +213,7 @@ public class TutorialManager : MonoBehaviour
         string header = "Travel";
         string body = "You can visit other areas by selecting the blue travel button in the bottom right panel, above the placement button.";
         string dismiss = "Next";
-        PopupManager.PopupInfo(header, body, dismiss, ShowTravelAdditionalInfo);
+     Popups.PopupInfo(header, body, dismiss, ShowTravelAdditionalInfo);
     }
     
     void ShowTravelAdditionalInfo()
@@ -221,7 +221,7 @@ public class TutorialManager : MonoBehaviour
         string header = "Travel";
         string body = "Different areas offer different services. Explore them all!";
         string dismiss = "Great";
-        PopupManager.PopupInfo(header, body, dismiss, ShowFinal);
+     Popups.PopupInfo(header, body, dismiss, ShowFinal);
     }
     
     // Step 6
@@ -230,13 +230,13 @@ public class TutorialManager : MonoBehaviour
         string header = "Take on the world";
         string body = "That's everything you need to know! Have fun taking care of your pet!";
         string dismiss = "I'm ready";
-        PopupManager.PopupInfo(header, body, dismiss, CloseTutorial);
+     Popups.PopupInfo(header, body, dismiss, CloseTutorial);
     }
     public void CloseTutorial()
     {
         PlayerFlagManager.RemoveFlag(PlayerFlag.Tutorial);
         CleanupEventListeners();
-        PopupManager.CloseAllPopups();
+     Popups.CloseAllPopups();
         currentTaskUI = null;
     }
 }
