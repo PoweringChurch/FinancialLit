@@ -10,16 +10,16 @@ public class AppointingFunctionality : BaseFunctionality
     }
     protected void Schedule()
     {
-        if (!PetFlagManager.HasFlag(PetFlag.Sick))
+        if (!PetHelper.petFlagManager.HasFlag(PetFlag.Sick))
         {
-            print(string.Join(", ", PetFlagManager.CurrentFlags));
-            Message($"{PetStats.Instance.PetName} is not sick!");
+            print(string.Join(", ", PetHelper.petFlagManager.CurrentFlags));
+            Message($"{PetHelper.petStats.PetName} is not sick!");
             return;
         }
         
         string header = "Pet treatment";
 
-        var status = PetStats.Instance.Status;
+        var status = PetHelper.petStats.Status;
         float avgHealth = (status["hunger"] + status["energy"] + status["hygiene"] + status["entertainment"]) / 4f;
         fee = baseline * (1.5f - avgHealth * 0.5f); 
         string body = $"Scheduling an appointment costs ${fee:N2}. You can reduce treatment costs by keeping your pet healthy. Do you want to proceed with the treatment?";
@@ -34,6 +34,6 @@ public class AppointingFunctionality : BaseFunctionality
         }
         Message("Pet cured!");    
         PlayerResources.Instance.Spend(fee, "Healthcare");
-        PetStats.Instance.CurePet();
+        PetHelper.petStats.CurePet();
     }
 }

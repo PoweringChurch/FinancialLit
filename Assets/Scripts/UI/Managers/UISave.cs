@@ -70,7 +70,7 @@ public class UISave : MonoBehaviour
     }
     private void OnLoadClick(string fileName)
     {
-        PetMover.Instance.petTransform.gameObject.SetActive(true);
+        PetHelper.petMover.petTransform.gameObject.SetActive(true);
         AreaHandler.Instance.EnterHome();
         LoadThisSave(fileName);
         
@@ -81,10 +81,10 @@ public class UISave : MonoBehaviour
         CameraHandler.Instance.ToggleGamecam(true);
         UIResourcesUpdater.Instance.UpdateText();
 
-        PetStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.SetState(PetState.Idle);
 
-        PetAnimation.Instance.SetBoolParameter("IsSitting",false);
-        PetAnimation.Instance.SetBoolParameter("IsSick",false);
+        PetHelper.petAnimation.SetBoolParameter("IsSitting",false);
+        PetHelper.petAnimation.SetBoolParameter("IsSick",false);
 
         UIInventory.Instance.UpdateInventoryUI();
     }
@@ -151,12 +151,11 @@ public class UISave : MonoBehaviour
         SaveHandler.Instance.LoadSaved(newData);
         SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
 
-        //upd external (?? what did this mean) (however many weeks later still no idea what this means)
-        PetFlagManager.ClearFlags();
-        PetStateMachine.SetState(PetState.Idle);
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
+        PetHelper.petFlagManager.ClearFlags();
+        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
 
-        PetMover.Instance.petTransform.gameObject.SetActive(true);
+        PetHelper.petMover.petTransform.gameObject.SetActive(true);
         //upd ui
         UIResourcesUpdater.Instance.UpdateText();
         UIInventory.Instance.UpdateInventoryUI();

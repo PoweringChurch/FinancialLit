@@ -8997,7 +8997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &217731165
 Transform:
   m_ObjectHideFlags: 0
@@ -9085,6 +9085,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fa3b2ede9242741ab9f64a85f1ca1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetBehaviour
+  petMover: {fileID: 0}
+  petAnimation: {fileID: 0}
+  petStats: {fileID: 0}
   barks:
   - {fileID: 8300000, guid: cb302f53310c0844c89422341f7b1da5, type: 3}
   - {fileID: 8300000, guid: f1a39fc2f778cae4e8c9c8e1dd702de2, type: 3}
@@ -9135,16 +9138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a7d45fb4845402aa31957032f0f334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pet
-  tirednessRate: 0.001
-  hungerRate: 0.002
-  boredomRate: 0.0024
-  dirtinessRate: 0.0013
-  sleepRecoveryRate: 0.012
-  entertainmentRecoveryRate: 0.018
-  hygieneRecoveryRate: 0.015
+  petAnimation: {fileID: 0}
   atPark: 0
-  stinkyParticles: {fileID: 489781194}
-  batheParticles: {fileID: 1178987253}
+  StinkyParticles: {fileID: 0}
+  BatheParticles: {fileID: 0}
 --- !u!1 &218140253
 GameObject:
   m_ObjectHideFlags: 0
@@ -35489,7 +35486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &789326473
 Transform:
   m_ObjectHideFlags: 0
@@ -35577,6 +35574,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fa3b2ede9242741ab9f64a85f1ca1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetBehaviour
+  petMover: {fileID: 0}
+  petAnimation: {fileID: 0}
+  petStats: {fileID: 0}
   barks:
   - {fileID: 8300000, guid: cb302f53310c0844c89422341f7b1da5, type: 3}
   - {fileID: 8300000, guid: f1a39fc2f778cae4e8c9c8e1dd702de2, type: 3}
@@ -35627,16 +35627,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a7d45fb4845402aa31957032f0f334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pet
-  tirednessRate: 0.001
-  hungerRate: 0.002
-  boredomRate: 0.0024
-  dirtinessRate: 0.0013
-  sleepRecoveryRate: 0.012
-  entertainmentRecoveryRate: 0.018
-  hygieneRecoveryRate: 0.015
+  petAnimation: {fileID: 0}
   atPark: 0
-  stinkyParticles: {fileID: 735516242}
-  batheParticles: {fileID: 1616348361}
+  StinkyParticles: {fileID: 0}
+  BatheParticles: {fileID: 0}
 --- !u!1 &791120792
 GameObject:
   m_ObjectHideFlags: 0
@@ -60816,16 +60810,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a7d45fb4845402aa31957032f0f334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pet
-  tirednessRate: 0.001
-  hungerRate: 0.002
-  boredomRate: 0.0024
-  dirtinessRate: 0.0013
-  sleepRecoveryRate: 0.012
-  entertainmentRecoveryRate: 0.018
-  hygieneRecoveryRate: 0.015
+  petAnimation: {fileID: 1624103064}
   atPark: 0
-  stinkyParticles: {fileID: 689857173}
-  batheParticles: {fileID: 21570889}
+  StinkyParticles: {fileID: 689857173}
+  BatheParticles: {fileID: 21570889}
 --- !u!114 &1624103060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60839,7 +60827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetFunctionality
   price: 0
-  loveParticles: {fileID: 0}
+  loveParticles: {fileID: 689857173}
 --- !u!114 &1624103062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60867,6 +60855,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fa3b2ede9242741ab9f64a85f1ca1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetBehaviour
+  petMover: {fileID: 1624103062}
+  petAnimation: {fileID: 1624103064}
+  petStats: {fileID: 1624103058}
   barks:
   - {fileID: 8300000, guid: cb302f53310c0844c89422341f7b1da5, type: 3}
   - {fileID: 8300000, guid: f1a39fc2f778cae4e8c9c8e1dd702de2, type: 3}

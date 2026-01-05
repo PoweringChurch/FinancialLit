@@ -22,11 +22,11 @@ public class SaveHandler : MonoBehaviour
     {
         currentPlayerData.IsNewSave = false;
         //pet stats
-        currentPlayerData.PetName = PetStats.Instance.PetName;
-        currentPlayerData.Hygiene = PetStats.Instance.Status["hygiene"];
-        currentPlayerData.Hunger = PetStats.Instance.Status["hunger"];
-        currentPlayerData.Entertainment = PetStats.Instance.Status["entertainment"];
-        currentPlayerData.Energy = PetStats.Instance.Status["energy"];
+        currentPlayerData.PetName = PetHelper.petStats.PetName;
+        currentPlayerData.Hygiene = PetHelper.petStats.Status["hygiene"];
+        currentPlayerData.Hunger = PetHelper.petStats.Status["hunger"];
+        currentPlayerData.Entertainment = PetHelper.petStats.Status["entertainment"];
+        currentPlayerData.Energy = PetHelper.petStats.Status["energy"];
 
         string displayStatus = "OKAY";
 
@@ -51,10 +51,10 @@ public class SaveHandler : MonoBehaviour
 
         currentPlayerData.DisplayStatus = displayStatus;
 
-        currentPlayerData.PetPosition = PetMover.Instance.petTransform.position;
-        currentPlayerData.PetRotation = PetMover.Instance.petTransform.rotation;
+        currentPlayerData.PetPosition = PetHelper.petMover.petTransform.position;
+        currentPlayerData.PetRotation = PetHelper.petMover.petTransform.rotation;
 
-        currentPlayerData.PetFlags = PetFlagManager.CurrentFlags;
+        currentPlayerData.PetFlags = PetHelper.petFlagManager.CurrentFlags;
         
         // furniture
 
@@ -102,16 +102,16 @@ public class SaveHandler : MonoBehaviour
     {
         playerData.IsNewSave = false;
         // Pet stats
-        PetStats.Instance.SetName(playerData.PetName);
-        PetStats.Instance.Status["hygiene"] = playerData.Hygiene;
-        PetStats.Instance.Status["hunger"] = playerData.Hunger;
-        PetStats.Instance.Status["entertainment"] = playerData.Entertainment;
-        PetStats.Instance.Status["energy"] = playerData.Energy;
+        PetHelper.petStats.SetName(playerData.PetName);
+        PetHelper.petStats.Status["hygiene"] = playerData.Hygiene;
+        PetHelper.petStats.Status["hunger"] = playerData.Hunger;
+        PetHelper.petStats.Status["entertainment"] = playerData.Entertainment;
+        PetHelper.petStats.Status["energy"] = playerData.Energy;
 
-        PetMover.Instance.agent.Warp(playerData.PetPosition);
-        PetMover.Instance.petTransform.rotation = playerData.PetRotation;
+        PetHelper.petMover.agent.Warp(playerData.PetPosition);
+        PetHelper.petMover.petTransform.rotation = playerData.PetRotation;
         // Pet flags
-        PetFlagManager.SetFlags(playerData.PetFlags);
+        PetHelper.petFlagManager.SetFlags(playerData.PetFlags);
 
         //clear existing furniture
         for (int i = homeFurnitureTransform.childCount - 1; i >= 0; i--)

@@ -44,14 +44,14 @@ public class UIStatusEffects : MonoBehaviour
             eventTrigger.triggers.Add(pointerExit);
         }
         
-        PetFlagManager.OnFlagChanged += UpdateFlags;
+        PetHelper.petFlagManager.OnFlagChanged += UpdateFlags;
         UpdateFlags(0);
     }
     void UpdateFlags(PetFlag _)
     {
         foreach (var icon in flagIcons)
         {
-            bool hasFlag = PetFlagManager.HasFlag(icon.petFlag);
+            bool hasFlag = PetHelper.petFlagManager.HasFlag(icon.petFlag);
             icon.gameObject.SetActive(hasFlag);
             
             if (!hasFlag && currentDescription != null && currentDescriptionIcon == icon)
@@ -77,6 +77,6 @@ public class UIStatusEffects : MonoBehaviour
     
     void OnDestroy() //should never even happen
     {
-        PetFlagManager.OnFlagChanged -= UpdateFlags;
+        PetHelper.petFlagManager.OnFlagChanged -= UpdateFlags;
     }
 }

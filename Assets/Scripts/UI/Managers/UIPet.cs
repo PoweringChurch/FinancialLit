@@ -31,17 +31,17 @@ public class UIPet : MonoBehaviour
     private float lerpSpeed = 3f;
     public void Initialize()
     {
-        currentHygiene = PetStats.Instance.Status["hygiene"];
-        currentHunger = PetStats.Instance.Status["hunger"];
-        currentEntertainment = PetStats.Instance.Status["entertainment"];
-        currentEnergy = PetStats.Instance.Status["energy"];
+        currentHygiene = PetHelper.petStats.Status["hygiene"];
+        currentHunger = PetHelper.petStats.Status["hunger"];
+        currentEntertainment = PetHelper.petStats.Status["entertainment"];
+        currentEnergy = PetHelper.petStats.Status["energy"];
     }
     private void Update()
     {
-        var hygiene = PetStats.Instance.Status["hygiene"];
-        var hunger = PetStats.Instance.Status["hunger"];
-        var entertainment = PetStats.Instance.Status["entertainment"];
-        var energy = PetStats.Instance.Status["energy"];
+        var hygiene = PetHelper.petStats.Status["hygiene"];
+        var hunger = PetHelper.petStats.Status["hunger"];
+        var entertainment = PetHelper.petStats.Status["entertainment"];
+        var energy = PetHelper.petStats.Status["energy"];
 
         currentHygiene = Mathf.Lerp(currentHygiene, hygiene, Time.deltaTime * lerpSpeed);
         currentHunger = Mathf.Lerp(currentHunger, hunger, Time.deltaTime * lerpSpeed);

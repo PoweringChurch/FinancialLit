@@ -101,13 +101,13 @@ public class BaseFunctionality : MonoBehaviour
     }
     protected virtual bool DefaultChecks()
     {
-        if (PetBehaviour.Instance.gameObject.activeInHierarchy == false)
+        if (PetHelper.CurrentActivePet.activeInHierarchy == false)
         {
             return true;
         }
-        if (!PetStateMachine.IsInState(PetState.Idle))
+        if (!PetHelper.petStateMachine.IsInState(PetState.Idle))
         {
-            Message($"{PetStats.Instance.PetName} is occupied!");
+            Message($"{PetHelper.petStats.PetName} is occupied!");
             return true;
         }
         return false;

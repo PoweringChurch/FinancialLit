@@ -55,12 +55,12 @@ public class PlayerInputHandler : MonoBehaviour
             if (isOverUi)
             {   
                 UICursor.Instance.SetCursor(UICursor.Instance.defaultCursor);
-                PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
+                PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
                 PlayerFlagManager.RemoveFlag(PlayerFlag.SetFollow);
                 return;
             }
             PlayerFlagManager.RemoveFlag(PlayerFlag.SetFollow);
-            PetMover.Instance.SetGoalPosition(goalPosition);
+            PetHelper.petMover.SetGoalPosition(goalPosition);
             UICursor.Instance.SetCursor(UICursor.Instance.defaultCursor);
         }
     }

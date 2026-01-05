@@ -13,26 +13,26 @@ public class PlayFunctionality : BaseFunctionality
             return;
         }
         inUse = true;
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
-        PetMover.Instance.OnReachedGoal += OnReached;
-        PetMover.Instance.SetGoalPosition(PositionPetY());
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
+        PetHelper.petMover.OnReachedGoal += OnReached;
+        PetHelper.petMover.SetGoalPosition(PositionPetY());
     }
     protected virtual void StopPlaying()
     {
         inUse = false;
         homeActions["Go play"] = GoPlay;
         homeActions.Remove("Stop playing");
-        PetStats.Instance.StopPlay();
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
-        PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
+        PetHelper.petStats.StopPlay();
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
+        PetHelper.petAnimation.SetBoolParameter("IsPlaying", false);
     }
     private void OnReached()
     {
-        PetMover.Instance.OnReachedGoal -= OnReached;
-        PetStats.Instance.StartPlay();
+        PetHelper.petMover.OnReachedGoal -= OnReached;
+        PetHelper.petStats.StartPlay();
         homeActions.Remove("Go play");
         homeActions["Stop playing"] = StopPlaying;
-        PetAnimation.Instance.SetBoolParameter("IsPlaying", true);
+        PetHelper.petAnimation.SetBoolParameter("IsPlaying", true);
     }
     protected override void Move()
     {
@@ -55,6 +55,6 @@ public class PlayFunctionality : BaseFunctionality
     //safety
     void OnDestroy()
     {
-        if (PetMover.Instance != null) PetMover.Instance.OnReachedGoal -= OnReached;
+        if (PetHelper.petMover != null) PetHelper.petMover.OnReachedGoal -= OnReached;
     }
 }
