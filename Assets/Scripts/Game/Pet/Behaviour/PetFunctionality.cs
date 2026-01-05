@@ -20,7 +20,7 @@ public class PetFunctionality : BaseFunctionality
     {
         if (!petStateMachine.IsInState(PetState.Idle) || petBehaviour.ActiveBehaviour == Behaviour.Occupied) //it IS MEANT TO CHECK HERE FUTURE ME DONT DELETE
         {
-            Message($"{petStats.PetName} is occupied!");
+            Message($"{petStats.petName} is occupied!");
             return;
         }
         
@@ -53,7 +53,7 @@ public class PetFunctionality : BaseFunctionality
         {
             if (!petStateMachine.IsInState(PetState.Idle))
             {
-                Message($"{petStats.PetName} is occupied!");
+                Message($"{petStats.petName} is occupied!");
                 return;
             }
             petStateMachine.SetState(PetState.Sitting);

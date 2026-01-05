@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+public enum PetBreed {Corgi, Cur, Pug}
 public class SaveHandler : MonoBehaviour
 {
     public static SaveHandler Instance;
@@ -21,8 +22,11 @@ public class SaveHandler : MonoBehaviour
     public void SaveGame()
     {
         currentPlayerData.IsNewSave = false;
+
         //pet stats
-        currentPlayerData.PetName = PetHelper.petStats.PetName;
+        currentPlayerData.Breed = PetHelper.petStats.breed;
+        currentPlayerData.PetName = PetHelper.petStats.petName;
+
         currentPlayerData.Hygiene = PetHelper.petStats.Status["hygiene"];
         currentPlayerData.Hunger = PetHelper.petStats.Status["hunger"];
         currentPlayerData.Entertainment = PetHelper.petStats.Status["entertainment"];
@@ -98,11 +102,30 @@ public class SaveHandler : MonoBehaviour
         File.WriteAllText(savePath, json);
         Debug.Log($"Game saved to {savePath}");
     }
-    public void LoadSaved(PlayerData playerData)
+
+    public GameObject corgiPrefab;
+    public GameObject curPrefab;
+    public GameObject pugPrefab;
+
+    public Transform gameSpace;
+    public void LoadSaveData(PlayerData playerData)
     {
         playerData.IsNewSave = false;
+        GameObject dog;
+        switch (playerData.Breed)
+        {
+            case PetBreed.Corgi:
+                dog = Instantiate(corgiPrefab,gameSpace);
+                break;
+            case PetBreed.Cur:
+                break;
+            case PetBreed.Pug:
+                break;
+        }
         // Pet stats
-        PetHelper.petStats.SetName(playerData.PetName);
+        PetHelper.petStats.petName = playerData.PetName;
+        PetHelper.petStats.breed = playerData.Breed;
+
         PetHelper.petStats.Status["hygiene"] = playerData.Hygiene;
         PetHelper.petStats.Status["hunger"] = playerData.Hunger;
         PetHelper.petStats.Status["entertainment"] = playerData.Entertainment;
@@ -124,9 +147,7 @@ public class SaveHandler : MonoBehaviour
         {
             FurnitureData furnitureItem = FurnitureDatabase.GetData(furnitureData.itemName);
             if (furnitureItem == null)
-            {
                 continue;
-            }
 
             GameObject spawnedFurniture = Instantiate(furnitureItem.prefab, homeFurnitureTransform);
             spawnedFurniture.transform.SetPositionAndRotation(furnitureData.position, furnitureData.rotation);

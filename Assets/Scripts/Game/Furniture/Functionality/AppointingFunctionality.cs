@@ -13,7 +13,7 @@ public class AppointingFunctionality : BaseFunctionality
         if (!PetHelper.petFlagManager.HasFlag(PetFlag.Sick))
         {
             print(string.Join(", ", PetHelper.petFlagManager.CurrentFlags));
-            Message($"{PetHelper.petStats.PetName} is not sick!");
+            Message($"{PetHelper.petStats.petName} is not sick!");
             return;
         }
         

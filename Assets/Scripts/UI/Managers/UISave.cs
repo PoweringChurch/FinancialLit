@@ -102,7 +102,12 @@ public class UISave : MonoBehaviour
     void LoadThisSave(string fileName)
     {
         var plrData = SaveHandler.Instance.PlayerDataFromFile(fileName);
-        SaveHandler.Instance.LoadSaved(plrData);
+        SaveHandler.Instance.LoadSaveData(plrData);
+    }
+    PetBreed selectedBreed = PetBreed.Corgi;
+    public void SelectBreed(int newBreed)
+    {
+        selectedBreed = (PetBreed)newBreed;
     }
     public void NewSave()
     {
@@ -112,7 +117,8 @@ public class UISave : MonoBehaviour
         }
         PlayerData newData = new()
         {
-            PetName = petNameInput.text
+            PetName = petNameInput.text,
+            Breed = selectedBreed
         };
         if (debugToggle.isOn)
         {
@@ -148,7 +154,7 @@ public class UISave : MonoBehaviour
         }
         //set as new data
         SaveHandler.Instance.currentPlayerData = newData;
-        SaveHandler.Instance.LoadSaved(newData);
+        SaveHandler.Instance.LoadSaveData(newData);
         SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
 
         PetHelper.petFlagManager.ClearFlags();

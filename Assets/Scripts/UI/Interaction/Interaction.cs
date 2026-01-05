@@ -49,7 +49,7 @@ public class Interaction : MonoBehaviour
             }
             var nameText = currentHoveringName.GetComponent<TextMeshPro>();
             if (functionality is PetFunctionality)
-                nameText.text = PetHelper.petStats.PetName;
+                nameText.text = PetHelper.petStats.petName;
             else
             {
                 var handler = functionality.GetComponent<PlacementHandler>();

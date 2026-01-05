@@ -17,6 +17,7 @@ public class FurnitureObjectData
 public class PlayerData
 {
     // Pet stats
+    public PetBreed Breed;
     public string PetName;
     public float Hygiene;
     public float Entertainment;

@@ -107,7 +107,7 @@ public class BaseFunctionality : MonoBehaviour
         }
         if (!PetHelper.petStateMachine.IsInState(PetState.Idle))
         {
-            Message($"{PetHelper.petStats.PetName} is occupied!");
+            Message($"{PetHelper.petStats.petName} is occupied!");
             return true;
         }
         return false;

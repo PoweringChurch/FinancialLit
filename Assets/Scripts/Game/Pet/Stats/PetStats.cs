@@ -6,13 +6,8 @@ public class PetStats : MonoBehaviour
     public PetFlagManager petFlagManager;
     public PetStateMachine petStateMachine;
     public PetAnimation petAnimation;
-    public string PetName
-    {
-        get
-        {
-            return petName;
-        }
-    }
+    public string petName = "unset";
+    public PetBreed breed = PetBreed.Corgi;
     const float tirednessRate = 0.001f;
     const float hungerRate = 0.002f;
     const float boredomRate = 0.0024f;
@@ -20,8 +15,6 @@ public class PetStats : MonoBehaviour
     const float sleepRecoveryRate = 0.012f;
     const float entertainmentRecoveryRate = 0.018f;
     const float hygieneRecoveryRate = 0.015f;
-    private string petName = "Foobar";
-
     public bool atPark = false;
     private int immuneTickTimer = 0;
     private int playfulTickTimer = 0;
@@ -49,10 +42,6 @@ public class PetStats : MonoBehaviour
             elapsed = 0;
             Step();
         }
-    }
-    public void SetName(string newPetName)
-    {
-        petName = newPetName;
     }
     void Step()
     {

@@ -91,11 +91,11 @@ public class UIWorkManager : MonoBehaviour
     {
         for (int i = reqHolder.childCount - 1; i >= 0; i--)
         {
-            UnityEngine.Object.Destroy(reqHolder.GetChild(i).gameObject);
+            Destroy(reqHolder.GetChild(i).gameObject);
         }
         foreach (Items item in currentOrder)
         {
-            UnityEngine.Object.Instantiate(itemUIMap[item],reqHolder);
+            Instantiate(itemUIMap[item],reqHolder);
         }
     }
     public void UpdateCompletedOrders(int completed, int total)
