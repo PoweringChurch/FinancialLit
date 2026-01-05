@@ -60,7 +60,9 @@ public class PlayerInputHandler : MonoBehaviour
                 return;
             }
             PlayerFlagManager.RemoveFlag(PlayerFlag.SetFollow);
-            PetHelper.petMover.SetGoalPosition(goalPosition);
+            PetHelper.petMover
+            .SetGoalPosition
+            (goalPosition);
             UICursor.Instance.SetCursor(UICursor.Instance.defaultCursor);
         }
     }

@@ -70,9 +70,8 @@ public class UISave : MonoBehaviour
     }
     private void OnLoadClick(string fileName)
     {
-        PetHelper.petMover.petTransform.gameObject.SetActive(true);
-        AreaHandler.Instance.EnterHome();
         LoadThisSave(fileName);
+        AreaHandler.Instance.EnterHome();
         
         //enter game
         ingameOverlay.SetActive(true);

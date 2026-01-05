@@ -4,14 +4,14 @@ using System;
 
 public class PetMover : MonoBehaviour
 {
-    PetAnimation petAnimation;
-    PetFlagManager petFlagManager;
-    PetStats petStats;
+    public PetAnimation petAnimation;
+    public PetFlagManager petFlagManager;
+    public PetStats petStats;
 
     public Transform petTransform;
     
     [HideInInspector] public bool reachedGoal;
-    private float moveSpeed = 2.5f;
+    private float moveSpeed = 1.75f;
     private float stoppingDistance = 0.4f;
     
     public NavMeshAgent agent;

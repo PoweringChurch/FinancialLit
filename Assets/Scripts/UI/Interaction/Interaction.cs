@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class Interaction : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private GameObject hoveringNamePrefab;
     [SerializeField] private Transform menuContainer;
-    
     [Header("Settings")]
     [SerializeField] private LayerMask interactableLayer; //furniture and pet
     [SerializeField] private float menuRadius = 120f;

@@ -5,8 +5,10 @@ using TMPro;
 using System.Collections;
 using Unity.VisualScripting;
 
+[RequireComponent(typeof(PlacementHandler))]
 public class BaseFunctionality : MonoBehaviour
 {
+    protected AudioClip purchaseSfx;
     //add global actions, and then other actions for statuses
     protected Dictionary<string, Action> globalActions = new();
     protected Dictionary<string, Action> homeActions = new();
@@ -18,6 +20,7 @@ public class BaseFunctionality : MonoBehaviour
     protected virtual void Awake()
     {
         floatingTextPrefab = Resources.Load<GameObject>("UITemplates/Message");
+        purchaseSfx = Resources.Load<AudioClip>("SoundFX/Notification/purchase");
         if (!ignoreBase)
         {
             homeActions["Move"] = Move;
@@ -45,8 +48,11 @@ public class BaseFunctionality : MonoBehaviour
     }
     protected virtual void Buy()
     {
+        if (!PlayerResources.Instance.CanAfford(price)) return;
+        SFXPlayer.Instance.Play(purchaseSfx);
         PlacementHandler handler = GetComponent<PlacementHandler>();
         var item = FurnitureDatabase.GetData(handler.itemName);
+
         InventoryHelper.Instance.AddItem(item, 1);
         PlayerResources.Instance.Spend(price, "Furniture");
     }

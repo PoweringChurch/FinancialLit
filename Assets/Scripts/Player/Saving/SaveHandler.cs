@@ -111,17 +111,24 @@ public class SaveHandler : MonoBehaviour
     public void LoadSaveData(PlayerData playerData)
     {
         playerData.IsNewSave = false;
-        GameObject dog;
+        GameObject dog = null;
         switch (playerData.Breed)
         {
             case PetBreed.Corgi:
                 dog = Instantiate(corgiPrefab,gameSpace);
+                Debug.Log("instantiated corgi");
                 break;
             case PetBreed.Cur:
+                Debug.Log("instantiated cur");
+                dog = Instantiate(curPrefab,gameSpace);
                 break;
             case PetBreed.Pug:
+                Debug.Log("instantiated pug");
+                dog = Instantiate(pugPrefab,gameSpace);
                 break;
         }
+        if (!dog) return;
+        PetHelper.CurrentActivePet = dog;
         // Pet stats
         PetHelper.petStats.petName = playerData.PetName;
         PetHelper.petStats.breed = playerData.Breed;

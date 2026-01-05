@@ -29,15 +29,9 @@ public class UIPet : MonoBehaviour
     private float currentEnergy;
     private Color currentDisplayColor;
     private float lerpSpeed = 3f;
-    public void Initialize()
-    {
-        currentHygiene = PetHelper.petStats.Status["hygiene"];
-        currentHunger = PetHelper.petStats.Status["hunger"];
-        currentEntertainment = PetHelper.petStats.Status["entertainment"];
-        currentEnergy = PetHelper.petStats.Status["energy"];
-    }
     private void Update()
     {
+        if (PetHelper.CurrentActivePet == null) return;
         var hygiene = PetHelper.petStats.Status["hygiene"];
         var hunger = PetHelper.petStats.Status["hunger"];
         var entertainment = PetHelper.petStats.Status["entertainment"];
