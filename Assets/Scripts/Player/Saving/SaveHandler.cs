@@ -111,6 +111,10 @@ public class SaveHandler : MonoBehaviour
     public void LoadSaveData(PlayerData playerData)
     {
         playerData.IsNewSave = false;
+        if (PetHelper.CurrentActivePet != null)
+        {
+            Destroy(PetHelper.CurrentActivePet);
+        }
         GameObject dog = null;
         switch (playerData.Breed)
         {
