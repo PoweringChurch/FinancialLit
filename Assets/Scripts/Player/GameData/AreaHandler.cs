@@ -54,25 +54,25 @@ public class AreaHandler : MonoBehaviour
         CleanupCurrentArea();
         PlayerFlagManager.RemoveFlag(PlayerFlag.Home);
 
-        PetStateMachine.SetState(PetState.Idle);
-        PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
-        PetAnimation.Instance.SetBoolParameter("IsSitting", false);
+        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petAnimation.SetBoolParameter("IsPlaying", false);
+        PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
 
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Roaming;
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Roaming;
 
         currentArea = Instantiate(area.prefab, gameSpace);
         CameraHandler.Instance.RefreshRenderers();
         
         lighting.shadows = LightShadows.None;
-        PetStats.Instance.gameObject.SetActive(false);
+        PetHelper.petStats.gameObject.SetActive(false);
 
         if (area.isShop) {
             PlayerFlagManager.AddFlag(PlayerFlag.Shopping);
             }
         if (area.shadows) lighting.shadows = LightShadows.Soft;
         if (area.bringPet) {
-            PetStats.Instance.gameObject.SetActive(true);
-            PetMover.Instance.agent.Warp(Vector3.up);
+            PetHelper.petStats.gameObject.SetActive(true);
+            PetHelper.petMover.agent.Warp(Vector3.up);
             }
 
         if (area.areaName == "Park")
@@ -83,9 +83,9 @@ public class AreaHandler : MonoBehaviour
                     UIPopups.Instance.PopupInfo(header,body);
                 }
             SaveHandler.Instance.currentPlayerData.VisitedPark = true;
-            PetStats.Instance.atPark = true;}
+            PetHelper.petStats.atPark = true;}
         else
-            PetStats.Instance.atPark = false;
+            PetHelper.petStats.atPark = false;
 
         if (area.areaName == "Veterinary")
         {
@@ -124,18 +124,18 @@ public class AreaHandler : MonoBehaviour
         CleanupCurrentArea();
 
         home.SetActive(true);
-        PetStats.Instance.atPark = false;
+        PetHelper.petStats.atPark = false;
         
-        PetStats.Instance.gameObject.SetActive(true);
-        PetMover.Instance.agent.Warp(Vector3.up);
+        PetHelper.petStats.gameObject.SetActive(true);
+        PetHelper.petMover.agent.Warp(Vector3.up);
         PlayerFlagManager.AddFlag(PlayerFlag.Home);
         PlayerFlagManager.RemoveFlag(PlayerFlag.Shopping);
 
-        PetStateMachine.SetState(PetState.Idle);
-        PetAnimation.Instance.SetBoolParameter("IsPlaying", false);
-        PetAnimation.Instance.SetBoolParameter("IsSitting", false);
+        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petAnimation.SetBoolParameter("IsPlaying", false);
+        PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
 
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
 
         lighting.shadows = LightShadows.None;
 

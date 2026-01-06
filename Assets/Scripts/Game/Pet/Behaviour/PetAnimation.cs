@@ -2,12 +2,7 @@ using UnityEngine;
 
 public class PetAnimation : MonoBehaviour
 {
-    public static PetAnimation Instance;
     [SerializeField] private Animator petAnimator;
-    void Awake()
-    {
-        Instance = this;
-    }
     public void SetBoolParameter(string paramName, bool to)
     {
         petAnimator.SetBool(paramName, to);

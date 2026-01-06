@@ -28,7 +28,6 @@ public class BackgroundMusicPlayer : MonoBehaviour
     
     void Update()
     {
-        // Update volume in real-time if changed in inspector
         audioSource.volume = volume*musicMultSlider.value;
         // Check if current track finished, play next
         if (!audioSource.isPlaying && musicTracks.Length > 0)

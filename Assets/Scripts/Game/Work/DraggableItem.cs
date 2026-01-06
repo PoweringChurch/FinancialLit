@@ -75,7 +75,7 @@ public class DraggableItem : MonoBehaviour
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
         
-        // Remove the DraggableItem script from the copy so it doesn't interfere
+        // Remove the DraggableItem script from the copy so it doesnt interfere with anything
         Destroy(draggedCopy.GetComponent<DraggableItem>());
     }
     
@@ -123,7 +123,7 @@ public class DraggableItem : MonoBehaviour
             draggedCopy = null;
         }
     }
-    //really could just return a bool but i dont want to just in case right
+    //really could just return a bool but i dont want to just in case
     private GameObject GetDropZoneAtPosition(Vector2 screenPos)
     {
         GameObject[] dropZoneObjects = GameObject.FindGameObjectsWithTag("DropZone");

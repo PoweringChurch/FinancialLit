@@ -30,14 +30,14 @@ public class UISave : MonoBehaviour
         {
             UnityEngine.Object.Destroy(child.gameObject);
         }
-        // Get all .json files in the save directory
+        //get all .json files in the save directory
         string savePath = Application.persistentDataPath;
         string[] saveFiles = System.IO.Directory.GetFiles(savePath, "*.json");
-        // Sort by last modified time (most recent first)
+        //sort by last modified time
         Array.Sort(saveFiles, (a, b) =>
             System.IO.File.GetLastWriteTime(b).CompareTo(System.IO.File.GetLastWriteTime(a))
         );
-        // Create a slot for each save file
+        //create a slot for each save file
         foreach (string filePath in saveFiles)
         {
             string fileName = System.IO.Path.GetFileName(filePath);
@@ -47,20 +47,19 @@ public class UISave : MonoBehaviour
                 string json = System.IO.File.ReadAllText(filePath);
                 PlayerData saveData = JsonUtility.FromJson<PlayerData>(json);
 
-                // Create slot UI
+                // create slot UI
                 GameObject slot = UnityEngine.Object.Instantiate(slotTemplate, slotGrid);
 
-                // Fill out slot info (adjust based on your template structure)
                 var texts = slot.GetComponentsInChildren<TextMeshProUGUI>();
-                texts[0].text = saveData.PetName; // Slot name/pet name
-                texts[1].text = FormatPlaytime(saveData.TotalPlaytimeSeconds); // Playtime
+                texts[0].text = saveData.PetName; // pet name
+                texts[1].text = FormatPlaytime(saveData.TotalPlaytimeSeconds); // playtime
                 texts[2].text = FormatTimestamp(saveData.LastSaveTimestamp); // Last saved
                 texts[3].text = saveData.DisplayStatus; // Status
                 texts[4].text = $"${saveData.Money:N2}"; //money
 
-                // Add button to load this save
+                // add button to load this save
                 Button loadButton = slot.GetComponentInChildren<Button>();
-                string capturedFileName = fileName; // Capture in local variable
+                string capturedFileName = fileName; // capture in local variable
                 loadButton.onClick.AddListener(() => OnLoadClick(fileName));
             }
             catch (Exception e)
@@ -71,9 +70,8 @@ public class UISave : MonoBehaviour
     }
     private void OnLoadClick(string fileName)
     {
-        PetMover.Instance.petTransform.gameObject.SetActive(true);
-        AreaHandler.Instance.EnterHome();
         LoadThisSave(fileName);
+        AreaHandler.Instance.EnterHome();
         
         //enter game
         ingameOverlay.SetActive(true);
@@ -82,10 +80,10 @@ public class UISave : MonoBehaviour
         CameraHandler.Instance.ToggleGamecam(true);
         UIResourcesUpdater.Instance.UpdateText();
 
-        PetStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.SetState(PetState.Idle);
 
-        PetAnimation.Instance.SetBoolParameter("IsSitting",false);
-        PetAnimation.Instance.SetBoolParameter("IsSick",false);
+        PetHelper.petAnimation.SetBoolParameter("IsSitting",false);
+        PetHelper.petAnimation.SetBoolParameter("IsSick",false);
 
         UIInventory.Instance.UpdateInventoryUI();
     }
@@ -103,7 +101,12 @@ public class UISave : MonoBehaviour
     void LoadThisSave(string fileName)
     {
         var plrData = SaveHandler.Instance.PlayerDataFromFile(fileName);
-        SaveHandler.Instance.LoadSaved(plrData);
+        SaveHandler.Instance.LoadSaveData(plrData);
+    }
+    PetBreed selectedBreed = PetBreed.Corgi;
+    public void SelectBreed(int newBreed)
+    {
+        selectedBreed = (PetBreed)newBreed;
     }
     public void NewSave()
     {
@@ -113,7 +116,8 @@ public class UISave : MonoBehaviour
         }
         PlayerData newData = new()
         {
-            PetName = petNameInput.text
+            PetName = petNameInput.text,
+            Breed = selectedBreed
         };
         if (debugToggle.isOn)
         {
@@ -149,15 +153,14 @@ public class UISave : MonoBehaviour
         }
         //set as new data
         SaveHandler.Instance.currentPlayerData = newData;
-        SaveHandler.Instance.LoadSaved(newData);
+        SaveHandler.Instance.LoadSaveData(newData);
         SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
 
-        //upd external (?? what did this mean)
-        PetFlagManager.ClearFlags();
-        PetStateMachine.SetState(PetState.Idle);
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
+        PetHelper.petFlagManager.ClearFlags();
+        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
 
-        PetMover.Instance.petTransform.gameObject.SetActive(true);
+        PetHelper.petMover.petTransform.gameObject.SetActive(true);
         //upd ui
         UIResourcesUpdater.Instance.UpdateText();
         UIInventory.Instance.UpdateInventoryUI();

@@ -22,7 +22,7 @@ public class UIPopups : MonoBehaviour
     {
         UISFXPlayer.Instance.Play(popupsfx);
         
-        GameObject newInfoPanel = UnityEngine.Object.Instantiate(infoPanelTemplate, PopupsTransform);
+        GameObject newInfoPanel = Instantiate(infoPanelTemplate, PopupsTransform);
         var tmps = newInfoPanel.GetComponentsInChildren<TextMeshProUGUI>();
 
         // Header, Body, Dismiss button text
@@ -33,7 +33,7 @@ public class UIPopups : MonoBehaviour
         // Setup dismiss button
         Button dismissButton = newInfoPanel.GetComponentInChildren<Button>();
         dismissButton.onClick.AddListener(() => {
-            UnityEngine.Object.Destroy(newInfoPanel);
+            Destroy(newInfoPanel);
             if (action != null) action.Invoke();
         });
     }
@@ -41,7 +41,7 @@ public class UIPopups : MonoBehaviour
     {
         UISFXPlayer.Instance.Play(popupsfx);
 
-        GameObject newYNPanel = UnityEngine.Object.Instantiate(ynPanelTemplate, PopupsTransform);
+        GameObject newYNPanel = Instantiate(ynPanelTemplate, PopupsTransform);
         var tmps = newYNPanel.GetComponentsInChildren<TextMeshProUGUI>();
         
         // Header, Body, Yes text, No text
@@ -56,21 +56,21 @@ public class UIPopups : MonoBehaviour
         buttons[0].onClick.AddListener(() => 
         {
             onYes?.Invoke();
-            UnityEngine.Object.Destroy(newYNPanel);
+            Destroy(newYNPanel);
         });
         
         // No button
         buttons[1].onClick.AddListener(() => 
         {
             onNo?.Invoke();
-            UnityEngine.Object.Destroy(newYNPanel);
+            Destroy(newYNPanel);
         });
     }
     public GameObject PopupTask(string header, string body) 
     {
         UISFXPlayer.Instance.Play(popupsfx);
 
-        GameObject newTaskPanel = UnityEngine.Object.Instantiate(taskPanelTemplate, PopupsTransform);
+        GameObject newTaskPanel = Instantiate(taskPanelTemplate, PopupsTransform);
         var tmps = newTaskPanel.GetComponentsInChildren<TextMeshProUGUI>();
         tmps[0].text = header;
         tmps[1].text = body;
@@ -86,7 +86,7 @@ public class UIPopups : MonoBehaviour
             Transform child = PopupsTransform.GetChild(i);
             if (child != null)
             {
-                UnityEngine.Object.Destroy(child.gameObject);
+                Destroy(child.gameObject);
             }
         }
     }

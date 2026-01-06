@@ -63,13 +63,11 @@ public class AssetLoader : MonoBehaviour
         
         loadingPanel.SetActive(false);
         
-        // Do whatever you need with loaded materials
         OnLoadingComplete();
     }
     
     void OnLoadingComplete()
     {
         Debug.Log($"Loaded {loadedMaterials.Count} materials!");
-        // Apply materials, start game, etc.
     }
 }

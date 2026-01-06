@@ -1,12 +1,15 @@
 using Unity.VisualScripting;
 using UnityEngine;
 public enum Behaviour {Default,Roaming, Occupied}
-//determines what to do and when. NOT like the state machine
 public class PetBehaviour : MonoBehaviour
 {
+    public PetMover petMover;
+    public PetFlagManager petFlagManager;
+    public PetAnimation petAnimation;
+    public PetStats petStats;
+
     public AudioClip[] barks;
     public AudioClip[] whimper;
-    public static PetBehaviour Instance;
     private Behaviour activeBehaviour;
     public Behaviour ActiveBehaviour
     {
@@ -15,14 +18,13 @@ public class PetBehaviour : MonoBehaviour
     }
     void Awake()
     {
-        Instance = this;
         activeBehaviour = Behaviour.Roaming;
     }
 
     private float actionTimer = 5f; //time until pet does something
     void Update()
     {
-        if (!PetMover.Instance.reachedGoal) return;
+        if (!petMover.reachedGoal) return;
         if (!CameraHandler.Instance.GameCamEnabled()) return;
         actionTimer -= Time.deltaTime;
         if (actionTimer <= 0)
@@ -45,7 +47,7 @@ public class PetBehaviour : MonoBehaviour
         switch (action)
         {
             case 0:
-                if (PetFlagManager.HasFlag(PetFlag.Sick))
+                if (petFlagManager.HasFlag(PetFlag.Sick))
                 {
                     actionTimer = 6;
                     SFXPlayer.Instance.Play(whimper[Random.Range(0,whimper.Length)]);
@@ -60,23 +62,23 @@ public class PetBehaviour : MonoBehaviour
                 break;
             case 2:
                 // Sit down for a bit
-                PetAnimation.Instance.SetBoolParameter("IsSitting", true);
+                petAnimation.SetBoolParameter("IsSitting", true);
                 actionTimer = Random.Range(4f, 8f);
                 break;
             default:
                 // Stand up if  sitting
-                PetAnimation.Instance.SetBoolParameter("IsSitting", false);
+                petAnimation.SetBoolParameter("IsSitting", false);
                 
                 // Try twice, else give up
                 var targetPos = RandomPosition(20f);
                 if (!VectorOverInteractable(targetPos)) targetPos = RandomPosition(10f);
                 if (!VectorOverInteractable(targetPos)) break;
-                PetMover.Instance.SetGoalPosition(targetPos);
+                petMover.SetGoalPosition(targetPos);
                 actionTimer = Random.Range(3f, 6f);
                 break;
         }
-        float energyMult = PetStats.Instance.Status["energy"] < 0.8f 
-            ? 1.0f + (0.8f - PetStats.Instance.Status["energy"]) * 0.1875f 
+        float energyMult = petStats.Status["energy"] < 0.8f 
+            ? 1.0f + (0.8f - petStats.Status["energy"]) * 0.1875f 
             : 1.0f;
         
         actionTimer *= energyMult;

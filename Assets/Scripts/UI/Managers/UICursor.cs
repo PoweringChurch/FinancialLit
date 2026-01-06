@@ -24,10 +24,10 @@ public class UICursor : MonoBehaviour
     {
         bool overInteractableLayer = false;
         Vector2 mousePos = Mouse.current.position.ReadValue();
-        // Create ray from camera through mouse position
+        //create ray from camera through mouse position
         Ray ray = gameCamera.ScreenPointToRay(mousePos);
         if (Physics.Raycast(ray, out _, 1000, interactableLayer)) overInteractableLayer = true;
-        // Calculate where ray intersects the target Y plane
+        //calculate where ray intersects the target Y plane
         float t = (targetY - ray.origin.y) / ray.direction.y;
         Vector3 targetPos = ray.origin + ray.direction * t;
         return (targetPos, overInteractableLayer);

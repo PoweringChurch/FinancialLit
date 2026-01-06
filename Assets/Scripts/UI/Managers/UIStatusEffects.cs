@@ -24,35 +24,34 @@ public class UIStatusEffects : MonoBehaviour
     private GameObject currentDescription;
     private Dictionary<PetFlag, FlagIcon> flagIconMap;
     private FlagIcon currentDescriptionIcon;
-    //icon should show description when hovered over by mouse
     public void Initialize()
     {
-    flagIconMap = new Dictionary<PetFlag, FlagIcon>();
-    foreach (var icon in flagIcons)
-    {
-        flagIconMap[icon.petFlag] = icon;
-        icon.gameObject.SetActive(false);
-        
-        var eventTrigger = icon.gameObject.GetComponent<EventTrigger>();
-        if (eventTrigger == null) eventTrigger = icon.gameObject.AddComponent<EventTrigger>();
-        
-        var pointerEnter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
-        pointerEnter.callback.AddListener((data) => ShowDescription(icon));
-        eventTrigger.triggers.Add(pointerEnter);
-        
-        var pointerExit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
-        pointerExit.callback.AddListener((data) => HideDescription());
-        eventTrigger.triggers.Add(pointerExit);
+        flagIconMap = new Dictionary<PetFlag, FlagIcon>();
+        foreach (var icon in flagIcons)
+        {
+            flagIconMap[icon.petFlag] = icon;
+            icon.gameObject.SetActive(false);
+            
+            var eventTrigger = icon.gameObject.GetComponent<EventTrigger>();
+            if (eventTrigger == null) eventTrigger = icon.gameObject.AddComponent<EventTrigger>();
+            
+            var pointerEnter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
+            pointerEnter.callback.AddListener((data) => ShowDescription(icon));
+            eventTrigger.triggers.Add(pointerEnter);
+            
+            var pointerExit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
+            pointerExit.callback.AddListener((data) => HideDescription());
+            eventTrigger.triggers.Add(pointerExit);
         }
         
-        PetFlagManager.OnFlagChanged += UpdateFlags;
-        UpdateFlags();
+        PetHelper.petFlagManager.OnFlagChanged += UpdateFlags;
+        UpdateFlags(0);
     }
-    void UpdateFlags()
+    void UpdateFlags(PetFlag _)
     {
         foreach (var icon in flagIcons)
         {
-            bool hasFlag = PetFlagManager.HasFlag(icon.petFlag);
+            bool hasFlag = PetHelper.petFlagManager.HasFlag(icon.petFlag);
             icon.gameObject.SetActive(hasFlag);
             
             if (!hasFlag && currentDescription != null && currentDescriptionIcon == icon)
@@ -65,7 +64,7 @@ public class UIStatusEffects : MonoBehaviour
     {
         HideDescription();
         currentDescriptionIcon = icon;
-        currentDescription = UnityEngine.Object.Instantiate(descriptionDisplayPrefab, popupsContainer);
+        currentDescription = Instantiate(descriptionDisplayPrefab, popupsContainer);
         var texts = currentDescription.GetComponentsInChildren<TMP_Text>();
         texts[0].text = icon.Name;
         texts[1].text = icon.Effect;
@@ -76,8 +75,8 @@ public class UIStatusEffects : MonoBehaviour
         if (currentDescription != null) UnityEngine.Object.Destroy(currentDescription);
     }
     
-    void OnDestroy()
+    void OnDestroy() //should never even happen
     {
-        PetFlagManager.OnFlagChanged -= UpdateFlags;
+        PetHelper.petFlagManager.OnFlagChanged -= UpdateFlags;
     }
 }

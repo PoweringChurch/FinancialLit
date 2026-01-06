@@ -13,25 +13,25 @@ public class PetBedFunctionality : BaseFunctionality
             return;
         }
         inUse = true;
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
-        PetMover.Instance.OnReachedGoal += OnReached;
-        PetMover.Instance.SetGoalPosition(PositionPetY());
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
+        PetHelper.petMover.OnReachedGoal += OnReached;
+        PetHelper.petMover.SetGoalPosition(PositionPetY());
     }
     protected virtual void StopResting()
     {
         inUse = false;
         homeActions["Go rest"] = GoRest;
         homeActions.Remove("Stop resting");
-        PetStats.Instance.StopSleep();
-        PetAnimation.Instance.SetBoolParameter("IsSitting",false);
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
+        PetHelper.petStats.StopSleep();
+        PetHelper.petAnimation.SetBoolParameter("IsSitting",false);
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
     }
     private void OnReached()
     {
-        PetMover.Instance.OnReachedGoal -= OnReached;
-        PetMover.Instance.petTransform.position = PositionPetY();
-        PetStats.Instance.StartSleep();
-        PetAnimation.Instance.SetBoolParameter("IsSitting",true);
+        PetHelper.petMover.OnReachedGoal -= OnReached;
+        PetHelper.petMover.petTransform.position = PositionPetY();
+        PetHelper.petStats.StartSleep();
+        PetHelper.petAnimation.SetBoolParameter("IsSitting",true);
         homeActions.Remove("Go rest");
         homeActions["Stop resting"] = StopResting;
     }
@@ -56,6 +56,6 @@ public class PetBedFunctionality : BaseFunctionality
     //safety
     void OnDestroy()
     {
-        if (PetMover.Instance != null) PetMover.Instance.OnReachedGoal -= OnReached;
+        if (PetHelper.petMover != null) PetHelper.petMover.OnReachedGoal -= OnReached;
     }
 }

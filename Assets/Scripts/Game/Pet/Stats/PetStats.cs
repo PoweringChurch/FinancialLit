@@ -3,24 +3,18 @@ using System;
 using System.Collections.Generic;
 public class PetStats : MonoBehaviour
 {
-    public static PetStats Instance;
-    public string PetName
-    {
-        get
-        {
-            return petName;
-        }
-    }
-    [Header("Decay Rates")]
-    [SerializeField] private float tirednessRate;
-    [SerializeField] private float hungerRate;
-    [SerializeField] private float boredomRate;
-    [SerializeField] private float dirtinessRate;
-    [SerializeField] private float sleepRecoveryRate;
-    [SerializeField] private float entertainmentRecoveryRate;
-    [SerializeField] private float hygieneRecoveryRate;
-    private string petName = "Foobar";
-
+    public PetFlagManager petFlagManager;
+    public PetStateMachine petStateMachine;
+    public PetAnimation petAnimation;
+    public string petName = "unset";
+    public PetBreed breed = PetBreed.Corgi;
+    const float tirednessRate = 0.001f;
+    const float hungerRate = 0.002f;
+    const float boredomRate = 0.0024f;
+    const float dirtinessRate = 0.0013f;
+    const float sleepRecoveryRate = 0.012f;
+    const float entertainmentRecoveryRate = 0.018f;
+    const float hygieneRecoveryRate = 0.015f;
     public bool atPark = false;
     private int immuneTickTimer = 0;
     private int playfulTickTimer = 0;
@@ -35,12 +29,8 @@ public class PetStats : MonoBehaviour
         ["energy"] = 0.8f
     };
     public Dictionary<string, float> Status => status;
-    [SerializeField] private ParticleSystem stinkyParticles;
-    [SerializeField] private ParticleSystem batheParticles;
-    void Awake()
-    {
-        Instance = this;
-    }
+    [SerializeField] private ParticleSystem StinkyParticles;
+    [SerializeField] private ParticleSystem BatheParticles;
     private float elapsed = 0;
     private readonly float tickspeed = 1.2f; //tick once every tickspeed seconds
     void Update()
@@ -53,64 +43,60 @@ public class PetStats : MonoBehaviour
             Step();
         }
     }
-    public void SetName(string newPetName)
-    {
-        petName = newPetName;
-    }
     void Step()
     {
         if (!CameraHandler.Instance.GameCamEnabled()) return;
-        float recoveryMultiplier = PetFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
+        float recoveryMultiplier = petFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
         float drainMultiplier = 1.6f;
-        if (PetFlagManager.HasFlag(PetFlag.Content)) drainMultiplier *= 0.9f;
-        if (PetFlagManager.HasFlag(PetFlag.Loved)) drainMultiplier *= 0.95f;
+        if (petFlagManager.HasFlag(PetFlag.Content)) drainMultiplier *= 0.9f;
+        if (petFlagManager.HasFlag(PetFlag.Loved)) drainMultiplier *= 0.95f;
 
         status["energy"] = Math.Max(0, status["energy"] - tirednessRate * drainMultiplier);
-        if (PetStateMachine.IsInState(PetState.Sleeping))
+        if (petStateMachine.IsInState(PetState.Sleeping))
         {
-            float sleepBonus = PetFlagManager.HasFlag(PetFlag.WornOut) ? 1.15f : 1f;
+            float sleepBonus = petFlagManager.HasFlag(PetFlag.WornOut) ? 1.15f : 1f;
             status["energy"] = Math.Clamp(status["energy"] + (sleepRecoveryRate + tirednessRate) * recoveryMultiplier * sleepBonus, 0, 1);
         }
 
         status["entertainment"] = Math.Max(0, status["entertainment"] - boredomRate * drainMultiplier);
-        if (PetStateMachine.IsInState(PetState.Playing) || atPark)
+        if (petStateMachine.IsInState(PetState.Playing) || atPark)
         {
-            float playBonus = PetFlagManager.HasFlag(PetFlag.Playful) ? 1.1f : 1f;
+            float playBonus = petFlagManager.HasFlag(PetFlag.Playful) ? 1.1f : 1f;
             float parkBonus = atPark ? 1.1f : 1f;
             status["entertainment"] = Math.Clamp(status["entertainment"] + (entertainmentRecoveryRate + boredomRate) * recoveryMultiplier * playBonus*parkBonus, 0, 1);
         }
 
         status["hygiene"] = Math.Max(0, status["hygiene"] - dirtinessRate * drainMultiplier);
-        if (PetStateMachine.IsInState(PetState.Bathing))
+        if (petStateMachine.IsInState(PetState.Bathing))
             status["hygiene"] = Math.Clamp(status["hygiene"] + (dirtinessRate + hygieneRecoveryRate), 0, 1);
 
         status["hunger"] = Math.Max(0, status["hunger"] - hungerRate * drainMultiplier);
         // Check for Content flag
         if (status["energy"] > 0.7f && status["entertainment"] > 0.7f && status["hygiene"] > 0.7f && status["hunger"] > 0.7f)
         {
-            if (!PetFlagManager.HasFlag(PetFlag.Content))
-                PetFlagManager.AddFlag(PetFlag.Content);
+            if (!petFlagManager.HasFlag(PetFlag.Content))
+                petFlagManager.AddFlag(PetFlag.Content);
         }
         else
-            PetFlagManager.RemoveFlag(PetFlag.Content);
+            petFlagManager.RemoveFlag(PetFlag.Content);
         // Check for playful flag
         if (status["energy"] > 0.6f && status["entertainment"] > 0.6f && UnityEngine.Random.Range(0f, 1f) < 0.004f)
         {
             playfulTickTimer = 30;
-            if (!PetFlagManager.HasFlag(PetFlag.Playful))
-                PetFlagManager.AddFlag(PetFlag.Playful);
+            if (!petFlagManager.HasFlag(PetFlag.Playful))
+                petFlagManager.AddFlag(PetFlag.Playful);
         }
 
         // Check for loved flag
         if (status["hunger"] > 0.6f && status["hygiene"] > 0.6f && UnityEngine.Random.Range(0f, 1f) < 0.004f)
         {
             lovedTickTimer = 40;
-            if (!PetFlagManager.HasFlag(PetFlag.Loved))
-                PetFlagManager.AddFlag(PetFlag.Loved);
+            if (!petFlagManager.HasFlag(PetFlag.Loved))
+                petFlagManager.AddFlag(PetFlag.Loved);
         }
 
         //check stinky
-        var emission = stinkyParticles.emission;
+        var emission = StinkyParticles.emission;
         emission.enabled = status["hygiene"] < 0.5f;
         
         //try get sick
@@ -123,11 +109,11 @@ public class PetStats : MonoBehaviour
         float hit = UnityEngine.Random.Range(0, 1f);
         if (0.7f < sickChance 
         && hit < sickChance*0.008f 
-        && !PetFlagManager.HasFlag(PetFlag.Sick) 
-        && !PetFlagManager.HasFlag(PetFlag.Immune))
+        && !petFlagManager.HasFlag(PetFlag.Sick) 
+        && !petFlagManager.HasFlag(PetFlag.Immune))
         {
-            PetFlagManager.AddFlag(PetFlag.Sick);
-            PetAnimation.Instance.SetBoolParameter("IsSick", true);
+            petFlagManager.AddFlag(PetFlag.Sick);
+            petAnimation.SetBoolParameter("IsSick", true);
             UIPopups.Instance.PopupInfo(
                 "Oh no",
                 "Your pet is sick! Recovery from eating, playing, and sleeping is halved. Visit the vet!");
@@ -137,66 +123,66 @@ public class PetStats : MonoBehaviour
             atParkWornOutTimer--;
             if (atParkWornOutTimer <= 0)
             {
-                PetFlagManager.AddFlag(PetFlag.WornOut);
+                petFlagManager.AddFlag(PetFlag.WornOut);
                 wornOutTickTimer = 50;
             }
         }
         else atParkWornOutTimer = 40;
 
         wornOutTickTimer--;
-        if (wornOutTickTimer <= 0 && PetFlagManager.HasFlag(PetFlag.WornOut))
-            PetFlagManager.RemoveFlag(PetFlag.WornOut);
+        if (wornOutTickTimer <= 0 && petFlagManager.HasFlag(PetFlag.WornOut))
+            petFlagManager.RemoveFlag(PetFlag.WornOut);
         
         immuneTickTimer -= 1;
-        if (immuneTickTimer <= 0 && PetFlagManager.HasFlag(PetFlag.Immune))
-            PetFlagManager.RemoveFlag(PetFlag.Immune);
+        if (immuneTickTimer <= 0 && petFlagManager.HasFlag(PetFlag.Immune))
+            petFlagManager.RemoveFlag(PetFlag.Immune);
         
         playfulTickTimer -= 1;
-        if (playfulTickTimer <= 0 && PetFlagManager.HasFlag(PetFlag.Playful))
-            PetFlagManager.RemoveFlag(PetFlag.Playful);
+        if (playfulTickTimer <= 0 && petFlagManager.HasFlag(PetFlag.Playful))
+            petFlagManager.RemoveFlag(PetFlag.Playful);
         
         lovedTickTimer -= 1;
-        if (lovedTickTimer <= 0 && PetFlagManager.HasFlag(PetFlag.Loved))
-            PetFlagManager.RemoveFlag(PetFlag.Loved);
+        if (lovedTickTimer <= 0 && petFlagManager.HasFlag(PetFlag.Loved))
+            petFlagManager.RemoveFlag(PetFlag.Loved);
     }
     public void StartBathing()
     {
-        PetStateMachine.SetState(PetState.Bathing);
-        var emission = batheParticles.emission;
+        petStateMachine.SetState(PetState.Bathing);
+        var emission = BatheParticles.emission;
         emission.enabled = true;
     }
     public void StopBathing()
     {
-        PetStateMachine.SetState(PetState.Idle);
-        var emission = batheParticles.emission;
+        petStateMachine.SetState(PetState.Idle);
+        var emission = BatheParticles.emission;
         emission.enabled = false;
     }
     public void FeedPet(float amount)
     {
-        if (PetFlagManager.HasFlag(PetFlag.Sick)) amount /= 2;
+        if (petFlagManager.HasFlag(PetFlag.Sick)) amount /= 2;
         status["hunger"] = Math.Min(1, status["hunger"] + amount);
     }
     public void StartPlay()
     {
-        PetStateMachine.SetState(PetState.Playing);
+        petStateMachine.SetState(PetState.Playing);
     }
     public void StopPlay()
     {
-        PetStateMachine.SetState(PetState.Idle);
+        petStateMachine.SetState(PetState.Idle);
     }
     public void StartSleep()
     {
-        PetStateMachine.SetState(PetState.Sleeping);
+        petStateMachine.SetState(PetState.Sleeping);
     }
     public void StopSleep()
     {
-        PetStateMachine.SetState(PetState.Idle);
+        petStateMachine.SetState(PetState.Idle);
     }
     public void CurePet()
     {
         immuneTickTimer = 120;
-        PetFlagManager.AddFlag(PetFlag.Immune);
-        PetFlagManager.RemoveFlag(PetFlag.Sick);
-        PetAnimation.Instance.SetBoolParameter("IsSick", false);
+        petFlagManager.AddFlag(PetFlag.Immune);
+        petFlagManager.RemoveFlag(PetFlag.Sick);
+        petAnimation.SetBoolParameter("IsSick", false);
     }
 }

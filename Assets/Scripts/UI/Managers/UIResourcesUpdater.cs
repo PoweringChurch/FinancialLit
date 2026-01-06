@@ -33,9 +33,9 @@ public class UIResourcesUpdater : MonoBehaviour
         foodText.text = PlayerResources.Instance.Food.ToString();
         moneyText.text = $"Balance: ${PlayerResources.Instance.Money:N2}";
 
-        foodspendings.text = $"${PlayerResources.Instance.Spendings["Food"].ToString()}";
-        hygieneSpendings.text = $"${PlayerResources.Instance.Spendings["Hygiene"].ToString()}";
-        healthcareSpendings.text = $"${PlayerResources.Instance.Spendings["Healthcare"].ToString()}";
-        furnitureSpendings.text = $"${PlayerResources.Instance.Spendings["Furniture"].ToString()}";
+        foodspendings.text = $"${PlayerResources.Instance.Spendings["Food"]}";
+        hygieneSpendings.text = $"${PlayerResources.Instance.Spendings["Hygiene"]}";
+        healthcareSpendings.text = $"${PlayerResources.Instance.Spendings["Healthcare"]}";
+        furnitureSpendings.text = $"${PlayerResources.Instance.Spendings["Furniture"]}";
     }
 }

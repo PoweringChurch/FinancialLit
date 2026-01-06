@@ -20,42 +20,42 @@ public class BathingFunctionality : BaseFunctionality
         {
             return;
         }
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
 
-        PetMover.Instance.OnReachedGoal += OnReached;
-        PetMover.Instance.SetGoalPosition(PositionPetY());
+        PetHelper.petMover.OnReachedGoal += OnReached;
+        PetHelper.petMover.SetGoalPosition(PositionPetY());
 
         inUse = true;
     }
     protected virtual void OnReached()
     {
-        PetMover.Instance.OnReachedGoal -= OnReached;
+        PetHelper.petMover.OnReachedGoal -= OnReached;
         GetComponent<NavMeshObstacle>().enabled = false;
 
-        PetMover.Instance.petTransform.LookAt(PositionPetY() + transform.right);
-        PetMover.Instance.petTransform.position = PositionPetY();
+        PetHelper.petMover.petTransform.LookAt(PositionPetY() + transform.right);
+        PetHelper.petMover.petTransform.position = PositionPetY();
 
         PlayerResources.Instance.ConsumeShampoo();
-        PetStats.Instance.StartBathing();
+        PetHelper.petStats.StartBathing();
         waterFill.SetActive(true);
 
         homeActions.Remove("Bathe");
         homeActions["Stop bathing"] = StopBathing;
 
-        PetAnimation.Instance.SetBoolParameter("IsSitting", true);
+        PetHelper.petAnimation.SetBoolParameter("IsSitting", true);
     }
     protected virtual void StopBathing()
     {
         GetComponent<NavMeshObstacle>().enabled = true;
 
-        PetStats.Instance.StopBathing();
+        PetHelper.petStats.StopBathing();
         waterFill.SetActive(false);
 
         homeActions["Bathe"] = Bathe;
         homeActions.Remove("Stop bathing");
 
-        PetAnimation.Instance.SetBoolParameter("IsSitting", false);
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
+        PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
 
         inUse = false;
     }

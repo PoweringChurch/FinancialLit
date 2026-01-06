@@ -4,11 +4,14 @@ using System;
 
 public class PetMover : MonoBehaviour
 {
-    public static PetMover Instance;
+    public PetAnimation petAnimation;
+    public PetFlagManager petFlagManager;
+    public PetStats petStats;
+
     public Transform petTransform;
     
     [HideInInspector] public bool reachedGoal;
-    private float moveSpeed = 2.5f;
+    private float moveSpeed = 1.75f;
     private float stoppingDistance = 0.4f;
     
     public NavMeshAgent agent;
@@ -16,7 +19,6 @@ public class PetMover : MonoBehaviour
     
     void Awake()
     {
-        Instance = this;
         agent = GetComponent<NavMeshAgent>();
         if (agent != null)
         {
@@ -40,7 +42,7 @@ public class PetMover : MonoBehaviour
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
                 reachedGoal = true;
-                PetAnimation.Instance.SetBoolParameter("IsMoving", false);
+                petAnimation.SetBoolParameter("IsMoving", false);
                 OnReachedGoal?.Invoke();
             }
             else
@@ -54,10 +56,10 @@ public class PetMover : MonoBehaviour
             }
 
             // Apply energy multiplier to speed
-            float energyMult = 0.5f + 0.5f * PetStats.Instance.Status["energy"];
-            float sickMult = PetFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
-            float lovedMult = PetFlagManager.HasFlag(PetFlag.Loved) ? 1.05f : 1f;
-            float playfulMult = PetFlagManager.HasFlag(PetFlag.Playful) ? 1.05f : 1f;
+            float energyMult = 0.5f + 0.5f * petStats.Status["energy"];
+            float sickMult = petFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
+            float lovedMult = petFlagManager.HasFlag(PetFlag.Loved) ? 1.05f : 1f;
+            float playfulMult = petFlagManager.HasFlag(PetFlag.Playful) ? 1.05f : 1f;
             agent.speed = moveSpeed * energyMult * sickMult * lovedMult * playfulMult;
         }
     }
@@ -65,8 +67,8 @@ public class PetMover : MonoBehaviour
     public void SetGoalPosition(Vector3 to)
     {
         agent.SetDestination(to);
-        PetAnimation.Instance.SetBoolParameter("IsSitting", false);
-        PetAnimation.Instance.SetBoolParameter("IsMoving", true);
+        petAnimation.SetBoolParameter("IsSitting", false);
+        petAnimation.SetBoolParameter("IsMoving", true);
         reachedGoal = false;
     }
 }

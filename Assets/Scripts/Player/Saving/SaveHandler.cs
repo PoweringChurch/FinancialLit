@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+public enum PetBreed {Corgi, Cur, Pug}
 public class SaveHandler : MonoBehaviour
 {
     public static SaveHandler Instance;
@@ -21,12 +22,15 @@ public class SaveHandler : MonoBehaviour
     public void SaveGame()
     {
         currentPlayerData.IsNewSave = false;
+
         //pet stats
-        currentPlayerData.PetName = PetStats.Instance.PetName;
-        currentPlayerData.Hygiene = PetStats.Instance.Status["hygiene"];
-        currentPlayerData.Hunger = PetStats.Instance.Status["hunger"];
-        currentPlayerData.Entertainment = PetStats.Instance.Status["entertainment"];
-        currentPlayerData.Energy = PetStats.Instance.Status["energy"];
+        currentPlayerData.Breed = PetHelper.petStats.breed;
+        currentPlayerData.PetName = PetHelper.petStats.petName;
+
+        currentPlayerData.Hygiene = PetHelper.petStats.Status["hygiene"];
+        currentPlayerData.Hunger = PetHelper.petStats.Status["hunger"];
+        currentPlayerData.Entertainment = PetHelper.petStats.Status["entertainment"];
+        currentPlayerData.Energy = PetHelper.petStats.Status["energy"];
 
         string displayStatus = "OKAY";
 
@@ -51,10 +55,10 @@ public class SaveHandler : MonoBehaviour
 
         currentPlayerData.DisplayStatus = displayStatus;
 
-        currentPlayerData.PetPosition = PetMover.Instance.petTransform.position;
-        currentPlayerData.PetRotation = PetMover.Instance.petTransform.rotation;
+        currentPlayerData.PetPosition = PetHelper.petMover.petTransform.position;
+        currentPlayerData.PetRotation = PetHelper.petMover.petTransform.rotation;
 
-        currentPlayerData.PetFlags = PetFlagManager.CurrentFlags;
+        currentPlayerData.PetFlags = PetHelper.petFlagManager.CurrentFlags;
         
         // furniture
 
@@ -98,22 +102,52 @@ public class SaveHandler : MonoBehaviour
         File.WriteAllText(savePath, json);
         Debug.Log($"Game saved to {savePath}");
     }
-    public void LoadSaved(PlayerData playerData)
+
+    public GameObject corgiPrefab;
+    public GameObject curPrefab;
+    public GameObject pugPrefab;
+
+    public Transform gameSpace;
+    public void LoadSaveData(PlayerData playerData)
     {
         playerData.IsNewSave = false;
+        if (PetHelper.CurrentActivePet != null)
+        {
+            Destroy(PetHelper.CurrentActivePet);
+        }
+        GameObject dog = null;
+        switch (playerData.Breed)
+        {
+            case PetBreed.Corgi:
+                dog = Instantiate(corgiPrefab,gameSpace);
+                Debug.Log("instantiated corgi");
+                break;
+            case PetBreed.Cur:
+                Debug.Log("instantiated cur");
+                dog = Instantiate(curPrefab,gameSpace);
+                break;
+            case PetBreed.Pug:
+                Debug.Log("instantiated pug");
+                dog = Instantiate(pugPrefab,gameSpace);
+                break;
+        }
+        if (!dog) return;
+        PetHelper.CurrentActivePet = dog;
         // Pet stats
-        PetStats.Instance.SetName(playerData.PetName);
-        PetStats.Instance.Status["hygiene"] = playerData.Hygiene;
-        PetStats.Instance.Status["hunger"] = playerData.Hunger;
-        PetStats.Instance.Status["entertainment"] = playerData.Entertainment;
-        PetStats.Instance.Status["energy"] = playerData.Energy;
+        PetHelper.petStats.petName = playerData.PetName;
+        PetHelper.petStats.breed = playerData.Breed;
 
-        PetMover.Instance.agent.Warp(playerData.PetPosition);
-        PetMover.Instance.petTransform.rotation = playerData.PetRotation;
+        PetHelper.petStats.Status["hygiene"] = playerData.Hygiene;
+        PetHelper.petStats.Status["hunger"] = playerData.Hunger;
+        PetHelper.petStats.Status["entertainment"] = playerData.Entertainment;
+        PetHelper.petStats.Status["energy"] = playerData.Energy;
+
+        PetHelper.petMover.agent.Warp(playerData.PetPosition);
+        PetHelper.petMover.petTransform.rotation = playerData.PetRotation;
         // Pet flags
-        PetFlagManager.SetFlags(playerData.PetFlags);
+        PetHelper.petFlagManager.SetFlags(playerData.PetFlags);
 
-        // Clear existing furniture
+        //clear existing furniture
         for (int i = homeFurnitureTransform.childCount - 1; i >= 0; i--)
         {
             Destroy(homeFurnitureTransform.GetChild(i).gameObject);
@@ -124,14 +158,12 @@ public class SaveHandler : MonoBehaviour
         {
             FurnitureData furnitureItem = FurnitureDatabase.GetData(furnitureData.itemName);
             if (furnitureItem == null)
-            {
                 continue;
-            }
 
             GameObject spawnedFurniture = Instantiate(furnitureItem.prefab, homeFurnitureTransform);
             spawnedFurniture.transform.SetPositionAndRotation(furnitureData.position, furnitureData.rotation);
 
-            // Restore furniture-specific data
+            // Restore furniture data
             var functionality = spawnedFurniture.GetComponent<BaseFunctionality>();
             if (functionality is FeedingFunctionality feedingFunctionality)
             {
@@ -165,7 +197,7 @@ public class SaveHandler : MonoBehaviour
             File.Delete(savePath);
             Debug.Log($"Deleted save file: {savePath}");
             
-            // If we deleted the currently active save, reset it
+            //if deleted the currently active save, reset it (should happen but juuust in case)
             if (currentSaveFile == fileName)
             {
                 currentSaveFile = "default.json";

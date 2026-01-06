@@ -9,7 +9,7 @@ public class Inventory
     [SerializeField] private List<InventoryEntry> inventoryEntries = new();    
     [NonSerialized] private Dictionary<string, InventoryEntry> inventoryDict = new();
     
-    // Call this after deserialization to rebuild the dictionary
+    // called this after deserialization to rebuild dictionary
     public void Initialize()
     {
         inventoryDict.Clear();
@@ -53,7 +53,7 @@ public class Inventory
         }
         else
         {
-            Debug.LogWarning($"Item {itemName} not found in inventory.");
+            Debug.LogWarning($"Item {itemName} not found in inventory");
         }
     }
     

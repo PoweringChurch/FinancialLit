@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PetFunctionality : BaseFunctionality
@@ -14,51 +13,51 @@ public class PetFunctionality : BaseFunctionality
     }
     void Follow()
     {
-        if (!PetStateMachine.IsInState(PetState.Idle) || PetBehaviour.Instance.ActiveBehaviour == Behaviour.Occupied) //it IS MEANT TO CHECK HERE FUTURE ME DONT DELETE
+        if (!PetHelper.petStateMachine.IsInState(PetState.Idle) || PetHelper.petBehaviour.ActiveBehaviour == Behaviour.Occupied) //it IS MEANT TO CHECK HERE FUTURE ME DONT DELETE
         {
-            Message($"{PetStats.Instance.PetName} is occupied!");
+            Message($"{PetHelper.petStats.petName} is occupied!");
             return;
         }
         
-        PetAnimation.Instance.SetBoolParameter("IsSitting",false);
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
+        PetHelper.petAnimation.SetBoolParameter("IsSitting",false);
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
 
         UICursor.Instance.SetCursor(UICursor.Instance.followingCursor);
         PlayerFlagManager.AddFlag(PlayerFlag.SetFollow);
         print("added set follow flag");
-        PetMover.Instance.OnReachedGoal += ReachedFollowTarget;
+        PetHelper.petMover.OnReachedGoal += ReachedFollowTarget;
     }
 
     void ReachedFollowTarget()
     {
-        PetMover.Instance.OnReachedGoal -= ReachedFollowTarget;
-        PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
+        PetHelper.petMover.OnReachedGoal -= ReachedFollowTarget;
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
     }
     void ToggleSit()
     {
-        if (PetStateMachine.IsInState(PetState.Sitting))
+        if (PetHelper.petStateMachine.IsInState(PetState.Sitting))
         {
-            PetStateMachine.SetState(PetState.Idle);
+            PetHelper.petStateMachine.SetState(PetState.Idle);
             globalActions.Remove("Rise");
             globalActions["Sit"] = ToggleSit;
 
-            PetBehaviour.Instance.ActiveBehaviour = Behaviour.Default;
-            PetAnimation.Instance.SetBoolParameter("IsSitting", false);
+            PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
+            PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
         }
         else
         {
-            if (!PetStateMachine.IsInState(PetState.Idle))
+            if (!PetHelper.petStateMachine.IsInState(PetState.Idle))
             {
-                Message($"{PetStats.Instance.PetName} is occupied!");
+                Message($"{PetHelper.petStats.petName} is occupied!");
                 return;
             }
-            PetStateMachine.SetState(PetState.Sitting);
+            PetHelper.petStateMachine.SetState(PetState.Sitting);
             globalActions.Remove("Sit");
             globalActions["Rise"] = ToggleSit;
 
-            PetMover.Instance.SetGoalPosition(PetMover.Instance.petTransform.transform.position);
-            PetBehaviour.Instance.ActiveBehaviour = Behaviour.Occupied;
-            PetAnimation.Instance.SetBoolParameter("IsSitting", true);
+            PetHelper.petMover.SetGoalPosition(PetHelper.petMover.petTransform.transform.position);
+            PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
+            PetHelper.petAnimation.SetBoolParameter("IsSitting", true);
         }
     }
 }

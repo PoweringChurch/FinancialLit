@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class Interaction : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private GameObject hoveringNamePrefab;
     [SerializeField] private Transform menuContainer;
-    
     [Header("Settings")]
     [SerializeField] private LayerMask interactableLayer; //furniture and pet
     [SerializeField] private float menuRadius = 120f;
@@ -49,7 +49,7 @@ public class Interaction : MonoBehaviour
             }
             var nameText = currentHoveringName.GetComponent<TextMeshPro>();
             if (functionality is PetFunctionality)
-                nameText.text = PetStats.Instance.PetName;
+                nameText.text = PetHelper.petStats.petName;
             else
             {
                 var handler = functionality.GetComponent<PlacementHandler>();
@@ -104,19 +104,15 @@ public class Interaction : MonoBehaviour
             
             if (validHits.Count > 0)
             {
-                // Sort by distance (closest first)
+                //sort by distance (closest first)
                 validHits.Sort((a, b) => a.distance.CompareTo(b.distance));
-                
                 // Cycle through valid hits
                 currentHitIndex = currentHitIndex % validHits.Count;
                 RaycastHit selectedHit = validHits[currentHitIndex];
-                
                 // Increment for next click
                 currentHitIndex++;
-                
                 // Get functionality component
                 selectedHit.transform.TryGetComponent(out BaseFunctionality functionality);
-
                 currentOutline = selectedHit.transform.GetComponentInChildren<Outline>();
                 if (currentOutline != null)
                 {
