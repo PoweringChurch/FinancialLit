@@ -15,7 +15,6 @@ public class UIAnimations : MonoBehaviour
     public Transform cur;
     public Transform pug;
 
-
     public void Update()
     {
         //rotate flag

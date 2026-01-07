@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class PetMover : MonoBehaviour
 {
     public PetAnimation petAnimation;
@@ -11,34 +12,30 @@ public class PetMover : MonoBehaviour
     public Transform petTransform;
     
     [HideInInspector] public bool reachedGoal;
-    private float moveSpeed = 1.75f;
-    private float stoppingDistance = 0.4f;
+    const float moveSpeed = 1.75f;
+    const float stoppingDistance = 0.4f;
     
     public NavMeshAgent agent;
     public event Action OnReachedGoal;
     
-    void Awake()
+    void Start()
     {
+        reachedGoal = true;
         agent = GetComponent<NavMeshAgent>();
         if (agent != null)
         {
             agent.speed = moveSpeed;
             agent.stoppingDistance = stoppingDistance;
-            agent.angularSpeed = 0; // We'll handle rotation manually
+            agent.angularSpeed = 0;
             agent.updateRotation = false;
         }
-    }
-    
-    void Start()
-    {
-        reachedGoal = true;
     }
     
     void Update()
     {
         if (!reachedGoal && agent != null)
         {
-            // Check if reached destination
+            // check if reached destination
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
                 reachedGoal = true;
@@ -47,7 +44,7 @@ public class PetMover : MonoBehaviour
             }
             else
             {
-                // Handle rotation
+                // handle rotation
                 if (agent.velocity.magnitude > 0.01f && petTransform != null)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(agent.velocity.normalized);
@@ -55,7 +52,7 @@ public class PetMover : MonoBehaviour
                 }
             }
 
-            // Apply energy multiplier to speed
+            // apply energy multiplier to speed
             float energyMult = 0.5f + 0.5f * petStats.Status["energy"];
             float sickMult = petFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
             float lovedMult = petFlagManager.HasFlag(PetFlag.Loved) ? 1.05f : 1f;

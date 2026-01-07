@@ -24,7 +24,7 @@ public class UIStatusEffects : MonoBehaviour
     private GameObject currentDescription;
     private Dictionary<PetFlag, FlagIcon> flagIconMap;
     private FlagIcon currentDescriptionIcon;
-    public void Initialize()
+    void Start()
     {
         flagIconMap = new Dictionary<PetFlag, FlagIcon>();
         foreach (var icon in flagIcons)

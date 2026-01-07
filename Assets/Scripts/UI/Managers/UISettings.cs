@@ -13,7 +13,7 @@ public class UISettings : MonoBehaviour
     public TMP_Dropdown textureQualityDropdown;
     public Toggle realtimeReflectionsToggle;
 
-    public void Initialize()
+    void Start()
     {
         fullScreenToggle.onValueChanged.AddListener(SetFullscreen);
         vsyncToggle.onValueChanged.AddListener(SetVsync);
@@ -21,6 +21,10 @@ public class UISettings : MonoBehaviour
         anisotropicFilteringToggle.onValueChanged.AddListener(SetAnisotropicFiltering);
         textureQualityDropdown.onValueChanged.AddListener(SetTextureQuality);
         realtimeReflectionsToggle.onValueChanged.AddListener(SetRealtimeReflections);
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
     //settings
     public void SetFullscreen(bool to)

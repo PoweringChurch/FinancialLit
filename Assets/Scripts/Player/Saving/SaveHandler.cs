@@ -43,7 +43,7 @@ public class SaveHandler : MonoBehaviour
 
         if (total > 3.5) displayStatus = "FINE";
         if (total > 3.7) displayStatus = "GREAT";
-        if (total > 3.9) displayStatus = "WONDERFUL";
+        if (total > 3.9) displayStatus = "AMAZING";
         if (entertainment < 0.5) displayStatus = "BORED";
         if (entertainment < 0.2) displayStatus = "SAD";
         if (hygiene < 0.3) displayStatus = "DIRTY";
@@ -119,16 +119,19 @@ public class SaveHandler : MonoBehaviour
         switch (playerData.Breed)
         {
             case PetBreed.Corgi:
-                dog = Instantiate(corgiPrefab,gameSpace);
-                Debug.Log("instantiated corgi");
+                dog = Instantiate(corgiPrefab,playerData.PetPosition,playerData.PetRotation,gameSpace);
+                Debug.Log("pos : "+playerData.PetPosition);
+                Debug.Log("rot : "+playerData.PetRotation.eulerAngles);
                 break;
             case PetBreed.Cur:
-                Debug.Log("instantiated cur");
-                dog = Instantiate(curPrefab,gameSpace);
+                dog = Instantiate(curPrefab,playerData.PetPosition,playerData.PetRotation,gameSpace);
+                Debug.Log("pos : "+playerData.PetPosition);
+                Debug.Log("rot : "+playerData.PetRotation.eulerAngles);
                 break;
             case PetBreed.Pug:
-                Debug.Log("instantiated pug");
-                dog = Instantiate(pugPrefab,gameSpace);
+                dog = Instantiate(pugPrefab,playerData.PetPosition,playerData.PetRotation,gameSpace);
+                Debug.Log("pos : "+playerData.PetPosition);
+                Debug.Log("rot : "+playerData.PetRotation.eulerAngles);
                 break;
         }
         if (!dog) return;
@@ -142,8 +145,6 @@ public class SaveHandler : MonoBehaviour
         PetHelper.petStats.Status["entertainment"] = playerData.Entertainment;
         PetHelper.petStats.Status["energy"] = playerData.Energy;
 
-        PetHelper.petMover.agent.Warp(playerData.PetPosition);
-        PetHelper.petMover.petTransform.rotation = playerData.PetRotation;
         // Pet flags
         PetHelper.petFlagManager.SetFlags(playerData.PetFlags);
 

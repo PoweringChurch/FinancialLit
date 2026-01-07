@@ -9,6 +9,8 @@ public class PlayerInputHandler : MonoBehaviour
     private InputAction raiseFurniture;
     private InputAction lowerFurniture;
     private InputAction setFreemove;
+
+    private InputAction bindEsc;
     void Awake()
     {
         interact = InputSystem.actions.FindAction("Interact");

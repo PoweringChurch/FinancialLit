@@ -57,7 +57,7 @@ public class UIPet : MonoBehaviour
 
         if (total > 3.5) displaytext = "FINE";
         if (total > 3.7) displaytext = "GREAT";
-        if (total > 3.9) displaytext = "WONDERFUL";
+        if (total > 3.9) displaytext = "AMAZING";
         if (entertainment < 0.5) displaytext = "BORED";
         if (entertainment < 0.2) displaytext = "SAD";
         if (hygiene < 0.3) displaytext = "DIRTY";
@@ -72,7 +72,7 @@ public class UIPet : MonoBehaviour
             ["OKAY"] = new Color(0.5f, 0.6f, 0.5f),
             ["FINE"] = new Color(0.5f, 0.8f, 0.6f),
             ["GREAT"] = new Color(0.5f, 0.9f, 0.6f),
-            ["WONDERFUL"] = new Color(0.3f, 0.9f, 0.5f),
+            ["AMAZING"] = new Color(0.3f, 0.9f, 0.5f),
             ["BORED"] = new Color(0.6f, 0.6f, 0.8f),
             ["SAD"] = new Color(0.4f, 0.4f, 0.7f),
             ["DIRTY"] = new Color(0.6f, 0.5f, 0.3f),
