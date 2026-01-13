@@ -2,7 +2,7 @@
 
 [Overview](https://www.flfbla.org/fbla-event-introduction-to-programming)
 
-[Details and Guidelines](https://greektrack-fbla-public.s3.amazonaws.com/files/1/High%20School%20Competitive%20Events%20Resources/Individual%20Guidelines/Presentation%20Events/Introduction-to-Programming.pdf?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAWVAJYMX2IFDGHQE3%2F20251201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251201T142010Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Signature=4c34faab7589f60c4fa984042aeedb8cdc285dbba6d82fa33c2c86bdce4a4172)
+[Details and Guidelines](https://www.fbla.org/high-school/competitive-events/)
 
 # TODO
 
