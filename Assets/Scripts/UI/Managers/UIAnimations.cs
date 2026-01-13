@@ -27,7 +27,7 @@ public class UIAnimations : MonoBehaviour
             bgScrollerImage.uvRect.size
         );
     }
-    float spinDuration = 1.5f;
+    const float spinDuration = 1.5f;
     public void SpinBreeds() 
     {
         corgi.rotation = Quaternion.Euler(0,90,0);
