@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//only used to make make handling animation easier later in the future
 public class PetAnimation : MonoBehaviour
 {
     [SerializeField] private Animator petAnimator;

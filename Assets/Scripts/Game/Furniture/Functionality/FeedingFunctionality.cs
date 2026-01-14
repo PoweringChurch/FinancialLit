@@ -4,55 +4,66 @@ public class FeedingFunctionality : BaseFunctionality
 {
     public bool filled = false;
     private ParticleSystem eatParticles;
+    // display when a food bowl is filled
     [SerializeField] protected Transform foodTransform;
     [SerializeField] protected float filledY;
     [SerializeField] protected float emptyY;
+
     protected override void Awake()
     {
         base.Awake();
         eatParticles = GetComponentInChildren<ParticleSystem>();
+        // set actions
         homeActions["Go eat"] = GoEat;
         homeActions["Refill"] = Refill;
     }
+    // called when go eat action is pressed
     protected virtual void GoEat()
     {
+        // check if food bowl is filled before letting pet eat
         if (!filled)
         {
             Message("Not filled!");
             return;
         }
-        if (DefaultChecks())
-        {
+        if (DefaultChecks()) // tb deleted
             return;
-        }
+        // make pet occupied
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
         PetHelper.petMover.OnReachedGoal += OnReached;
         PetHelper.petMover.SetGoalPosition(PositionPetY());
     }
+    // called when pet reaches food bowl
     protected virtual void OnReached()
     {
+        // disconnect onreached
         PetHelper.petMover.OnReachedGoal -= OnReached;
-        //PetMover.Instance.petModel.position = PositionPetY() + transform.forward;
+        // make pet look at food
         PetHelper.petMover.petTransform.LookAt(PositionPetY());
-
+        // play eat animation
         PetHelper.petAnimation.SetTrigger("Eat");
-        PetHelper.petStats.FeedPet(0.4f);
-        //wait for 0.5 sec
+        // refill pet hunger by 30%
+        PetHelper.petStats.FeedPet(0.3f);
+        // matched with time of animation to eat
         Invoke(nameof(EatFood), 0.7f);
     }
+    // play the eat particles and remove the visual cue, for use in onreached
     void EatFood()
     {
         eatParticles.Play();
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
         SetFilled(false);
     }
+    // refill the bowl
     protected virtual void Refill()
     {
+        // check if already filled
         if (filled)
         {
             Message("Already filled!");
             return;
         }
+        // check if the player has enough feed
         if (!PlayerResources.Instance.CanConsumeFood())
         {
             Message("No pet food!");
@@ -60,8 +71,8 @@ public class FeedingFunctionality : BaseFunctionality
         }
         PlayerResources.Instance.ConsumeFood();
         SetFilled(true);
-        
     }
+    // update the food visual
     public virtual void SetFilled(bool to)
     {
         filled = to;
