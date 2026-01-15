@@ -39,8 +39,10 @@ public class PlayFunctionality : BaseFunctionality
         homeActions["Stop playing"] = StopPlaying;
         PetHelper.petAnimation.SetBoolParameter("IsPlaying", true);
     }
+    // override for use check
     protected override void Move()
     {
+        // check if in use
         if (inUse)
         {
             Message("In use!");
@@ -48,8 +50,10 @@ public class PlayFunctionality : BaseFunctionality
         }
         base.Move();
     }
+    // override for use check
     protected override void Remove()
     {
+        // check if in use
         if (inUse)
         {
             Message("In use!");

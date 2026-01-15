@@ -5,9 +5,9 @@ using UnityEngine;
 public class FurnitureData : ScriptableObject
 {
     public string itemName;
-    public GameObject prefab;  // The furniture prefab
+    public GameObject prefab;  // the furniture prefab
     public Sprite icon;
-
+    // really not a necessary function, as i removed most debugging feature involving this class. will keep for potential future use though
     public override string ToString()
     {
         return $"{itemName}, prefab {prefab.name}";

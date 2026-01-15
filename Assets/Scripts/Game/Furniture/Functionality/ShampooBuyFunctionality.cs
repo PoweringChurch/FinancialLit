@@ -1,9 +1,6 @@
 public class ShampooBuyFunctionality : BaseFunctionality
 {
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    // override to make add inventory instead of adding furniture object
     protected override void Buy()
     {
         if (!PlayerResources.Instance.CanAfford(price)) return;

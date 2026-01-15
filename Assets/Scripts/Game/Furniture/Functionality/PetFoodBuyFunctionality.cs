@@ -1,6 +1,6 @@
 public class PetFoodBuyFunctionality : BaseFunctionality
 {
-    // override to make pet food enter players inventory instead of the item
+    // override to make pet food enter players inventory instead of the furniture object
     protected override void Buy()
     {
         if (!PlayerResources.Instance.CanAfford(price)) return;
