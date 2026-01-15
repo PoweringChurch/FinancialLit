@@ -94,23 +94,17 @@ public class PetBehaviour : MonoBehaviour
         
         actionTimer *= energyMult;
     }
-    Vector3 RandomPosition(float radius, bool conserveY = true)
+    // selected a random position in radius around pet transform, by default y is set to 0 unless false is passed as second argument
+    Vector3 RandomPosition(float radius, bool setyzero = true)
     {
         Vector2 randomCircle = Random.insideUnitCircle * radius;
-
-        if (conserveY)
-        {
+        // if setyzero is true set y to zero
+        if (setyzero)
             return transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
-        }
         else
-        {
-            Vector3 randomSphere = Random.insideUnitSphere * radius;
-            return transform.position + randomSphere;
-        }
+            return transform.position + randomCircle;
     }
     [SerializeField] private LayerMask interactableLayer;
-    bool VectorOverInteractable(Vector3 vector)
-    {
-        return Physics.Raycast(vector, Vector3.down, Mathf.Infinity, interactableLayer);
-    }
+    // determines if the passed vector is over the interactable layer
+    bool VectorOverInteractable(Vector3 vector) { return Physics.Raycast(vector, Vector3.down, Mathf.Infinity, interactableLayer); }
 }
