@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PetFunctionality : BaseFunctionality
 {
-    public ParticleSystem loveParticles;
     protected override void Awake()
     {
         ignoreBase = true;

@@ -97,10 +97,10 @@ public class PetBehaviour : MonoBehaviour
     // selected a random position in radius around pet transform, by default y is set to 0 unless false is passed as second argument
     Vector3 RandomPosition(float radius, bool setyzero = true)
     {
-        Vector2 randomCircle = Random.insideUnitCircle * radius;
+        Vector3 randomCircle = Random.insideUnitCircle * radius;
         // if setyzero is true set y to zero
         if (setyzero)
-            return transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+            return transform.position + new Vector3(randomCircle.x, 0, randomCircle.z);
         else
             return transform.position + randomCircle;
     }
