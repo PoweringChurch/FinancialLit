@@ -4,11 +4,6 @@ public enum Behaviour {Default, Roaming, Occupied}
 // Default enum might be depracated, as it serves the exact same purpose as Roaming
 public class PetBehaviour : MonoBehaviour
 {
-    public PetMover petMover;
-    public PetFlagManager petFlagManager;
-    public PetAnimation petAnimation;
-    public PetStats petStats;
-
     public AudioClip[] barks;
     public AudioClip[] whimper;
     private Behaviour activeBehaviour;
@@ -26,7 +21,7 @@ public class PetBehaviour : MonoBehaviour
     void Update()
     {
         // do not do anything if moving
-        if (!petMover.reachedGoal) return;
+        if (!PetHelper.petMover.reachedGoal) return;
         // just in case, but shouldnt be an issue
         if (!CameraHandler.Instance.GameCamEnabled()) return;
         // increment timer
@@ -56,7 +51,7 @@ public class PetBehaviour : MonoBehaviour
         {
             // 1 / 10 chance for pet to bark / whimper
             case 0:
-                if (petFlagManager.HasFlag(PetFlag.Sick))
+                if (PetHelper.petFlagManager.HasFlag(PetFlag.Sick))
                 {
                     actionTimer = 6;
                     SFXPlayer.Instance.Play(whimper[Random.Range(0,whimper.Length)]);
@@ -71,25 +66,25 @@ public class PetBehaviour : MonoBehaviour
                 break;
             // 1 / 10 chance to sit down for 4-8 seconds
             case 2:
-                petAnimation.SetBoolParameter("IsSitting", true);
+                PetHelper.petAnimation.SetBoolParameter("IsSitting", true);
                 actionTimer = Random.Range(4f, 8f);
                 break;
             // 7 / 10 chance (if not the other three) move around to a random nearby position, wait for 3-6 seconds
             default:
-                petAnimation.SetBoolParameter("IsSitting", false);
+                PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
                 
                 // try twice to get a valid position to move to, else give up
                 var targetPos = RandomPosition(20f);
                 if (!VectorOverInteractable(targetPos)) targetPos = RandomPosition(10f);
                 if (!VectorOverInteractable(targetPos)) break;
                 // set goal position to target position
-                petMover.SetGoalPosition(targetPos);
+                PetHelper.petMover.SetGoalPosition(targetPos);
                 actionTimer = Random.Range(3f, 6f);
                 break;
         }
         // action timer will increase as energy decreases
-        float energyMult = petStats.Status["energy"] < 0.8f 
-            ? 1.0f + (0.8f - petStats.Status["energy"]) * 0.1875f 
+        float energyMult = PetHelper.petStats.Status["energy"] < 0.8f 
+            ? 1.0f + (0.8f - PetHelper.petStats.Status["energy"]) * 0.1875f 
             : 1.0f;
         
         actionTimer *= energyMult;

@@ -13,6 +13,7 @@ public static class PetHelper
         {
             currentActivePet = value;
             Debug.Log("Set current active pet");
+            // set the variables
             if (currentActivePet != null)
             {
                 petAnimation = currentActivePet.GetComponent<PetAnimation>();
@@ -36,7 +37,8 @@ public static class PetHelper
             }
         }
     }
-
+    
+    // for easy access
     public static PetAnimation petAnimation;
     public static PetBehaviour petBehaviour;
     public static PetFunctionality petFunctionality;
