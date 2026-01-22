@@ -61,6 +61,7 @@ public class PlacementHandler : MonoBehaviour
         _InitializeMaterials();
     }
 #endif
+    // sets this furniture's placement mode to the provided mode
     public void SetPlacementMode(PlacementMode mode)
     {
         bool hasNavMesh = GetComponent<NavMeshObstacle>() != null;
@@ -77,7 +78,7 @@ public class PlacementHandler : MonoBehaviour
             if (hasNavMesh)
                 GetComponent<NavMeshObstacle>().enabled = false;
         }
-        else
+        else // mode == invalid
         {
             hasValidPlacement = false;
             if (hasNavMesh)
@@ -85,30 +86,36 @@ public class PlacementHandler : MonoBehaviour
         }
         SetMaterial(mode);
     }
-
+    // sets the material of this object to the passed mode's associated material
     public void SetMaterial(PlacementMode mode)
     {
         if (mode == PlacementMode.Fixed)
         {
+            // loop through meshes and
             foreach (MeshRenderer r in meshComponents)
+                // apply the furnitures material
                 r.sharedMaterials = initialMaterials[r].ToArray();
         }
         else
         {
+            // determine what material to apply
             Material matToApply = mode == PlacementMode.Valid
                 ? validPlacementMaterial : invalidPlacementMaterial;
-
+                
             Material[] m; int nMaterials;
+            // loop through materials and 
             foreach (MeshRenderer r in meshComponents)
             {
                 nMaterials = initialMaterials[r].Count;
                 m = new Material[nMaterials];
+                // apply the mode's associated material
                 for (int i = 0; i < nMaterials; i++)
                     m[i] = matToApply;
                 r.sharedMaterials = m;
             }
         }
     }
+    // init
     private void _InitializeMaterials()
     {
         if (initialMaterials == null)
@@ -120,9 +127,7 @@ public class PlacementHandler : MonoBehaviour
         }
 
         foreach (MeshRenderer r in meshComponents)
-        {
             initialMaterials[r] = new List<Material>(r.sharedMaterials);
-        }
     }
     private bool IsIgnored(GameObject o)
     {
