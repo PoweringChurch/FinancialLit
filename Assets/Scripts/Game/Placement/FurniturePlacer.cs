@@ -35,12 +35,6 @@ public class FurniturePlacer : MonoBehaviour
       private Quaternion previousRotation;
       [HideInInspector] public bool isMoving = false;
       [HideInInspector] public bool onPlacement = false;
-
-      public bool GameOver {
-            get {
-                  return gameOver;
-            }
-      }
       public event Action<string> OnItemPlaced;
 
       void Awake()
