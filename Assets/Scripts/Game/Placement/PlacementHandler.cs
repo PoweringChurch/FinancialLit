@@ -12,41 +12,49 @@ public enum PlacementMode
 //modified a bit but mostly from this tutorial
 public class PlacementHandler : MonoBehaviour
 {
+    // really should be a field and have property 
     public string itemName;
+    
     private Material validPlacementMaterial;
     private Material invalidPlacementMaterial;
+    // to put the materials on
     public MeshRenderer[] meshComponents;
+    // so that we can set our materials to their originals when placing
     private Dictionary<MeshRenderer, List<Material>> initialMaterials;
-    [HideInInspector] public bool hasValidPlacement;
-    [HideInInspector] public bool isFixed;
-    private int _nObstacles;
+
+    [HideInInspector] public bool hasValidPlacement = true;
+    [HideInInspector] public bool isFixed = true;
+    private int _nObstacles = 0;
+
     private void Awake()
     {
-        hasValidPlacement = true;
-        isFixed = true;
-        _nObstacles = 0;
-
         validPlacementMaterial = Resources.Load<Material>("Materials/ValidPlacement");
         invalidPlacementMaterial = Resources.Load<Material>("Materials/InvalidPlacement");
         _InitializeMaterials();
     }
     void OnTriggerEnter(Collider other)
     {
+        // if the object is placed, return
         if (isFixed) return;
-        if (IsIgnored(other.gameObject)) { return; }
+        if (IsIgnored(other.gameObject)) return;
+        // increment the number of obstacles by 1
         _nObstacles++;
-        if (UISave.Instance.debugToggle.isOn) 
-        {print("debug mode is enabled"); return;}
+        /* if (UISave.Instance.debugToggle.isOn) 
+            { print("debug mode is enabled"); return; }*/
         SetPlacementMode(PlacementMode.Invalid);
     }
     void OnTriggerExit(Collider other)
     {
+        // if the object is placed, return
         if (isFixed) return;
-        if (IsIgnored(other.gameObject)) { return; }
+        if (IsIgnored(other.gameObject)) return;
+
+        // decrease the number of obstacles by 1
         _nObstacles--;
         if (_nObstacles <= 0)
             SetPlacementMode(PlacementMode.Valid);
     }
+    // try to init materials in the editor
 #if UNITY_EDITOR
     private void OnValidate()
     {

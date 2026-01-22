@@ -5,15 +5,19 @@ using System;
 [RequireComponent(typeof(NavMeshAgent))]
 public class PetMover : MonoBehaviour
 {
-    [HideInInspector] public bool reachedGoal;
+    [HideInInspector] public bool reachedGoal; // could use a property here, but there isnt really a reason to
+
     const float moveSpeed = 1.75f;
     const float stoppingDistance = 0.4f;
     
-    public NavMeshAgent agent;
     public event Action OnReachedGoal;
-    
+    public NavMeshAgent agent;
+    public Transform petTransform;
+
     void Start()
     {
+        // set variables
+        petTransform = transform;
         reachedGoal = true;
         agent = GetComponent<NavMeshAgent>();
         if (agent != null)

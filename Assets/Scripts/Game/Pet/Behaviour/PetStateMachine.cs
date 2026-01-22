@@ -8,7 +8,7 @@ public class PetStateMachine : MonoBehaviour
     
     public  event Action<PetState, PetState> OnStateChanged;
     
-    // might remove and just make CurrentState a getter setter
+    // might remove and just make CurrentState a property
     public void SetState(PetState newState)
     {
         if (currentState == newState) return;

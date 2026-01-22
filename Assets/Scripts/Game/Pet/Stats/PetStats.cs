@@ -162,7 +162,7 @@ public class PetStats : MonoBehaviour
             }
         }
         else atParkWornOutTimer = 40;
-
+        
         // make worn out status expire
         wornOutTickTimer--;
         if (wornOutTickTimer <= 0 && PetHelper.petFlagManager.HasFlag(PetFlag.WornOut))
@@ -201,22 +201,10 @@ public class PetStats : MonoBehaviour
         status["hunger"] = Math.Min(1, status["hunger"] + amount);
     }
     // called when the pet starts playing. these next few functions are really only written like this so incase anything should change further down the line I can know whats being called and how
-    public void StartPlay()
-    {
-        PetHelper.petStateMachine.SetState(PetState.Playing);
-    }
-    public void StopPlay()
-    {
-        PetHelper.petStateMachine.SetState(PetState.Idle);
-    }
-    public void StartSleep()
-    {
-        PetHelper.petStateMachine.SetState(PetState.Sleeping);
-    }
-    public void StopSleep()
-    {
-        PetHelper.petStateMachine.SetState(PetState.Idle);
-    }
+    public void StartPlay() { PetHelper.petStateMachine.SetState(PetState.Playing); }
+    public void StopPlay() { PetHelper.petStateMachine.SetState(PetState.Idle); }
+    public void StartSleep() { PetHelper.petStateMachine.SetState(PetState.Sleeping); }
+    public void StopSleep() { PetHelper.petStateMachine.SetState(PetState.Idle); }
 
     // called when the pet is cured
     public void CurePet()
