@@ -12,47 +12,56 @@ public enum PlacementMode
 //modified a bit but mostly from this tutorial
 public class PlacementHandler : MonoBehaviour
 {
+    // really should be a field and have property 
     public string itemName;
+    
     private Material validPlacementMaterial;
     private Material invalidPlacementMaterial;
+    // to put the materials on
     public MeshRenderer[] meshComponents;
+    // so that we can set our materials to their originals when placing
     private Dictionary<MeshRenderer, List<Material>> initialMaterials;
-    [HideInInspector] public bool hasValidPlacement;
-    [HideInInspector] public bool isFixed;
-    private int _nObstacles;
+
+    [HideInInspector] public bool hasValidPlacement = true;
+    [HideInInspector] public bool isFixed = true;
+    private int _nObstacles = 0;
+
     private void Awake()
     {
-        hasValidPlacement = true;
-        isFixed = true;
-        _nObstacles = 0;
-
         validPlacementMaterial = Resources.Load<Material>("Materials/ValidPlacement");
         invalidPlacementMaterial = Resources.Load<Material>("Materials/InvalidPlacement");
         _InitializeMaterials();
     }
     void OnTriggerEnter(Collider other)
     {
+        // if the object is placed, return
         if (isFixed) return;
-        if (IsIgnored(other.gameObject)) { return; }
+        if (IsIgnored(other.gameObject)) return;
+        // increment the number of obstacles by 1
         _nObstacles++;
-        if (UISave.Instance.debugToggle.isOn) 
-        {print("debug mode is enabled"); return;}
+        /* if (UISave.Instance.debugToggle.isOn) 
+            { print("debug mode is enabled"); return; }*/
         SetPlacementMode(PlacementMode.Invalid);
     }
     void OnTriggerExit(Collider other)
     {
+        // if the object is placed, return
         if (isFixed) return;
-        if (IsIgnored(other.gameObject)) { return; }
+        if (IsIgnored(other.gameObject)) return;
+
+        // decrease the number of obstacles by 1
         _nObstacles--;
         if (_nObstacles <= 0)
             SetPlacementMode(PlacementMode.Valid);
     }
+    // try to init materials in the editor
 #if UNITY_EDITOR
     private void OnValidate()
     {
         _InitializeMaterials();
     }
 #endif
+    // sets this furniture's placement mode to the provided mode
     public void SetPlacementMode(PlacementMode mode)
     {
         bool hasNavMesh = GetComponent<NavMeshObstacle>() != null;
@@ -69,7 +78,7 @@ public class PlacementHandler : MonoBehaviour
             if (hasNavMesh)
                 GetComponent<NavMeshObstacle>().enabled = false;
         }
-        else
+        else // mode == invalid
         {
             hasValidPlacement = false;
             if (hasNavMesh)
@@ -77,30 +86,36 @@ public class PlacementHandler : MonoBehaviour
         }
         SetMaterial(mode);
     }
-
+    // sets the material of this object to the passed mode's associated material
     public void SetMaterial(PlacementMode mode)
     {
         if (mode == PlacementMode.Fixed)
         {
+            // loop through meshes and
             foreach (MeshRenderer r in meshComponents)
+                // apply the furnitures material
                 r.sharedMaterials = initialMaterials[r].ToArray();
         }
         else
         {
+            // determine what material to apply
             Material matToApply = mode == PlacementMode.Valid
                 ? validPlacementMaterial : invalidPlacementMaterial;
-
+                
             Material[] m; int nMaterials;
+            // loop through materials and 
             foreach (MeshRenderer r in meshComponents)
             {
                 nMaterials = initialMaterials[r].Count;
                 m = new Material[nMaterials];
+                // apply the mode's associated material
                 for (int i = 0; i < nMaterials; i++)
                     m[i] = matToApply;
                 r.sharedMaterials = m;
             }
         }
     }
+    // init
     private void _InitializeMaterials()
     {
         if (initialMaterials == null)
@@ -112,9 +127,7 @@ public class PlacementHandler : MonoBehaviour
         }
 
         foreach (MeshRenderer r in meshComponents)
-        {
             initialMaterials[r] = new List<Material>(r.sharedMaterials);
-        }
     }
     private bool IsIgnored(GameObject o)
     {

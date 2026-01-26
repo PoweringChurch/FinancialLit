@@ -1,13 +1,11 @@
 public class PetFoodBuyFunctionality : BaseFunctionality
 {
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    // override to make pet food enter players inventory instead of the furniture object
     protected override void Buy()
     {
         if (!PlayerResources.Instance.CanAfford(price)) return;
         SFXPlayer.Instance.Play(purchaseSfx);
+        
         PlayerResources.Instance.Spend(price, "Food");
         PlayerResources.Instance.AddFood(1);
     }

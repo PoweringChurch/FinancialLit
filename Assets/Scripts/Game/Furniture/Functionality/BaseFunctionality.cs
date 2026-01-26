@@ -85,8 +85,8 @@ public class BaseFunctionality : MonoBehaviour
         const float tweenDur = 1.5f;
 
         Vector3 goalPos = new Vector3(0,5,0) + textObj.transform.position;
-        Tween.Position(textObj.transform, endValue: goalPos, duration: tweenDur, ease: Ease.SineIn);
-        Tween.Color(tmp, endValue: new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, 0f), duration: tweenDur);
+        Tween.Position(textObj.transform, endValue: goalPos, duration: tweenDur, ease: Ease.InSine);
+        Tween.Color(tmp, endValue: new Color(tmp.color.r, tmp.color.g, tmp.color.b, 0f), duration: tweenDur);
         // delete after 1.5 sec
         StartCoroutine(WaitSecsDestroyObj(1.5f,textObj));
     }

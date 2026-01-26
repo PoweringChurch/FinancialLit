@@ -3,14 +3,17 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
+    // technically not necessary, but makes it a lot more terse
     private InputAction interact;
     private InputAction cancel;
     private InputAction rotate;
     private InputAction raiseFurniture;
     private InputAction lowerFurniture;
     private InputAction setFreemove;
-
+    
+    // to be added
     private InputAction bindEsc;
+
     void Awake()
     {
         interact = InputSystem.actions.FindAction("Interact");

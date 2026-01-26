@@ -5,21 +5,19 @@ using System;
 [RequireComponent(typeof(NavMeshAgent))]
 public class PetMover : MonoBehaviour
 {
-    public PetAnimation petAnimation;
-    public PetFlagManager petFlagManager;
-    public PetStats petStats;
+    [HideInInspector] public bool reachedGoal; // could use a property here, but there isnt really a reason to
 
-    public Transform petTransform;
-    
-    [HideInInspector] public bool reachedGoal;
     const float moveSpeed = 1.75f;
     const float stoppingDistance = 0.4f;
     
-    public NavMeshAgent agent;
     public event Action OnReachedGoal;
-    
+    public NavMeshAgent agent;
+    public Transform petTransform;
+
     void Start()
     {
+        // set variables
+        petTransform = transform;
         reachedGoal = true;
         agent = GetComponent<NavMeshAgent>();
         if (agent != null)
@@ -30,7 +28,7 @@ public class PetMover : MonoBehaviour
             agent.updateRotation = false;
         }
     }
-    
+
     void Update()
     {
         if (!reachedGoal && agent != null)
@@ -39,33 +37,33 @@ public class PetMover : MonoBehaviour
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
                 reachedGoal = true;
-                petAnimation.SetBoolParameter("IsMoving", false);
+                PetHelper.petAnimation.SetBoolParameter("IsMoving", false);
                 OnReachedGoal?.Invoke();
             }
             else
             {
                 // handle rotation
-                if (agent.velocity.magnitude > 0.01f && petTransform != null)
+                if (agent.velocity.magnitude > 0.01f && transform != null)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(agent.velocity.normalized);
-                    petTransform.rotation = Quaternion.Slerp(petTransform.rotation, targetRotation, Time.deltaTime * moveSpeed * 4f);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * moveSpeed * 4f);
                 }
             }
 
-            // apply energy multiplier to speed
-            float energyMult = 0.5f + 0.5f * petStats.Status["energy"];
-            float sickMult = petFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
-            float lovedMult = petFlagManager.HasFlag(PetFlag.Loved) ? 1.05f : 1f;
-            float playfulMult = petFlagManager.HasFlag(PetFlag.Playful) ? 1.05f : 1f;
+            // apply stats multiplier to speed
+            float energyMult = 0.5f + 0.5f * PetHelper.petStats.Status["energy"];
+            float sickMult = PetHelper.petFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
+            float lovedMult = PetHelper.petFlagManager.HasFlag(PetFlag.Loved) ? 1.05f : 1f;
+            float playfulMult = PetHelper.petFlagManager.HasFlag(PetFlag.Playful) ? 1.05f : 1f;
             agent.speed = moveSpeed * energyMult * sickMult * lovedMult * playfulMult;
         }
     }
-    
+    // set the pet's goal position
     public void SetGoalPosition(Vector3 to)
     {
         agent.SetDestination(to);
-        petAnimation.SetBoolParameter("IsSitting", false);
-        petAnimation.SetBoolParameter("IsMoving", true);
+        PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
+        PetHelper.petAnimation.SetBoolParameter("IsMoving", true);
         reachedGoal = false;
     }
 }
