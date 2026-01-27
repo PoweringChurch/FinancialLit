@@ -90,7 +90,7 @@ public class PetBehaviour : MonoBehaviour
         actionTimer *= energyMult;
     }
     // selected a random position in radius around pet transform, by default y is set to 0 unless false is passed as second argument
-    Vector3 RandomPosition(float radius, bool setyzero = true)
+    private Vector3 RandomPosition(float radius, bool setyzero = true)
     {
         Vector3 randomCircle = Random.insideUnitCircle * radius;
         // if setyzero is true set y to zero
@@ -101,5 +101,5 @@ public class PetBehaviour : MonoBehaviour
     }
     [SerializeField] private LayerMask interactableLayer;
     // determines if the passed vector is over the interactable layer
-    bool VectorOverInteractable(Vector3 vector) { return Physics.Raycast(vector, Vector3.down, Mathf.Infinity, interactableLayer); }
+    private bool VectorOverInteractable(Vector3 vector) { return Physics.Raycast(vector, Vector3.down, Mathf.Infinity, interactableLayer); }
 }
