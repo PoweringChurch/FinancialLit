@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 // in progress
 
-// solely responsible for time related things, such as date
+// responsible for time related things, such as date
 public class GameTime : MonoBehaviour
 {
     public static GameTime Instance;

@@ -15,6 +15,8 @@ public class UIPet : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI DisplayText;
     [SerializeField]
+    private TextMeshProUGUI NameText;
+    [SerializeField]
     private Image HungerFill;
     [SerializeField]
     private Image HygieneFill;
@@ -87,6 +89,7 @@ public class UIPet : MonoBehaviour
         currentDisplayColor = Color.Lerp(currentDisplayColor, targetColor, Time.deltaTime * lerpSpeed);
         DisplayImage.color = currentDisplayColor;
         DisplayText.text = displaytext;
+        NameText.text = PetHelper.petStats.petName;
     }
     public void ToggleStatusPanel()
     {
