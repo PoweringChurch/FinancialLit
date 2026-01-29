@@ -78,7 +78,7 @@ public class UISave : MonoBehaviour
         savesScreen.SetActive(false);
 
         CameraHandler.Instance.ToggleGamecam(true);
-        UIResourcesUpdater.Instance.UpdateText();
+        UIOverlay.Instance.UpdateResourcesAndBal();
 
         PetHelper.petStateMachine.SetState(PetState.Idle);
 
@@ -117,7 +117,7 @@ public class UISave : MonoBehaviour
         PlayerData newData = new()
         {
             PetName = petNameInput.text,
-            Breed = selectedBreed
+            Breed = selectedBreed,
         };
         if (debugToggle.isOn)
         {
@@ -159,10 +159,8 @@ public class UISave : MonoBehaviour
         PetHelper.petFlagManager.ClearFlags();
         PetHelper.petStateMachine.SetState(PetState.Idle);
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
-
-        PetHelper.petMover.petTransform.gameObject.SetActive(true);
         //upd ui
-        UIResourcesUpdater.Instance.UpdateText();
+        UIOverlay.Instance.UpdateResourcesAndBal();
         UIInventory.Instance.UpdateInventoryUI();
     }
     public void DeleteCurrentSave()

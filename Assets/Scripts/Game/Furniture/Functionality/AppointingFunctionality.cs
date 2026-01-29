@@ -22,7 +22,7 @@ public class AppointingFunctionality : BaseFunctionality
         }
         // calculate fee
         var status = PetHelper.petStats.Status;
-        float avgHealth = (status["hunger"] + status["energy"] + status["hygiene"] + status["entertainment"]) / 4f;
+        float avgHealth = (status["hunger"] + status["energy"] + status["hygiene"] + status["entertainment"]) / 400f;
         fee = baseline * (1.5f - avgHealth * 0.5f); 
         // show popup
         string header = "Pet treatment";

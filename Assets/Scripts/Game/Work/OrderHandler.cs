@@ -17,6 +17,10 @@ public class OrderHandler : MonoBehaviour
     private float timePerOrder = 12f;
     private float countdown = 0f;
     private bool shiftActive = false;
+    public bool ShiftActive
+    {
+        get { return shiftActive; }
+    }
     
     public event Action OnWorkStarted;
     public event Action OnWorkEnded;
@@ -61,6 +65,7 @@ public class OrderHandler : MonoBehaviour
         completedOrderCount = 0;
         totalEarned = 0f;
         shiftActive = false;
+
         OnWorkStarted?.Invoke();
         UIWorkManager.Instance.UpdateCompletedOrders(0, totalOrders);
     }
@@ -140,21 +145,23 @@ public class OrderHandler : MonoBehaviour
     
     public void CancelShift()
     {
+        if (shiftActive)
+            GameTime.Instance.ElapseTime(480,true);
+        
         shiftActive = false;
         countdown = 0f;
         totalEarned = 0f;
         currentOrder = null;
 
         OnWorkEnded?.Invoke();
-
     }
     public void EndShift()
     {
         shiftActive = false;
         PlayerResources.Instance.AddMoney(totalEarned);
         totalEarned = 0f;
-
+        
+        GameTime.Instance.ElapseTime(480,true);
         OnWorkEnded?.Invoke();
-
     }
 }

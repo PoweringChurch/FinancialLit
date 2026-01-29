@@ -82,9 +82,9 @@ public class PetBehaviour : MonoBehaviour
                 actionTimer = Random.Range(3f, 6f);
                 break;
         }
-        // action timer will increase as energy decreases
-        float energyMult = PetHelper.petStats.Status["energy"] < 0.8f 
-            ? 1.0f + (0.8f - PetHelper.petStats.Status["energy"]) * 0.1875f 
+        // action timer will increase as energy decreases (max +15% slower at 0 energy)
+        float energyMult = PetHelper.petStats.Status["energy"] < 80f 
+            ? 1.0f + (80f - PetHelper.petStats.Status["energy"]) * 0.15f / 80f 
             : 1.0f;
         
         actionTimer *= energyMult;

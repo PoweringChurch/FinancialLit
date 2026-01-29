@@ -6,16 +6,23 @@ using System;
 public class GameTime : MonoBehaviour
 {
     public static GameTime Instance;
+    public bool IsFastForwarding { 
+        get
+        {
+            return minuteDuration != 1;
+        }
+    }
+    private Light mainLight;
     private int minute = 0; // 0 - 1440, increments every second
-    private int day = 0; // 0 - 6, each unit is a 1440 minutes (6 is max because of 0 indexing)
+    private int day = 0; // 0 - 6, each unit is a 1440 minutes
     private int week = 0; // 0 - maxint, each unit is 7 days
 
     private float elapsed = 0;
     private float minuteDuration = 1;
 
-    public float Minute { get { return minute; }  }
-    public float Day    { get { return day; }     }
-    public float Week   { get { return week; }    }
+    public int Minute { get { return minute; }  }
+    public int Day    { get { return day; }     }
+    public int Week   { get { return week; }    }
     
     public float MinuteDuration 
     {
@@ -23,51 +30,79 @@ public class GameTime : MonoBehaviour
         {
             return minuteDuration;
         }
-        set 
-        {
-            // minutes will never last longer than 1 second
-            minuteDuration = Math.Min(1,value);
-        }
+    }
+    void Awake()
+    {
+        Instance = this;
     }
     void Start()
     {
-        Instance = this;
+        mainLight = transform.parent.Find("WorldLight").GetComponent<Light>();
         PetHelper.petStateMachine.OnStateChanged += ApplyStateMod;
-        Debug.Log("awake");
+        ElapseTime(0);
     }
     // for use when onstatechanged is called in petStateMachine
     void ApplyStateMod(PetState oldState, PetState newState)
     {
-        if (newState == PetState.Sleeping)
-            MinuteDuration = 0.5f;
-        else
-            MinuteDuration = 1;
+        switch (newState)
+        {
+            case PetState.Sleeping:
+                minuteDuration = 0.25f;
+                break;
+            case PetState.Bathing:
+                minuteDuration = 0.35f;
+                break;
+            case PetState.Playing:
+                minuteDuration = 0.8f;
+                break;
+            default:
+                minuteDuration = 1;
+                break;
+        }
     }
     void Update()
     {
+        // check if were on a shift (pause time updates if work is happening)
+        if (OrderHandler.Instance.ShiftActive)
+            return;
         elapsed += Time.deltaTime;
         if (elapsed >= minuteDuration)
         {
             ElapseTime(1);
-            Debug.Log("minute: " + minute);
             elapsed = 0;
         }
     }
     // elapses time by given amount in passedMinutes
-    public void ElapseTime(int passedMinutes) 
+    public void ElapseTime(int passedMinutes, bool atWork = false) 
     {
-        // calculate minute
+        // tick the pet's stats
+        PetHelper.petStats.Tick(passedMinutes,atWork);
+        
+        // add passed minutes to total
         minute += passedMinutes;
-        int newMinute = minute%1440;
-        // calculate days
-        int passedDays = minute/1440;
+        
+        // calculate how many days passed
+        int passedDays = minute / 1440;
+        minute %= 1440;
+        
+        // add passed days to total
         day += passedDays;
-        int newDay = day%7;
+        
+        // calculate how many weeks passed
+        int passedWeeks = day / 7;
+        day %= 7;
+        
+        // add passed weeks to total
+        week += passedWeeks;
 
-        int passedWeeks = day/7;
-
+        mainLight.intensity = 0.3f + 0.95f * Mathf.Sin(minute / 1440f * Mathf.PI);
+        UIOverlay.Instance.UpdateTime();
+    }
+    // sets the time without ticking game, really only used when loading the game
+    public void SetTime(int newMinute, int newDay, int newWeek)
+    {
         minute = newMinute;
         day = newDay;
-        week += passedWeeks;
+        week = newWeek;
     }
 }

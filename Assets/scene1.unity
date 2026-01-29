@@ -4735,6 +4735,9 @@ MonoBehaviour:
     VisitedVet: 0
     VisitedSmartyPets: 0
     VisitedFurnitureStore: 0
+    Minute: 480
+    Day: 0
+    Week: 0
   currentSaveFile: default.json
   corgiPrefab: {fileID: 897730280674974148, guid: c28add0c88b966449b322f02bd242adf, type: 3}
   curPrefab: {fileID: 5096089074900406767, guid: 8783bd9bc6b85f04fa7a41035ba23e0a, type: 3}
@@ -5021,7 +5024,7 @@ GameObject:
   - component: {fileID: 307103646}
   - component: {fileID: 307103647}
   m_Layer: 0
-  m_Name: UIResources
+  m_Name: UIOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5057,6 +5060,9 @@ MonoBehaviour:
   shampooText: {fileID: 490231538}
   foodText: {fileID: 174027473}
   moneyText: {fileID: 1535926489}
+  dayWeekText: {fileID: 1373206227}
+  hourMinText: {fileID: 1561268888}
+  speedUpNotif: {fileID: 1293708172}
 --- !u!1 &307397120
 GameObject:
   m_ObjectHideFlags: 0
@@ -9633,7 +9639,7 @@ GameObject:
   - component: {fileID: 572829464}
   - component: {fileID: 572829463}
   m_Layer: 0
-  m_Name: DirectionalLight
+  m_Name: WorldLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20373,6 +20379,81 @@ MonoBehaviour:
   slotTemplate: {fileID: 1923449651465023780, guid: f4937750604d0a04da03a72ec17fc5f8, type: 3}
   petNameInput: {fileID: 326611631}
   debugToggle: {fileID: 1545590035}
+--- !u!1 &1293708172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1293708175}
+  - component: {fileID: 1293708174}
+  - component: {fileID: 1293708176}
+  m_Layer: 5
+  m_Name: Speedup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!222 &1293708174
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293708172}
+  m_CullTransparentMesh: 1
+--- !u!224 &1293708175
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293708172}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1561268887}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 25, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1293708176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293708172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7dace2c251570fb41b3c22ec48cc1d6d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1301167053
 GameObject:
   m_ObjectHideFlags: 0
@@ -23589,18 +23670,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 688522145}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -23612,18 +23681,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: OpenBuilder
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1555366605
 MonoBehaviour:
@@ -23831,7 +23888,7 @@ GameObject:
   - component: {fileID: 1561268889}
   - component: {fileID: 1561268888}
   m_Layer: 5
-  m_Name: Time
+  m_Name: HourMin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23848,7 +23905,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1293708175}
   m_Father: {fileID: 1669684839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -23876,7 +23934,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:00
+  m_text: 00:00 AM
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c161feef9dfc8df4ca746446fd0582f2, type: 2}
   m_sharedMaterial: {fileID: -8505806774433642538, guid: c161feef9dfc8df4ca746446fd0582f2, type: 2}

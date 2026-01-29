@@ -131,8 +131,7 @@ public class UIWorkManager : MonoBehaviour
     }
     public void EndShift()
     {
-        float total = OrderHandler.Instance.totalEarned;
-        string body = $"Great work! You earned ${total:F2} for your hard work!";
+        string body = $"Great work! You earned ${OrderHandler.Instance.totalEarned:F2} for your hard work! 8 hours have passed.";
         UIPopups.Instance.PopupInfo("Job well done!",body,"Yay!",() =>
         {
             OrderHandler.Instance.EndShift();

@@ -49,15 +49,21 @@ public class PlayerData
     public bool VisitedSmartyPets;
     public bool VisitedFurnitureStore;
 
+    // igt
+    public int Minute;
+    public int Day;
+    public int Week;
+
     public PlayerData()
     {
         // Default values for new game
         PetName = "Pet";
-        Hygiene = Entertainment = Hunger = Energy = 1f;
-        DisplayStatus = "GREAT";
+        Hygiene = Entertainment = Hunger = Energy = 100f;
+        DisplayStatus = "OKAY";
         PetFlags = new List<PetFlag>();
         PlacedFurniture = new List<FurnitureObjectData>();
         PlayerInventory = new Inventory();
+        Minute = 480;
         Money = 200f;
         Shampoo = 8;
         Food = 8;

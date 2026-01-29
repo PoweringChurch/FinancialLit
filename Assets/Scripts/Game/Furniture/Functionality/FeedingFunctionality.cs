@@ -43,7 +43,7 @@ public class FeedingFunctionality : BaseFunctionality
         // play eat animation
         PetHelper.petAnimation.SetTrigger("Eat");
         // refill pet hunger by 30%
-        PetHelper.petStats.FeedPet(0.3f);
+        PetHelper.petStats.FeedPet(25f);
         // matched with time of animation to eat
         Invoke(nameof(EatFood), 0.7f);
     }
