@@ -21,12 +21,13 @@ public class Inventory
     }
     public void AddItem(FurnitureData itemData, int amount)
     {
+        //Checks if the item data is null
         if (itemData == null)
         {
             Debug.LogError("Cannot add null item to inventory");
             return;
         }
-        
+        //if item data isn't null, add the item to your inventory
         if (inventoryDict.ContainsKey(itemData.itemName))
         {
             inventoryDict[itemData.itemName].count += amount;
@@ -41,6 +42,7 @@ public class Inventory
     
     public void RemoveItem(string itemName, int amount)
     {
+        //Removes the specified item from your inventory
         if (inventoryDict.ContainsKey(itemName))
         {
             InventoryEntry entry = inventoryDict[itemName];
@@ -65,7 +67,7 @@ public class Inventory
         }
         return null;
     }
-    
+    //Gets the amount of an item you have
     public int GetItemCount(string itemName)
     {
         if (inventoryDict.ContainsKey(itemName))
@@ -74,7 +76,7 @@ public class Inventory
         }
         return 0;
     }
-    
+    //Checks if you have an item
     public bool HasItem(string itemName, int amount = 1)
     {
         return GetItemCount(itemName) >= amount;
