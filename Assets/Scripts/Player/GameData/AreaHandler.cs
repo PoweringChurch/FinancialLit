@@ -76,8 +76,10 @@ public class AreaHandler : MonoBehaviour
             }
 
         if (area.areaName == "Park")
+             //Checks if the player hasn't been to the park
             {if (!SaveHandler.Instance.currentPlayerData.VisitedPark)
                 {
+                    //if the player hasn't been to the park, this code will run
                     string header = "Park";
                     string body = "At the park, your dog passively gains entertainment, and can get worn out if you stay here for a while. After getting worn out, you pet will sleep much easier!";
                     UIPopups.Instance.PopupInfo(header,body);
@@ -89,8 +91,10 @@ public class AreaHandler : MonoBehaviour
 
         if (area.areaName == "Veterinary")
         {
+            //Checks if the player hasn't been to the vet
             if (!SaveHandler.Instance.currentPlayerData.VisitedVet)
             {
+                //if the player hasn't been to the vet, this code will run
                 string header = "Veterinary";
                 string body = "If your pet ever gets sick, you can visit the vet to cure them for a fee!";
                 UIPopups.Instance.PopupInfo(header,body);
@@ -99,8 +103,10 @@ public class AreaHandler : MonoBehaviour
         }
         if (area.areaName == "SmartyPets")
         {
+            //Checks if the player hasn't been to the pet shop
             if (!SaveHandler.Instance.currentPlayerData.VisitedSmartyPets)
             {
+                //if the player hasn't been to the pet shop, this code will run
                 string header = "SmartyPets";
                 string body = "Welcome to SmartyPets! Here you can purchase pet-related items, like pet beds, food, shampoo, or pet toys. Purchase items by selecting the item you wish to purchase and pressing buy.";
                 UIPopups.Instance.PopupInfo(header,body);
@@ -109,8 +115,10 @@ public class AreaHandler : MonoBehaviour
         }
         if (area.areaName == "FurnitureStore")
         {
+            //Checks if the player hasn't been to the furniture store
             if (!SaveHandler.Instance.currentPlayerData.VisitedFurnitureStore)
             {
+                //if the player hasn't been to the furniture store, this code will run
                 string header = "Furniture Store";
                 string body = "At the furniture store, you can purchase furniture to place in your home. Purchased furniture gets added to your inventory for placement in the placement menu.";
                 UIPopups.Instance.PopupInfo(header,body);

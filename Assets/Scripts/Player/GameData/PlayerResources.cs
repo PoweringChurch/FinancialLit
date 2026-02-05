@@ -13,6 +13,7 @@ public class PlayerResources : MonoBehaviour
 
         PlayerFlagManager.AddFlag(PlayerFlag.Home);
     }
+    //
     private Dictionary<string, float> spendings = new()
     {
         ["Furniture"] = 0f,
