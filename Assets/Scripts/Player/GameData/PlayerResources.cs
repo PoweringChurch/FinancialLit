@@ -13,6 +13,7 @@ public class PlayerResources : MonoBehaviour
 
         PlayerFlagManager.AddFlag(PlayerFlag.Home);
     }
+    /// to move to financial spending
     private Dictionary<string, float> spendings = new()
     {
         ["Furniture"] = 0f,
@@ -22,6 +23,7 @@ public class PlayerResources : MonoBehaviour
     };
 
     public Dictionary<string, float> Spendings => spendings;
+    ///
     public float Money => money;
     public int Food => food;
     public int Shampoo => shampoo;
