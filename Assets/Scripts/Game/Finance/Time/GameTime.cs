@@ -63,7 +63,7 @@ public class GameTime : MonoBehaviour
     void Update()
     {
         // check if were on a shift (pause time updates if work is happening)
-        if (OrderHandler.Instance.ShiftActive)
+        if (WorkHandler.Instance.ShiftActive)
             return;
         elapsed += Time.deltaTime;
         if (elapsed >= minuteDuration)

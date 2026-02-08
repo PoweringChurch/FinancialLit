@@ -1,117 +1,122 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
-
+using UnityEngine.UI;
 [Serializable]
 public class UIWorkManager : MonoBehaviour
 {
     public static UIWorkManager Instance;
-
+    // work overlay
+    [Header("Overlay")]
     public GameObject workoverlayUI;
     public GameObject ingameOverlayUI;
-    public TextMeshProUGUI completedOrders;
-    public TextMeshProUGUI timerText;
-    public GameObject ballItemUI;
-    public GameObject brushItemUI;
-    public GameObject treatItemUI;
-    public GameObject shampooItemUI;        
-    public Transform reqHolder;
-    public RectTransform boxTransform;
-    private Dictionary<Items, GameObject> itemUIMap;
+    public TextMeshProUGUI scenarioText;
+    public TextMeshProUGUI moneyEarned;
+    public Image bonusFill;
+    // question and ans
+    [Header("QA")]
+    public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI questionText;
 
-    public void Awake()
+    public GameObject numInputAnsObj;
+    public GameObject multiChoiceAnsObj;
+    public TMP_InputField inputTxt;
+    [SerializeField] private GameObject[] choiceButtons;
+    // feedback
+    [Header("Feedback")]
+    public GameObject feedbackObj;
+    public TextMeshProUGUI feedbackHeaderTxt;
+    public TextMeshProUGUI feedbackTxt;
+    public Image feedbackBg;
+    public Color correctColor;
+    public Color incorrectColor;
+
+    void Awake()
     {
         Instance = this;
-        itemUIMap = new Dictionary<Items, GameObject>
-        {
-            { Items.Ball, ballItemUI },
-            { Items.Brush, brushItemUI },
-            { Items.Treat, treatItemUI },
-            { Items.Shampoo, shampooItemUI }
-        };
     }
-    
-    public void NextBox()
-    {
-        StartCoroutine(BoxTransitionAnimation());
-    }
-    private IEnumerator BoxTransitionAnimation()
-    {
-        float duration = 0.5f;
-        float elapsed = 0f;
-        
-        // get screen width for off-screen positions
-        float screenWidth = Screen.width;
-        Vector2 centerPos = boxTransform.anchoredPosition;
-        Vector2 rightOffScreen = new Vector2(screenWidth, centerPos.y);
-        Vector2 leftOffScreen = new Vector2(-screenWidth, centerPos.y);
-        
-        //slide current box off to the right
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-            boxTransform.anchoredPosition = Vector2.Lerp(centerPos, rightOffScreen, t);
-            yield return null;
-        }
-        
-        //teleport box to left side (off screen)
-        boxTransform.anchoredPosition = leftOffScreen;
-        
-        //reset elapsed time for slide in
-        elapsed = 0f;
-        
-        // slide new box in from the left
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0, 1, elapsed / duration);
-            boxTransform.anchoredPosition = Vector2.Lerp(leftOffScreen, centerPos, t);
-            yield return null;
-        }
-        //center
-        boxTransform.anchoredPosition = centerPos;
-    }
-    public void StartWorking()
-    {
-        workoverlayUI.SetActive(true);
-        OrderHandler.Instance.BeginShift();
-    }
-    
     public void UpdateTimer(float timeRemaining)
     {
-        if (timerText != null)
+        bonusFill.fillAmount = Mathf.Clamp01(timeRemaining/WorkHandler.bonusTimePerScenario);
+    }
+    public void UpdateWorkStats(int to, int totalScenarios)
+    {
+        scenarioText.text = $"{to}/{totalScenarios}";
+        moneyEarned.text = $"${WorkHandler.Instance.totalEarned}";
+    }
+    public void ShowFeedback(bool isCorrect, FinancialScenario scenario)
+    {
+        feedbackObj.SetActive(true);
+        feedbackHeaderTxt.text = isCorrect? "Correct" : "Incorrect...";
+        feedbackBg.color = isCorrect? correctColor : incorrectColor;
+        isMultiChoice = scenario.choices != null && scenario.choices.Length > 0;
+        if (isMultiChoice)
+            feedbackTxt.text = scenario.choices[scenario.correctChoiceIndex];
+        else
+            feedbackTxt.text = $"{scenario.correctAnswerFloat:F0}";
+    }
+    // displays the provided scenario
+    public void DisplayScenario(FinancialScenario scenario)
+    {
+        descriptionText.text = scenario.description;
+        questionText.text = scenario.question;
+        feedbackObj.SetActive(false);
+        
+        // determine if multichoice based on whether choices exist
+        isMultiChoice = scenario.choices != null && scenario.choices.Length > 0;
+        
+        numInputAnsObj.SetActive(!isMultiChoice);
+        multiChoiceAnsObj.SetActive(isMultiChoice);
+        
+        if (isMultiChoice)
         {
-            timerText.text = $"Time: {timeRemaining:F1}s";
+            for (int i = 0; i < choiceButtons.Length; i++)
+            {
+                if (i < scenario.choices.Length)
+                {
+                    choiceButtons[i].SetActive(true);
+                    choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = scenario.choices[i];
+                }
+                else
+                    choiceButtons[i].SetActive(false);
+            }
         }
     }
-    public void UpdateOrderDisplay(List<Items> currentOrder)
+    int selectedChoiceIndex = -1;
+    bool isMultiChoice = false;
+    // called from the choice select buttons
+    public void ChoiceButtonClicked(int choiceIndex)
     {
-        for (int i = reqHolder.childCount - 1; i >= 0; i--)
-        {
-            Destroy(reqHolder.GetChild(i).gameObject);
-        }
-        foreach (Items item in currentOrder)
-        {
-            Instantiate(itemUIMap[item],reqHolder);
-        }
+        selectedChoiceIndex = choiceIndex;
     }
-    public void UpdateCompletedOrders(int completed, int total)
+    // called from the submit button
+    public void SubmitButtonClicked()
     {
-        if (completedOrders != null)
-        {
-            completedOrders.text = $"Orders: {completed}/{total}";
-        }
+        if (WorkHandler.Instance.inReviewTime)
+            return;
+        print("submit clicked");
+        // no answer inputted
+        if (isMultiChoice && selectedChoiceIndex == -1)
+            return;
+        if (inputTxt.text == "" && !isMultiChoice)
+            return;
+        // answer the question
+        if (isMultiChoice)
+            WorkHandler.Instance.SubmitChoice(selectedChoiceIndex);
+        else
+            WorkHandler.Instance.SubmitAnswer(float.Parse(inputTxt.text));
+        // reset
+        selectedChoiceIndex = -1;
+        inputTxt.text = "";
     }
     public void CancelWork()
     {
         string header = "Stop working?";
-        string body = "Are you sure you want to stop working? You will lose any earned money.";
+        string body = "Do you want to stop working? You will lose any earned money.";
         UIPopups.Instance.PopupYN(header,body, () =>
         {
-            OrderHandler.Instance.CancelShift();
+            WorkHandler.Instance.CancelShift();
             CameraHandler.Instance.ToggleGamecam(true);
             ingameOverlayUI.SetActive(true);
             workoverlayUI.SetActive(false);
@@ -120,21 +125,22 @@ public class UIWorkManager : MonoBehaviour
     public void EnterWork()
     {
         string header = "Start working";
-        string body = "Fulfill customer orders by dragging the requested items into the delivery box. Work fast for bonus earnings!";
+        string body = "Do you want to start working?";
         UIPopups.Instance.PopupYN(header,body, () =>
         {
-            OrderHandler.Instance.BeginShift();
             CameraHandler.Instance.ToggleGamecam(false);
             workoverlayUI.SetActive(true);
             ingameOverlayUI.SetActive(false);
+
+            WorkHandler.Instance.BeginShift();
         }, null, "Start", "Nevermind");
     }
     public void EndShift()
     {
-        string body = $"Great work! You earned ${OrderHandler.Instance.totalEarned:F2} for your hard work! 8 hours have passed.";
+        string body = $"Great work! You earned ${WorkHandler.Instance.totalEarned:F2} for your hard work! 8 hours have passed.";
         UIPopups.Instance.PopupInfo("Job well done!",body,"Yay!",() =>
         {
-            OrderHandler.Instance.EndShift();
+            WorkHandler.Instance.EndShift();
             CameraHandler.Instance.ToggleGamecam(true);
             ingameOverlayUI.SetActive(true);
             workoverlayUI.SetActive(false);

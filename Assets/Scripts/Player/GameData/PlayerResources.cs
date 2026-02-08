@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class PlayerResources : MonoBehaviour
 {
     public static PlayerResources Instance;
-    private float money = 10.01f;
     private int food = 10;
     private int shampoo = 10;
     void Awake()
@@ -13,35 +12,8 @@ public class PlayerResources : MonoBehaviour
 
         PlayerFlagManager.AddFlag(PlayerFlag.Home);
     }
-    /// to move to financial spending
-    private Dictionary<string, float> spendings = new()
-    {
-        ["Furniture"] = 0f,
-        ["Healthcare"] = 0f,
-        ["Hygiene"] = 0f,
-        ["Food"] = 0f,
-    };
-
-    public Dictionary<string, float> Spendings => spendings;
-    ///
-    public float Money => money;
     public int Food => food;
     public int Shampoo => shampoo;
-
-    public void Spend(float cost, string purchaseType)
-    {
-        if (!spendings.ContainsKey(purchaseType))
-        {
-            return;
-        }
-        if (CanAfford(cost))
-        {
-            spendings[purchaseType] += cost;
-            money -= cost;
-            UIOverlay.Instance.UpdateResourcesAndBal();
-            return;
-        }
-    }
     public void ConsumeFood()
     {
         if (CanConsumeFood())
@@ -56,13 +28,7 @@ public class PlayerResources : MonoBehaviour
         {
             shampoo -= 1;
             UIOverlay.Instance.UpdateResourcesAndBal();
-
         }
-    }
-    public void AddMoney(float amount)
-    {
-        money += amount;
-        UIOverlay.Instance.UpdateResourcesAndBal();
     }
     public void AddFood(int count)
     {
@@ -73,11 +39,6 @@ public class PlayerResources : MonoBehaviour
     {
         shampoo += count;
         UIOverlay.Instance.UpdateResourcesAndBal();
-    }
-
-    public void SetMoney(float to)
-    {
-        money = to;
     }
     public void SetShampoo(int to)
     {
@@ -95,9 +56,5 @@ public class PlayerResources : MonoBehaviour
     public bool CanConsumeShampoo()
     {
         return (shampoo - 1) >= 0;
-    }
-    public bool CanAfford(float cost)
-    {
-        return (money - cost) >= 0;
     }
 }

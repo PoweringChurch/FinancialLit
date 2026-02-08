@@ -30,11 +30,12 @@ public class Memberships : MonoBehaviour
     private Dictionary<string, Membership> activeMemberships = new();
     
     void Awake() { Instance = this; }
-    // add a membership; does not check if player has enough to spend
+    // add a membership
     public void AddMembership(string id, Membership newMembership)
     {
         activeMemberships[id] = newMembership;
     }
+    // schedules a membership to be cancelled
     public void ScheduleCancel(string id)
     {
         activeMemberships[id].scheduledCancel = true;

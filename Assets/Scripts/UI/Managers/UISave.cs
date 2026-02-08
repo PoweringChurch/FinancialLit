@@ -55,7 +55,7 @@ public class UISave : MonoBehaviour
                 texts[1].text = FormatPlaytime(saveData.TotalPlaytimeSeconds); // playtime
                 texts[2].text = FormatTimestamp(saveData.LastSaveTimestamp); // Last saved
                 texts[3].text = saveData.DisplayStatus; // Status
-                texts[4].text = $"${saveData.Money:N2}"; //money
+                texts[4].text = $"${saveData.Balance:N2}"; //money
 
                 // add button to load this save
                 Button loadButton = slot.GetComponentInChildren<Button>();
@@ -126,7 +126,7 @@ public class UISave : MonoBehaviour
             {
                 newData.PlayerInventory.AddItem(data, 1000);
             }
-            newData.Money = 1000000;
+            newData.Balance = 1000000;
             newData.Shampoo = 10000;
             newData.Food = 1000;
 

@@ -34,7 +34,7 @@ public class PlayerData
     public Inventory PlayerInventory;
 
     // resources
-    public float Money;
+    public float Balance;
     public int Shampoo;
     public int Food;
 
@@ -64,7 +64,7 @@ public class PlayerData
         PlacedFurniture = new List<FurnitureObjectData>();
         PlayerInventory = new Inventory();
         Minute = 480;
-        Money = 200f;
+        Balance = 200f;
         Shampoo = 8;
         Food = 8;
         TotalPlaytimeSeconds = 0f;

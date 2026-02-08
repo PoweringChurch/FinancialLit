@@ -25,7 +25,7 @@ public class UIOverlay : MonoBehaviour
     {
         shampooText.text = PlayerResources.Instance.Shampoo.ToString();
         foodText.text = PlayerResources.Instance.Food.ToString();
-        moneyText.text = $"Balance: ${PlayerResources.Instance.Money:N2}";
+        moneyText.text = $"Balance: ${FinancialSpending.Instance.Balance:N2}";
     }
     public void UpdateTime()
     {

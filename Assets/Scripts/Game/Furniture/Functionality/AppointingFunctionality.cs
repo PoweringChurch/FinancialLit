@@ -53,13 +53,13 @@ public class AppointingFunctionality : BaseFunctionality
     protected void OnScheduleYes()
     {
         // check if player can afford fee
-        if (!PlayerResources.Instance.CanAfford(fee))
+        if (!FinancialSpending.Instance.CanAfford(fee))
         {
             UIPopups.Instance.PopupInfo("Cannot afford","You cannot afford an appointment.");
             return;
         }
         // spend money
-        PlayerResources.Instance.Spend(fee, "Healthcare");
+        FinancialSpending.Instance.Spend(fee, "Healthcare");
         PetHelper.petStats.CurePet();
         // inform player of cure
         Message("Pet cured!");   

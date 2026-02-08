@@ -94,7 +94,7 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
 
         // resources
-        currentPlayerData.Money = PlayerResources.Instance.Money;
+        currentPlayerData.Balance = FinancialSpending.Instance.Balance;
         currentPlayerData.Food = PlayerResources.Instance.Food;
         currentPlayerData.Shampoo = PlayerResources.Instance.Shampoo;
 
@@ -191,7 +191,7 @@ public class SaveHandler : MonoBehaviour
         // Igt
         GameTime.Instance.SetTime(playerData.Minute,playerData.Day,playerData.Week);
         // Resources
-        PlayerResources.Instance.SetMoney(playerData.Money);
+        FinancialSpending.Instance.SetBalance(playerData.Balance);
         PlayerResources.Instance.SetFood(playerData.Food);
         PlayerResources.Instance.SetShampoo(playerData.Shampoo);
 
