@@ -1,6 +1,8 @@
 using System;
 using TMPro;
 using Unity.Mathematics;
+using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 [Serializable]
@@ -22,6 +24,7 @@ public class UIWorkManager : MonoBehaviour
     public GameObject numInputAnsObj;
     public GameObject multiChoiceAnsObj;
     public TMP_InputField inputTxt;
+    public TextMeshProUGUI unitsTxt;
     [SerializeField] private GameObject[] choiceButtons;
     // feedback
     [Header("Feedback")]
@@ -32,21 +35,10 @@ public class UIWorkManager : MonoBehaviour
     public Color correctColor;
     public Color incorrectColor;
 
-    void Awake()
-    {
-        Instance = this;
-    }
-    public void UpdateTimer(float timeRemaining)
-    {
-        bonusFill.fillAmount = Mathf.Clamp01(timeRemaining/WorkHandler.bonusTimePerScenario);
-    }
-    public void UpdateWorkStats(int to, int totalScenarios)
-    {
-        scenarioText.text = $"{to}/{totalScenarios}";
-        moneyEarned.text = $"${WorkHandler.Instance.totalEarned}";
-    }
-    public void ShowFeedback(bool isCorrect, FinancialScenario scenario)
-    {
+    void Awake() { Instance = this; }
+    public void UpdateTimer(float timeRemaining) { bonusFill.fillAmount = Mathf.Clamp01(timeRemaining/WorkHandler.bonusTimePerScenario); }
+    public void UpdateWorkStats(int to, int totalScenarios) { scenarioText.text = $"{to}/{totalScenarios}"; moneyEarned.text = $"${WorkHandler.Instance.totalEarned:F2}"; }
+    public void ShowFeedback(bool isCorrect, FinancialScenario scenario) {
         feedbackObj.SetActive(true);
         feedbackHeaderTxt.text = isCorrect? "Correct" : "Incorrect...";
         feedbackBg.color = isCorrect? correctColor : incorrectColor;
@@ -71,6 +63,7 @@ public class UIWorkManager : MonoBehaviour
         
         if (isMultiChoice)
         {
+            // set the options
             for (int i = 0; i < choiceButtons.Length; i++)
             {
                 if (i < scenario.choices.Length)
@@ -81,21 +74,44 @@ public class UIWorkManager : MonoBehaviour
                 else
                     choiceButtons[i].SetActive(false);
             }
+            // get children
+            Transform parent = choiceButtons[0].transform.parent;
+            List<Transform> children = new List<Transform>();
+            for (int i = 0; i < parent.childCount; i++)
+                children.Add(parent.GetChild(i));
+
+            // shuffle the choices
+            int n = children.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = UnityEngine.Random.Range(0, n + 1); // exclusive max
+                Transform value = children[k];
+                children[k] = children[n];
+                children[n] = value;
+            }
+            // reorder in hierarchy
+            for (int i = 0; i < children.Count; i++)
+            {
+                // also deactivate highlights
+                children[i].SetSiblingIndex(i);
+                children[i].GetChild(1).gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            unitsTxt.text = scenario.units;
         }
     }
     int selectedChoiceIndex = -1;
     bool isMultiChoice = false;
     // called from the choice select buttons
-    public void ChoiceButtonClicked(int choiceIndex)
-    {
-        selectedChoiceIndex = choiceIndex;
-    }
+    public void ChoiceButtonClicked(int choiceIndex) { selectedChoiceIndex = choiceIndex; }
     // called from the submit button
     public void SubmitButtonClicked()
     {
         if (WorkHandler.Instance.inReviewTime)
             return;
-        print("submit clicked");
         // no answer inputted
         if (isMultiChoice && selectedChoiceIndex == -1)
             return;
@@ -110,6 +126,7 @@ public class UIWorkManager : MonoBehaviour
         selectedChoiceIndex = -1;
         inputTxt.text = "";
     }
+    // cancels the work, called from a button
     public void CancelWork()
     {
         string header = "Stop working?";
@@ -122,6 +139,7 @@ public class UIWorkManager : MonoBehaviour
             workoverlayUI.SetActive(false);
         }, () => {});
     }
+    // enters work, called from the working functionality when the go to work action is pressed
     public void EnterWork()
     {
         string header = "Start working";
@@ -135,6 +153,7 @@ public class UIWorkManager : MonoBehaviour
             WorkHandler.Instance.BeginShift();
         }, null, "Start", "Nevermind");
     }
+    // ends the shift
     public void EndShift()
     {
         string body = $"Great work! You earned ${WorkHandler.Instance.totalEarned:F2} for your hard work! 8 hours have passed.";

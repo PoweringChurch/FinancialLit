@@ -53,7 +53,6 @@ public class WorkHandler : MonoBehaviour
     private int totalScenarios = 5;
     private float bonusTimer;
     public const float bonusTimePerScenario = 30f;
-    private float countdown = 0f;
     private bool shiftActive = false;
     private int difficultyLevel = 1; // scales with completed shifts
     
@@ -111,7 +110,7 @@ public class WorkHandler : MonoBehaviour
         UIWorkManager.Instance.DisplayScenario(currentScenario);
         UIWorkManager.Instance.UpdateTimer(bonusTimer);
     }
-    
+    // generates & returns a scenario
     private FinancialScenario GenerateScenario()
     {
         ScenarioType[] numericTypes = { ScenarioType.Budgeting, ScenarioType.Savings, ScenarioType.DebtPayoff, ScenarioType.EmergencyFund };
@@ -150,6 +149,7 @@ public class WorkHandler : MonoBehaviour
     "Quineshia", "Ackerman", "Helix", "Seth", "Zimmerman", "Zoe", "Xander", "Mikhael", "Franklin", "Trenton",
     "Brody", "Howard", "August", "Gene", "Brooks"
     };
+    // input, changing values
     private FinancialScenario GenerateBudgetingScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
@@ -166,6 +166,7 @@ public class WorkHandler : MonoBehaviour
             "After covering these costs, how much money do they have left?"
         );
         scenario.units = "Dollars";
+
         scenario.data["income"] = income;
         scenario.data["rent"] = rent;
         scenario.data["groceries"] = groceries;
@@ -178,27 +179,26 @@ public class WorkHandler : MonoBehaviour
         
         return scenario;
     }
+    // choices, changing
     private FinancialScenario GenerateNeedsVsWantsScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
         
-        string[][] items = new string[][] 
+        string[] needs = new string[]
         {
-            new string[] { "Designer sneakers", "Basic running shoes", "Work boots (job requirement)", "Luxury slippers" },
-            new string[] { "Premium streaming subscriptions", "Basic internet", "Cable TV package", "Gaming console" },
-            new string[] { "Gym membership", "Gourmet meal kit", "Groceries", "Restaurant dining" },
-            new string[] { "New smartphone (current works fine)", "Car insurance", "Smartwatch", "Concert tickets" }
+            "Internet", "Work boots", "Car insurance", "Groceries", "Clothing", "Rent payments", "Medical bills"
         };
-        
-        string[] itemSet = items[UnityEngine.Random.Range(0, items.Length)];
-        int needIndex = UnityEngine.Random.Range(0, itemSet.Length);
-        
-        // Ensure there's actually a clear "need" in the set
-        if (itemSet == items[0]) needIndex = 2; // Work boots
-        else if (itemSet == items[1]) needIndex = 1; // Basic internet
-        else if (itemSet == items[2]) needIndex = 2; // Groceries
-        else if (itemSet == items[3]) needIndex = 1; // Car insurance
-        
+        string[] wants = new string[]
+        {
+            "Designer sneakers", "Luxury slippers", "Streaming subscription", "Gaming console", "Gourmet meal kit",
+            "Restaurant dining", "Concert tickets", "New smartphone", "Car Smartwatch"
+        };
+        string[] itemSet = new string[] {
+            needs[UnityEngine.Random.Range(0, needs.Length-1)],
+            wants[UnityEngine.Random.Range(0, needs.Length-1)],
+            wants[UnityEngine.Random.Range(0, needs.Length-1)],
+            wants[UnityEngine.Random.Range(0, needs.Length-1)]
+        };
         FinancialScenario scenario = new FinancialScenario(
             ScenarioType.NeedsVsWants,
             $"{clientName} has limited budget this month and must prioritize how they spend their money.",
@@ -206,11 +206,11 @@ public class WorkHandler : MonoBehaviour
         );
         
         scenario.choices = itemSet;
-        scenario.correctChoiceIndex = needIndex;
+        scenario.correctChoiceIndex = 0;
         
         return scenario;
     }
-
+    // choices, fixed
     private FinancialScenario GenerateCreditCardScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
@@ -231,15 +231,15 @@ public class WorkHandler : MonoBehaviour
         scenario.choices = new string[] 
         { 
             "Annual fee amount",
-            "Interest rate (APR)", 
+            "Interest rate", 
             "Rewards percentage",
             "Credit limit"
         };
-        scenario.correctChoiceIndex = 1; // Interest rate doesn't matter if paying in full
+        scenario.correctChoiceIndex = 1; // interest rate doesnt matter if paying in full
         
         return scenario;
     }
-
+    // choices, changing
     private FinancialScenario GenerateInsuranceScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
@@ -255,7 +255,7 @@ public class WorkHandler : MonoBehaviour
             "Based on how often they use healthcare, which plan is likely to save them more money over a year?"
         );
         
-        float planACost = (lowPremium * 12) + lowDeductible; // Assume one incident
+        float planACost = (lowPremium * 12) + lowDeductible; // assumes one incident
         float planBCost = (highPremium * 12) + highDeductible;
         
         scenario.choices = new string[] 
@@ -269,7 +269,7 @@ public class WorkHandler : MonoBehaviour
         
         return scenario;
     }
-
+    // choices, changing
     private FinancialScenario GenerateOpportunityCostScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
@@ -296,17 +296,16 @@ public class WorkHandler : MonoBehaviour
         
         return scenario;
     }
-
+    // choices, fixed
     private FinancialScenario GenerateInflationScenario()
     {
-        string[] names = { "Emerson", "Lennon", "Sutton", "Ellis", "Marlowe" };
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
         
         float inflationRate = UnityEngine.Random.Range(2f, 5f);
         
         FinancialScenario scenario = new FinancialScenario(
             ScenarioType.Inflation,
-            $"Inflation is {inflationRate}% this year. {clientName} has $10,000 in savings.",
+            $"Inflation is {inflationRate:F2}% this year. {clientName} has $10,000 in savings.",
             "What happens to their purchasing power if money earns 0% interest?"
         );
         
@@ -321,10 +320,9 @@ public class WorkHandler : MonoBehaviour
         
         return scenario;
     }
-
+    // choices, changing
     private FinancialScenario GenerateRentVsBuyScenario()
     {
-        string[] names = { "Hayden", "Sloane", "Jules", "Palmer", "Monroe" };
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
         
         float rent = UnityEngine.Random.Range(1200f, 2000f);
@@ -334,20 +332,21 @@ public class WorkHandler : MonoBehaviour
         FinancialScenario scenario = new FinancialScenario(
             ScenarioType.RentVsBuy,
             $"{clientName} is relocating for a job that will last {yearsPlanning} years. Renting would cost ${rent:F0} per month, while buying a home with a mortgage would cost ${mortgage:F0} per month but would build equity over time.",
-            "Considering the length of the job, which option is the smarter financial choice?"
+            "Considering the length of the job, which option is the better financial choice?"
         );
         
         scenario.choices = new string[] 
         { 
-            "Buy - building equity is always better",
-            "Rent - short stay means buying costs more", 
-            "Buy - interest rates are low",
-            "Rent - homeownership is never worth the money"
+            "Buying, because building equity is always better",
+            "Renting, because short stay means buying costs more", 
+            "Buying, because interest rates are low",
+            "Renting, because home ownership is never worth the costs"
         };
-        scenario.correctChoiceIndex = yearsPlanning <= 2 ? 1 : 0; // Rent for short term
+        scenario.correctChoiceIndex = yearsPlanning <= 2 ? 1 : 0; // rent for short term
         
         return scenario;
     }
+    // input, changing
     private FinancialScenario GenerateSavingsScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
@@ -370,7 +369,7 @@ public class WorkHandler : MonoBehaviour
         
         return scenario;
     }
-    
+    // choices, changing
     private FinancialScenario GenerateComparisonScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
@@ -401,7 +400,7 @@ public class WorkHandler : MonoBehaviour
         
         return scenario;
     }
-    
+    // input, changing
     private FinancialScenario GenerateDebtScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
@@ -410,13 +409,13 @@ public class WorkHandler : MonoBehaviour
         float interestRate = UnityEngine.Random.Range(5f, 20f);
         float monthlyPayment = UnityEngine.Random.Range(100f, 500f);
         
-        // Simplified interest calculation (not compound for easier math)
+        // simplified interest calculation
         float monthlyInterest = (debt * (interestRate / 100f)) / 12f;
         float principalPayment = monthlyPayment - monthlyInterest;
         
         FinancialScenario scenario = new FinancialScenario(
             ScenarioType.DebtPayoff,
-            $"{clientName} owes ${debt:F0} on a loan with an annual interest rate of {interestRate:F1}%. Each month, they make a payment of ${monthlyPayment:F0}.",
+            $"{clientName} owes ${debt:F0} on a loan with an annual interest rate of {interestRate:F2}%. Each month, they make a payment of ${monthlyPayment:F0}.",
             $"In the first month, how much of that payment goes toward paying down the original amount {clientName} borrowed?"
         );
         scenario.units = "Dollars";
@@ -429,7 +428,7 @@ public class WorkHandler : MonoBehaviour
         
         return scenario;
     }
-    
+    // input, changing
     private FinancialScenario GenerateEmergencyFundScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
@@ -477,7 +476,7 @@ public class WorkHandler : MonoBehaviour
         
         if (correct)
         {
-            // Calculate payment based on time remaining and difficulty
+            // calculate payment based on time remaining and difficulty
             float timeBonus = Mathf.Clamp01(bonusTimer / bonusTimePerScenario);
             float basePay = 20f + (difficultyLevel * 10f);
             float payment = basePay + ((timeBonus*20) + basePay * 0.5f);
@@ -486,7 +485,7 @@ public class WorkHandler : MonoBehaviour
         
         UIWorkManager.Instance.UpdateWorkStats(completedScenarioCount, totalScenarios);
         inReviewTime = true;
-        // Small delay before next scenario
+        // small delay before next scenario
         Invoke(nameof(NextScenario), 4f);
     }
     // cancels the shift, making time elapse, but no pay
@@ -496,7 +495,6 @@ public class WorkHandler : MonoBehaviour
             GameTime.Instance.ElapseTime(480, true);
         
         shiftActive = false;
-        countdown = 0f;
         totalEarned = 0f;
         currentScenario = null;
 

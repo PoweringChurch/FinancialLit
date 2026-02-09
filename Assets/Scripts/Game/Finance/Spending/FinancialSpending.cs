@@ -8,8 +8,6 @@ public class FinancialSpending : MonoBehaviour
     public static FinancialSpending Instance;
 
     private float balance = 0; // players balance
-    private float spentToday = 0; // amount spent in the current day
-    private float weeklyBills = 0; // amount due at the end of the week
 
     public float Balance => balance;
 
@@ -30,7 +28,6 @@ public class FinancialSpending : MonoBehaviour
             Debug.LogWarning("No purchase type '"+purchaseType+"' exists");
             return;
         }
-        spentToday += amount;
         spendings[purchaseType] += amount;
         balance -= amount;
 
