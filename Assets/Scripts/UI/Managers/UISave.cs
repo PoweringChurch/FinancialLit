@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
 public class UISave : MonoBehaviour
 {
     public static UISave Instance;
@@ -48,17 +47,14 @@ public class UISave : MonoBehaviour
                 PlayerData saveData = JsonUtility.FromJson<PlayerData>(json);
 
                 // create slot UI
-                GameObject slot = UnityEngine.Object.Instantiate(slotTemplate, slotGrid);
-
-                var texts = slot.GetComponentsInChildren<TextMeshProUGUI>();
-                texts[0].text = saveData.PetName; // pet name
-                texts[1].text = FormatPlaytime(saveData.TotalPlaytimeSeconds); // playtime
-                texts[2].text = FormatTimestamp(saveData.LastSaveTimestamp); // Last saved
-                texts[3].text = saveData.DisplayStatus; // Status
-                texts[4].text = $"${saveData.Balance:N2}"; //money
+                GameObject slotobj = UnityEngine.Object.Instantiate(slotTemplate, slotGrid);
+                var saveslotUi = slotobj.GetComponent<SaveSlotUI>();
+                saveslotUi.nametxt.text = saveData.PetName;
+                saveslotUi.playtimetxt.text = FormatPlaytime(saveData.TotalPlaytimeSeconds);
+                saveslotUi.lastsavedtxt.text = FormatTimestamp(saveData.LastSaveTimestamp);
 
                 // add button to load this save
-                Button loadButton = slot.GetComponentInChildren<Button>();
+                Button loadButton = slotobj.GetComponentInChildren<Button>();
                 string capturedFileName = fileName; // capture in local variable
                 loadButton.onClick.AddListener(() => OnLoadClick(fileName));
             }

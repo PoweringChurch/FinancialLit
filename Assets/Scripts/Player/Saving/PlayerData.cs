@@ -26,7 +26,6 @@ public class PlayerData
 
     public Vector3 PetPosition;
     public Quaternion PetRotation;
-    public string DisplayStatus;
 
     public List<PetFlag> PetFlags; //enum
     // furniture
@@ -59,7 +58,6 @@ public class PlayerData
         // Default values for new game
         PetName = "Pet";
         Hygiene = Entertainment = Hunger = Energy = 100f;
-        DisplayStatus = "OKAY";
         PetFlags = new List<PetFlag>();
         PlacedFurniture = new List<FurnitureObjectData>();
         PlayerInventory = new Inventory();

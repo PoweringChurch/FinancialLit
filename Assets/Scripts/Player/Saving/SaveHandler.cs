@@ -32,7 +32,6 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.Entertainment = PetHelper.petStats.Status["entertainment"];
         currentPlayerData.Energy = PetHelper.petStats.Status["energy"];
 
-        string displaytext = "OKAY";
 
         float hygiene = currentPlayerData.Hygiene;
         float hunger = currentPlayerData.Hunger;
@@ -40,26 +39,6 @@ public class SaveHandler : MonoBehaviour
         float energy = currentPlayerData.Energy;
 
         float total = (hygiene + hunger + fun + energy)/400;
-
-        if (total > 87.5f) displaytext = "HAPPY";
-        if (total > 92.5f) displaytext = "CHEERFUL";
-        if (total > 97.5f) displaytext = "JOYFUL";
-
-        if (fun < 50f) displaytext = "BORED";
-        if (fun < 20f) displaytext = "LONELY";
-        if (hygiene < 30f) displaytext = "STINKY";
-        if (hygiene < 15f) displaytext = "FILTHY";
-        if (hunger < 50f) displaytext = "HUNGRY";
-        if (hunger < 30f) displaytext = "STARVING";
-        if (energy < 40f) displaytext = "SLEEPY";
-        if (energy < 20f) displaytext = "EXHAUSTED";
-
-        if (energy < 30f && fun < 30f) displaytext = "MISERABLE";
-        if (hunger < 25f && hygiene < 25f) displaytext = "UNWELL";
-
-        if (total < 20f) displaytext = "CRITICAL";
-
-        currentPlayerData.DisplayStatus = displaytext;
 
         currentPlayerData.PetPosition = PetHelper.petMover.petTransform.position;
         currentPlayerData.PetRotation = PetHelper.petMover.petTransform.rotation;
