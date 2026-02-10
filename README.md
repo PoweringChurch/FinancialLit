@@ -1,105 +1,41 @@
-# Intro to Programming Submission
+# My Dog Home source files
 
-[Overview](https://www.flfbla.org/fbla-event-introduction-to-programming)
+###### FinancialLit is the repository for the FBLA Intro to Programming 2025 - 2026 event submission source files, My Dog Home.
 
-[Details and Guidelines](https://www.fbla.org/high-school/competitive-events/)
+## Overview
 
-# TODO
+> This is a Unity project made for the Introduction to Programming 2025 - 2026 FBLA competition, by Xavier McCoy.  
 
-### Revision history
+The goal of My Dog Home is to provide a realistic yet engaging experience of managing a pet's needs within a budget. Players must balance:
 
-###### 1.00 - 12/1/2025, Xavier McCoy. 
-Initial version
+- Financial Management: Earning money through work minigame mechanics to afford food, shelter, and healthcare.
+- Pet Wellness: Monitoring hygiene, entertainment, hunger, and energy levels.
+- Home Customization: A building system that allows players to invest their savings into their pet's environment.
+- Event Links: [FBLA Overview](https://www.flfbla.org/fbla-event-introduction-to-programming) | [Details & Guidelines](https://www.fbla.org/high-school/competitive-events)
 
-## Week of 12/1/2025
+This project is currently actively being developed, so everything in this project is subject to change!
 
-Make game more active
-- [ ] Dog has wants to complete
-  * For example, dog may want to use the restroom. If dog is not taken to park, dog will defacate on the ground, lowering hygiene.
-- [ ] More minigames
-  * Dog walking minigame at park? Add interactions at certain locations
-- [ ] Way to gain more money from working, or money gain passively
-  * Hire workers?
+## How to access project
 
-World life
-- [ ] Dog roaming around in dog park
-- [ ] Game time
-  * Make dog park turn dark during night hours, businesses close during night
-- [ ] Interactive toys
-- [ ] Let dog interact with more objects, let dog rest in bed
+This project is actively being developed, so this process may change!  
+To access My Dog Home's source files, you must have Unity Hub installed, as well as Unity Editor 6.0.
 
-Personalization & customization
-- [ ] Alternative dog breeds for selection
-- [ ] Accessories for dog
-- [ ] Allow player to add rooms to home for a price
+1. Clone the repository
+```
+git clone https://github.com/PoweringChurch/FinancialLit.git
+```
+2. Add to Unity Hub
+   * Open Unity Hub and click Add > Add project from disk.
+   * Navigate to the cloned folder and click Select Folder
+3. Launch
+   * Select the project from your list to open it in the Unity Editor
 
-## Week of 12/8/2025
+## Contributing
 
-Animation
-- [ ] Dog sleeping animation
-- [ ] Dog petting animation
-- [ ] Toy animations
+> No pull requests! Issues are welcomed.
 
-Codebase
-- [ ] Significantly improve codebase to be much more presentable
-  - [ ] Use ```const``` variables, more defined variable names
-  - [ ] Add comments to explain what functions and calculations do
-  - [ ] Rename and label functions
-  - [ ] Input validation for functions
-    * This means ensuring types are correct and results are reasonable, shouldn't take too much effort
-- [ ] Optimize
-  - [ ] Swap out certain data structures for better and more appropiate alternatives (list -> array if needed)
-  - [ ] Remove unnecessary calculations, if any
-- [ ] Add console
-  - [ ] Console should allow user to run certain commands and query certain data with proper output reports
-    * An output report is the log that is shown after running a command.
-  - [ ] User should be able to "customize and analyze information" based on output reports
-  * Commands might include ```get hygiene```, ```set hygiene 1.00```, etc.
+To maintain compliance with FBLA competitive event rules regarding original work:
+   * Pull requests are closed. Please do not submit pull requests to this repository.  
+   * Issues are open. Suggestions, bug reports, and feedback via the "Issues" tab are highly encouraged and appreciated!
 
-## Week of 12/15/2025
-
-Touchups
-- [ ] Get playtesters to give feedback
-- [ ] Take note of any feedback given
-
-Bugfixing
-- [ ] Fix minor & major bugs found by playtesters
-
-User Experience
-- [ ] Interface contains no spelling errors
-  * The single most important item on this list. Grammar is not difficult enough to lose points on.
-- [ ] Ensure semantics make sense
-- [ ] Interactive help menu
-- [ ] No navigation errors
-  * Return buttons properly return user to previous page, etc.
-- [ ] "Program use also includes an intelligent feature such as an interactive Q&A"
-- [ ] Add arrows/highlights pointing exactly what to do during tutorial
-- [ ] Customizable hotkeys and keybinds
-  * Esc to return, bring up menus, etc.
-
-UI Improvements
-- [ ] UI animations
-  - [ ] Action wheel expand animation
-  - [ ] Hover selectable name animation
-  * All animation will likely just be handled with math, though not sure for now
-- [ ] UI SFX
-  - [ ] Button hover & click SFX
-  - [ ] Hover selectable object SFX
-
-## Week of 12/22/2025
-
-Implementation of feedback
-- [ ] Implement feedback
-  * This should look significantly more defined when feedback is received
-
-Write documentation
-- [ ] Completion
-
-### TBD
-
-## Week of 12/29/2025
-
-Begin working on presentation
-- [ ] Ensure presentation is visually appealing and informative
-
-### TBD
+Author: Xavier McCoy, In Active Development (Version 0.1)
