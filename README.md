@@ -15,6 +15,8 @@ The goal of My Dog Home is to provide a realistic yet engaging experience of man
 
 This project is currently actively being developed, so everything in this project is subject to change!
 
+![Sample Image 01](Aspect_ratio_16_9_example.jpg)
+
 ## How to view this project in the Unity editor
 
 This project is actively being developed, so this process may change!  
