@@ -100,8 +100,6 @@ GameObject:
   - component: {fileID: 3735487508432414620}
   - component: {fileID: 2636278774091160573}
   - component: {fileID: 6464908915763240389}
-  - component: {fileID: 1027011570570238803}
-  - component: {fileID: 7069761922701431409}
   - component: {fileID: 8796838248672718165}
   m_Layer: 7
   m_Name: DevOakTree(Clone)
@@ -174,42 +172,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &1027011570570238803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124640226559350394}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &7069761922701431409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124640226559350394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOakTree
-  meshComponents:
-  - {fileID: 9059960785709086277}
-  - {fileID: 5345488142303605191}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &8796838248672718165
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -237,8 +199,6 @@ GameObject:
   - component: {fileID: 5758177468453370878}
   - component: {fileID: 6739830572606126825}
   - component: {fileID: 5787602470872907255}
-  - component: {fileID: 1809396828762219308}
-  - component: {fileID: 1807356973497037191}
   - component: {fileID: 602463946576706976}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -311,42 +271,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &1809396828762219308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244272529804073785}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &1807356973497037191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244272529804073785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 7656744470344548133}
-  - {fileID: 7391267050945866473}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &602463946576706976
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -374,8 +298,6 @@ GameObject:
   - component: {fileID: 4517400178542086119}
   - component: {fileID: 8967513948715579214}
   - component: {fileID: 1240408579328576121}
-  - component: {fileID: 1098338518725637310}
-  - component: {fileID: 7231772922787843096}
   - component: {fileID: 2371079766945915930}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -448,42 +370,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &1098338518725637310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372104635011225443}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &7231772922787843096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372104635011225443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 5936243311228524376}
-  - {fileID: 6388456566142154920}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &2371079766945915930
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -714,8 +600,6 @@ GameObject:
   - component: {fileID: 1330172669438331312}
   - component: {fileID: 4550591601353330493}
   - component: {fileID: 3677017683741603907}
-  - component: {fileID: 1867921411090055}
-  - component: {fileID: 5801408366790850847}
   - component: {fileID: 1596921864825959077}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -788,42 +672,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &1867921411090055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463411460969663967}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5801408366790850847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463411460969663967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 3053533041206764868}
-  - {fileID: 3199841651153813420}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &1596921864825959077
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -851,8 +699,6 @@ GameObject:
   - component: {fileID: 7179106012861746451}
   - component: {fileID: 2958836765162355840}
   - component: {fileID: 1612750307758236246}
-  - component: {fileID: 7151680641330566525}
-  - component: {fileID: 8570337254910459530}
   - component: {fileID: 8747361860668874024}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -925,42 +771,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &7151680641330566525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463690838006984869}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &8570337254910459530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463690838006984869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 6786186612581748951}
-  - {fileID: 5242299417773711949}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &8747361860668874024
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -988,8 +798,6 @@ GameObject:
   - component: {fileID: 6703759183541763320}
   - component: {fileID: 7966335500466408513}
   - component: {fileID: 4267207140066075370}
-  - component: {fileID: 1794993118598782883}
-  - component: {fileID: 5929501846200589138}
   m_Layer: 7
   m_Name: DevSmallRock(Clone)
   m_TagString: Untagged
@@ -1061,41 +869,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1794993118598782883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571510771606903300}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5929501846200589138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571510771606903300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevSmallRock
-  meshComponents:
-  - {fileID: 7800529840029425417}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &612003077650716568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,8 +1058,6 @@ GameObject:
   - component: {fileID: 1551299750089389475}
   - component: {fileID: 6423819106293655102}
   - component: {fileID: 1386927487340978970}
-  - component: {fileID: 7104299339276316961}
-  - component: {fileID: 3932855385728126233}
   m_Layer: 7
   m_Name: DevOrangeFlower(Clone)
   m_TagString: Untagged
@@ -1358,42 +1129,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.6, z: 0.2}
   m_Center: {x: 0, y: 0.3, z: 0}
---- !u!114 &7104299339276316961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716103957600487675}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &3932855385728126233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716103957600487675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOrangeFlower
-  meshComponents:
-  - {fileID: 4065088391819243436}
-  - {fileID: 4402331372975079144}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &725214033695641584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,8 +1845,6 @@ GameObject:
   - component: {fileID: 4575880234102261440}
   - component: {fileID: 6899912546810782219}
   - component: {fileID: 6090365368282029278}
-  - component: {fileID: 2058244471728904530}
-  - component: {fileID: 6391473750671575079}
   - component: {fileID: 6547900725448595844}
   m_Layer: 7
   m_Name: DevBigBush(Clone)
@@ -2184,42 +1917,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &2058244471728904530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161905104049266973}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &6391473750671575079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161905104049266973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevBigBush
-  meshComponents:
-  - {fileID: 2804840114814373445}
-  - {fileID: 8319088254474374046}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &6547900725448595844
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -2507,8 +2204,6 @@ GameObject:
   - component: {fileID: 1751078117348565422}
   - component: {fileID: 8850109632796997711}
   - component: {fileID: 5061885395755265162}
-  - component: {fileID: 4512727051575314435}
-  - component: {fileID: 3466897198357053591}
   - component: {fileID: 1236769134291681679}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -2581,42 +2276,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &4512727051575314435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286263844877155626}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &3466897198357053591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286263844877155626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 8792187130712271610}
-  - {fileID: 4641019736379013316}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &1236769134291681679
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -3146,8 +2805,6 @@ GameObject:
   - component: {fileID: 1072171301948494341}
   - component: {fileID: 8513902070889827350}
   - component: {fileID: 3300635626627111707}
-  - component: {fileID: 2871039710536088311}
-  - component: {fileID: 2210571310899664232}
   - component: {fileID: 3480402727292049323}
   m_Layer: 7
   m_Name: DevOakTree(Clone)
@@ -3220,42 +2877,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &2871039710536088311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1569109049680311572}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &2210571310899664232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1569109049680311572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOakTree
-  meshComponents:
-  - {fileID: 6459543784331649613}
-  - {fileID: 7249587091458605005}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &3480402727292049323
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -3518,8 +3139,6 @@ GameObject:
   - component: {fileID: 1699077182432452478}
   - component: {fileID: 8361140725356258718}
   - component: {fileID: 8567396339503714393}
-  - component: {fileID: 1966112707031878261}
-  - component: {fileID: 5275826913930648263}
   - component: {fileID: 9122797272210081164}
   m_Layer: 7
   m_Name: DevBigBush(Clone)
@@ -3592,42 +3211,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &1966112707031878261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733188012543043647}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5275826913930648263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733188012543043647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevBigBush
-  meshComponents:
-  - {fileID: 8214623618331938208}
-  - {fileID: 7957191783675632085}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &9122797272210081164
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -3769,8 +3352,6 @@ GameObject:
   - component: {fileID: 7161640504805265915}
   - component: {fileID: 1586740075384121634}
   - component: {fileID: 7615405258611783227}
-  - component: {fileID: 3698894278001745742}
-  - component: {fileID: 2156395776055517344}
   m_Layer: 7
   m_Name: DevOrangeFlower(Clone)
   m_TagString: Untagged
@@ -3842,42 +3423,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.6, z: 0.2}
   m_Center: {x: 0, y: 0.3, z: 0}
---- !u!114 &3698894278001745742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863044285580283509}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &2156395776055517344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863044285580283509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOrangeFlower
-  meshComponents:
-  - {fileID: 456056559099360397}
-  - {fileID: 6184536473934828969}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &1867622476977834286
 GameObject:
   m_ObjectHideFlags: 0
@@ -3978,8 +3523,6 @@ GameObject:
   - component: {fileID: 6583835438532138057}
   - component: {fileID: 2512517840226284553}
   - component: {fileID: 5091749563391289216}
-  - component: {fileID: 8877712270862221205}
-  - component: {fileID: 4055329877356790182}
   m_Layer: 7
   m_Name: DevOrangeFlower(Clone)
   m_TagString: Untagged
@@ -4051,42 +3594,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.6, z: 0.2}
   m_Center: {x: 0, y: 0.3, z: 0}
---- !u!114 &8877712270862221205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908577859717875676}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &4055329877356790182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908577859717875676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOrangeFlower
-  meshComponents:
-  - {fileID: 4390985737664823101}
-  - {fileID: 6051962297869826583}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &1915236011495653395
 GameObject:
   m_ObjectHideFlags: 0
@@ -4511,8 +4018,6 @@ GameObject:
   - component: {fileID: 1548511097390228502}
   - component: {fileID: 6810395852199917820}
   - component: {fileID: 3530043551576619189}
-  - component: {fileID: 8696592730031782512}
-  - component: {fileID: 3761277932675550265}
   - component: {fileID: 8854188460732848680}
   m_Layer: 7
   m_Name: DevLargeRock(Clone)
@@ -4585,41 +4090,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &8696592730031782512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118997265270409716}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &3761277932675550265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118997265270409716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevLargeRock
-  meshComponents:
-  - {fileID: 7169023008839360975}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &8854188460732848680
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -4647,8 +4117,6 @@ GameObject:
   - component: {fileID: 2796563365926134664}
   - component: {fileID: 683952792150096931}
   - component: {fileID: 1022341543583239642}
-  - component: {fileID: 5073125510269812494}
-  - component: {fileID: 7680198692384937233}
   - component: {fileID: 899592514764821230}
   m_Layer: 7
   m_Name: DevOakTree(Clone)
@@ -4721,42 +4189,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &5073125510269812494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130941789738405803}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &7680198692384937233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130941789738405803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOakTree
-  meshComponents:
-  - {fileID: 2450764451373423462}
-  - {fileID: 5381285561859592236}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &899592514764821230
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -4906,8 +4338,6 @@ GameObject:
   - component: {fileID: 9201291211019063006}
   - component: {fileID: 2625953991992193575}
   - component: {fileID: 6492009023183395756}
-  - component: {fileID: 6286126842345154628}
-  - component: {fileID: 5835064968922568292}
   m_Layer: 7
   m_Name: DevOrangeFlower(Clone)
   m_TagString: Untagged
@@ -4979,42 +4409,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.6, z: 0.2}
   m_Center: {x: 0, y: 0.3, z: 0}
---- !u!114 &6286126842345154628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2198952479636844472}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5835064968922568292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2198952479636844472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOrangeFlower
-  meshComponents:
-  - {fileID: 1381375927864804372}
-  - {fileID: 8429171839770374900}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &2245581365698580336
 GameObject:
   m_ObjectHideFlags: 0
@@ -5382,8 +4776,6 @@ GameObject:
   - component: {fileID: 3458998933427635028}
   - component: {fileID: 3186968799760805898}
   - component: {fileID: 4999332262731594671}
-  - component: {fileID: 7897212959420734017}
-  - component: {fileID: 2728677639332363148}
   - component: {fileID: 4579987389262600097}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -5456,42 +4848,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &7897212959420734017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2378900644719390012}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &2728677639332363148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2378900644719390012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 1665473730007892037}
-  - {fileID: 1580358112090906648}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &4579987389262600097
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -6053,8 +5409,6 @@ GameObject:
   - component: {fileID: 692176111275021919}
   - component: {fileID: 2376571041841356086}
   - component: {fileID: 968638034188081463}
-  - component: {fileID: 937070238000946769}
-  - component: {fileID: 3318071308409926545}
   - component: {fileID: 7608312778531992284}
   m_Layer: 7
   m_Name: DevOakTree(Clone)
@@ -6127,42 +5481,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &937070238000946769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711447202153529291}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &3318071308409926545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711447202153529291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOakTree
-  meshComponents:
-  - {fileID: 6633061137210169480}
-  - {fileID: 6715052205244111192}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &7608312778531992284
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -6603,8 +5921,6 @@ GameObject:
   - component: {fileID: 923224919013951777}
   - component: {fileID: 3684921681618922539}
   - component: {fileID: 79385647038811472}
-  - component: {fileID: 7227480145033356528}
-  - component: {fileID: 8713107997067609615}
   - component: {fileID: 2541018830065119957}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -6677,42 +5993,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &7227480145033356528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001492426874246934}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &8713107997067609615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001492426874246934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 8114331557760148231}
-  - {fileID: 4777013160370110916}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &2541018830065119957
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -6740,8 +6020,6 @@ GameObject:
   - component: {fileID: 7434574816726613814}
   - component: {fileID: 4243918402401967732}
   - component: {fileID: 4473820574943189159}
-  - component: {fileID: 2255198567019062406}
-  - component: {fileID: 7105936849663717566}
   - component: {fileID: 556917698889946583}
   m_Layer: 7
   m_Name: DevOakTree(Clone)
@@ -6814,42 +6092,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &2255198567019062406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3038228386396251145}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &7105936849663717566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3038228386396251145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOakTree
-  meshComponents:
-  - {fileID: 4495529851961302784}
-  - {fileID: 914906055144531331}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &556917698889946583
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -6966,8 +6208,6 @@ GameObject:
   - component: {fileID: 7708377588761682460}
   - component: {fileID: 187943879638130535}
   - component: {fileID: 5769282874444037161}
-  - component: {fileID: 5516926746681036919}
-  - component: {fileID: 4603690431966077359}
   - component: {fileID: 4112390692432420662}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -7040,42 +6280,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &5516926746681036919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3095549778701893276}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &4603690431966077359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3095549778701893276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 6860531774737567194}
-  - {fileID: 7098755681806583257}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &4112390692432420662
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -7192,8 +6396,6 @@ GameObject:
   - component: {fileID: 7455664903000739098}
   - component: {fileID: 8923512404573117310}
   - component: {fileID: 1606816571358792934}
-  - component: {fileID: 5039350312853203200}
-  - component: {fileID: 151308108915968821}
   - component: {fileID: 6643237374591820254}
   m_Layer: 7
   m_Name: DevOakTree(Clone)
@@ -7266,42 +6468,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &5039350312853203200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3196887143688291858}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &151308108915968821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3196887143688291858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOakTree
-  meshComponents:
-  - {fileID: 5468412502427989950}
-  - {fileID: 1316802630170244457}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &6643237374591820254
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -7329,8 +6495,6 @@ GameObject:
   - component: {fileID: 3132684030421007424}
   - component: {fileID: 3023191896435739859}
   - component: {fileID: 5027902533801471027}
-  - component: {fileID: 2392753017338631696}
-  - component: {fileID: 5878828756565643758}
   - component: {fileID: 6187949037299370087}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -7403,42 +6567,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &2392753017338631696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3208224664925397925}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5878828756565643758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3208224664925397925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 3139497916764768856}
-  - {fileID: 6836195229295109728}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &6187949037299370087
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -7466,8 +6594,6 @@ GameObject:
   - component: {fileID: 9087378518688738921}
   - component: {fileID: 7215000867968219411}
   - component: {fileID: 1527144756532965561}
-  - component: {fileID: 9175449049363048787}
-  - component: {fileID: 6972369912524065639}
   - component: {fileID: 6082984420580901302}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -7540,42 +6666,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &9175449049363048787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3237313767438610447}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &6972369912524065639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3237313767438610447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 2547559675545304690}
-  - {fileID: 5167730184761151801}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &6082984420580901302
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -7603,8 +6693,6 @@ GameObject:
   - component: {fileID: 7647938242001448411}
   - component: {fileID: 2424122569057353859}
   - component: {fileID: 8146465056209769665}
-  - component: {fileID: 726541982157521932}
-  - component: {fileID: 6417991901757664350}
   - component: {fileID: 5818507381720320925}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -7677,42 +6765,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &726541982157521932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297157442938398805}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &6417991901757664350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297157442938398805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 6731198466996133013}
-  - {fileID: 7500099249242907621}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &5818507381720320925
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -8210,8 +7262,6 @@ GameObject:
   - component: {fileID: 576175520983489165}
   - component: {fileID: 7220358697585309747}
   - component: {fileID: 617883743044563216}
-  - component: {fileID: 7101670778244261744}
-  - component: {fileID: 4632075826441435396}
   - component: {fileID: 915788334896337058}
   m_Layer: 7
   m_Name: DevBigBush(Clone)
@@ -8284,42 +7334,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &7101670778244261744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3789527241951543088}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &4632075826441435396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3789527241951543088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevBigBush
-  meshComponents:
-  - {fileID: 8246215892224248902}
-  - {fileID: 8157147511029185210}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &915788334896337058
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -8347,8 +7361,6 @@ GameObject:
   - component: {fileID: 2905237909019706154}
   - component: {fileID: 4037113520081881411}
   - component: {fileID: 4740423337563341288}
-  - component: {fileID: 7876405229666493032}
-  - component: {fileID: 5071563580853958929}
   - component: {fileID: 4983811699889924922}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -8421,42 +7433,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &7876405229666493032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804388424829265735}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5071563580853958929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804388424829265735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 1294747038035346268}
-  - {fileID: 4059281676889714294}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &4983811699889924922
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -9040,8 +8016,6 @@ GameObject:
   - component: {fileID: 7116838777918052196}
   - component: {fileID: 3795410061867687232}
   - component: {fileID: 6930524585861180658}
-  - component: {fileID: 8876584934802624463}
-  - component: {fileID: 4619263367249442050}
   - component: {fileID: 359271641908872192}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -9114,42 +8088,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &8876584934802624463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4116182535579777443}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &4619263367249442050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4116182535579777443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 7119214224369323827}
-  - {fileID: 4608740696739442513}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &359271641908872192
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -9673,8 +8611,6 @@ GameObject:
   - component: {fileID: 8337381579188942637}
   - component: {fileID: 4402707677941391319}
   - component: {fileID: 2941811627980945534}
-  - component: {fileID: 2916221440238647117}
-  - component: {fileID: 4971182859036006801}
   - component: {fileID: 2393215459087156403}
   m_Layer: 7
   m_Name: DevMedRock(Clone)
@@ -9765,41 +8701,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &2916221440238647117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4466978160148712247}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &4971182859036006801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4466978160148712247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevMedRock
-  meshComponents:
-  - {fileID: 3036656315682849555}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &2393215459087156403
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -9827,8 +8728,6 @@ GameObject:
   - component: {fileID: 1987840511080413937}
   - component: {fileID: 2077741783322042654}
   - component: {fileID: 7713133689030701595}
-  - component: {fileID: 6330211116560997324}
-  - component: {fileID: 332406317245374058}
   - component: {fileID: 5814032972358365005}
   m_Layer: 7
   m_Name: DevBigBush(Clone)
@@ -9901,42 +8800,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &6330211116560997324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4481636019575865568}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &332406317245374058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4481636019575865568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevBigBush
-  meshComponents:
-  - {fileID: 1233720517217232598}
-  - {fileID: 1037465345074900723}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &5814032972358365005
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -10289,8 +9152,6 @@ GameObject:
   - component: {fileID: 1433446377971042318}
   - component: {fileID: 5085280280256353046}
   - component: {fileID: 8707180483689804072}
-  - component: {fileID: 4544412030725634173}
-  - component: {fileID: 7783240822227967699}
   - component: {fileID: 7091725279943014641}
   m_Layer: 7
   m_Name: DevStump(Clone)
@@ -10381,42 +9242,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7, y: 0.7, z: 0.7}
   m_Center: {x: 0, y: 0.35, z: 0}
---- !u!114 &4544412030725634173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4667080719857070441}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &7783240822227967699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4667080719857070441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevStump
-  meshComponents:
-  - {fileID: 1619074276360104154}
-  - {fileID: 4161762218651636091}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &7091725279943014641
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -10444,8 +9269,6 @@ GameObject:
   - component: {fileID: 2508325988879072339}
   - component: {fileID: 7820191598907076323}
   - component: {fileID: 2352930797249256628}
-  - component: {fileID: 2663190859833278769}
-  - component: {fileID: 793485628128170193}
   - component: {fileID: 1038017767516747996}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -10518,42 +9341,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &2663190859833278769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4713649262569389614}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &793485628128170193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4713649262569389614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 7815909850074820543}
-  - {fileID: 6858721932513360791}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &1038017767516747996
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -11724,8 +10511,6 @@ GameObject:
   - component: {fileID: 7481005339335423111}
   - component: {fileID: 8494482170877449414}
   - component: {fileID: 3694962845047203970}
-  - component: {fileID: 1981091126284170351}
-  - component: {fileID: 1998742093349700757}
   - component: {fileID: 9066142626398257334}
   m_Layer: 7
   m_Name: DevBigBush(Clone)
@@ -11798,42 +10583,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &1981091126284170351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5489186001125186390}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &1998742093349700757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5489186001125186390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevBigBush
-  meshComponents:
-  - {fileID: 850341189297093701}
-  - {fileID: 8284810298834376097}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &9066142626398257334
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -12275,8 +11024,6 @@ GameObject:
   - component: {fileID: 2008190041135067230}
   - component: {fileID: 5046590346764530303}
   - component: {fileID: 6832054540631886124}
-  - component: {fileID: 2471240256683017879}
-  - component: {fileID: 5376165654802065019}
   m_Layer: 7
   m_Name: DevOrangeFlower(Clone)
   m_TagString: Untagged
@@ -12348,42 +11095,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.6, z: 0.2}
   m_Center: {x: 0, y: 0.3, z: 0}
---- !u!114 &2471240256683017879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5722462589102984067}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5376165654802065019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5722462589102984067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOrangeFlower
-  meshComponents:
-  - {fileID: 1215744059212637440}
-  - {fileID: 9051794640251991920}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &5731350857053509954
 GameObject:
   m_ObjectHideFlags: 0
@@ -12573,8 +11284,6 @@ GameObject:
   - component: {fileID: 882401923865152765}
   - component: {fileID: 3910148318855996241}
   - component: {fileID: 2854098048095077991}
-  - component: {fileID: 4406285546404836229}
-  - component: {fileID: 2152597097366652549}
   - component: {fileID: 4183846121604527357}
   m_Layer: 7
   m_Name: DevBigBush(Clone)
@@ -12647,42 +11356,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &4406285546404836229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5782737691943757579}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &2152597097366652549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5782737691943757579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevBigBush
-  meshComponents:
-  - {fileID: 8923626328140715913}
-  - {fileID: 8644426748721355828}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &4183846121604527357
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -13438,8 +12111,6 @@ GameObject:
   - component: {fileID: 3717658291461406523}
   - component: {fileID: 805489740029488097}
   - component: {fileID: 3279670108992239226}
-  - component: {fileID: 1467096087509675927}
-  - component: {fileID: 7711984897600131931}
   - component: {fileID: 8929479509378627376}
   m_Layer: 7
   m_Name: DevStump(Clone)
@@ -13530,42 +12201,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7, y: 0.7, z: 0.7}
   m_Center: {x: 0, y: 0.35, z: 0}
---- !u!114 &1467096087509675927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6173504673952101923}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &7711984897600131931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6173504673952101923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevStump
-  meshComponents:
-  - {fileID: 3002275318750785498}
-  - {fileID: 8168905404791255102}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &8929479509378627376
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -13682,8 +12317,6 @@ GameObject:
   - component: {fileID: 362145933353942162}
   - component: {fileID: 6687303596507202605}
   - component: {fileID: 2195558602397766363}
-  - component: {fileID: 4540477346561679286}
-  - component: {fileID: 5162465669070929673}
   - component: {fileID: 3862877785103540747}
   m_Layer: 7
   m_Name: DevBigBush(Clone)
@@ -13756,42 +12389,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &4540477346561679286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6343537921181155492}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5162465669070929673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6343537921181155492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevBigBush
-  meshComponents:
-  - {fileID: 2727173934293027653}
-  - {fileID: 8638602181301858543}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &3862877785103540747
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -14143,8 +12740,6 @@ GameObject:
   - component: {fileID: 2915162256881115493}
   - component: {fileID: 6094732765863523187}
   - component: {fileID: 5415163661708217312}
-  - component: {fileID: 3055527730634679644}
-  - component: {fileID: 5096164962326287348}
   - component: {fileID: 5288360241368265963}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -14217,42 +12812,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &3055527730634679644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6918246501230086811}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5096164962326287348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6918246501230086811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 5834813754420324180}
-  - {fileID: 1282422642102599922}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &5288360241368265963
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -14369,8 +12928,6 @@ GameObject:
   - component: {fileID: 8677592667911248768}
   - component: {fileID: 7803023436042435950}
   - component: {fileID: 2279495943331156820}
-  - component: {fileID: 1304829117455073291}
-  - component: {fileID: 5366667889278959146}
   - component: {fileID: 2367263962629342528}
   m_Layer: 7
   m_Name: DevBigBush(Clone)
@@ -14443,42 +13000,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &1304829117455073291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6955281561230659959}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5366667889278959146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6955281561230659959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevBigBush
-  meshComponents:
-  - {fileID: 5844831699446172026}
-  - {fileID: 3294149996073115613}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &2367263962629342528
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -14595,8 +13116,6 @@ GameObject:
   - component: {fileID: 3106763467824164880}
   - component: {fileID: 7438311202348163840}
   - component: {fileID: 3467736296156686506}
-  - component: {fileID: 7866799395334442904}
-  - component: {fileID: 8684539884076099585}
   - component: {fileID: 202991088899158684}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -14669,42 +13188,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &7866799395334442904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7011054165486188400}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &8684539884076099585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7011054165486188400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 4813404265726808740}
-  - {fileID: 1565189488695123450}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &202991088899158684
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -14878,8 +13361,6 @@ GameObject:
   - component: {fileID: 6599059453491663360}
   - component: {fileID: 2048296723518618933}
   - component: {fileID: 8686040865546261734}
-  - component: {fileID: 8351945491680447665}
-  - component: {fileID: 3964109240485868603}
   - component: {fileID: 5281279962848940537}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -14952,42 +13433,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &8351945491680447665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7124103189726539595}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &3964109240485868603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7124103189726539595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 8164562317954113731}
-  - {fileID: 1534062516344243225}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &5281279962848940537
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -15072,8 +13517,6 @@ GameObject:
   - component: {fileID: 2232974255471687193}
   - component: {fileID: 1251718006278201105}
   - component: {fileID: 7301746921770384686}
-  - component: {fileID: 8188547839270640978}
-  - component: {fileID: 5745947905534469241}
   - component: {fileID: 5909171176408301247}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -15146,42 +13589,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &8188547839270640978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267552864953365324}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5745947905534469241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267552864953365324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 6326536155467421690}
-  - {fileID: 1573884169013446977}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &5909171176408301247
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -15298,8 +13705,6 @@ GameObject:
   - component: {fileID: 8725935978228754913}
   - component: {fileID: 9168532059787527417}
   - component: {fileID: 7514557307308229063}
-  - component: {fileID: 3755361439956840035}
-  - component: {fileID: 1705197353361218238}
   - component: {fileID: 1046759377623367966}
   m_Layer: 7
   m_Name: DevBigBush(Clone)
@@ -15372,42 +13777,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &3755361439956840035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7312221211512268677}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &1705197353361218238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7312221211512268677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevBigBush
-  meshComponents:
-  - {fileID: 7678398596628747424}
-  - {fileID: 7697884725808459660}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &1046759377623367966
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -15791,8 +14160,6 @@ GameObject:
   - component: {fileID: 2412192771339740730}
   - component: {fileID: 7060438300035406068}
   - component: {fileID: 1125361106911886217}
-  - component: {fileID: 7060480380034536012}
-  - component: {fileID: 2079618963951035340}
   m_Layer: 7
   m_Name: DevSmallRock(Clone)
   m_TagString: Untagged
@@ -15864,41 +14231,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7060480380034536012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7958933788480282071}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &2079618963951035340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7958933788480282071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevSmallRock
-  meshComponents:
-  - {fileID: 8051640294941863143}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &7963557658999959761
 GameObject:
   m_ObjectHideFlags: 0
@@ -15967,8 +14299,6 @@ GameObject:
   - component: {fileID: 6407978013102840419}
   - component: {fileID: 218463783160930326}
   - component: {fileID: 788380856811959817}
-  - component: {fileID: 1669060894737164329}
-  - component: {fileID: 7354765366809054231}
   - component: {fileID: 2061697691776458810}
   m_Layer: 7
   m_Name: DevPineTree(Clone)
@@ -16041,42 +14371,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &1669060894737164329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8031156470035842991}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &7354765366809054231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8031156470035842991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevPineTree
-  meshComponents:
-  - {fileID: 7265146892154452377}
-  - {fileID: 7026777424079870682}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &2061697691776458810
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -16428,8 +14722,6 @@ GameObject:
   - component: {fileID: 8401416926975621554}
   - component: {fileID: 7931551281337214262}
   - component: {fileID: 5447868461019254568}
-  - component: {fileID: 2940039952868725112}
-  - component: {fileID: 471421423888416447}
   - component: {fileID: 5664291102621481861}
   m_Layer: 7
   m_Name: DevOakTree(Clone)
@@ -16502,42 +14794,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &2940039952868725112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8315192275860440094}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &471421423888416447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8315192275860440094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOakTree
-  meshComponents:
-  - {fileID: 2281018868837316700}
-  - {fileID: 6643758463271336687}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &5664291102621481861
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -16565,8 +14821,6 @@ GameObject:
   - component: {fileID: 7559331814958011445}
   - component: {fileID: 2681415123693930263}
   - component: {fileID: 1063709377726149594}
-  - component: {fileID: 349492914494964167}
-  - component: {fileID: 3267612105795716407}
   - component: {fileID: 326422401491887391}
   m_Layer: 7
   m_Name: DevOakTree(Clone)
@@ -16639,42 +14893,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &349492914494964167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8352190942581803168}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &3267612105795716407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8352190942581803168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOakTree
-  meshComponents:
-  - {fileID: 7206337733601943572}
-  - {fileID: 6057956575314533309}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &326422401491887391
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -16791,8 +15009,6 @@ GameObject:
   - component: {fileID: 3337627604465968495}
   - component: {fileID: 3938147958549370426}
   - component: {fileID: 6712006353155670241}
-  - component: {fileID: 7227867930558231331}
-  - component: {fileID: 8591629974761822911}
   m_Layer: 7
   m_Name: DevSmallRock(Clone)
   m_TagString: Untagged
@@ -16864,41 +15080,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7227867930558231331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8472953673719810237}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &8591629974761822911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8472953673719810237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevSmallRock
-  meshComponents:
-  - {fileID: 478781698167240332}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &8482957609574399402
 GameObject:
   m_ObjectHideFlags: 0
@@ -17164,8 +15345,6 @@ GameObject:
   - component: {fileID: 7629417463689186018}
   - component: {fileID: 2887050952108715489}
   - component: {fileID: 1185403333190447867}
-  - component: {fileID: 2320209477081313403}
-  - component: {fileID: 9089781122754555984}
   - component: {fileID: 4867441021027225907}
   m_Layer: 7
   m_Name: DevOakTree(Clone)
@@ -17238,42 +15417,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &2320209477081313403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8643299149713854897}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &9089781122754555984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8643299149713854897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOakTree
-  meshComponents:
-  - {fileID: 2428199288405243149}
-  - {fileID: 4315337586506477732}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &4867441021027225907
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -17569,8 +15712,6 @@ GameObject:
   - component: {fileID: 3101334858157889608}
   - component: {fileID: 1197937481405582370}
   - component: {fileID: 2306615054729198011}
-  - component: {fileID: 3831981203652250433}
-  - component: {fileID: 2948904728183281662}
   - component: {fileID: 3843520605553924296}
   m_Layer: 7
   m_Name: DevMedRock(Clone)
@@ -17661,41 +15802,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &3831981203652250433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8763618636720911378}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &2948904728183281662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8763618636720911378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevMedRock
-  meshComponents:
-  - {fileID: 4301699069731863232}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!208 &3843520605553924296
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -18072,8 +16178,6 @@ GameObject:
   - component: {fileID: 3600318581426709575}
   - component: {fileID: 8802200742216335662}
   - component: {fileID: 7438055609652545495}
-  - component: {fileID: 7423762923886119348}
-  - component: {fileID: 5451604399963018317}
   m_Layer: 7
   m_Name: DevOrangeFlower(Clone)
   m_TagString: Untagged
@@ -18145,42 +16249,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.6, z: 0.2}
   m_Center: {x: 0, y: 0.3, z: 0}
---- !u!114 &7423762923886119348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035759262632234086}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &5451604399963018317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035759262632234086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevOrangeFlower
-  meshComponents:
-  - {fileID: 5554693597911029109}
-  - {fileID: 4805903043223619165}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &9061452823432028087
 GameObject:
   m_ObjectHideFlags: 0
@@ -18192,8 +16260,6 @@ GameObject:
   - component: {fileID: 6447599583695128590}
   - component: {fileID: 6942552053429719060}
   - component: {fileID: 4137630370944198013}
-  - component: {fileID: 5778926820810679217}
-  - component: {fileID: 3922324780311964390}
   m_Layer: 7
   m_Name: DevSmallRock(Clone)
   m_TagString: Untagged
@@ -18265,41 +16331,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5778926820810679217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9061452823432028087}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.9568628, g: 0.6431373, b: 0.3764706, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &3922324780311964390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9061452823432028087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
-  itemName: DevSmallRock
-  meshComponents:
-  - {fileID: 2983442950276885961}
-  hasValidPlacement: 1
-  isFixed: 1
 --- !u!1 &9085685083469350236
 GameObject:
   m_ObjectHideFlags: 0

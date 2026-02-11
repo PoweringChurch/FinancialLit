@@ -25,14 +25,14 @@ public class TutorialManager : MonoBehaviour
             "Teach me!", 
             "Skip");
     }
-    
+    // starts the tutorial
     public void StartTutorial()
     {
         PlayerFlagManager.AddFlag(PlayerFlag.Tutorial);
         CleanupEventListeners();
         ShowWelcome();
     }
-    
+    // cleans up the listeners for tutorial based events
     private void CleanupEventListeners()
     {
         if (moodDisplay != null)
@@ -168,7 +168,7 @@ public class TutorialManager : MonoBehaviour
     
     void TaskBeginWorking()
     {
-        string header = "Money";
+        string header = "Let's go to work!";
         string body = "Close the placement menu, and select the placed monitor to begin working";
         currentTaskUI = Popups.PopupTask(header, body);
         
@@ -194,7 +194,7 @@ public class TutorialManager : MonoBehaviour
         }
         
         string header = "Money";
-        string body = "You can view how you spend your money by clicking on your balance in the top left.\n\nBe sure to spend responsibly!";
+        string body = "You can view your balance in the top left corner of the screen.\n\nBe sure to spend responsibly!";
         string dismiss = "Got it";
      Popups.PopupInfo(header, body, dismiss, ShowResources);
     }

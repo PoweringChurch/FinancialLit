@@ -17,7 +17,7 @@ public static class PetHelper
             if (currentActivePet != null)
             {
                 petAnimation = currentActivePet.GetComponent<PetAnimation>();
-                petBehaviour = currentActivePet.GetComponent<PetBehaviour>();
+                petBehaviour = currentActivePet.GetComponentInChildren<PetBehaviour>();
                 petFunctionality = currentActivePet.GetComponent<PetFunctionality>();
                 petMover = currentActivePet.GetComponent<PetMover>();
                 petStateMachine = currentActivePet.GetComponent<PetStateMachine>();
