@@ -11,7 +11,8 @@ The goal of My Dog Home is to provide a realistic yet engaging experience of man
 - Financial Management: Earning money through work minigame mechanics to afford food, shelter, and healthcare.
 - Pet Wellness: Monitoring hygiene, entertainment, hunger, and energy levels.
 - Home Customization: A building system that allows players to invest their savings into their pet's environment.
-- Event Links: [FBLA Overview](https://www.flfbla.org/fbla-event-introduction-to-programming) | [Details & Guidelines](https://www.fbla.org/high-school/competitive-events)
+
+Event Links: [FBLA Overview](https://www.flfbla.org/fbla-event-introduction-to-programming) | [Details & Guidelines](https://www.fbla.org/high-school/competitive-events)
 
 This project is currently actively being developed, so everything in this project is subject to change!
 
