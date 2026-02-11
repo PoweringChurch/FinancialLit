@@ -20,6 +20,7 @@ public class PetMover : MonoBehaviour
         petTransform = transform;
         reachedGoal = true;
         agent = GetComponent<NavMeshAgent>();
+
         if (agent != null)
         {
             agent.speed = moveSpeed;
@@ -51,7 +52,7 @@ public class PetMover : MonoBehaviour
             }
 
             // apply stats multiplier to speed
-            float energyMult = 0.5f + 0.5f * PetHelper.petStats.Status["energy"];
+            float energyMult = 0.5f + 0.5f * (PetHelper.petStats.Status["energy"]/100);
             float sickMult = PetHelper.petFlagManager.HasFlag(PetFlag.Sick) ? 0.5f : 1f;
             float lovedMult = PetHelper.petFlagManager.HasFlag(PetFlag.Loved) ? 1.05f : 1f;
             float playfulMult = PetHelper.petFlagManager.HasFlag(PetFlag.Playful) ? 1.05f : 1f;

@@ -32,28 +32,13 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.Entertainment = PetHelper.petStats.Status["entertainment"];
         currentPlayerData.Energy = PetHelper.petStats.Status["energy"];
 
-        string displayStatus = "OKAY";
 
         float hygiene = currentPlayerData.Hygiene;
         float hunger = currentPlayerData.Hunger;
-        float entertainment = currentPlayerData.Entertainment;
+        float fun = currentPlayerData.Entertainment;
         float energy = currentPlayerData.Energy;
 
-        float total = hygiene + hunger + entertainment + energy;
-
-        if (total > 3.5) displayStatus = "FINE";
-        if (total > 3.7) displayStatus = "GREAT";
-        if (total > 3.9) displayStatus = "AMAZING";
-        if (entertainment < 0.5) displayStatus = "BORED";
-        if (entertainment < 0.2) displayStatus = "SAD";
-        if (hygiene < 0.3) displayStatus = "DIRTY";
-        if (hunger < 0.5) displayStatus = "HUNGRY";
-        if (hunger < 0.3) displayStatus = "STARVING";
-        if (energy < 0.4) displayStatus = "TIRED";
-        if (energy < 0.2) displayStatus = "EXHAUSTED";
-        if (total < 0.8) displayStatus = "CRITICAL";
-
-        currentPlayerData.DisplayStatus = displayStatus;
+        float total = (hygiene + hunger + fun + energy)/400;
 
         currentPlayerData.PetPosition = PetHelper.petMover.petTransform.position;
         currentPlayerData.PetRotation = PetHelper.petMover.petTransform.rotation;
@@ -67,12 +52,14 @@ public class SaveHandler : MonoBehaviour
         {
             var childTransform = homeFurnitureTransform.GetChild(i);
             var placementHandler = childTransform.GetComponent<PlacementHandler>();
-            if (placementHandler == null) continue; // Skip if no PlacementHandler
+            if (placementHandler == null) continue; // skip if no PlacementHandler
 
-            FurnitureObjectData newFurnitureObjData = new();
-            newFurnitureObjData.position = childTransform.position;
-            newFurnitureObjData.rotation = childTransform.rotation;
-            newFurnitureObjData.itemName = placementHandler.itemName;
+            FurnitureObjectData newFurnitureObjData = new()
+            {
+                position = childTransform.position,
+                rotation = childTransform.rotation,
+                itemName = placementHandler.itemName
+            };
 
             var childFunctionality = childTransform.GetComponent<BaseFunctionality>();
             if (childFunctionality is FeedingFunctionality feedingFunctionality)
@@ -86,9 +73,14 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
 
         // resources
-        currentPlayerData.Money = PlayerResources.Instance.Money;
+        currentPlayerData.Balance = FinancialSpending.Instance.Balance;
         currentPlayerData.Food = PlayerResources.Instance.Food;
         currentPlayerData.Shampoo = PlayerResources.Instance.Shampoo;
+
+        // igt
+        currentPlayerData.Minute = GameTime.Instance.Minute;
+        currentPlayerData.Day = GameTime.Instance.Day;
+        currentPlayerData.Week = GameTime.Instance.Week;
 
         // player stats
         float currentSessionTime = Time.time - sessionStartTime;
@@ -119,19 +111,16 @@ public class SaveHandler : MonoBehaviour
         switch (playerData.Breed)
         {
             case PetBreed.Corgi:
-                dog = Instantiate(corgiPrefab,playerData.PetPosition,playerData.PetRotation,gameSpace);
-                Debug.Log("pos : "+playerData.PetPosition);
-                Debug.Log("rot : "+playerData.PetRotation.eulerAngles);
+                dog = Instantiate(corgiPrefab,gameSpace);
+                Debug.Log("instantiated corgi");
                 break;
             case PetBreed.Cur:
-                dog = Instantiate(curPrefab,playerData.PetPosition,playerData.PetRotation,gameSpace);
-                Debug.Log("pos : "+playerData.PetPosition);
-                Debug.Log("rot : "+playerData.PetRotation.eulerAngles);
+                Debug.Log("instantiated cur");
+                dog = Instantiate(curPrefab,gameSpace);
                 break;
             case PetBreed.Pug:
-                dog = Instantiate(pugPrefab,playerData.PetPosition,playerData.PetRotation,gameSpace);
-                Debug.Log("pos : "+playerData.PetPosition);
-                Debug.Log("rot : "+playerData.PetRotation.eulerAngles);
+                Debug.Log("instantiated pug");
+                dog = Instantiate(pugPrefab,gameSpace);
                 break;
         }
         if (!dog) return;
@@ -145,6 +134,8 @@ public class SaveHandler : MonoBehaviour
         PetHelper.petStats.Status["entertainment"] = playerData.Entertainment;
         PetHelper.petStats.Status["energy"] = playerData.Energy;
 
+        PetHelper.petMover.agent.Warp(playerData.PetPosition);
+        PetHelper.petMover.petTransform.rotation = playerData.PetRotation;
         // Pet flags
         PetHelper.petFlagManager.SetFlags(playerData.PetFlags);
 
@@ -166,18 +157,20 @@ public class SaveHandler : MonoBehaviour
 
             // Restore furniture data
             var functionality = spawnedFurniture.GetComponent<BaseFunctionality>();
+            var placementHandler = spawnedFurniture.GetComponent<PlacementHandler>();
+            placementHandler.SetPlacementMode(PlacementMode.Fixed);
             if (functionality is FeedingFunctionality feedingFunctionality)
-            {
                 feedingFunctionality.SetFilled(furnitureData.isFilled);
-            }
         }
 
         // Inventory
         InventoryHelper.Instance.SetInventory(playerData.PlayerInventory);
         InventoryHelper.Instance.Rebuild(); // Rebuild FurnitureData references
 
+        // Igt
+        GameTime.Instance.SetTime(playerData.Minute,playerData.Day,playerData.Week);
         // Resources
-        PlayerResources.Instance.SetMoney(playerData.Money);
+        FinancialSpending.Instance.SetBalance(playerData.Balance);
         PlayerResources.Instance.SetFood(playerData.Food);
         PlayerResources.Instance.SetShampoo(playerData.Shampoo);
 
@@ -192,7 +185,6 @@ public class SaveHandler : MonoBehaviour
             Debug.LogWarning($"Save file {fileName} not found, cannot delete");
             return false;
         }
-        
         try
         {
             File.Delete(savePath);

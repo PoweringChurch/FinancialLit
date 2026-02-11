@@ -63,7 +63,7 @@ public class BaseFunctionality : MonoBehaviour
     protected virtual void Buy()
     {
         // check if player can afford
-        if (!PlayerResources.Instance.CanAfford(price)) return;
+        if (!FinancialSpending.Instance.CanAfford(price)) return;
         // play purchase sfx
         SFXPlayer.Instance.Play(purchaseSfx);
         // add item to inventory
@@ -71,7 +71,8 @@ public class BaseFunctionality : MonoBehaviour
         var item = FurnitureDatabase.GetData(handler.itemName);
         InventoryHelper.Instance.AddItem(item, 1);
         // spend money
-        PlayerResources.Instance.Spend(price, "Furniture");
+        if (!FinancialSpending.Instance.CanAfford(price)) return;
+        FinancialSpending.Instance.Spend(price, "Furniture");
     }
     // show message popup; different from an info popup
     protected void Message(string message)

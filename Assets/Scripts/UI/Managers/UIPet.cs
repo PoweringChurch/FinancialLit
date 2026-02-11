@@ -15,6 +15,8 @@ public class UIPet : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI DisplayText;
     [SerializeField]
+    private TextMeshProUGUI NameText;
+    [SerializeField]
     private Image HungerFill;
     [SerializeField]
     private Image HygieneFill;
@@ -23,70 +25,89 @@ public class UIPet : MonoBehaviour
     [SerializeField]
     private Image EnergyFill;
 
-    private float currentHygiene;
-    private float currentHunger;
-    private float currentEntertainment;
-    private float currentEnergy;
+    private float lerpHygiene;
+    private float lerpHunger;
+    private float lerpFun;
+    private float lerpEnergy;
     private Color currentDisplayColor;
     private float lerpSpeed = 3f;
+
+    private Color highStatsColor = new(0.37f,0.94f,0.57f);
+    private Color lowStatsColor = new(0.93f,0.49f,0.37f);
     private void Update()
     {
         if (PetHelper.CurrentActivePet == null) return;
+        // get stats
         var hygiene = PetHelper.petStats.Status["hygiene"];
         var hunger = PetHelper.petStats.Status["hunger"];
-        var entertainment = PetHelper.petStats.Status["entertainment"];
+        var fun = PetHelper.petStats.Status["entertainment"];
         var energy = PetHelper.petStats.Status["energy"];
 
-        currentHygiene = Mathf.Lerp(currentHygiene, hygiene, Time.deltaTime * lerpSpeed);
-        currentHunger = Mathf.Lerp(currentHunger, hunger, Time.deltaTime * lerpSpeed);
-        currentEntertainment = Mathf.Lerp(currentEntertainment, entertainment, Time.deltaTime * lerpSpeed);
-        currentEnergy = Mathf.Lerp(currentEnergy, energy, Time.deltaTime * lerpSpeed);
+        // lerp the stats
+        lerpHygiene = Mathf.Lerp(lerpHygiene, hygiene, Time.deltaTime * lerpSpeed);
+        lerpHunger = Mathf.Lerp(lerpHunger, hunger, Time.deltaTime * lerpSpeed);
+        lerpFun = Mathf.Lerp(lerpFun, fun, Time.deltaTime * lerpSpeed);
+        lerpEnergy = Mathf.Lerp(lerpEnergy, energy, Time.deltaTime * lerpSpeed);
+        // set the fill amount
+        HygieneFill.fillAmount = lerpHygiene / 100;
+        HungerFill.fillAmount = lerpHunger / 100;
+        EntertainmentFill.fillAmount = lerpFun / 100;
+        EnergyFill.fillAmount = lerpEnergy / 100;
+        // set the color
+        HungerFill.color = Color.Lerp(lowStatsColor, highStatsColor, lerpHunger/100);
+        EnergyFill.color = Color.Lerp(lowStatsColor, highStatsColor, lerpEnergy/100);
+        HygieneFill.color = Color.Lerp(lowStatsColor, highStatsColor, lerpHygiene/100);
+        EntertainmentFill.color = Color.Lerp(lowStatsColor, highStatsColor, lerpFun/100);
 
-        HygieneFill.fillAmount = currentHygiene;
-        HungerFill.fillAmount = currentHunger;
-        EntertainmentFill.fillAmount = currentEntertainment;
-        EnergyFill.fillAmount = currentEnergy;
-
-        HungerFill.color = Color.Lerp(Color.red, Color.green, currentHunger);
-        EnergyFill.color = Color.Lerp(Color.red, Color.green, currentEnergy);
-        HygieneFill.color = Color.Lerp(Color.red, Color.green, currentHygiene);
-        EntertainmentFill.color = Color.Lerp(Color.red, Color.green, currentEntertainment);
-
-        var total = entertainment + hygiene + energy + hunger;
+        // display mood
+        float total = (fun + hygiene + energy + hunger) / 4f;
         string displaytext = "OKAY";
 
-        if (total > 3.5) displaytext = "FINE";
-        if (total > 3.7) displaytext = "GREAT";
-        if (total > 3.9) displaytext = "AMAZING";
-        if (entertainment < 0.5) displaytext = "BORED";
-        if (entertainment < 0.2) displaytext = "SAD";
-        if (hygiene < 0.3) displaytext = "DIRTY";
-        if (hunger < 0.5) displaytext = "HUNGRY";
-        if (hunger < 0.3) displaytext = "STARVING";
-        if (energy < 0.4) displaytext = "TIRED";
-        if (energy < 0.2) displaytext = "EXHAUSTED";
-        if (total < 0.8) displaytext = "CRITICAL";
+        // positive moods (based on total)
+        if (total > 87.5f) displaytext = "HAPPY";
+        if (total > 92.5f) displaytext = "CHEERFUL";
+        if (total > 97.5f) displaytext = "JOYFUL";
 
+        // negative moods (priority based on specific stats)
+        if (fun < 50f) displaytext = "BORED";
+        if (fun < 20f) displaytext = "LONELY";
+        if (hygiene < 30f) displaytext = "STINKY";
+        if (hygiene < 15f) displaytext = "FILTHY";
+        if (hunger < 50f) displaytext = "HUNGRY";
+        if (hunger < 30f) displaytext = "STARVING";
+        if (energy < 40f) displaytext = "SLEEPY";
+        if (energy < 20f) displaytext = "EXHAUSTED";
+
+        // multistat moods
+        if (energy < 30f && fun < 30f) displaytext = "MISERABLE";
+        if (hunger < 25f && hygiene < 25f) displaytext = "UNWELL";
+
+        // critical state overrides everything
+        if (total < 20f) displaytext = "CRITICAL";
         var colorDict = new Dictionary<string, Color>
         {
-            ["OKAY"] = new Color(0.5f, 0.6f, 0.5f),
-            ["FINE"] = new Color(0.5f, 0.8f, 0.6f),
-            ["GREAT"] = new Color(0.5f, 0.9f, 0.6f),
-            ["AMAZING"] = new Color(0.3f, 0.9f, 0.5f),
-            ["BORED"] = new Color(0.6f, 0.6f, 0.8f),
-            ["SAD"] = new Color(0.4f, 0.4f, 0.7f),
-            ["DIRTY"] = new Color(0.6f, 0.5f, 0.3f),
-            ["HUNGRY"] = new Color(0.6f, 0.4f, 0.2f),
-            ["STARVING"] = new Color(0.9f, 0.3f, 0f),
-            ["TIRED"] = new Color(0.7f, 0.7f, 0.5f),
-            ["EXHAUSTED"] = new Color(0.3f, 0.3f, 0.3f),
-            ["CRITICAL"] = Color.darkRed
+            ["OKAY"] = new Color(0.7f, 0.8f, 0.7f, 0.75f),        // greenish gray
+            ["HAPPY"] = new Color(0.5f, 0.85f, 0.6f, 0.75f),      // light green
+            ["CHEERFUL"] = new Color(0.4f, 0.9f, 0.5f, 0.75f),    // bright green
+            ["JOYFUL"] = new Color(1f, 0.85f, 0.2f, 0.75f),       // golden yellow
+            ["BORED"] = new Color(0.6f, 0.6f, 0.75f, 0.75f),      // dull blue gray
+            ["LONELY"] = new Color(0.45f, 0.45f, 0.65f, 0.75f),   // sad blue
+            ["STINKY"] = new Color(0.65f, 0.55f, 0.3f, 0.75f),    // muddy brown
+            ["FILTHY"] = new Color(0.5f, 0.4f, 0.2f, 0.75f),      // dark brown
+            ["HUNGRY"] = new Color(0.8f, 0.5f, 0.3f, 0.75f),      // orange
+            ["STARVING"] = new Color(0.9f, 0.3f, 0.1f, 0.75f),    // red orange
+            ["SLEEPY"] = new Color(0.6f, 0.5f, 0.7f, 0.75f),      // soft purple
+            ["EXHAUSTED"] = new Color(0.4f, 0.35f, 0.4f, 0.75f),  // dark gray purple
+            ["MISERABLE"] = new Color(0.5f, 0.3f, 0.5f, 0.75f),   // dark purple
+            ["UNWELL"] = new Color(0.6f, 0.45f, 0.3f, 0.75f),     // bleghh brown
+            ["CRITICAL"] = new Color(0.8f, 0.1f, 0.1f, 0.75f)     // danger red
         };
 
         Color targetColor = colorDict[displaytext];
         currentDisplayColor = Color.Lerp(currentDisplayColor, targetColor, Time.deltaTime * lerpSpeed);
         DisplayImage.color = currentDisplayColor;
         DisplayText.text = displaytext;
+        NameText.text = PetHelper.petStats.petName;
     }
     public void ToggleStatusPanel()
     {

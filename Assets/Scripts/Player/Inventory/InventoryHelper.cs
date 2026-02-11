@@ -34,7 +34,7 @@ public class InventoryHelper : MonoBehaviour
         inventory = newInventory;
         inventory.Initialize();
         UIInventory.Instance.SetInventory(inventory);
-        UIResourcesUpdater.Instance.UpdateText();
+        UIOverlay.Instance.UpdateResourcesAndBal();
     }
     public void Rebuild()
     {

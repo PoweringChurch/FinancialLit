@@ -26,7 +26,6 @@ public class PlayerData
 
     public Vector3 PetPosition;
     public Quaternion PetRotation;
-    public string DisplayStatus;
 
     public List<PetFlag> PetFlags; //enum
     // furniture
@@ -34,7 +33,7 @@ public class PlayerData
     public Inventory PlayerInventory;
 
     // resources
-    public float Money;
+    public float Balance;
     public int Shampoo;
     public int Food;
 
@@ -49,16 +48,21 @@ public class PlayerData
     public bool VisitedSmartyPets;
     public bool VisitedFurnitureStore;
 
+    // igt
+    public int Minute;
+    public int Day;
+    public int Week;
+
     public PlayerData()
     {
         // Default values for new game
         PetName = "Pet";
-        Hygiene = Entertainment = Hunger = Energy = 1f;
-        DisplayStatus = "GREAT";
+        Hygiene = Entertainment = Hunger = Energy = 100f;
         PetFlags = new List<PetFlag>();
         PlacedFurniture = new List<FurnitureObjectData>();
         PlayerInventory = new Inventory();
-        Money = 200f;
+        Minute = 480;
+        Balance = 200f;
         Shampoo = 8;
         Food = 8;
         TotalPlaytimeSeconds = 0f;

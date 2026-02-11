@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
 public class UISave : MonoBehaviour
 {
     public static UISave Instance;
@@ -48,17 +47,14 @@ public class UISave : MonoBehaviour
                 PlayerData saveData = JsonUtility.FromJson<PlayerData>(json);
 
                 // create slot UI
-                GameObject slot = UnityEngine.Object.Instantiate(slotTemplate, slotGrid);
-
-                var texts = slot.GetComponentsInChildren<TextMeshProUGUI>();
-                texts[0].text = saveData.PetName; // pet name
-                texts[1].text = FormatPlaytime(saveData.TotalPlaytimeSeconds); // playtime
-                texts[2].text = FormatTimestamp(saveData.LastSaveTimestamp); // Last saved
-                texts[3].text = saveData.DisplayStatus; // Status
-                texts[4].text = $"${saveData.Money:N2}"; //money
+                GameObject slotobj = UnityEngine.Object.Instantiate(slotTemplate, slotGrid);
+                var saveslotUi = slotobj.GetComponent<SaveSlotUI>();
+                saveslotUi.nametxt.text = saveData.PetName;
+                saveslotUi.playtimetxt.text = FormatPlaytime(saveData.TotalPlaytimeSeconds);
+                saveslotUi.lastsavedtxt.text = FormatTimestamp(saveData.LastSaveTimestamp);
 
                 // add button to load this save
-                Button loadButton = slot.GetComponentInChildren<Button>();
+                Button loadButton = slotobj.GetComponentInChildren<Button>();
                 string capturedFileName = fileName; // capture in local variable
                 loadButton.onClick.AddListener(() => OnLoadClick(fileName));
             }
@@ -78,7 +74,7 @@ public class UISave : MonoBehaviour
         savesScreen.SetActive(false);
 
         CameraHandler.Instance.ToggleGamecam(true);
-        UIResourcesUpdater.Instance.UpdateText();
+        UIOverlay.Instance.UpdateResourcesAndBal();
 
         PetHelper.petStateMachine.SetState(PetState.Idle);
 
@@ -117,7 +113,7 @@ public class UISave : MonoBehaviour
         PlayerData newData = new()
         {
             PetName = petNameInput.text,
-            Breed = selectedBreed
+            Breed = selectedBreed,
         };
         if (debugToggle.isOn)
         {
@@ -126,7 +122,7 @@ public class UISave : MonoBehaviour
             {
                 newData.PlayerInventory.AddItem(data, 1000);
             }
-            newData.Money = 1000000;
+            newData.Balance = 1000000;
             newData.Shampoo = 10000;
             newData.Food = 1000;
 
@@ -159,10 +155,8 @@ public class UISave : MonoBehaviour
         PetHelper.petFlagManager.ClearFlags();
         PetHelper.petStateMachine.SetState(PetState.Idle);
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
-
-        PetHelper.petMover.petTransform.gameObject.SetActive(true);
         //upd ui
-        UIResourcesUpdater.Instance.UpdateText();
+        UIOverlay.Instance.UpdateResourcesAndBal();
         UIInventory.Instance.UpdateInventoryUI();
     }
     public void DeleteCurrentSave()

@@ -22,24 +22,24 @@ public class AppointingFunctionality : BaseFunctionality
         }
         // calculate fee
         var status = PetHelper.petStats.Status;
-        float avgHealth = (status["hunger"] + status["energy"] + status["hygiene"] + status["entertainment"]) / 4f;
+        float avgHealth = (status["hunger"] + status["energy"] + status["hygiene"] + status["entertainment"]) / 400f;
         fee = baseline * (1.5f - avgHealth * 0.5f); 
         // show popup
         string header = "Pet treatment";
         string body = $"Scheduling an appointment costs ${fee:N2}. You can reduce treatment costs by keeping your pet healthy. Do you want to proceed with the treatment?";
-        UIPopups.Instance.PopupYN(header,body,OnYes,() => {},"Yes","No");
+        UIPopups.Instance.PopupYN(header,body,OnScheduleYes,() => {},"Yes","No");
     }
     // occurs when the pop up informing user of fee is accepted
-    protected void OnYes()
+    protected void OnScheduleYes()
     {
         // check if player can afford fee
-        if (!PlayerResources.Instance.CanAfford(fee))
+        if (!FinancialSpending.Instance.CanAfford(fee))
         {
             UIPopups.Instance.PopupInfo("Cannot afford","You cannot afford an appointment.");
             return;
         }
         // spend money
-        PlayerResources.Instance.Spend(fee, "Healthcare");
+        FinancialSpending.Instance.Spend(fee, "Healthcare");
         PetHelper.petStats.CurePet();
         // inform player of cure
         Message("Pet cured!");   

@@ -41,10 +41,10 @@ public class TutorialManager : MonoBehaviour
         if (FurniturePlacer.Instance != null)
             FurniturePlacer.Instance.OnItemPlaced -= ShowPlacementAcknowledgement;
         
-        if (OrderHandler.Instance != null)
+        if (WorkHandler.Instance != null)
         {
-            OrderHandler.Instance.OnWorkStarted -= OnWorkStartedHandler;
-            OrderHandler.Instance.OnWorkEnded -= ShowWorkAcknowledgement;
+            WorkHandler.Instance.OnWorkStarted -= OnWorkStartedHandler;
+            WorkHandler.Instance.OnWorkEnded -= ShowWorkAcknowledgement;
         }
         
         if (currentTaskUI != null)
@@ -172,10 +172,10 @@ public class TutorialManager : MonoBehaviour
         string body = "Close the placement menu, and select the placed monitor to begin working";
         currentTaskUI = Popups.PopupTask(header, body);
         
-        if (OrderHandler.Instance != null)
+        if (WorkHandler.Instance != null)
         {
-            OrderHandler.Instance.OnWorkStarted += OnWorkStartedHandler;
-            OrderHandler.Instance.OnWorkEnded += ShowWorkAcknowledgement;
+            WorkHandler.Instance.OnWorkStarted += OnWorkStartedHandler;
+            WorkHandler.Instance.OnWorkEnded += ShowWorkAcknowledgement;
         }
     }
     
@@ -187,10 +187,10 @@ public class TutorialManager : MonoBehaviour
     
     void ShowWorkAcknowledgement()
     {
-        if (OrderHandler.Instance != null)
+        if (WorkHandler.Instance != null)
         {
-            OrderHandler.Instance.OnWorkStarted -= OnWorkStartedHandler;
-            OrderHandler.Instance.OnWorkEnded -= ShowWorkAcknowledgement;
+            WorkHandler.Instance.OnWorkStarted -= OnWorkStartedHandler;
+            WorkHandler.Instance.OnWorkEnded -= ShowWorkAcknowledgement;
         }
         
         string header = "Money";

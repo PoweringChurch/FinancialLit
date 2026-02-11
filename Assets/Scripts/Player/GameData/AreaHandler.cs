@@ -41,10 +41,9 @@ public class AreaHandler : MonoBehaviour
 
     public void EnterArea(string areaName)
     {
-        AreaData area;
-        if (!areaDict.TryGetValue(areaName, out area))
+        if (!areaDict.TryGetValue(areaName, out AreaData area))
         {
-            Debug.LogError($"Area '{areaName}' not found!");
+            Debug.LogError($"Area '{areaName}' not found");
             return;
         }
         if (home && home.activeSelf)
@@ -64,14 +63,12 @@ public class AreaHandler : MonoBehaviour
         CameraHandler.Instance.RefreshRenderers();
         
         lighting.shadows = LightShadows.None;
-        PetHelper.petStats.gameObject.SetActive(false);
 
         if (area.isShop) {
             PlayerFlagManager.AddFlag(PlayerFlag.Shopping);
             }
         if (area.shadows) lighting.shadows = LightShadows.Soft;
         if (area.bringPet) {
-            PetHelper.petStats.gameObject.SetActive(true);
             PetHelper.petMover.agent.Warp(Vector3.up);
             }
 
@@ -126,7 +123,6 @@ public class AreaHandler : MonoBehaviour
         home.SetActive(true);
         PetHelper.petStats.atPark = false;
         
-        PetHelper.petStats.gameObject.SetActive(true);
         PetHelper.petMover.agent.Warp(Vector3.up);
         PlayerFlagManager.AddFlag(PlayerFlag.Home);
         PlayerFlagManager.RemoveFlag(PlayerFlag.Shopping);
