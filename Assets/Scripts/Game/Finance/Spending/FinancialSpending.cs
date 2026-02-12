@@ -40,6 +40,8 @@ public class FinancialSpending : MonoBehaviour
     }
     public void Earn(float amount)
     {
+        balance += amount;
+        UIOverlay.Instance.UpdateResourcesAndBal();
     }
     // checks if the player can afford this amount
     public bool CanAfford(float amount)

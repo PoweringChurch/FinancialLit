@@ -484,13 +484,13 @@ GameObject:
   - component: {fileID: 3355510666671699779}
   - component: {fileID: 991847890067081973}
   - component: {fileID: 91441192951109635}
-  - component: {fileID: 570333544624622568}
   - component: {fileID: 1006558608588530379}
   - component: {fileID: 6980948609535283321}
   - component: {fileID: 6896053715873793238}
   - component: {fileID: 4386064834161555712}
   - component: {fileID: 3484407513969632709}
   - component: {fileID: 6217280439889641837}
+  - component: {fileID: -5176870944653452781}
   m_Layer: 9
   m_Name: Corgi
   m_TagString: Untagged
@@ -563,19 +563,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetFunctionality
   price: 0
---- !u!114 &570333544624622568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897730280674974148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f745ed7bb6fd9644a28d4b56972407e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetAnimation
-  petAnimator: {fileID: 1348785088413962861}
 --- !u!195 &1006558608588530379
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -671,6 +658,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b7d4df96e764a7696af22843fdad6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTime
+--- !u!114 &-5176870944653452781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897730280674974148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f745ed7bb6fd9644a28d4b56972407e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PetAnimation
+  petAnimator: {fileID: 1348785088413962861}
 --- !u!1 &912081616381369656
 GameObject:
   m_ObjectHideFlags: 0

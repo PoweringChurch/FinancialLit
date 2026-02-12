@@ -25,6 +25,9 @@ public class UIWorkManager : MonoBehaviour
     public GameObject multiChoiceAnsObj;
     public TMP_InputField inputTxt;
     public TextMeshProUGUI unitsTxt;
+
+    public TextMeshProUGUI hintTxt;
+
     [SerializeField] private GameObject[] choiceButtons;
     // feedback
     [Header("Feedback")]
@@ -46,7 +49,7 @@ public class UIWorkManager : MonoBehaviour
         if (isMultiChoice)
             feedbackTxt.text = scenario.choices[scenario.correctChoiceIndex];
         else
-            feedbackTxt.text = $"{scenario.correctAnswerFloat:F0}";
+            feedbackTxt.text = $"{scenario.correctAnswerFloat:F2}";
     }
     // displays the provided scenario
     public void DisplayScenario(FinancialScenario scenario)
@@ -54,7 +57,9 @@ public class UIWorkManager : MonoBehaviour
         descriptionText.text = scenario.description;
         questionText.text = scenario.question;
         feedbackObj.SetActive(false);
-        
+        // set the hint text
+        unitsTxt.text = scenario.units;
+        hintTxt.text = scenario.hintText;
         // determine if multichoice based on whether choices exist
         isMultiChoice = scenario.choices != null && scenario.choices.Length > 0;
         

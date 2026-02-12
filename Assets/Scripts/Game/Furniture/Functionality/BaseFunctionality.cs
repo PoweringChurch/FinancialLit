@@ -101,8 +101,8 @@ public class BaseFunctionality : MonoBehaviour
     public Dictionary<string, Action> GetAvailableActions()
     {
         // get player states
-        bool home = PlayerFlagManager.HasState(PlayerFlag.Home);
-        bool shopping = PlayerFlagManager.HasState(PlayerFlag.Shopping);
+        bool home = PlayerFlagManager.HasFlag(PlayerFlag.Home);
+        bool shopping = PlayerFlagManager.HasFlag(PlayerFlag.Shopping);
 
         // order matters, has to be consistent
         var availableActions = new Dictionary<string, Action>();

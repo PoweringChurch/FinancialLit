@@ -18,7 +18,7 @@ public  class PetFlagManager : MonoBehaviour
 
     public  List<PetFlag> CurrentFlags => currentFlags;
     
-    public  event Action<PetFlag> OnFlagChanged;
+    public event Action<PetFlag> OnFlagChanged;
     
     // adds a flag
     public  void AddFlag(PetFlag state)

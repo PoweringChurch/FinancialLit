@@ -21,6 +21,10 @@ public class UIOverlay : MonoBehaviour
         Instance = this;
         UpdateResourcesAndBal();
     }
+    public void RemovePlayerPlacementFlag()
+    {
+        PlayerFlagManager.RemoveFlag(PlayerFlag.Placement);
+    }
     public void UpdateResourcesAndBal()
     {
         shampooText.text = PlayerResources.Instance.Shampoo.ToString();

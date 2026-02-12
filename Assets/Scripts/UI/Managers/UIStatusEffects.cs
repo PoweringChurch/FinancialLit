@@ -43,9 +43,11 @@ public class UIStatusEffects : MonoBehaviour
             pointerExit.callback.AddListener((data) => HideDescription());
             eventTrigger.triggers.Add(pointerExit);
         }
-        
-        PetHelper.petFlagManager.OnFlagChanged += UpdateFlags;
-        UpdateFlags(0);
+        PetHelper.OnPetLoad += OnPetLoad;
+    }
+    void OnPetLoad(GameObject pet)
+    {
+        pet.GetComponent<PetFlagManager>().OnFlagChanged += UpdateFlags;
     }
     void UpdateFlags(PetFlag _)
     {

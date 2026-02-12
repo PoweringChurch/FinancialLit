@@ -72,7 +72,7 @@ public class Interaction : MonoBehaviour
     public void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
-        bool hasPlacement = PlayerFlagManager.HasState(PlayerFlag.Placement);
+        bool hasPlacement = PlayerFlagManager.HasFlag(PlayerFlag.Placement);
 
         if (isOverUi && IsPointerOverActionMenu()) return; //because we are over an action
         CloseMenu();
