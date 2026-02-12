@@ -6,7 +6,7 @@ public class PetFoodBuyFunctionality : BaseFunctionality
         if (!FinancialSpending.Instance.CanAfford(price)) return;
         SFXPlayer.Instance.Play(purchaseSfx);
         
-        FinancialSpending.Instance.Spend(price, "Food");
+        FinancialSpending.Instance.Spend(price);
         PlayerResources.Instance.AddFood(1);
     }
 }

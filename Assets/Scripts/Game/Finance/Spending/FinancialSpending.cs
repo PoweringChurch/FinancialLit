@@ -8,31 +8,17 @@ public class FinancialSpending : MonoBehaviour
     public static FinancialSpending Instance;
 
     private float balance = 0; // players balance
-
     public float Balance => balance;
 
     void Awake() { Instance = this; }
-    private Dictionary<string, float> spendings = new()
-    {
-        ["Home"] = 0f,
-        ["Healthcare"] = 0f,
-        ["Hygiene"] = 0f,
-        ["Food"] = 0f,
-    };
 
     // spends the passed amount, also handles various other types of calcs
-    public void Spend(float amount, string purchaseType)
+    public void Spend(float amount)
     {
-        if (!spendings.ContainsKey(purchaseType))
-        {
-            Debug.LogWarning("No purchase type '"+purchaseType+"' exists");
-            return;
-        }
-        spendings[purchaseType] += amount;
         balance -= amount;
-
         UIOverlay.Instance.UpdateResourcesAndBal();
     }
+    // only for use in the load function in savehandler
     public void SetBalance(float to)
     {
         balance = to;

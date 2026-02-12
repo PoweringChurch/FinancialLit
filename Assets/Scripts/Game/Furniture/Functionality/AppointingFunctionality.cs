@@ -39,7 +39,7 @@ public class AppointingFunctionality : BaseFunctionality
             return;
         }
         // spend money
-        FinancialSpending.Instance.Spend(fee, "Healthcare");
+        FinancialSpending.Instance.Spend(fee);
         PetHelper.petStats.CurePet();
         // inform player of cure
         Message("Pet cured!");   

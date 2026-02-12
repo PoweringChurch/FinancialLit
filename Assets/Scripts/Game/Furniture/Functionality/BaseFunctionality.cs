@@ -72,7 +72,7 @@ public class BaseFunctionality : MonoBehaviour
         InventoryHelper.Instance.AddItem(item, 1);
         // spend money
         if (!FinancialSpending.Instance.CanAfford(price)) return;
-        FinancialSpending.Instance.Spend(price, "Furniture");
+        FinancialSpending.Instance.Spend(price);
     }
     // show message popup; different from an info popup
     protected void Message(string message)

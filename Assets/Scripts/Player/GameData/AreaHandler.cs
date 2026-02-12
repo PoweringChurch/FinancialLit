@@ -30,9 +30,7 @@ public class AreaHandler : MonoBehaviour
     {
         Instance = this;
         foreach (var area in areas)
-        {
             areaDict[area.areaName] = area;
-        }
     }
     private void Start()
     {
@@ -114,6 +112,7 @@ public class AreaHandler : MonoBehaviour
         }
 
         PetHelper.CurrentActivePet.transform.Find("PetModel").gameObject.SetActive(area.bringPet);
+        PetHelper.CurrentActivePet.transform.Find("StinkyParticles").gameObject.SetActive(area.bringPet);
         UIButtons.Instance.DisableButton("Build");
     }
     public void EnterHome()
@@ -137,6 +136,7 @@ public class AreaHandler : MonoBehaviour
         lighting.shadows = LightShadows.None;
         // reactivate pet
         PetHelper.CurrentActivePet.transform.Find("PetModel").gameObject.SetActive(true);
+        PetHelper.CurrentActivePet.transform.Find("StinkyParticles").gameObject.SetActive(true);
         // refresh the pet's renderers
         CameraHandler.Instance.RefreshRenderers();
         UIButtons.Instance.EnableButton("Build");
