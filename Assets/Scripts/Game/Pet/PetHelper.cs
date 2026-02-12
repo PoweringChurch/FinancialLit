@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class PetHelper
@@ -13,11 +14,12 @@ public static class PetHelper
         {
             currentActivePet = value;
             Debug.Log("Set current active pet");
+            OnPetLoad?.Invoke(value);
             // set the variables
             if (currentActivePet != null)
             {
                 petAnimation = currentActivePet.GetComponent<PetAnimation>();
-                petBehaviour = currentActivePet.GetComponent<PetBehaviour>();
+                petBehaviour = currentActivePet.GetComponentInChildren<PetBehaviour>();
                 petFunctionality = currentActivePet.GetComponent<PetFunctionality>();
                 petMover = currentActivePet.GetComponent<PetMover>();
                 petStateMachine = currentActivePet.GetComponent<PetStateMachine>();
@@ -39,12 +41,13 @@ public static class PetHelper
     }
     
     // for easy access
+    public static event Action<GameObject> OnPetLoad;
+
     public static PetAnimation petAnimation;
     public static PetBehaviour petBehaviour;
     public static PetFunctionality petFunctionality;
     public static PetMover petMover;
     public static PetStateMachine petStateMachine;
-
     public static PetFlagManager petFlagManager;
     public static PetStats petStats;
 }

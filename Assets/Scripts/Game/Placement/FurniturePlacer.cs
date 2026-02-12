@@ -105,6 +105,7 @@ public class FurniturePlacer : MonoBehaviour
                   return;
             _objectPrefab = furniture.prefab;
             minydisplay.gameObject.SetActive(true);
+            PlayerFlagManager.AddFlag(PlayerFlag.Placement);
             _PrepareObject();
       }
       // cancels the placement of the current object

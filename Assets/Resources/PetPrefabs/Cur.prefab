@@ -245,7 +245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370001452852846926}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8634,7 +8634,6 @@ GameObject:
   - component: {fileID: 5743229824267637352}
   - component: {fileID: 1683343298654115792}
   - component: {fileID: 6368952920146377753}
-  - component: {fileID: 4059098210739531292}
   - component: {fileID: 5704129343707446434}
   - component: {fileID: 781621072516043312}
   - component: {fileID: 7958738095607712289}
@@ -8662,10 +8661,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2890024020678944607}
   - {fileID: 2059590959170510629}
   - {fileID: 8181438628006083236}
   - {fileID: 5606951115527205238}
+  - {fileID: 2890024020678944607}
   - {fileID: 6010261808064303519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8714,27 +8713,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetFunctionality
   price: 0
---- !u!114 &4059098210739531292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5096089074900406767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00fa3b2ede9242741ab9f64a85f1ca1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetBehaviour
-  barks:
-  - {fileID: 8300000, guid: cb302f53310c0844c89422341f7b1da5, type: 3}
-  - {fileID: 8300000, guid: f1a39fc2f778cae4e8c9c8e1dd702de2, type: 3}
-  - {fileID: 8300000, guid: 8f29febe42a43df4c8d9dfe1af14e959, type: 3}
-  whimper:
-  - {fileID: 8300000, guid: 36751d4adf1e59447a24fa8a2847c264, type: 3}
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &5704129343707446434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10431,7 +10409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6705224251098959969}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15870,7 +15848,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7405222756910939440}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -36.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15933,7 +15911,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 3.7433e-41, y: 5.2e-44, z: 0, w: 1.04e-43}
+  m_BoundingSphereOverride: {x: 2.7105054e-20, y: 1.74498e-39, z: 2.609e-41, w: -1.07591455e-33}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -16868,6 +16846,7 @@ GameObject:
   - component: {fileID: 2890024020678944607}
   - component: {fileID: 5017727853766942908}
   - component: {fileID: 3231581164648131561}
+  - component: {fileID: 4442521445548583029}
   m_Layer: 9
   m_Name: PetModel
   m_TagString: Untagged
@@ -16932,6 +16911,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &4442521445548583029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8825634651551901869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00fa3b2ede9242741ab9f64a85f1ca1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PetBehaviour
+  barks:
+  - {fileID: 8300000, guid: cb302f53310c0844c89422341f7b1da5, type: 3}
+  - {fileID: 8300000, guid: f1a39fc2f778cae4e8c9c8e1dd702de2, type: 3}
+  - {fileID: 8300000, guid: 8f29febe42a43df4c8d9dfe1af14e959, type: 3}
+  whimper:
+  - {fileID: 8300000, guid: 36751d4adf1e59447a24fa8a2847c264, type: 3}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8843559927891615670
 GameObject:
   m_ObjectHideFlags: 0

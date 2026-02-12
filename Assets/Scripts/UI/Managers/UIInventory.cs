@@ -54,7 +54,7 @@ public class UIInventory : MonoBehaviour
             TextMeshProUGUI countText = newTemplate.transform.GetComponentInChildren<TextMeshProUGUI>();
             countText.text = $"{entry.count}";
             //set img
-            Transform inner = newTemplate.transform.GetChild(1);
+            Transform inner = newTemplate.transform.GetChild(0);
             var imgPreview = inner.GetChild(0).GetComponent<Image>();
 
             

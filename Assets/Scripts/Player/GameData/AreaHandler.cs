@@ -30,15 +30,13 @@ public class AreaHandler : MonoBehaviour
     {
         Instance = this;
         foreach (var area in areas)
-        {
             areaDict[area.areaName] = area;
-        }
     }
     private void Start()
     {
         if (home) home.SetActive(true);
     }
-
+    
     public void EnterArea(string areaName)
     {
         if (!areaDict.TryGetValue(areaName, out AreaData area))
@@ -47,9 +45,7 @@ public class AreaHandler : MonoBehaviour
             return;
         }
         if (home && home.activeSelf)
-        {
             home.SetActive(false);
-        }
         CleanupCurrentArea();
         PlayerFlagManager.RemoveFlag(PlayerFlag.Home);
 
@@ -114,6 +110,9 @@ public class AreaHandler : MonoBehaviour
             }
             SaveHandler.Instance.currentPlayerData.VisitedFurnitureStore = true;
         }
+
+        PetHelper.CurrentActivePet.transform.Find("PetModel").gameObject.SetActive(area.bringPet);
+        PetHelper.CurrentActivePet.transform.Find("StinkyParticles").gameObject.SetActive(area.bringPet);
         UIButtons.Instance.DisableButton("Build");
     }
     public void EnterHome()
@@ -122,11 +121,12 @@ public class AreaHandler : MonoBehaviour
 
         home.SetActive(true);
         PetHelper.petStats.atPark = false;
-        
+        // reset pet's position
         PetHelper.petMover.agent.Warp(Vector3.up);
         PlayerFlagManager.AddFlag(PlayerFlag.Home);
         PlayerFlagManager.RemoveFlag(PlayerFlag.Shopping);
 
+        // handle pets behaviour and animation
         PetHelper.petStateMachine.SetState(PetState.Idle);
         PetHelper.petAnimation.SetBoolParameter("IsPlaying", false);
         PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
@@ -134,7 +134,10 @@ public class AreaHandler : MonoBehaviour
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
 
         lighting.shadows = LightShadows.None;
-
+        // reactivate pet
+        PetHelper.CurrentActivePet.transform.Find("PetModel").gameObject.SetActive(true);
+        PetHelper.CurrentActivePet.transform.Find("StinkyParticles").gameObject.SetActive(true);
+        // refresh the pet's renderers
         CameraHandler.Instance.RefreshRenderers();
         UIButtons.Instance.EnableButton("Build");
     }

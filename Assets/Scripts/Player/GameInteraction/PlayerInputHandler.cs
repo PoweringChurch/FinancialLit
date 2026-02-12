@@ -53,7 +53,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         //setting follow
         var (goalPosition,overInteractableLayer) = UICursor.Instance.CursorToVector3(1);
-        if (PlayerFlagManager.HasState(PlayerFlag.SetFollow) && interact.WasPressedThisFrame() && overInteractableLayer)
+        if (PlayerFlagManager.HasFlag(PlayerFlag.SetFollow) && interact.WasPressedThisFrame() && overInteractableLayer)
         {
             print("clicked");
             bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();

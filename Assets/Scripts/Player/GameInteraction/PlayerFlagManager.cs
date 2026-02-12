@@ -29,14 +29,14 @@ public static class PlayerFlagManager
         RemoveFlag((PlayerFlag)stateInt);
     }
     
-    public static bool HasState(PlayerFlag state)
+    public static bool HasFlag(PlayerFlag state)
     {
         return currentFlags.Contains(state);
     }
 
     public static bool HasFlag(int stateInt)
     {
-        return HasState((PlayerFlag)stateInt);
+        return HasFlag((PlayerFlag)stateInt);
     }
     public static void ClearFlag()
     {

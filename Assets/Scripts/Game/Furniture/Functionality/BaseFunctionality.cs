@@ -72,7 +72,7 @@ public class BaseFunctionality : MonoBehaviour
         InventoryHelper.Instance.AddItem(item, 1);
         // spend money
         if (!FinancialSpending.Instance.CanAfford(price)) return;
-        FinancialSpending.Instance.Spend(price, "Furniture");
+        FinancialSpending.Instance.Spend(price);
     }
     // show message popup; different from an info popup
     protected void Message(string message)
@@ -101,8 +101,8 @@ public class BaseFunctionality : MonoBehaviour
     public Dictionary<string, Action> GetAvailableActions()
     {
         // get player states
-        bool home = PlayerFlagManager.HasState(PlayerFlag.Home);
-        bool shopping = PlayerFlagManager.HasState(PlayerFlag.Shopping);
+        bool home = PlayerFlagManager.HasFlag(PlayerFlag.Home);
+        bool shopping = PlayerFlagManager.HasFlag(PlayerFlag.Shopping);
 
         // order matters, has to be consistent
         var availableActions = new Dictionary<string, Action>();
