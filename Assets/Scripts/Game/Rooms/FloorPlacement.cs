@@ -1,0 +1,1 @@
+// floors can only be placed in a set of enclosed walls
