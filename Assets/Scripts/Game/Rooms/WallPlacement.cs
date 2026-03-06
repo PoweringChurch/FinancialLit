@@ -27,7 +27,7 @@ public class WallPlacement : MonoBehaviour
         onPlacement = false;
         // if player is hovering over placement
         _ray = gameCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if ( && Physics.Raycast(_ray, out _hit, 1000f, placementLayerMask))
+        if (Physics.Raycast(_ray, out _hit, 1000f, placementLayerMask))
         {
             // set active on first frame
             if (freemove)
