@@ -26,7 +26,6 @@ public class PlayerInputHandler : MonoBehaviour
     void Update()
     {
         HandleFurniturePlacer();
-        HandleWallPlacer();
         HandleInteraction();
         HandleMisc();
     }
@@ -66,15 +65,10 @@ public class PlayerInputHandler : MonoBehaviour
                 return;
             }
             PlayerFlagManager.RemoveFlag(PlayerFlag.SetFollow);
-            PetHelper.petMover.SetGoalPosition(goalPosition);
+            PetHelper.petMover
+            .SetGoalPosition
+            (goalPosition);
             UICursor.Instance.SetCursor(UICursor.Instance.defaultCursor);
-        }
-    }
-    void HandleWallPlacer()
-    {
-        if (interact.WasPressedThisFrame())
-        {
-            WallPlacement.Instance.TryPlaceWall();
         }
     }
     void HandleInteraction()
