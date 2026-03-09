@@ -26,6 +26,7 @@ public class PlayerInputHandler : MonoBehaviour
     void Update()
     {
         HandleFurniturePlacer();
+        HandleWallPlacer();
         HandleInteraction();
         HandleMisc();
     }
@@ -48,6 +49,13 @@ public class PlayerInputHandler : MonoBehaviour
         
         if (raiseFurniture.IsPressed()) FurniturePlacer.Instance.AddYOffset(Time.deltaTime);
         else if (lowerFurniture.IsPressed()) FurniturePlacer.Instance.AddYOffset(-Time.deltaTime);
+    }
+    void HandleWallPlacer()
+    {
+        if (interact.WasPressedThisFrame())
+        {
+            WallPlacement.Instance.TryPlaceWall();
+        }
     }
     void HandleMisc()
     {

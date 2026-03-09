@@ -4,11 +4,8 @@
 // a single wall is "double faced" in that one side of the wall can have a different material than the other side
 
 using UnityEngine;
-using System.Collections.Generic;
-using System;
-using UnityEditor;
-using System.Linq;
-
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 public class Wall
 {
     public Vector3 A;
@@ -18,10 +15,27 @@ public class Wall
 
 public class WallPlacement : MonoBehaviour
 {
+    public static WallPlacement Instance;
 
     public LayerMask placementLayerMask;
     public Camera gameCamera;
+
+    public GameObject wallPrefab;
+    public Transform wallHolder;
+
     [HideInInspector] public bool onPlacement = false;
+
+    private Ray _ray;
+    private RaycastHit _hit;
+
+    private bool freemove = false;
+    private const float cellSize = 0.25f;
+    private Vector2 gridOffset = new();
+
+    void Awake()
+    {
+        Instance = this;
+    }
     void Update()
     {
         onPlacement = false;
@@ -31,9 +45,9 @@ public class WallPlacement : MonoBehaviour
         {
             // set active on first frame
             if (freemove)
-                _currentPosition = new Vector3(_hit.point.x,currentyoffset,_hit.point.z);
+                _currentPosition = new Vector3(_hit.point.x,0,_hit.point.z);
             else
-                _currentPosition = _ClampToNearest(_hit.point, cellSize);
+                _currentPosition = ClampToNearest(_hit.point, cellSize);
             onPlacement = true;
         }
     }
@@ -46,19 +60,31 @@ public class WallPlacement : MonoBehaviour
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
         // check if the layer is not over placement
         if (!onPlacement) return;
-
         // set position a's value if it does not have value
-        if (!_positionA.HasValue)
+        if (_positionA.HasValue)
         {
-            _positionA = _currentPosition;
+            // create the new wall with the provided positions
+            GameObject newWall = Instantiate(wallPrefab, wallHolder);
+            newWall.transform.position = (_currentPosition+(Vector3)_positionA)/2;
+            newWall.transform.localScale = new Vector3(Vector3.Distance(_currentPosition,(Vector3)_positionA)/2, 1,1);
+            newWall.transform.LookAt(_currentPosition);
+            newWall.transform.Rotate(0,-90,0);
+            _positionA = null;
         }
         else
         {
-            // create the new wall with the provided positions
-            Wall newWall = new();
-            newWall.A = _positionA;
-            newWall.B = _currentPosition;
-            return newWall;
+            _positionA = _currentPosition;
         }
+    }
+    private Vector3 ClampToNearest(Vector3 pos, float threshold)
+    {
+        float t = 1f / threshold;
+        Vector3 v = ((Vector3)Vector3Int.FloorToInt(pos * t)) / t;
+
+        float s = threshold * 0.5f;
+        v.x += s + gridOffset.x; // recenter in middle of cells
+        v.z += s + gridOffset.y;
+
+        return v;
     }
 }
