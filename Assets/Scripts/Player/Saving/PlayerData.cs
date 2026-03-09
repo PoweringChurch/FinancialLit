@@ -16,7 +16,7 @@ public class FurnitureObjectData
 [System.Serializable]
 public class PlayerData
 {
-    // Pet stats
+    // pet stats
     public PetBreed Breed;
     public string PetName;
     public float Hygiene;
@@ -27,7 +27,7 @@ public class PlayerData
     public Vector3 PetPosition;
     public Quaternion PetRotation;
 
-    public List<PetFlag> PetFlags; //enum
+    public List<PetFlag> PetFlags; // enum
     // furniture
     public List<FurnitureObjectData> PlacedFurniture;
     public Inventory PlayerInventory;
@@ -37,7 +37,7 @@ public class PlayerData
     public int Shampoo;
     public int Food;
 
-    //player stats
+    // player stats
     public float TotalPlaytimeSeconds;
     public long LastSaveTimestamp;
 
@@ -55,7 +55,7 @@ public class PlayerData
 
     public PlayerData()
     {
-        // Default values for new game
+        // default values for new game
         PetName = "Pet";
         Hygiene = Entertainment = Hunger = Energy = 100f;
         PetFlags = new List<PetFlag>();

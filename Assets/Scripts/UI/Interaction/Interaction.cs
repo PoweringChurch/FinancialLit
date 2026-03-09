@@ -10,13 +10,13 @@ using Unity.VisualScripting;
 public class Interaction : MonoBehaviour
 {
     public static Interaction Instance;
-    [Header("References")]
+
     [SerializeField] private Camera gameCamera;
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private GameObject hoveringNamePrefab;
     [SerializeField] private Transform menuContainer;
-    [Header("Settings")]
+
     [SerializeField] private LayerMask interactableLayer; //furniture and pet
     [SerializeField] private float menuRadius = 120f;
     [SerializeField] private float raycastDistance = 1000f;
@@ -63,21 +63,20 @@ public class Interaction : MonoBehaviour
             currentHoveringName = null;
         }
     }
-    //not yet implemented
     private int currentHitIndex = 0;
-    private RaycastHit[] hitBuffer = new RaycastHit[10]; // Adjust size as needed
+    private RaycastHit[] hitBuffer = new RaycastHit[10];
     private Vector2 lastClickPos;
-    private float clickPositionThreshold = 5f; // Pixels
+    private float clickPositionThreshold = 5f; // pixels
 
     public void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
         bool hasPlacement = PlayerFlagManager.HasFlag(PlayerFlag.Placement);
 
-        if (isOverUi && IsPointerOverActionMenu()) return; //because we are over an action
+        if (isOverUi && IsPointerOverActionMenu()) return; // because we are over an action
         CloseMenu();
-        if (hasPlacement) return; //because we are in placement, so we dont want to bring up action menu while placing something
-        if (isOverUi) return; //because we are not in an action menu
+        if (hasPlacement) return; // because we are in placement, so we dont want to bring up action menu while placing something
+        if (isOverUi) return; // because we are not in an action menu
         
         Vector2 mousePos = Mouse.current.position.ReadValue();
         Ray ray = gameCamera.ScreenPointToRay(mousePos);
@@ -85,7 +84,7 @@ public class Interaction : MonoBehaviour
         bool isSamePosition = Vector2.Distance(mousePos, lastClickPos) < clickPositionThreshold;
         if (!isSamePosition)
         {
-            currentHitIndex = 0; // Reset index for new position
+            currentHitIndex = 0; // reset index for new position
         }
         lastClickPos = mousePos;
         
@@ -104,14 +103,14 @@ public class Interaction : MonoBehaviour
             
             if (validHits.Count > 0)
             {
-                //sort by distance (closest first)
+                // sort by distance (closest first)
                 validHits.Sort((a, b) => a.distance.CompareTo(b.distance));
-                // Cycle through valid hits
+                // cycle through valid hits
                 currentHitIndex = currentHitIndex % validHits.Count;
                 RaycastHit selectedHit = validHits[currentHitIndex];
-                // Increment for next click
+                // increment for next click
                 currentHitIndex++;
-                // Get functionality component
+                // get functionality component
                 selectedHit.transform.TryGetComponent(out BaseFunctionality functionality);
                 currentOutline = selectedHit.transform.GetComponentInChildren<Outline>();
                 if (currentOutline != null)
@@ -147,18 +146,18 @@ public class Interaction : MonoBehaviour
     }
     void ShowMenu(Vector2 screenPosition, BaseFunctionality functionality)
     {
-        // Get available actions
+        // get available actions
         var availableActions = functionality.GetAvailableActions();
         if (availableActions.Count == 0)
         {
             Debug.LogWarning("No actions available");
             return;
         }
-        // Create menu container
+        // create menu container
         currentMenu = new GameObject("RadialMenu");
         currentMenu.transform.SetParent(menuContainer, false);
         
-        // Convert screen position to canvas space
+        // convert screen position to canvas space
         RectTransform canvasRect = canvas.GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasRect,
@@ -182,25 +181,25 @@ public class Interaction : MonoBehaviour
     
     void CreateButton(string actionName, Vector2 localPosition, Action action, Transform parent, float price)
     {
-        // Instantiate button
+        // instantiate button
         GameObject buttonObj = Instantiate(buttonPrefab, parent);
         RectTransform buttonRect = buttonObj.GetComponent<RectTransform>();
         
-        // Position button
+        // position button
         buttonRect.anchoredPosition = localPosition;
         
-        // Set button text if it has one
+        // set button text if it has one
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
         buttonText.text = actionName;
         if (actionName == "Buy")
         {
             buttonText.text = $"Buy (${price:f2})";
         }
-        // Add click listener
+        // add click listener
         Button button = buttonObj.GetComponent<Button>();
         if (button != null)
         {
-            // Capture action name to avoid closure iss
+            // capture action name to avoid closure iss
             string capturedAction = actionName;
             button.onClick.AddListener(() =>
             {
@@ -213,9 +212,9 @@ public class Interaction : MonoBehaviour
     Vector2[] CalculateRadialPositions(int count, float radius)
     {
         Vector2[] positions = new Vector2[count];
-        // Calculate angle between each button
+        // calculate angle between each button
         float angleStep = 360f / count;
-        // Offset to start at top (remove the -90f to start at right)
+        // offset to start at top
         float startAngle = 90f; //-90f;
         
         for (int i = 0; i < count; i++)

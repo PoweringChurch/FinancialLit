@@ -59,7 +59,7 @@ public class FurniturePlacer : MonoBehaviour
                   }
                   else
                   {
-                        _toBuild.transform.position = _ClampToNearest(_hit.point, cellSize);
+                        _toBuild.transform.position = ClampToNearest(_hit.point, cellSize);
                         minydisplay.position = new Vector3(_toBuild.transform.position.x, minyoffset+0.02f, _toBuild.transform.position.z);
                   }
                   onPlacement = true;
@@ -84,7 +84,7 @@ public class FurniturePlacer : MonoBehaviour
             if (freemove)
                   _toBuild.transform.position = new Vector3(_hit.point.x,currentyoffset,_hit.point.z);
             else // else make it snap
-                  _toBuild.transform.position = _ClampToNearest(_hit.point, cellSize);
+                  _toBuild.transform.position = ClampToNearest(_hit.point, cellSize);
             
             // trigger the event
             OnItemPlaced?.Invoke(itemName);
@@ -134,7 +134,7 @@ public class FurniturePlacer : MonoBehaviour
       public void OverrideRotation(Quaternion quaternion) { previousRotation = quaternion; }
       public void AddYOffset(float delta) { currentyoffset = Math.Clamp(currentyoffset+delta,minyoffset,maxyoffset); }
       public void SetFreemove(bool to) { freemove = to; }
-      private Vector3 _ClampToNearest(Vector3 pos, float threshold)
+      private Vector3 ClampToNearest(Vector3 pos, float threshold)
       {
             float t = 1f / threshold;
             Vector3 v = ((Vector3)Vector3Int.FloorToInt(pos * t)) / t;
