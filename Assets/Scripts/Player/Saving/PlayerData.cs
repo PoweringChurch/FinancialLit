@@ -27,11 +27,12 @@ public class PlayerData
     public Vector3 PetPosition;
     public Quaternion PetRotation;
 
-    public List<PetFlag> PetFlags; //enum
+    public List<PetFlag> PetFlags; // enum
     // furniture
     public List<FurnitureObjectData> PlacedFurniture;
     public Inventory PlayerInventory;
-
+    // rooms
+    public List<Wall> PlacedWalls;
     // resources
     public float Balance;
     public int Shampoo;
@@ -74,5 +75,7 @@ public class PlayerData
         VisitedVet = false;
         VisitedSmartyPets = false;
         VisitedFurnitureStore = false;
+
+        PlacedWalls = new();
     }
 }

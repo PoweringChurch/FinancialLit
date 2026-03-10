@@ -31,31 +31,30 @@ public class PlayerInputHandler : MonoBehaviour
         HandleMisc();
     }
     void HandleFurniturePlacer()
-    {
+    {  
         if (cancel.WasPressedThisFrame())
-        {
             FurniturePlacer.Instance.CancelPlacement();
-        }
         if (rotate.WasPressedThisFrame())
-        {
             FurniturePlacer.Instance.RotateFurniture();
-        }
         if (interact.WasPressedThisFrame() && FurniturePlacer.Instance.onPlacement)
-        {
             FurniturePlacer.Instance.Place();
-        }
-        if (setFreemove.WasPressedThisFrame()) FurniturePlacer.Instance.SetFreemove(true);
-        else if (setFreemove.WasReleasedThisFrame()) FurniturePlacer.Instance.SetFreemove(false);
-        
-        if (raiseFurniture.IsPressed()) FurniturePlacer.Instance.AddYOffset(Time.deltaTime);
-        else if (lowerFurniture.IsPressed()) FurniturePlacer.Instance.AddYOffset(-Time.deltaTime);
+        if (setFreemove.WasPressedThisFrame()) 
+            FurniturePlacer.Instance.SetFreemove(true);
+        else if (setFreemove.WasReleasedThisFrame()) 
+            FurniturePlacer.Instance.SetFreemove(false);
+        if (raiseFurniture.IsPressed()) 
+            FurniturePlacer.Instance.AddYOffset(Time.deltaTime);
+        else if (lowerFurniture.IsPressed()) 
+            FurniturePlacer.Instance.AddYOffset(-Time.deltaTime);
     }
     void HandleWallPlacer()
     {
+        if (!PlayerFlagManager.HasFlag(PlayerFlag.WallPlacement))
+            return;
+        if (cancel.WasPressedThisFrame())
+            WallPlacement.Instance.CancelPlacement();
         if (interact.WasPressedThisFrame())
-        {
             WallPlacement.Instance.TryPlaceWall();
-        }
     }
     void HandleMisc()
     {
@@ -82,8 +81,6 @@ public class PlayerInputHandler : MonoBehaviour
     void HandleInteraction()
     {
         if (interact.WasPressedThisFrame())
-        {
             Interaction.Instance.HandleClick();
-        }
     }
 }

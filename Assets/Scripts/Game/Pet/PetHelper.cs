@@ -12,9 +12,9 @@ public static class PetHelper
         }
         set
         {
+            OnPetLoad?.Invoke(value);
             currentActivePet = value;
             Debug.Log("Set current active pet");
-            OnPetLoad?.Invoke(value);
             // set the variables
             if (currentActivePet != null)
             {

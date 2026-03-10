@@ -32,7 +32,6 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.Entertainment = PetHelper.petStats.Status["entertainment"];
         currentPlayerData.Energy = PetHelper.petStats.Status["energy"];
 
-
         float hygiene = currentPlayerData.Hygiene;
         float hunger = currentPlayerData.Hunger;
         float fun = currentPlayerData.Entertainment;
@@ -72,6 +71,7 @@ public class SaveHandler : MonoBehaviour
 
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
 
+        currentPlayerData.PlacedWalls = WallPlacement.placedWalls;
         // resources
         currentPlayerData.Balance = FinancialSpending.Instance.Balance;
         currentPlayerData.Food = PlayerResources.Instance.Food;
@@ -163,6 +163,9 @@ public class SaveHandler : MonoBehaviour
                 feedingFunctionality.SetFilled(furnitureData.isFilled);
         }
 
+        WallPlacement.Instance.placedWalls = playerData.PlacedWalls;
+        // todo make walls load
+        
         // Inventory
         InventoryHelper.Instance.SetInventory(playerData.PlayerInventory);
         InventoryHelper.Instance.Rebuild(); // Rebuild FurnitureData references

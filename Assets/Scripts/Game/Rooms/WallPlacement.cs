@@ -6,13 +6,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+
 public class Wall
 {
-    public Vector3 A;
-    public Vector3 B;
-    // in the future, should store material of inner and outer sides
+    Vector3 p0;
+    Vector3 p1;
 }
-
 public class WallPlacement : MonoBehaviour
 {
     public static WallPlacement Instance;
@@ -31,7 +30,8 @@ public class WallPlacement : MonoBehaviour
     private bool freemove = false;
     private const float cellSize = 0.25f;
     private Vector2 gridOffset = new();
-
+    public List<Wall> placedWalls = new();
+    public GameObject previewWall;
     void Awake()
     {
         Instance = this;
@@ -48,6 +48,18 @@ public class WallPlacement : MonoBehaviour
                 _currentPosition = new Vector3(_hit.point.x,0,_hit.point.z);
             else
                 _currentPosition = ClampToNearest(_hit.point, cellSize);
+            
+            // preview the wall
+            if (_positionA.HasValue)
+            {
+                if (!previewWall.activeSelf)
+                    previewWall.SetActive(true);
+                previewWall.transform.position = (_currentPosition+(Vector3)_positionA)/2;
+                previewWall.transform.localScale = new Vector3(Vector3.Distance(_currentPosition,(Vector3)_positionA)/2, 1, 1);
+            }
+            else if (!_positionA.HasValue && previewWall.activeSelf)
+                previewWall.SetActive(false);
+            
             onPlacement = true;
         }
     }
@@ -64,17 +76,35 @@ public class WallPlacement : MonoBehaviour
         if (_positionA.HasValue)
         {
             // create the new wall with the provided positions
-            GameObject newWall = Instantiate(wallPrefab, wallHolder);
-            newWall.transform.position = (_currentPosition+(Vector3)_positionA)/2;
-            newWall.transform.localScale = new Vector3(Vector3.Distance(_currentPosition,(Vector3)_positionA)/2, 1,1);
-            newWall.transform.LookAt(_currentPosition);
-            newWall.transform.Rotate(0,-90,0);
+            Wall newWall = new();
+            newWall.p0 = _currentPosition;
+            newWall.p1 = (Vector3)_positionA;
+            // go through each placed wall and check if they intersect
+            foreach (Wall wall in placedWalls)
+            {
+                if (DoIntersect(newWall, wall))
+                    return;
+            }
+            // create a wall gameobject based on the positions
+            GameObject wallObj = Instantiate(wallPrefab, wallHolder);
+            wallObj.transform.position = (newWall.p0+newWall.p1)/2;
+            wallObj.transform.localScale = new Vector3(Vector3.Distance(newWall.p0,newWall.p1)/2, 1, 1);
+            
+            wallObj.transform.LookAt(newWall.p0);
+            wallObj.transform.Rotate(0,-90,0);
+
+            placedWalls.Add(newWall);
+            
             _positionA = null;
         }
         else
         {
             _positionA = _currentPosition;
         }
+    }
+    public void CancelPlacement()
+    {
+        _positionA = null;
     }
     private Vector3 ClampToNearest(Vector3 pos, float threshold)
     {
@@ -86,5 +116,57 @@ public class WallPlacement : MonoBehaviour
         v.z += s + gridOffset.y;
 
         return v;
+    }
+    // approach from https://www.geeksforgeeks.org/dsa/check-if-two-given-line-segments-intersect/
+    private bool OnSegment(Vector3 p, Vector3 q, Vector3 r)
+    {
+        return (q.x <= Math.Max(p.x, r.x) && 
+                q.x >= Math.Min(p.x, r.x) &&
+                q.z <= Math.Max(p.z, r.z) && 
+                q.z >= Math.Min(p.z, r.z));
+    }
+    // function to find orientation of ordered triplet (p, q, r)
+    // 0 --> p, q and r are collinear
+    // 1 --> Clockwise
+    // 2 --> Counterclockwise
+    public int Orientation(Vector3 p, Vector3 q, Vector3 r) {
+        float val = (q.z - p.z) * (r.x - q.x) -
+                  (q.x - p.x) * (r.z - q.z);
+        // collinear
+        if (val == 0) return 0;
+        // clock or counterclock wise
+        // 1 for clockwise, 2 for counterclockwise
+        return (val > 0) ? 1 : 2;
+    }
+    public bool DoIntersect(Wall a, Wall b) {
+        // find the four orientations needed
+        // for general and special cases
+        int o1 = Orientation(a.p0.x, a.p0.z, b.p1.x);
+        int o2 = Orientation(a.p0.x, a.p0.z, b.p1.z);
+        int o3 = Orientation(a.p1.x, a.p1.z, a.p0.x);
+        int o4 = Orientation(a.p1.x, a.p1.z, a.p0.z);
+
+        // general case
+        if (o1 != o2 && o3 != o4)
+            return true;
+
+        // special cases
+        // p1, q1 and p2 are collinear and p2 lies on segment p1q1
+        if (o1 == 0 &&
+        OnSegment(a.p0.x, b.p1.x, a.p0.z)) return true;
+
+        // p1, q1 and q2 are collinear and q2 lies on segment p1q1
+        if (o2 == 0 &&
+        OnSegment(a.p0.x, b.p1.z, a.p0.z)) return true;
+
+        // p2, q2 and p1 are collinear and p1 lies on segment p2q2
+        if (o3 == 0 &&
+        OnSegment(b.p1.x, a.p0.x, b.p1.z)) return true;
+
+        // p2, q2 and q1 are collinear and q1 lies on segment p2q2 
+        if (o4 == 0 &&
+        OnSegment(b.p1.x, a.p0.z, b.p1.z)) return true;
+
+        return false;
     }
 }
