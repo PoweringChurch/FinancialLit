@@ -9,6 +9,7 @@ public class CameraHandler : MonoBehaviour
     [SerializeField] private Camera gameCamera;
     [SerializeField] private Camera menuCamera;
     [SerializeField] private GameObject scrollGameobj;
+
     private float moveSpeed = 15f;
     private float currentZoom = 10f;
     private float minZoom = 2f;
@@ -26,17 +27,20 @@ public class CameraHandler : MonoBehaviour
         Instance = this;
         RefreshRenderers();
     }
+    // toggles the game cameras
     public void ToggleGamecam(bool state)
     {
         gameCamera.enabled = state;
         menuCamera.enabled = !state;
         scrollGameobj.SetActive(!state); 
     }
+    // refresh the renderers for the walls and objects, allowing them to become transparent when zoomed in
     public void RefreshRenderers()
     {
         wallRenderers = GetRenderersFromTags("Wall");
         hideableRenderers = GetRenderersFromTags("Hideable");
     }
+
     void Update()
     {
         if (gameCamera != null && gameCamera.enabled)
@@ -46,11 +50,13 @@ public class CameraHandler : MonoBehaviour
             HideObjects();
         }
     }
+    // move the camera around, called in the update function
     private void MoveCamera()
     {
         Vector2 input = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;
         gameCamera.transform.position += (new Vector3(1, 0, 1) * input.y + gameCamera.transform.right * input.x) * Time.deltaTime * moveSpeed * camSpeedMultiplier.value;
     }
+    // zoom the camera out and in, called in the update function
     private void ZoomCamera()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
@@ -59,16 +65,18 @@ public class CameraHandler : MonoBehaviour
         currentZoom = Mathf.Clamp(currentZoom - InputSystem.actions.FindAction("Zoom").ReadValue<Vector2>().y * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
         gameCamera.orthographicSize = currentZoom;
     }
+    // max and minimum distance for zooming
     float maxDistance = 30;
     float minDistance = 20;
 
     float hideableMinDistance = 18;
     float minAlpha = 0.05f;
+
     private void HideObjects()
     {
         float zoomScale = currentZoom / 10f;
 
-        //fade walls
+        // fade walls
         foreach (Renderer renderer in wallRenderers)
         {
             if (renderer == null) continue;
@@ -81,7 +89,7 @@ public class CameraHandler : MonoBehaviour
             renderer.material.color = color;
         }
 
-        //hide objects
+        // hide objects
         foreach (Renderer renderer in hideableRenderers)
         {
             if (renderer == null) continue;
@@ -89,20 +97,19 @@ public class CameraHandler : MonoBehaviour
             renderer.enabled = distance >= hideableMinDistance / zoomScale;
         }
     }
-    //helpers
+    // helpers
     public bool GameCamEnabled()
     {
         return gameCamera.enabled;
     }
+    // get the renderers from tags
     Renderer[] GetRenderersFromTags(string tag)
     {
         GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
         System.Collections.Generic.List<Renderer> renderers = new System.Collections.Generic.List<Renderer>();
         
         foreach (GameObject obj in objects)
-        {
             renderers.AddRange(obj.GetComponentsInChildren<Renderer>());
-        }
         
         return renderers.ToArray();
     }

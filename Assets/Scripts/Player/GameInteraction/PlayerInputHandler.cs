@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+// this script exclusively handles player input so as to minimize forms of input not being centralized and difficult to manage
 public class PlayerInputHandler : MonoBehaviour
 {
     // technically not necessary, but makes it a lot more terse

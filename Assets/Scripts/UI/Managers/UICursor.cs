@@ -12,7 +12,7 @@ public class UICursor : MonoBehaviour
 
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] Camera gameCamera;
-
+    
     public Texture2D defaultCursor;
     public Texture2D followingCursor;
 
@@ -20,14 +20,15 @@ public class UICursor : MonoBehaviour
     {
         Instance = this;
     }
+    // returns the position of the cursor to vector3
     public (Vector3, bool) CursorToVector3(float targetY)
     {
         bool overInteractableLayer = false;
         Vector2 mousePos = Mouse.current.position.ReadValue();
-        //create ray from camera through mouse position
+        // create ray from camera through mouse position
         Ray ray = gameCamera.ScreenPointToRay(mousePos);
         if (Physics.Raycast(ray, out _, 1000, interactableLayer)) overInteractableLayer = true;
-        //calculate where ray intersects the target Y plane
+        // calculate where ray intersects the target Y plane
         float t = (targetY - ray.origin.y) / ray.direction.y;
         Vector3 targetPos = ray.origin + ray.direction * t;
         return (targetPos, overInteractableLayer);

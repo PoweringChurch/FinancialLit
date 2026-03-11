@@ -34,6 +34,7 @@ public class UIPet : MonoBehaviour
 
     private Color highStatsColor = new(0.37f,0.94f,0.57f);
     private Color lowStatsColor = new(0.93f,0.49f,0.37f);
+    
     private void Update()
     {
         if (PetHelper.CurrentActivePet == null) return;
@@ -102,13 +103,14 @@ public class UIPet : MonoBehaviour
             ["UNWELL"] = new Color(0.6f, 0.45f, 0.3f, 0.75f),     // bleghh brown
             ["CRITICAL"] = new Color(0.8f, 0.1f, 0.1f, 0.75f)     // danger red
         };
-
+        // set the color
         Color targetColor = colorDict[displaytext];
         currentDisplayColor = Color.Lerp(currentDisplayColor, targetColor, Time.deltaTime * lerpSpeed);
         DisplayImage.color = currentDisplayColor;
         DisplayText.text = displaytext;
         NameText.text = PetHelper.petStats.petName;
     }
+    // toggle the status panel
     public void ToggleStatusPanel()
     {
         bool panelActive = StatusPanel.activeSelf;

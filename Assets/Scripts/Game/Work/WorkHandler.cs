@@ -163,6 +163,7 @@ public class WorkHandler : MonoBehaviour
     "Quineshia", "Ackerman", "Helix", "Seth", "Zimmerman", "Zoe", "Xander", "Mikhael", "Franklin", "Trenton",
     "Brody", "Howard", "August", "Gene", "Brooks"
     };
+    
     private FinancialScenario GenerateTaxesScenario()
     {
         string clientName = names[UnityEngine.Random.Range(0, names.Length)];
@@ -637,7 +638,7 @@ public class WorkHandler : MonoBehaviour
         scenario.hintText = "Emergency funds should cover multiple months of expenses. Multiply monthly expenses by the target number of months.";
         return scenario;
     }
-    
+    // submits the answer
     public void SubmitAnswer(float answer)
     {
         if (currentScenario == null || !shiftActive) return;
@@ -646,7 +647,7 @@ public class WorkHandler : MonoBehaviour
         UIWorkManager.Instance.ShowFeedback(correct, currentScenario);
         CompleteScenario(correct);
     }
-    
+    // submits a choice
     public void SubmitChoice(int choiceIndex)
     {
         if (currentScenario == null || !shiftActive) return;

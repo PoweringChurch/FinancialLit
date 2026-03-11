@@ -21,16 +21,19 @@ public class UIOverlay : MonoBehaviour
         Instance = this;
         UpdateResourcesAndBal();
     }
+    // removes the player's placement flag
     public void RemovePlayerPlacementFlag()
     {
         PlayerFlagManager.RemoveFlag(PlayerFlag.Placement);
     }
+    // update the player's resources and balance
     public void UpdateResourcesAndBal()
     {
         shampooText.text = PlayerResources.Instance.Shampoo.ToString();
         foodText.text = PlayerResources.Instance.Food.ToString();
         moneyText.text = $"Balance: ${FinancialSpending.Instance.Balance:N2}";
     }
+    // updates the ingame time
     public void UpdateTime()
     {
         int minute = GameTime.Instance.Minute; // 0 - 1439, 0 indexed

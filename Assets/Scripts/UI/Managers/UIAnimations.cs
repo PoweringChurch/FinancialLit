@@ -14,7 +14,7 @@ public class UIAnimations : MonoBehaviour
     public Transform corgi;
     public Transform cur;
     public Transform pug;
-
+    
     public void Update()
     {
         //rotate flag
@@ -28,6 +28,7 @@ public class UIAnimations : MonoBehaviour
         );
     }
     const float spinDuration = 1.5f;
+    // rotates the breeds in the pet breed selection menu
     public void SpinBreeds() 
     {
         corgi.rotation = Quaternion.Euler(0,90,0);

@@ -7,7 +7,8 @@ public class FurniturePlacer : MonoBehaviour
       // core of furniture placement, made by modifying this tutorial
       // https://github.com/MinaPecheux/unity-tutorials/tree/main/Assets/07-BuildingPlacement
 
-      public static FurniturePlacer Instance; // singleton
+      public static FurniturePlacer Instance;
+
       public LayerMask placementLayerMask;
       public LayerMask groundLayerMask;
       public Camera gameCamera;
@@ -15,7 +16,8 @@ public class FurniturePlacer : MonoBehaviour
       public Transform minydisplay;
       public AudioClip placeSfx;
       
-      [HideInInspector] public GameObject _objectPrefab; // honestly could make a bool property that just checks if this exists
+
+      [HideInInspector] public GameObject _objectPrefab; // could make a bool property that just checks if this exists
       private GameObject _toBuild;
       private PlacementHandler _handler;
 

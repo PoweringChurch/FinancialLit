@@ -5,6 +5,7 @@ public class WorkingFunctionality : BaseFunctionality
         base.Awake();
         homeActions["Work"] = BeginWork;
     }
+    // begin working
     protected void BeginWork()
     {
         UIWorkManager.Instance.EnterWork();

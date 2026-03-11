@@ -19,58 +19,53 @@ public class UIInventory : MonoBehaviour
     {
         Instance = this;
         if (itemButtonTemplate == null || contentTransform == null)
-        {
             Debug.LogError("InventoryManager components not fully linked in Inspector");
-        }
     }
-
+    // set a new inventory
     public void SetInventory(Inventory newInventory)
     {
         inventory = newInventory;
     }
-
+    // updates the inventorys ui
     public void UpdateInventoryUI()
     {
-        //clear existing UI
+        // clear existing UI
         foreach (Transform child in contentTransform)
-        {
             UnityEngine.Object.Destroy(child.gameObject);
-        }
         inventoryItemUI.Clear();
+
         if (inventory == null)
-        {
             return;
-        }
         foreach (var entry in inventory.GetItemsToDisplay())
         {
+            // shouldnt happen but better to check
             if (entry.data == null)
             {
                 Debug.LogWarning("Entry item not found");
                 continue;
             }
+            // create a new inventory button based on the button template
             GameObject newTemplate = UnityEngine.Object.Instantiate(itemButtonTemplate, contentTransform);
             Button itemButton = newTemplate.GetComponent<Button>();
-            //set count
+            // set count
             TextMeshProUGUI countText = newTemplate.transform.GetComponentInChildren<TextMeshProUGUI>();
             countText.text = $"{entry.count}";
-            //set img
+            // set img
             Transform inner = newTemplate.transform.GetChild(0);
             var imgPreview = inner.GetChild(0).GetComponent<Image>();
 
             
             imgPreview.sprite = entry.data.icon;
-            //add clicking functionality
+            // add clicking functionality
             itemButton.onClick.AddListener(() => OnItemButtonClicked(entry));
             inventoryItemUI.Add(entry.itemName, newTemplate);
         }
     }
-
+    // update the inventory item
     public void UpdateInventoryItem(string itemName)
     {
         if (inventory == null)
-        {
             return;
-        }
 
         InventoryEntry entry = inventory.GetEntry(itemName);
 
@@ -85,35 +80,36 @@ public class UIInventory : MonoBehaviour
             return;
         }
 
-        // If the item UI doesn't exist but the item is in inventory, refresh the whole UI 
+        // if the item UI doesn't exist but the item is in inventory, refresh the whole UI 
         if (!inventoryItemUI.TryGetValue(itemName, out GameObject existingItemUI))
         {
             UpdateInventoryUI();
             return;
         }
 
-        // Update the count text
+        // update the count text
         TextMeshProUGUI countText = existingItemUI.GetComponentInChildren<TextMeshProUGUI>();
         countText.text = $"{entry.count}";
 
-        // Ensure UI is active if count > 0
+        // ensure UI is active if count > 0
         existingItemUI.SetActive(true);
     }
-
+    // called when the item button is clicked in the placement ui
     private void OnItemButtonClicked(InventoryEntry entry)
     {
-        //shouldnt even occur
+        // shouldnt occur; safety
         if (entry.count <= 0)
         {
             Debug.LogWarning("Cannot select item with 0 count");
             return;
         }
+        // doubly shouldnt occur, but safety
         if (!entry.data.prefab)
         {
             Debug.LogError($"Item {entry.itemName} has no prefab assigned");
             return;
         }
-
+        // set the current selected furniture
         FurniturePlacer.Instance.SetCurrentFurniture(entry.itemName);
     }
 }

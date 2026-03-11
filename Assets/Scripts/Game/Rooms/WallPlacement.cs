@@ -1,7 +1,7 @@
 // walls are to placed on a base floor grid
 // a single wall is defined by two points
 // a single wall cannot be intersecting another wall
-// a single wall is "double faced" in that one side of the wall can have a different material than the other side
+// a single wall is double faced in that one side of the wall can have a different material than the other side
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +12,8 @@ public class Wall
     Vector3 p0;
     Vector3 p1;
 }
+
+// class is modified from the furniture placer class
 public class WallPlacement : MonoBehaviour
 {
     public static WallPlacement Instance;
@@ -27,10 +29,14 @@ public class WallPlacement : MonoBehaviour
     private Ray _ray;
     private RaycastHit _hit;
 
+    // grid placement
     private bool freemove = false;
     private const float cellSize = 0.25f;
+    
     private Vector2 gridOffset = new();
+    // keep track of the placed walls
     public List<Wall> placedWalls = new();
+    // preview the wall
     public GameObject previewWall;
     void Awake()
     {

@@ -61,7 +61,7 @@ public class PlayFunctionality : BaseFunctionality
         } 
         base.Remove();
     }
-    //safety
+    // safety
     void OnDestroy()
     {
         if (PetHelper.petMover != null) PetHelper.petMover.OnReachedGoal -= OnReached;

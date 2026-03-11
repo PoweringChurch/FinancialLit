@@ -1,4 +1,5 @@
 using System;
+// inventory entry class, for use in the inventory class
 [Serializable]
 public class InventoryEntry
 {

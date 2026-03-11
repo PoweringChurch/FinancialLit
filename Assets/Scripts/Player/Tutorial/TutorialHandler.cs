@@ -224,7 +224,7 @@ public class TutorialManager : MonoBehaviour
      Popups.PopupInfo(header, body, dismiss, ShowFinal);
     }
     
-    // Step 6
+    // Step 7
     void ShowFinal()
     {
         string header = "Take on the world";

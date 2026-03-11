@@ -26,12 +26,12 @@ public class UISettings : MonoBehaviour
     {
         Application.Quit();
     }
-    //settings
+    // settings
     public void SetFullscreen(bool to)
     {
         Screen.fullScreen = to;
     }
-
+    // toggles vsync
     public void SetVsync(bool to)
     {
         QualitySettings.vSyncCount = to ? 1 : 0;

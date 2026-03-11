@@ -39,29 +39,29 @@ public class PetFunctionality : BaseFunctionality
     // called when the sit action is pressed; does as the name says
     void ToggleSit()
     {
-        if (PetHelper.petStateMachine.IsInState(PetState.Sitting))
+        if (PetHelper.petStateMachine.IsInState(PetState.Sitting)) // if the pet is sitting 
         {
-            PetHelper.petStateMachine.SetState(PetState.Idle);
-            globalActions.Remove("Rise");
-            globalActions["Sit"] = ToggleSit;
+            PetHelper.petStateMachine.SetState(PetState.Idle); // make the pet idle in the state machine
+            globalActions.Remove("Rise"); // remove the rise action, as the pet is now standing
+            globalActions["Sit"] = ToggleSit; // and add the sit action
 
-            PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
-            PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
+            PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default; // set the active behavior to default
+            PetHelper.petAnimation.SetBoolParameter("IsSitting", false); // make the pet stop sitting anim
         }
-        else
+        else // if the pet is not sitting
         {
-            if (!PetHelper.petStateMachine.IsInState(PetState.Idle))
+            if (!PetHelper.petStateMachine.IsInState(PetState.Idle)) // if the pet is not idle
             {
-                Message($"{PetHelper.petStats.petName} is occupied!");
+                Message($"{PetHelper.petStats.petName} is occupied!"); // inform the player that the pet is busy
                 return;
             }
-            PetHelper.petStateMachine.SetState(PetState.Sitting);
-            globalActions.Remove("Sit");
-            globalActions["Rise"] = ToggleSit;
+            PetHelper.petStateMachine.SetState(PetState.Sitting); // make the petting in the state machine
+            globalActions.Remove("Sit"); // remove the sit action, as the pet is now sitting
+            globalActions["Rise"] = ToggleSit; // and add the rise action
 
-            PetHelper.petMover.SetGoalPosition(PetHelper.petMover.petTransform.transform.position);
-            PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
-            PetHelper.petAnimation.SetBoolParameter("IsSitting", true);
+            PetHelper.petMover.SetGoalPosition(PetHelper.petMover.petTransform.transform.position); // set the pet's goal position to it's current position, incase it is moving but not busy
+            PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied; // set the active behaviour to occupied
+            PetHelper.petAnimation.SetBoolParameter("IsSitting", true); // make the pet play sitting anim
         }
     }
 }
