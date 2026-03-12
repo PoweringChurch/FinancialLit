@@ -63,30 +63,32 @@ public class CameraHandler : MonoBehaviour
         if (isOverUi) return;
         moveSpeed = 20f * (currentZoom / 10f);
         currentZoom = Mathf.Clamp(currentZoom - InputSystem.actions.FindAction("Zoom").ReadValue<Vector2>().y * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
+        if (InputSystem.actions.FindAction("ZoomInKey").IsPressed())
+            currentZoom = Mathf.Clamp(currentZoom - 0.1f * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
+        else if (InputSystem.actions.FindAction("ZoomOutKey").IsPressed())
+            currentZoom = Mathf.Clamp(currentZoom + 0.1f * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
         gameCamera.orthographicSize = currentZoom;
     }
-    // max and minimum distance for zooming
-    float maxDistance = 30;
-    float minDistance = 20;
-
     float hideableMinDistance = 18;
-    float minAlpha = 0.05f;
 
     private void HideObjects()
     {
         float zoomScale = currentZoom / 10f;
 
-        // fade walls
+        // hide walls
         foreach (Renderer renderer in wallRenderers)
         {
             if (renderer == null) continue;
             float distance = Vector3.Distance(gameCamera.transform.position, renderer.transform.position);
+            /*
             float t = Mathf.InverseLerp(minDistance / zoomScale, maxDistance / zoomScale, distance);
             float alpha = Mathf.Lerp(minAlpha, 1f, t);
 
             Color color = renderer.material.color;
             color.a = alpha;
             renderer.material.color = color;
+            */
+            renderer.enabled = distance >= hideableMinDistance / zoomScale;
         }
 
         // hide objects

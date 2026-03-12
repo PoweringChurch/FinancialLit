@@ -54,9 +54,10 @@ public class Interaction : MonoBehaviour
             if (functionality is PetFunctionality) // if the functionality that it hit happens to be a pet functionality
                 nameText.text = PetHelper.petStats.petName; // show the pet's name instead
             else
+            {
                 var handler = functionality.GetComponent<PlacementHandler>();
                 nameText.text = handler.itemName;
-
+            }
             currentHoveringName.transform.position = functionality.transform.position+new Vector3(0,1f,0)-(Camera.main.transform.forward*2);
             currentHoveringName.transform.rotation = Camera.main.transform.rotation;
         }
@@ -67,7 +68,9 @@ public class Interaction : MonoBehaviour
     }
     private int currentHitIndex = 0;
     private RaycastHit[] hitBuffer = new RaycastHit[10];
-    private float clickPositionThreshold = 5f; // pixels
+    private float clickPositionThreshold = 15f; // pixels
+
+    Vector2 lastClickPos = new Vector2();
     // called from PlayerInputHandler
     public void HandleClick()
     {

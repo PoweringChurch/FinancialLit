@@ -6,11 +6,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-
+using System.Collections.Generic;
+using System;
 public class Wall
 {
-    Vector3 p0;
-    Vector3 p1;
+    public Vector3 p0;
+    public Vector3 p1;
 }
 
 // class is modified from the furniture placer class
@@ -24,6 +25,9 @@ public class WallPlacement : MonoBehaviour
     public GameObject wallPrefab;
     public Transform wallHolder;
 
+    public Material invalidPlacementMaterial;
+    public Material validPlacementMaterial;
+
     [HideInInspector] public bool onPlacement = false;
 
     private Ray _ray;
@@ -31,9 +35,9 @@ public class WallPlacement : MonoBehaviour
 
     // grid placement
     private bool freemove = false;
-    private const float cellSize = 0.25f;
+    private const float cellSize = 2f;
     
-    private Vector2 gridOffset = new();
+    private Vector2 gridOffset = new(1f,1f);
     // keep track of the placed walls
     public List<Wall> placedWalls = new();
     // preview the wall
@@ -62,6 +66,8 @@ public class WallPlacement : MonoBehaviour
                     previewWall.SetActive(true);
                 previewWall.transform.position = (_currentPosition+(Vector3)_positionA)/2;
                 previewWall.transform.localScale = new Vector3(Vector3.Distance(_currentPosition,(Vector3)_positionA)/2, 1, 1);
+                previewWall.transform.LookAt(_currentPosition);
+                previewWall.transform.Rotate(0,-90,0);
             }
             else if (!_positionA.HasValue && previewWall.activeSelf)
                 previewWall.SetActive(false);
@@ -85,12 +91,14 @@ public class WallPlacement : MonoBehaviour
             Wall newWall = new();
             newWall.p0 = _currentPosition;
             newWall.p1 = (Vector3)_positionA;
+            /*
             // go through each placed wall and check if they intersect
             foreach (Wall wall in placedWalls)
             {
                 if (DoIntersect(newWall, wall))
                     return;
             }
+            */
             // create a wall gameobject based on the positions
             GameObject wallObj = Instantiate(wallPrefab, wallHolder);
             wallObj.transform.position = (newWall.p0+newWall.p1)/2;
@@ -101,7 +109,9 @@ public class WallPlacement : MonoBehaviour
 
             placedWalls.Add(newWall);
             
+            // reset and refresh
             _positionA = null;
+            CameraHandler.Instance.RefreshRenderers();
         }
         else
         {
@@ -119,6 +129,7 @@ public class WallPlacement : MonoBehaviour
 
         float s = threshold * 0.5f;
         v.x += s + gridOffset.x; // recenter in middle of cells
+        v.y = 0f;
         v.z += s + gridOffset.y;
 
         return v;
@@ -147,10 +158,10 @@ public class WallPlacement : MonoBehaviour
     public bool DoIntersect(Wall a, Wall b) {
         // find the four orientations needed
         // for general and special cases
-        int o1 = Orientation(a.p0.x, a.p0.z, b.p1.x);
-        int o2 = Orientation(a.p0.x, a.p0.z, b.p1.z);
-        int o3 = Orientation(a.p1.x, a.p1.z, a.p0.x);
-        int o4 = Orientation(a.p1.x, a.p1.z, a.p0.z);
+        int o1 = Orientation(a.p0, a.p0, b.p1);
+        int o2 = Orientation(a.p0, a.p0, b.p1);
+        int o3 = Orientation(a.p1, a.p1, a.p0);
+        int o4 = Orientation(a.p1, a.p1, a.p0);
 
         // general case
         if (o1 != o2 && o3 != o4)
@@ -159,19 +170,19 @@ public class WallPlacement : MonoBehaviour
         // special cases
         // p1, q1 and p2 are collinear and p2 lies on segment p1q1
         if (o1 == 0 &&
-        OnSegment(a.p0.x, b.p1.x, a.p0.z)) return true;
+        OnSegment(a.p0, b.p1, a.p0)) return true;
 
         // p1, q1 and q2 are collinear and q2 lies on segment p1q1
         if (o2 == 0 &&
-        OnSegment(a.p0.x, b.p1.z, a.p0.z)) return true;
+        OnSegment(a.p0, b.p1, a.p0)) return true;
 
         // p2, q2 and p1 are collinear and p1 lies on segment p2q2
         if (o3 == 0 &&
-        OnSegment(b.p1.x, a.p0.x, b.p1.z)) return true;
+        OnSegment(b.p1, a.p0, b.p1)) return true;
 
         // p2, q2 and q1 are collinear and q1 lies on segment p2q2 
         if (o4 == 0 &&
-        OnSegment(b.p1.x, a.p0.z, b.p1.z)) return true;
+        OnSegment(b.p1, a.p0, b.p1)) return true;
 
         return false;
     }

@@ -71,7 +71,7 @@ public class SaveHandler : MonoBehaviour
 
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
 
-        currentPlayerData.PlacedWalls = WallPlacement.placedWalls;
+        currentPlayerData.PlacedWalls = WallPlacement.Instance.placedWalls;
         // resources
         currentPlayerData.Balance = FinancialSpending.Instance.Balance;
         currentPlayerData.Food = PlayerResources.Instance.Food;
