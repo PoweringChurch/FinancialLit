@@ -23,6 +23,7 @@ public class WallPlacement : MonoBehaviour
     public Camera gameCamera;
 
     public GameObject wallPrefab;
+    public GameObject wallCornerPrefab;
     public Transform wallHolder;
 
     public Material invalidPlacementMaterial;
@@ -54,11 +55,7 @@ public class WallPlacement : MonoBehaviour
         if (Physics.Raycast(_ray, out _hit, 1000f, placementLayerMask))
         {
             // set active on first frame
-            if (freemove)
-                _currentPosition = new Vector3(_hit.point.x,0,_hit.point.z);
-            else
-                _currentPosition = ClampToNearest(_hit.point, cellSize);
-            
+            _currentPosition = ClampToNearest(_hit.point, cellSize);
             // preview the wall
             if (_positionA.HasValue)
             {
@@ -78,6 +75,8 @@ public class WallPlacement : MonoBehaviour
     // store positionA for placement in the future
     private Vector3 _currentPosition;
     private Vector3? _positionA;
+    private Vector3 cornerOffset = new(0,0.184f,0);
+    private Vector3 offset = new(0,2.5f,0);
     public void TryPlaceWall()
     {
         // check if cursor over ui
@@ -88,27 +87,29 @@ public class WallPlacement : MonoBehaviour
         if (_positionA.HasValue)
         {
             // create the new wall with the provided positions
-            Wall newWall = new();
-            newWall.p0 = _currentPosition;
-            newWall.p1 = (Vector3)_positionA;
-            /*
-            // go through each placed wall and check if they intersect
-            foreach (Wall wall in placedWalls)
-            {
-                if (DoIntersect(newWall, wall))
-                    return;
-            }
-            */
+            Wall newWall = new() { p0 = _currentPosition+offset, p1 = (Vector3)_positionA+offset };
+            if (!IsWallValid(newWall))
+                return;
             // create a wall gameobject based on the positions
             GameObject wallObj = Instantiate(wallPrefab, wallHolder);
-            wallObj.transform.position = (newWall.p0+newWall.p1)/2;
-            wallObj.transform.localScale = new Vector3(Vector3.Distance(newWall.p0,newWall.p1)/2, 1, 1);
-            
-            wallObj.transform.LookAt(newWall.p0);
-            wallObj.transform.Rotate(0,-90,0);
+            Vector3 wallDir = (newWall.p1 - newWall.p0).normalized;
+            Quaternion wallRotation = Quaternion.LookRotation(wallDir) * Quaternion.Euler(0, 90, 0);
 
+            wallObj.transform.position = (newWall.p0 + newWall.p1) / 2;
+            wallObj.transform.rotation = wallRotation;
+            wallObj.transform.localScale = new Vector3(Vector3.Distance(newWall.p0, newWall.p1) / 2, 1, 1);
+
+            GameObject corner0 = Instantiate(wallCornerPrefab, wallHolder);
+            corner0.transform.position = newWall.p0 + cornerOffset;
+            corner0.transform.rotation = wallRotation;
+            corner0.transform.Rotate(-90,0,-90);
+            GameObject corner1 = Instantiate(wallCornerPrefab, wallHolder);
+            corner1.transform.position = newWall.p1 + cornerOffset;
+            corner1.transform.rotation = wallRotation;
+            corner1.transform.Rotate(-90,0,-90);
             placedWalls.Add(newWall);
             
+
             // reset and refresh
             _positionA = null;
             CameraHandler.Instance.RefreshRenderers();
@@ -155,35 +156,42 @@ public class WallPlacement : MonoBehaviour
         // 1 for clockwise, 2 for counterclockwise
         return (val > 0) ? 1 : 2;
     }
-    public bool DoIntersect(Wall a, Wall b) {
-        // find the four orientations needed
-        // for general and special cases
-        int o1 = Orientation(a.p0, a.p0, b.p1);
-        int o2 = Orientation(a.p0, a.p0, b.p1);
-        int o3 = Orientation(a.p1, a.p1, a.p0);
-        int o4 = Orientation(a.p1, a.p1, a.p0);
+    public bool DoIntersect(Wall a, Wall b)
+    {
+        if (a.p0 == b.p0 || a.p0 == b.p1 || a.p1 == b.p0 || a.p1 == b.p1)
+            return false;
+        
+        int o1 = Orientation(a.p0, a.p1, b.p0);
+        int o2 = Orientation(a.p0, a.p1, b.p1);
+        int o3 = Orientation(b.p0, b.p1, a.p0);
+        int o4 = Orientation(b.p0, b.p1, a.p1);
 
         // general case
         if (o1 != o2 && o3 != o4)
             return true;
 
-        // special cases
-        // p1, q1 and p2 are collinear and p2 lies on segment p1q1
-        if (o1 == 0 &&
-        OnSegment(a.p0, b.p1, a.p0)) return true;
-
-        // p1, q1 and q2 are collinear and q2 lies on segment p1q1
-        if (o2 == 0 &&
-        OnSegment(a.p0, b.p1, a.p0)) return true;
-
-        // p2, q2 and p1 are collinear and p1 lies on segment p2q2
-        if (o3 == 0 &&
-        OnSegment(b.p1, a.p0, b.p1)) return true;
-
-        // p2, q2 and q1 are collinear and q1 lies on segment p2q2 
-        if (o4 == 0 &&
-        OnSegment(b.p1, a.p0, b.p1)) return true;
+        
+        // collinear special cases
+        if (o1 == 0 && OnSegment(a.p0, b.p0, a.p1)) return true;
+        if (o2 == 0 && OnSegment(a.p0, b.p1, a.p1)) return true;
+        if (o3 == 0 && OnSegment(b.p0, a.p0, b.p1)) return true;
+        if (o4 == 0 && OnSegment(b.p0, a.p1, b.p1)) return true;
+        
 
         return false;
+    }
+    public bool IsWallValid(Wall newWall)
+    {
+        // wall must have nonzero length
+        if (Vector3.Distance(newWall.p0, newWall.p1) < 0.001f)
+            return false;
+
+        foreach (Wall wall in placedWalls)
+        {
+            if (DoIntersect(newWall, wall))
+                return false;
+        }
+
+        return true;
     }
 }
