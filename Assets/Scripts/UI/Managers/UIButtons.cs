@@ -21,14 +21,10 @@ public class UIButtons : MonoBehaviour
     {
         Instance = this;
         buttonDict = new Dictionary<string, ToggleableButton>();
-        if (buttons != null)
-        {
-            foreach (var btn in buttons)
-            {
-                if (!string.IsNullOrEmpty(btn.name))
-                    buttonDict[btn.name] = btn;
-            }
-        }
+        
+        foreach (var btn in buttons)
+            if (!string.IsNullOrEmpty(btn.name))
+                buttonDict[btn.name] = btn;
     }
 
     public void DisableButton(string buttonName) => SetButtonState(buttonName, false);
@@ -42,7 +38,8 @@ public class UIButtons : MonoBehaviour
 
         if (targetButton.button) targetButton.button.enabled = enabled;
         RawImage unavailableImage = targetButton.button.transform.Find("Unavailable").GetComponent<RawImage>();
-        if (unavailableImage) unavailableImage.enabled = !enabled;
+        if (unavailableImage) 
+            unavailableImage.enabled = !enabled;
     }
     
     public void Quit() {

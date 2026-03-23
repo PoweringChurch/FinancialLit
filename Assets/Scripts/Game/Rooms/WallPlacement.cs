@@ -168,10 +168,12 @@ public class WallPlacement : MonoBehaviour
         int o4 = Orientation(b.p0, b.p1, a.p1);
 
         // general case
+        /* IF p1, q1, and p2 orientations (o1) DOES NOT EQUAL p1, q1, and q2 orientations (o2) 
+        AND p2, q2, and p1 orientations (o3) DOES NOT EQUAL p2, q2, and q1 orientations (o4)
+        THEN the lines intersect */
         if (o1 != o2 && o3 != o4)
             return true;
 
-        
         // collinear special cases
         if (o1 == 0 && OnSegment(a.p0, b.p0, a.p1)) return true;
         if (o2 == 0 && OnSegment(a.p0, b.p1, a.p1)) return true;
