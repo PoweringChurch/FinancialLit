@@ -145,19 +145,20 @@ public class WallPlacement : MonoBehaviour
     }
     // function to find orientation of ordered triplet (p, q, r)
     // 0 --> p, q and r are collinear
-    // 1 --> Clockwise
-    // 2 --> Counterclockwise
+    // 1 --> clockwise
+    // 2 --> counterclockwise
     public int Orientation(Vector3 p, Vector3 q, Vector3 r) {
         float val = (q.z - p.z) * (r.x - q.x) -
                   (q.x - p.x) * (r.z - q.z);
         // collinear
         if (val == 0) return 0;
         // clock or counterclock wise
-        // 1 for clockwise, 2 for counterclockwise
+        // 1 for cw, 2 for ccw
         return (val > 0) ? 1 : 2;
     }
     public bool DoIntersect(Wall a, Wall b)
     {
+        // allows for walls to be placed on corners
         if (a.p0 == b.p0 || a.p0 == b.p1 || a.p1 == b.p0 || a.p1 == b.p1)
             return false;
         
@@ -176,7 +177,6 @@ public class WallPlacement : MonoBehaviour
         if (o2 == 0 && OnSegment(a.p0, b.p1, a.p1)) return true;
         if (o3 == 0 && OnSegment(b.p0, a.p0, b.p1)) return true;
         if (o4 == 0 && OnSegment(b.p0, a.p1, b.p1)) return true;
-        
 
         return false;
     }

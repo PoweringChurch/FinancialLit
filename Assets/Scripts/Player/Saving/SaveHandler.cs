@@ -22,7 +22,7 @@ public class SaveHandler : MonoBehaviour
     public void SaveGame()
     {
         currentPlayerData.IsNewSave = false;
-
+        
         //pet stats
         currentPlayerData.Breed = PetHelper.petStats.breed;
         currentPlayerData.PetName = PetHelper.petStats.petName;

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using PrimeTween;
 
 [Serializable]
-public class UIAnimations : MonoBehaviour
+public class UIMenuAnims : MonoBehaviour
 {
     public Transform flag;
 
