@@ -62,6 +62,7 @@ public class PlayerData
         PetFlags = new List<PetFlag>();
         PlacedFurniture = new List<FurnitureObjectData>();
         PlayerInventory = new Inventory();
+        PlacedWalls = new List<Wall>();
         Minute = 480;
         Balance = 200f;
         Shampoo = 8;

@@ -44,8 +44,7 @@ public class SaveHandler : MonoBehaviour
 
         currentPlayerData.PetFlags = PetHelper.petFlagManager.CurrentFlags;
         
-        // furniture
-
+        // save furniture
         List<FurnitureObjectData> placedFurnitureData = new();
         for (int i = 0; i < homeFurnitureTransform.childCount; i++)
         {
@@ -68,10 +67,10 @@ public class SaveHandler : MonoBehaviour
             placedFurnitureData.Add(newFurnitureObjData);
         }
         currentPlayerData.PlacedFurniture = placedFurnitureData;
-
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
-
         currentPlayerData.PlacedWalls = WallPlacement.Instance.placedWalls;
+        print("saved placed walls");
+        print("there are "+WallPlacement.Instance.placedWalls.Count+" walls");
         // resources
         currentPlayerData.Balance = FinancialSpending.Instance.Balance;
         currentPlayerData.Food = PlayerResources.Instance.Food;
@@ -160,9 +159,9 @@ public class SaveHandler : MonoBehaviour
                 feedingFunctionality.SetFilled(furnitureData.isFilled);
         }
 
+        // spawn saved walls
         WallPlacement.Instance.placedWalls = playerData.PlacedWalls;
-        // todo make walls load
-        
+        WallPlacement.Instance.ReloadPlacedWalls();
         // inventory
         InventoryHelper.Instance.SetInventory(playerData.PlayerInventory);
         InventoryHelper.Instance.Rebuild(); // Rebuild FurnitureData references

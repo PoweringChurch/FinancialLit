@@ -1,4 +1,5 @@
 
+/*
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -16,7 +17,7 @@ public class FloorPlacement : MonoBehaviour
 {
     public Material invalidPlacementMaterial;
     public Material validPlacementMaterial;
-
+    public Transform 
     [HideInInspector] public bool onPlacement = false;
 
     public GameObject floorPrefab;
@@ -35,7 +36,7 @@ public class FloorPlacement : MonoBehaviour
     public GameObject previewFloor;
 
     private Vector3 _currentPosition;
-    private Vector3 _positionA;
+    private Vector3? _positionA;
 
     void Update()
     {
@@ -99,3 +100,4 @@ public class FloorPlacement : MonoBehaviour
         return true; // temporary, add checks later
     }
 }
+*/

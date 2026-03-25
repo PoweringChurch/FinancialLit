@@ -98,7 +98,7 @@ public class BaseFunctionality : MonoBehaviour
         Destroy(obj);
     }
     // helper functions
-    public Dictionary<string, Action> GetAvailableActions()
+    public Dictionary<string, Action> GetAvailableActions() 
     {
         // get player states
         bool home = PlayerFlagManager.HasFlag(PlayerFlag.Home);

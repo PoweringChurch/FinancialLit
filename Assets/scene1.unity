@@ -3642,6 +3642,7 @@ GameObject:
   - component: {fileID: 241518231}
   - component: {fileID: 241518230}
   - component: {fileID: 241518229}
+  - component: {fileID: 241518233}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -3819,6 +3820,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241518227}
   m_CullTransparentMesh: 1
+--- !u!114 &241518233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241518227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b793b296980324c83bb4902d8b9c8de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrowOnHover
 --- !u!1 &254506650
 GameObject:
   m_ObjectHideFlags: 0
@@ -4390,9 +4403,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 276261167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00189a6008eb647cd91f745a12f00ed9, type: 3}
+  m_Script: {fileID: 11500000, guid: f495f5dc9a6804588b9b1ed3f934bad1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIAnimations
+  m_EditorClassIdentifier: Assembly-CSharp::UIMenuAnims
   flag: {fileID: 221748804}
   bgScrollerImage: {fileID: 1409663744}
   scrollSpeed: {x: 0.1, y: 0.1}
@@ -10176,6 +10189,7 @@ GameObject:
   - component: {fileID: 571220996}
   - component: {fileID: 571220995}
   - component: {fileID: 571220994}
+  - component: {fileID: 571220998}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -10329,6 +10343,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571220992}
   m_CullTransparentMesh: 1
+--- !u!114 &571220998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571220992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b793b296980324c83bb4902d8b9c8de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrowOnHover
 --- !u!1 &572468826
 GameObject:
   m_ObjectHideFlags: 0
@@ -12568,6 +12594,7 @@ GameObject:
   - component: {fileID: 737229363}
   - component: {fileID: 737229362}
   - component: {fileID: 737229361}
+  - component: {fileID: 737229365}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -12709,6 +12736,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737229359}
   m_CullTransparentMesh: 1
+--- !u!114 &737229365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737229359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b793b296980324c83bb4902d8b9c8de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrowOnHover
 --- !u!1 &738419737
 GameObject:
   m_ObjectHideFlags: 0
@@ -33809,7 +33848,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 276261169}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIAnimations, Assembly-CSharp
         m_MethodName: SpinBreeds
         m_Mode: 1
@@ -35389,6 +35428,7 @@ GameObject:
   - component: {fileID: 2076079402}
   - component: {fileID: 2076079401}
   - component: {fileID: 2076079404}
+  - component: {fileID: 2076079405}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -35554,6 +35594,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2076079405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076079399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b793b296980324c83bb4902d8b9c8de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrowOnHover
 --- !u!1 &2077909179
 GameObject:
   m_ObjectHideFlags: 0

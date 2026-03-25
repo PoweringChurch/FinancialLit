@@ -35,7 +35,6 @@ public class WallPlacement : MonoBehaviour
     private RaycastHit _hit;
 
     // grid placement
-    private bool freemove = false;
     private const float cellSize = 2f;
     
     private Vector2 gridOffset = new(1f,1f);
@@ -71,6 +70,39 @@ public class WallPlacement : MonoBehaviour
             
             onPlacement = true;
         }
+    }
+    public void ReloadPlacedWalls()
+    {
+        print("reloaded placed walls");
+        // clear existing walls
+        for (int i = wallHolder.childCount - 1; i >= 0; i--)
+        {
+            Destroy(wallHolder.GetChild(i).gameObject);
+        }
+        // spawn saved walls
+        foreach (var wall in placedWalls)
+        {
+            // create wall
+            GameObject wallObj = Instantiate(wallPrefab, wallHolder);
+            Vector3 wallDir = (wall.p1 - wall.p0).normalized;
+            Quaternion wallRotation = Quaternion.LookRotation(wallDir) * Quaternion.Euler(0, 90, 0);
+
+            wallObj.transform.position = (wall.p0 + wall.p1) / 2;
+            wallObj.transform.rotation = wallRotation;
+            wallObj.transform.localScale = new Vector3(Vector3.Distance(wall.p0, wall.p1) / 2, 1, 1);
+            // create corners
+            GameObject corner0 = Instantiate(wallCornerPrefab, wallHolder);
+            corner0.transform.position = wall.p0 + cornerOffset;
+            corner0.transform.rotation = wallRotation;
+            corner0.transform.Rotate(-90,0,-90);
+
+            GameObject corner1 = Instantiate(wallCornerPrefab, wallHolder);
+            corner1.transform.position = wall.p1 + cornerOffset;
+            corner1.transform.rotation = wallRotation;
+            corner1.transform.Rotate(-90,0,-90);
+            print("created wall");
+        }
+        CameraHandler.Instance.RefreshRenderers(); //refresh
     }
     // store positionA for placement in the future
     private Vector3 _currentPosition;
@@ -118,6 +150,7 @@ public class WallPlacement : MonoBehaviour
         {
             _positionA = _currentPosition;
         }
+        print("there are "+placedWalls.Count+" walls");
     }
     public void CancelPlacement()
     {
