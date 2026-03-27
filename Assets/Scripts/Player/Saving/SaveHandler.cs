@@ -69,8 +69,6 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.PlacedFurniture = placedFurnitureData;
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
         currentPlayerData.PlacedWalls = WallPlacement.Instance.placedWalls;
-        print("saved placed walls");
-        print("there are "+WallPlacement.Instance.placedWalls.Count+" walls");
         // resources
         currentPlayerData.Balance = FinancialSpending.Instance.Balance;
         currentPlayerData.Food = PlayerResources.Instance.Food;
@@ -88,7 +86,7 @@ public class SaveHandler : MonoBehaviour
 
         sessionStartTime = Time.time; //reset for next save
         // save to file
-        string json = JsonUtility.ToJson(currentPlayerData, true); // true = pretty print
+        string json = JsonUtility.ToJson(currentPlayerData, true); // true here pretty print
         string savePath = Application.persistentDataPath + "/" + currentSaveFile;
         File.WriteAllText(savePath, json);
         Debug.Log($"Game saved to {savePath}");
@@ -160,7 +158,7 @@ public class SaveHandler : MonoBehaviour
         }
 
         // spawn saved walls
-        WallPlacement.Instance.placedWalls = playerData.PlacedWalls;
+        WallPlacement.Instance.SetWalls(playerData.PlacedWalls);
         WallPlacement.Instance.ReloadPlacedWalls();
         // inventory
         InventoryHelper.Instance.SetInventory(playerData.PlayerInventory);

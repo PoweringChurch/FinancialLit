@@ -70,27 +70,29 @@ public class CameraHandler : MonoBehaviour
         gameCamera.orthographicSize = currentZoom;
     }
     float hideableMinDistance = 18;
-
+    float minDistance = 10;
+    float maxDistance = 20;
+    float minAlpha = 0.1f;
     private void HideObjects()
     {
         float zoomScale = currentZoom / 10f;
 
+        
         // hide walls
         foreach (Renderer renderer in wallRenderers)
         {
             if (renderer == null) continue;
             float distance = Vector3.Distance(gameCamera.transform.position, renderer.transform.position);
-            /*
+            
             float t = Mathf.InverseLerp(minDistance / zoomScale, maxDistance / zoomScale, distance);
-            float alpha = Mathf.Lerp(minAlpha, 1f, t);
+            float alpha = Mathf.Lerp(1f, minAlpha, t);
 
-            Color color = renderer.material.color;
-            color.a = alpha;
-            renderer.material.color = color;
-            */
-            renderer.enabled = distance >= hideableMinDistance / zoomScale;
+            renderer.material.SetFloat("_Alpha", alpha);
+            
+            
+            //renderer.enabled = distance >= hideableMinDistance / zoomScale;
         }
-
+        
         // hide objects
         foreach (Renderer renderer in hideableRenderers)
         {

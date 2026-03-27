@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System;
+
+[System.Serializable]
 public class Wall
 {
     public Vector3 p0;
@@ -71,9 +73,12 @@ public class WallPlacement : MonoBehaviour
             onPlacement = true;
         }
     }
+    public void SetWalls(List<Wall> to)
+    {
+        placedWalls = to;
+    }
     public void ReloadPlacedWalls()
     {
-        print("reloaded placed walls");
         // clear existing walls
         for (int i = wallHolder.childCount - 1; i >= 0; i--)
         {
@@ -100,7 +105,6 @@ public class WallPlacement : MonoBehaviour
             corner1.transform.position = wall.p1 + cornerOffset;
             corner1.transform.rotation = wallRotation;
             corner1.transform.Rotate(-90,0,-90);
-            print("created wall");
         }
         CameraHandler.Instance.RefreshRenderers(); //refresh
     }
@@ -150,7 +154,6 @@ public class WallPlacement : MonoBehaviour
         {
             _positionA = _currentPosition;
         }
-        print("there are "+placedWalls.Count+" walls");
     }
     public void CancelPlacement()
     {
