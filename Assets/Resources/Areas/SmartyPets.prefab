@@ -10655,6 +10655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3451657843637417811}
   - component: {fileID: 6632792266608133616}
+  - component: {fileID: 8496840096059556888}
   m_Layer: 0
   m_Name: dogbowl
   m_TagString: Untagged
@@ -10696,6 +10697,22 @@ MonoBehaviour:
   foodTransform: {fileID: 0}
   filledY: 0
   emptyY: 0
+--- !u!114 &8496840096059556888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632643187276610912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
+  itemName: 
+  meshComponents: []
+  hasValidPlacement: 1
+  isFixed: 1
 --- !u!1 &774187926226458924
 GameObject:
   m_ObjectHideFlags: 0
@@ -11718,7 +11735,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
+  - {fileID: -876546973899608171, guid: a89b959f0e5ee49549ae5e1eb88304ca, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12478,7 +12495,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
+  - {fileID: -876546973899608171, guid: a89b959f0e5ee49549ae5e1eb88304ca, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13306,6 +13323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6711782433692210825}
   - component: {fileID: 6592413272440866815}
+  - component: {fileID: 7451011887472249875}
   m_Layer: 0
   m_Name: dogbowl
   m_TagString: Untagged
@@ -13347,6 +13365,22 @@ MonoBehaviour:
   foodTransform: {fileID: 0}
   filledY: 0
   emptyY: 0
+--- !u!114 &7451011887472249875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2944599567551054770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
+  itemName: 
+  meshComponents: []
+  hasValidPlacement: 1
+  isFixed: 1
 --- !u!1 &2949573490814953713
 GameObject:
   m_ObjectHideFlags: 0
@@ -14259,7 +14293,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
+  - {fileID: -876546973899608171, guid: a89b959f0e5ee49549ae5e1eb88304ca, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22083,6 +22117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8140740592786979366}
   - component: {fileID: 1318800523327171067}
+  - component: {fileID: 5830862827318643707}
   m_Layer: 0
   m_Name: dogbowl
   m_TagString: Untagged
@@ -22124,6 +22159,22 @@ MonoBehaviour:
   foodTransform: {fileID: 0}
   filledY: 0
   emptyY: 0
+--- !u!114 &5830862827318643707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023877388533850083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
+  itemName: 
+  meshComponents: []
+  hasValidPlacement: 1
+  isFixed: 1
 --- !u!1 &6082435028577123229
 GameObject:
   m_ObjectHideFlags: 0
@@ -22134,6 +22185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3471737273338535199}
   - component: {fileID: 8004180205231371921}
+  - component: {fileID: 978778562287189907}
   m_Layer: 0
   m_Name: dogbowl
   m_TagString: Untagged
@@ -22175,6 +22227,22 @@ MonoBehaviour:
   foodTransform: {fileID: 0}
   filledY: 0
   emptyY: 0
+--- !u!114 &978778562287189907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082435028577123229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
+  itemName: 
+  meshComponents: []
+  hasValidPlacement: 1
+  isFixed: 1
 --- !u!1 &6094993039978776228
 GameObject:
   m_ObjectHideFlags: 0
@@ -38105,7 +38173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa852d5ce133fb643bae31c04afe0485, type: 2}
+  - {fileID: -876546973899608171, guid: a89b959f0e5ee49549ae5e1eb88304ca, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -38669,6 +38737,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5669189841289974584}
   - component: {fileID: 5577806662430155891}
+  - component: {fileID: 2971668251997685462}
   m_Layer: 0
   m_Name: dogbowl
   m_TagString: Untagged
@@ -38710,6 +38779,22 @@ MonoBehaviour:
   foodTransform: {fileID: 0}
   filledY: 0
   emptyY: 0
+--- !u!114 &2971668251997685462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7621025122421575379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
+  itemName: 
+  meshComponents: []
+  hasValidPlacement: 1
+  isFixed: 1
 --- !u!1 &7641166137993059964
 GameObject:
   m_ObjectHideFlags: 0
@@ -40309,6 +40394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 253251348120194729}
   - component: {fileID: 8311771824877777979}
+  - component: {fileID: 2848577018626818834}
   m_Layer: 0
   m_Name: dogbowl
   m_TagString: Untagged
@@ -40350,6 +40436,22 @@ MonoBehaviour:
   foodTransform: {fileID: 0}
   filledY: 0
   emptyY: 0
+--- !u!114 &2848577018626818834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8826286092675378036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710c11b0c13fb4f339f6178aa3bfa4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacementHandler
+  itemName: 
+  meshComponents: []
+  hasValidPlacement: 1
+  isFixed: 1
 --- !u!1 &9023902131836697765
 GameObject:
   m_ObjectHideFlags: 0

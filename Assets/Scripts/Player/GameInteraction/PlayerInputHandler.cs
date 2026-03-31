@@ -50,10 +50,10 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void HandleWallPlacer()
     {
-        /*
+        
         if (!PlayerFlagManager.HasFlag(PlayerFlag.WallPlacement))
             return;
-        */
+        
         if (cancel.WasPressedThisFrame())
             WallPlacement.Instance.CancelPlacement();
         if (interact.WasPressedThisFrame())

@@ -21,10 +21,25 @@ public class UIOverlay : MonoBehaviour
         Instance = this;
         UpdateResourcesAndBal();
     }
-    // removes the player's placement flag
-    public void RemovePlayerPlacementFlag()
+
+    public void OpenFurnitureTab()
     {
+        PlayerFlagManager.AddFlag(PlayerFlag.Placement);
+        PlayerFlagManager.RemoveFlag(PlayerFlag.WallPlacement);
+        WallPlacement.Instance.CancelPlacement();
+    }
+    public void OpenRoomsTab()
+    {
+        PlayerFlagManager.AddFlag(PlayerFlag.WallPlacement);
         PlayerFlagManager.RemoveFlag(PlayerFlag.Placement);
+        FurniturePlacer.Instance.CancelPlacement();
+    }
+    public void ClosePlacement()
+    {
+        PlayerFlagManager.RemoveFlag(PlayerFlag.WallPlacement);
+        PlayerFlagManager.RemoveFlag(PlayerFlag.Placement);
+        FurniturePlacer.Instance.CancelPlacement();
+        WallPlacement.Instance.CancelPlacement();
     }
     // update the player's resources and balance
     public void UpdateResourcesAndBal()
