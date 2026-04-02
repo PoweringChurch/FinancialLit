@@ -1,5 +1,3 @@
-
-/*
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -15,9 +13,13 @@ public class Floor
 // class is modified from WallPlacement
 public class FloorPlacement : MonoBehaviour
 {
+    public LayerMask placementLayerMask;
+    public Camera gameCamera;
+
     public Material invalidPlacementMaterial;
     public Material validPlacementMaterial;
-    public Transform 
+    public Transform floorHolder;
+
     [HideInInspector] public bool onPlacement = false;
 
     public GameObject floorPrefab;
@@ -26,7 +28,6 @@ public class FloorPlacement : MonoBehaviour
     private RaycastHit _hit;
 
     // grid placement
-    private bool freemove = false;
     private const float cellSize = 2f;
     
     private Vector2 gridOffset = new(1f,1f);
@@ -63,6 +64,19 @@ public class FloorPlacement : MonoBehaviour
         }
     }
 
+    private Vector3 ClampToNearest(Vector3 pos, float threshold)
+    {
+        float t = 1f / threshold;
+        Vector3 v = ((Vector3)Vector3Int.FloorToInt(pos * t)) / t;
+
+        float s = threshold * 0.5f;
+        v.x += s + gridOffset.x; // recenter in middle of cells
+        v.y = 0f;
+        v.z += s + gridOffset.y;
+
+        return v;
+    }
+
     public void TryPlaceFloor()
     {
         // check if cursor over ui
@@ -74,12 +88,12 @@ public class FloorPlacement : MonoBehaviour
         {
             // create the new floor with the provided positions
             Floor newFloor = new() { 
-                pos = (_currentPosition+_positionA)/2, 
+                pos = (_currentPosition+(Vector3)_positionA)/2, 
                 size = new Vector3(Vector3.Distance(_currentPosition,(Vector3)_positionA)/2, 1, Vector3.Distance(_currentPosition,(Vector3)_positionA)/2) };
             if (!IsFloorValid(newFloor))
                 return;
             // create a floor gameobject based on the positions
-            GameObject floorObj = Instantiate(floorPrefab, wallHolder);
+            GameObject floorObj = Instantiate(floorPrefab, floorHolder);
 
             floorObj.transform.position = newFloor.pos;
             floorObj.transform.localScale = newFloor.size;
@@ -100,4 +114,3 @@ public class FloorPlacement : MonoBehaviour
         return true; // temporary, add checks later
     }
 }
-*/
