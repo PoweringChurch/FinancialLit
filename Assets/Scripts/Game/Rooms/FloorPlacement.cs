@@ -16,8 +16,8 @@ public class FloorPlacement : MonoBehaviour
     public LayerMask placementLayerMask;
     public Camera gameCamera;
 
-    public Material invalidPlacementMaterial;
-    public Material validPlacementMaterial;
+    private Material validPlacementMaterial;
+    private Material invalidPlacementMaterial;
     public Transform floorHolder;
 
     [HideInInspector] public bool onPlacement = false;
@@ -38,6 +38,11 @@ public class FloorPlacement : MonoBehaviour
 
     private Vector3 _currentPosition;
     private Vector3? _positionA;
+    void Awake()
+    {
+        validPlacementMaterial = Resources.Load<Material>("Materials/Furniture/ValidPlacement");
+        invalidPlacementMaterial = Resources.Load<Material>("Materials/Furniture/InvalidPlacement");
+    }
 
     void Update()
     {

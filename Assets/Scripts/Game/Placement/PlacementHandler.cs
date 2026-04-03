@@ -28,8 +28,8 @@ public class PlacementHandler : MonoBehaviour
 
     private void Awake()
     {
-        validPlacementMaterial = Resources.Load<Material>("Materials/ValidPlacement");
-        invalidPlacementMaterial = Resources.Load<Material>("Materials/InvalidPlacement");
+        validPlacementMaterial = Resources.Load<Material>("Materials/Furniture/ValidPlacement");
+        invalidPlacementMaterial = Resources.Load<Material>("Materials/Furniture/InvalidPlacement");
         _InitializeMaterials();
     }
     void OnTriggerEnter(Collider other)

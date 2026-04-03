@@ -8,17 +8,20 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System;
+using Unity.Mathematics;
 
 [System.Serializable]
 public class Wall
 {
     public Vector3 p0;
     public Vector3 p1;
+    public int innerMat;
+    public int outerMat;
+    public float sellVal; // saved in wall info, as its easier to determine sell price at wall creation
 }
-
 // class is modified from the furniture placer class
 public class WallPlacement : MonoBehaviour
-{
+{   
     public static WallPlacement Instance;
 
     public LayerMask placementLayerMask;
@@ -28,8 +31,9 @@ public class WallPlacement : MonoBehaviour
     public GameObject wallCornerPrefab;
     public Transform wallHolder;
 
-    public Material invalidPlacementMaterial;
-    public Material validPlacementMaterial;
+    public Material[] wallMaterials; // defined in the unity editor
+    private Material validPlacementMaterial;
+    private Material invalidPlacementMaterial;
 
     [HideInInspector] public bool onPlacement = false;
 
@@ -43,10 +47,14 @@ public class WallPlacement : MonoBehaviour
     // keep track of the placed walls
     public List<Wall> placedWalls = new();
     // preview the wall
-    public GameObject previewWall;
+    public Transform previewWall;
+    public Renderer previewWallRenderer;
+    Wall previewWallData = new();
     void Awake()
     {
         Instance = this;
+        validPlacementMaterial = Resources.Load<Material>("Materials/Furniture/ValidPlacement");
+        invalidPlacementMaterial = Resources.Load<Material>("Materials/Furniture/InvalidPlacement");
     }
     void Update()
     {
@@ -60,15 +68,20 @@ public class WallPlacement : MonoBehaviour
             // preview the wall
             if (_positionA.HasValue)
             {
-                if (!previewWall.activeSelf)
-                    previewWall.SetActive(true);
-                previewWall.transform.position = (_currentPosition+(Vector3)_positionA)/2;
-                previewWall.transform.localScale = new Vector3(Vector3.Distance(_currentPosition,(Vector3)_positionA)/2, 1, 1);
-                previewWall.transform.LookAt(_currentPosition);
-                previewWall.transform.Rotate(0,-90,0);
+                if (!previewWall.gameObject.activeSelf)
+                    previewWall.gameObject.SetActive(true);
+                previewWallRenderer.material = validPlacementMaterial;
+                previewWallData.p0 = _currentPosition;
+                previewWallData.p1 = (Vector3)_positionA;
+                if (!IsWallValid(previewWallData))
+                    previewWallRenderer.material = invalidPlacementMaterial;
+                previewWall.position = (_currentPosition+(Vector3)_positionA)/2;
+                previewWall.localScale = new Vector3(Vector3.Distance(_currentPosition,(Vector3)_positionA)/2, 1, 1);
+                previewWall.LookAt(_currentPosition);
+                previewWall.Rotate(0,-90,0);
             }
-            else if (!_positionA.HasValue && previewWall.activeSelf)
-                previewWall.SetActive(false);
+            else if (!_positionA.HasValue && previewWall.gameObject.activeSelf)
+                previewWall.gameObject.SetActive(false);
             
             onPlacement = true;
         }
@@ -95,6 +108,7 @@ public class WallPlacement : MonoBehaviour
             wallObj.transform.position = (wall.p0 + wall.p1) / 2;
             wallObj.transform.rotation = wallRotation;
             wallObj.transform.localScale = new Vector3(Vector3.Distance(wall.p0, wall.p1) / 2, 1, 1);
+
             // create corners
             GameObject corner0 = Instantiate(wallCornerPrefab, wallHolder);
             corner0.transform.position = wall.p0 + cornerOffset;
@@ -105,6 +119,20 @@ public class WallPlacement : MonoBehaviour
             corner1.transform.position = wall.p1 + cornerOffset;
             corner1.transform.rotation = wallRotation;
             corner1.transform.Rotate(-90,0,-90);
+
+            Renderer wallRenderer = wallObj.GetComponentInChildren<Renderer>();
+            Renderer corner0Renderer = corner0.GetComponent<Renderer>();
+            Renderer corner1Renderer = corner1.GetComponent<Renderer>();
+
+            // wall
+            wallRenderer.materials[0] = wallMaterials[wall.innerMat];
+            wallRenderer.materials[1] = wallMaterials[wall.outerMat];
+            // corner 0
+            corner0Renderer.materials[0] = wallMaterials[wall.innerMat];
+            corner0Renderer.materials[1] = wallMaterials[wall.outerMat];
+            // corner 1
+            corner1Renderer.materials[0] = wallMaterials[wall.innerMat];
+            corner1Renderer.materials[1] = wallMaterials[wall.outerMat];
         }
         CameraHandler.Instance.RefreshRenderers(); //refresh
     }
@@ -126,6 +154,7 @@ public class WallPlacement : MonoBehaviour
             Wall newWall = new() { p0 = _currentPosition+offset, p1 = (Vector3)_positionA+offset };
             if (!IsWallValid(newWall))
                 return;
+            
             // create a wall gameobject based on the positions
             GameObject wallObj = Instantiate(wallPrefab, wallHolder);
             Vector3 wallDir = (newWall.p1 - newWall.p0).normalized;
@@ -139,12 +168,15 @@ public class WallPlacement : MonoBehaviour
             corner0.transform.position = newWall.p0 + cornerOffset;
             corner0.transform.rotation = wallRotation;
             corner0.transform.Rotate(-90,0,-90);
+
             GameObject corner1 = Instantiate(wallCornerPrefab, wallHolder);
             corner1.transform.position = newWall.p1 + cornerOffset;
             corner1.transform.rotation = wallRotation;
             corner1.transform.Rotate(-90,0,-90);
             placedWalls.Add(newWall);
             
+            newWall.innerMat = 0;
+            newWall.outerMat = 1;
 
             // reset and refresh
             _positionA = null;

@@ -32800,14 +32800,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   gameCamera: {fileID: 1130872541}
-  wallPrefab: {fileID: 398247578432997681, guid: d909b54f524664d6ab8caab3436594c5, type: 3}
+  wallPrefab: {fileID: 4261812304668728492, guid: e705ccc3983b8be468d7138a4845d0b8, type: 3}
   wallCornerPrefab: {fileID: 8098678301254722286, guid: f7ee468ed44139146a475f36708d0409, type: 3}
   wallHolder: {fileID: 601939664}
-  invalidPlacementMaterial: {fileID: 0}
-  validPlacementMaterial: {fileID: 0}
+  wallMaterials:
+  - {fileID: -876546973899608171, guid: 50865f2ffece74ef1b6cf464d4376076, type: 3}
+  - {fileID: -876546973899608171, guid: a89b959f0e5ee49549ae5e1eb88304ca, type: 3}
+  - {fileID: -876546973899608171, guid: c42df7a90716540129593502901d816e, type: 3}
+  - {fileID: -876546973899608171, guid: b3ac9f9277fc52e4bb200581041fb567, type: 3}
   onPlacement: 0
   placedWalls: []
-  previewWall: {fileID: 738188027891933166}
+  previewWall: {fileID: 5516056145282987827}
+  previewWallRenderer: {fileID: 1195500111718589715}
 --- !u!114 &1880617076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32824,8 +32828,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   gameCamera: {fileID: 1130872541}
-  invalidPlacementMaterial: {fileID: 2100000, guid: 26c7e694b6fc34ead86d6f683c1256a1, type: 2}
-  validPlacementMaterial: {fileID: 2100000, guid: 46ac25f835fda4b929c54d06729c4c4c, type: 2}
   floorHolder: {fileID: 45739561}
   onPlacement: 0
   floorPrefab: {fileID: 4537016145151738983, guid: 2f121afbf32eecd4499940b4583b75b5, type: 3}
@@ -44078,27 +44080,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &2396726055241108946
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3316857026147433269}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2399078939522696569
 GameObject:
   m_ObjectHideFlags: 0
@@ -46100,7 +46081,6 @@ GameObject:
   - component: {fileID: 701159039357724757}
   - component: {fileID: 1419805666422976443}
   - component: {fileID: 1195500111718589715}
-  - component: {fileID: 2396726055241108946}
   m_Layer: 0
   m_Name: Inner
   m_TagString: Wall
