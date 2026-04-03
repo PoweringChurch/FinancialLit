@@ -45,7 +45,7 @@ public class WallPlacement : MonoBehaviour
     
     private Vector2 gridOffset = new(1f,1f);
     // keep track of the placed walls
-    public List<Wall> placedWalls = new();
+    public List<Wall> placedWalls = new(); 
     // preview the wall
     public Transform previewWall;
     public Renderer previewWallRenderer;
@@ -102,25 +102,29 @@ public class WallPlacement : MonoBehaviour
         {
             // create wall
             GameObject wallObj = Instantiate(wallPrefab, wallHolder);
+            Transform wallModelTransform = wallObj.transform.Find("WallModel");
+            WallFunctionality wallFunc = wallModelTransform.GetComponent<WallFunctionality>();
+            wallFunc.walldata = wall;
+            
             Vector3 wallDir = (wall.p1 - wall.p0).normalized;
             Quaternion wallRotation = Quaternion.LookRotation(wallDir) * Quaternion.Euler(0, 90, 0);
 
             wallObj.transform.position = (wall.p0 + wall.p1) / 2;
-            wallObj.transform.rotation = wallRotation;
-            wallObj.transform.localScale = new Vector3(Vector3.Distance(wall.p0, wall.p1) / 2, 1, 1);
+            wallModelTransform.rotation = wallRotation;
+            wallModelTransform.localScale = new Vector3(Vector3.Distance(wall.p0, wall.p1) / 2, 1, 1);
 
             // create corners
-            GameObject corner0 = Instantiate(wallCornerPrefab, wallHolder);
+            GameObject corner0 = Instantiate(wallCornerPrefab, wallObj.transform);
             corner0.transform.position = wall.p0 + cornerOffset;
             corner0.transform.rotation = wallRotation;
             corner0.transform.Rotate(-90,0,-90);
 
-            GameObject corner1 = Instantiate(wallCornerPrefab, wallHolder);
+            GameObject corner1 = Instantiate(wallCornerPrefab, wallObj.transform);
             corner1.transform.position = wall.p1 + cornerOffset;
             corner1.transform.rotation = wallRotation;
             corner1.transform.Rotate(-90,0,-90);
 
-            Renderer wallRenderer = wallObj.GetComponentInChildren<Renderer>();
+            Renderer wallRenderer = wallModelTransform.gameObject.GetComponentInChildren<Renderer>();
             Renderer corner0Renderer = corner0.GetComponent<Renderer>();
             Renderer corner1Renderer = corner1.GetComponent<Renderer>();
 
@@ -141,6 +145,9 @@ public class WallPlacement : MonoBehaviour
     private Vector3? _positionA;
     private Vector3 cornerOffset = new(0,0.184f,0);
     private Vector3 offset = new(0,2.5f,0);
+
+    float basecost = 20;
+
     public void TryPlaceWall()
     {
         // check if cursor over ui
@@ -154,30 +161,39 @@ public class WallPlacement : MonoBehaviour
             Wall newWall = new() { p0 = _currentPosition+offset, p1 = (Vector3)_positionA+offset };
             if (!IsWallValid(newWall))
                 return;
+            float cost = basecost*Vector3.Distance((Vector3)_positionA, _currentPosition);
+            if (!FinancialSpending.Instance.CanAfford(cost))
+                return;
+            FinancialSpending.Instance.Spend(cost);
             
             // create a wall gameobject based on the positions
             GameObject wallObj = Instantiate(wallPrefab, wallHolder);
+            Transform wallModelTransform = wallObj.transform.Find("WallModel");
             Vector3 wallDir = (newWall.p1 - newWall.p0).normalized;
             Quaternion wallRotation = Quaternion.LookRotation(wallDir) * Quaternion.Euler(0, 90, 0);
 
             wallObj.transform.position = (newWall.p0 + newWall.p1) / 2;
-            wallObj.transform.rotation = wallRotation;
-            wallObj.transform.localScale = new Vector3(Vector3.Distance(newWall.p0, newWall.p1) / 2, 1, 1);
+            wallModelTransform.rotation = wallRotation;
+            wallModelTransform.localScale = new Vector3(Vector3.Distance(newWall.p0, newWall.p1) / 2, 1, 1);
 
-            GameObject corner0 = Instantiate(wallCornerPrefab, wallHolder);
+            GameObject corner0 = Instantiate(wallCornerPrefab, wallObj.transform);
             corner0.transform.position = newWall.p0 + cornerOffset;
             corner0.transform.rotation = wallRotation;
             corner0.transform.Rotate(-90,0,-90);
 
-            GameObject corner1 = Instantiate(wallCornerPrefab, wallHolder);
+            GameObject corner1 = Instantiate(wallCornerPrefab, wallObj.transform);
             corner1.transform.position = newWall.p1 + cornerOffset;
             corner1.transform.rotation = wallRotation;
             corner1.transform.Rotate(-90,0,-90);
             placedWalls.Add(newWall);
             
-            newWall.innerMat = 0;
+            newWall.innerMat = 2;
             newWall.outerMat = 1;
 
+            newWall.sellVal = cost*0.8f;
+
+            WallFunctionality wallFunc = wallModelTransform.GetComponent<WallFunctionality>();
+            wallFunc.walldata = newWall;
             // reset and refresh
             _positionA = null;
             CameraHandler.Instance.RefreshRenderers();

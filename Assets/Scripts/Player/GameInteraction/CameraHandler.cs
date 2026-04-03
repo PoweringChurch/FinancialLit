@@ -51,10 +51,12 @@ public class CameraHandler : MonoBehaviour
         }
     }
     // move the camera around, called in the update function
+    private Vector3 directions = new Vector3(1, 0, 1);
     private void MoveCamera()
     {
         Vector2 input = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;
-        gameCamera.transform.position += (new Vector3(1, 0, 1) * input.y + gameCamera.transform.right * input.x) * Time.deltaTime * moveSpeed * camSpeedMultiplier.value;
+        gameCamera.transform.position += (directions * input.y + gameCamera.transform.right * input.x) * Time.deltaTime * moveSpeed * camSpeedMultiplier.value;
+        gameCamera.transform.position = new Vector3(Mathf.Clamp(gameCamera.transform.position.x,-30,10),20,Mathf.Clamp(gameCamera.transform.position.z,-30,10));
     }
     // zoom the camera out and in, called in the update function
     private void ZoomCamera()
