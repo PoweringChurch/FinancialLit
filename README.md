@@ -14,7 +14,7 @@ The goal of My Dog Home is to provide a realistic yet engaging experience of man
 
 Event Links: [FBLA Overview](https://www.flfbla.org/fbla-event-introduction-to-programming) | [Details & Guidelines](https://www.fbla.org/high-school/competitive-events)
 
-This project's development is currently paused!
+This project is currently in active development!
 
 ![Sample Image 01](ReadmeImages/SamplePhotoCrop.jpg)
 
