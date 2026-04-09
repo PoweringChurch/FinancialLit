@@ -41,4 +41,4 @@ To maintain compliance with FBLA competitive event rules regarding original work
    * Pull requests are closed. Please do not submit pull requests to this repository.  
    * Issues are open. Suggestions, bug reports, and feedback via the "Issues" tab are highly encouraged and appreciated!
 
-Author: Xavier McCoy, Paused development (Version 0.2)
+Author: Xavier McCoy, Active development (Version 0.2)
