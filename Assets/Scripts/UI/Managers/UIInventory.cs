@@ -31,7 +31,7 @@ public class UIInventory : MonoBehaviour
     {
         // clear existing UI
         foreach (Transform child in contentTransform)
-            UnityEngine.Object.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         inventoryItemUI.Clear();
 
         if (inventory == null)
@@ -74,7 +74,7 @@ public class UIInventory : MonoBehaviour
             //if item is removed or count is zero, clean up the UI element
             if (inventoryItemUI.TryGetValue(itemName, out GameObject itemUI))
             {
-                UnityEngine.Object.Destroy(itemUI);
+                Destroy(itemUI);
                 inventoryItemUI.Remove(itemName);
             }
             return;
@@ -110,6 +110,6 @@ public class UIInventory : MonoBehaviour
             return;
         }
         // set the current selected furniture
-        FurniturePlacer.Instance.SetCurrentFurniture(entry.itemName);
+        FurniturePlacement.Instance.SetCurrentFurniture(entry.itemName);
     }
 }

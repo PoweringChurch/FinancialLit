@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 
 using PrimeTween;
 
-[RequireComponent(typeof(PlacementHandler))]
+[RequireComponent(typeof(PlacementData))]
 public class BaseFunctionality : MonoBehaviour
 {
     protected AudioClip purchaseSfx; // the purchasing sfx played when user buys a piece of furniture
@@ -36,14 +36,14 @@ public class BaseFunctionality : MonoBehaviour
     // allows user to move the piece of furniture; base action
     protected virtual void Move()
     {
-        PlacementHandler handler = GetComponent<PlacementHandler>();
+        PlacementData handler = GetComponent<PlacementData>();
         // move object
         var item = FurnitureDatabase.GetData(handler.itemName);
         
         InventoryHelper.Instance.AddItem(item, 1); // add the item back into inventory so furniture can be placed
-        FurniturePlacer.Instance.isMoving = true; // set moving on the furnitureplacer
-        FurniturePlacer.Instance.OverrideRotation(transform.rotation); // override the player's furniture rotation for a more natural experience
-        FurniturePlacer.Instance.SetCurrentFurniture(handler.itemName); // set the current active furniture to the object that is being moved
+        FurniturePlacement.Instance.isMoving = true; // set moving on the furnitureplacer
+        FurniturePlacement.Instance.OverrideRotation(transform.rotation); // override the player's furniture rotation for a more natural experience
+        FurniturePlacement.Instance.SetCurrentFurniture(handler.itemName); // set the current active furniture to the object that is being moved
 
         // queue previously set down furniture for destruction so that the player cannot duplicate items
         Destroy(gameObject);
@@ -51,7 +51,7 @@ public class BaseFunctionality : MonoBehaviour
     // removes selected piece of furniture; base action
     protected virtual void Remove()
     {
-        PlacementHandler handler = GetComponent<PlacementHandler>();
+        PlacementData handler = GetComponent<PlacementData>();
         // remove object
         var item = FurnitureDatabase.GetData(handler.itemName);
         InventoryHelper.Instance.AddItem(item, 1);
@@ -67,7 +67,7 @@ public class BaseFunctionality : MonoBehaviour
         // play purchase sfx
         SFXPlayer.Instance.Play(purchaseSfx);
         // add item to inventory
-        PlacementHandler handler = GetComponent<PlacementHandler>();
+        PlacementData handler = GetComponent<PlacementData>();
         var item = FurnitureDatabase.GetData(handler.itemName);
         InventoryHelper.Instance.AddItem(item, 1);
         // spend money

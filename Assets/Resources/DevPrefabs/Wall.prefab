@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1036994259080423981}
   - component: {fileID: 1135776795394649817}
   - component: {fileID: 9100651429191030119}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: twosideWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6139703557455164196}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,10 +134,8 @@ GameObject:
   - component: {fileID: 4062528447569029447}
   - component: {fileID: 6276367918872407390}
   - component: {fileID: 4639945076750035067}
-  - component: {fileID: 4914109007793456341}
-  - component: {fileID: 5448278097423228580}
-  - component: {fileID: 6804785030372105228}
-  m_Layer: 0
+  - component: {fileID: 1369432497478630726}
+  m_Layer: 11
   m_Name: WallModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,34 +212,7 @@ MonoBehaviour:
   - {fileID: 9100651429191030119}
   hasValidPlacement: 1
   isFixed: 1
---- !u!54 &4914109007793456341
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6624906586467985653}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &5448278097423228580
+--- !u!114 &1369432497478630726
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,29 +221,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6624906586467985653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6cc1d5007ea558a4481d701c0f2e53b1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.98039216, g: 0.69411767, b: 0.627451, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &6804785030372105228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6624906586467985653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68693cf71d2744d2893e677b678720fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WallFunctionality
-  price: 0
-  walldata:
+  m_EditorClassIdentifier: Assembly-CSharp::WallComponent
+  wallData:
     p0: {x: 0, y: 0, z: 0}
     p1: {x: 0, y: 0, z: 0}
     innerMat: 0

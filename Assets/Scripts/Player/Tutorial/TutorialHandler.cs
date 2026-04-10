@@ -38,8 +38,8 @@ public class TutorialManager : MonoBehaviour
         if (moodDisplay != null)
             moodDisplay.onClick.RemoveListener(ShowNeedsAcknowledgement);
         
-        if (FurniturePlacer.Instance != null)
-            FurniturePlacer.Instance.OnItemPlaced -= ShowPlacementAcknowledgement;
+        if (FurniturePlacement.Instance != null)
+            FurniturePlacement.Instance.OnItemPlaced -= ShowPlacementAcknowledgement;
         
         if (WorkHandler.Instance != null)
         {
@@ -131,9 +131,9 @@ public class TutorialManager : MonoBehaviour
         string body = "Open the placement menu and place down an old monitor";
         currentTaskUI = Popups.PopupTask(header, body);
         
-        if (FurniturePlacer.Instance != null)
-            FurniturePlacer.Instance.OnItemPlaced += ShowPlacementAcknowledgement;
-        if (FurniturePlacer.Instance.IsItemPlaced("Old Monitor"))
+        if (FurniturePlacement.Instance != null)
+            FurniturePlacement.Instance.OnItemPlaced += ShowPlacementAcknowledgement;
+        if (FurniturePlacement.Instance.IsItemPlaced("Old Monitor"))
         {
             ShowPlacementAcknowledgement("Old Monitor");
         }
@@ -144,8 +144,8 @@ public class TutorialManager : MonoBehaviour
         if (itemName != "Old Monitor")
             return;
         
-        if (FurniturePlacer.Instance != null)
-            FurniturePlacer.Instance.OnItemPlaced -= ShowPlacementAcknowledgement;
+        if (FurniturePlacement.Instance != null)
+            FurniturePlacement.Instance.OnItemPlaced -= ShowPlacementAcknowledgement;
         
         string header = "Nice work!";
         string body = "You've successfully placed your first item. You can use this system to decorate your home with furniture and equipment.";

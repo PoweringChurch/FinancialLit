@@ -33,7 +33,7 @@ public class Interaction : MonoBehaviour
     }
     void Update()
     {
-        if (currentMenu || FurniturePlacer.Instance._objectPrefab) {
+        if (currentMenu || FurniturePlacement.Instance._objectPrefab) {
             if (currentHoveringName)
             {
                 Destroy(currentHoveringName);
@@ -55,7 +55,7 @@ public class Interaction : MonoBehaviour
                 nameText.text = PetHelper.petStats.petName; // show the pet's name instead
             else
             {
-                var handler = functionality.GetComponent<PlacementHandler>();
+                var handler = functionality.GetComponent<PlacementData>();
                 nameText.text = handler.itemName;
             }
             currentHoveringName.transform.position = functionality.transform.position+new Vector3(0,1f,0)-(Camera.main.transform.forward*2);
@@ -75,7 +75,7 @@ public class Interaction : MonoBehaviour
     public void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
-        bool hasPlacement = PlayerFlagManager.HasFlag(PlayerFlag.Placement);
+        bool hasPlacement = PlacementManager.Instance.ActiveMode != PlacementManager.Mode.None ;
 
         if (isOverUi && IsPointerOverActionMenu()) return; // because we are over an action
         CloseMenu();

@@ -32,7 +32,7 @@ public class PlayerData
     public List<FurnitureObjectData> PlacedFurniture;
     public Inventory PlayerInventory;
     // rooms
-    public List<Wall> PlacedWalls;
+    public List<WallData> PlacedWalls;
     // resources
     public float Balance;
     public int Shampoo;
@@ -62,7 +62,7 @@ public class PlayerData
         PetFlags = new List<PetFlag>();
         PlacedFurniture = new List<FurnitureObjectData>();
         PlayerInventory = new Inventory();
-        PlacedWalls = new List<Wall>();
+        PlacedWalls = new List<WallData>();
         Minute = 480;
         Balance = 200f;
         Shampoo = 8;

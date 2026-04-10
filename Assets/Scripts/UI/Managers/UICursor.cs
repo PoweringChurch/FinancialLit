@@ -15,6 +15,8 @@ public class UICursor : MonoBehaviour
     
     public Texture2D defaultCursor;
     public Texture2D followingCursor;
+    public Texture2D destroyCursor;
+
 
     public void Awake()
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public enum PlayerFlag {Tutorial, Home, Shopping, Placement, SetFollow, WallPlacement}
+public enum PlayerFlag {Tutorial, Home, Shopping, SetFollow}
 
 public static class PlayerFlagManager
 {

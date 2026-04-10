@@ -32,43 +32,15 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.Entertainment = PetHelper.petStats.Status["entertainment"];
         currentPlayerData.Energy = PetHelper.petStats.Status["energy"];
 
-        float hygiene = currentPlayerData.Hygiene;
-        float hunger = currentPlayerData.Hunger;
-        float fun = currentPlayerData.Entertainment;
-        float energy = currentPlayerData.Energy;
-
-        float total = (hygiene + hunger + fun + energy)/400;
-
         currentPlayerData.PetPosition = PetHelper.petMover.petTransform.position;
         currentPlayerData.PetRotation = PetHelper.petMover.petTransform.rotation;
 
         currentPlayerData.PetFlags = PetHelper.petFlagManager.CurrentFlags;
         
-        // save furniture
-        List<FurnitureObjectData> placedFurnitureData = new();
-        for (int i = 0; i < homeFurnitureTransform.childCount; i++)
-        {
-            var childTransform = homeFurnitureTransform.GetChild(i);
-            var placementHandler = childTransform.GetComponent<PlacementHandler>();
-            if (placementHandler == null) continue; // skip if no PlacementHandler
-
-            FurnitureObjectData newFurnitureObjData = new()
-            {
-                position = childTransform.position,
-                rotation = childTransform.rotation,
-                itemName = placementHandler.itemName
-            };
-
-            var childFunctionality = childTransform.GetComponent<BaseFunctionality>();
-            if (childFunctionality is FeedingFunctionality feedingFunctionality)
-            {
-                newFurnitureObjData.isFilled = feedingFunctionality.filled;
-            }
-            placedFurnitureData.Add(newFurnitureObjData);
-        }
-        currentPlayerData.PlacedFurniture = placedFurnitureData;
+        // save house
+        currentPlayerData.PlacedFurniture = PlacementManager.Instance.GetPlacedFurniture();
+        currentPlayerData.PlacedWalls = PlacementManager.Instance.GetPlacedWalls();
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
-        currentPlayerData.PlacedWalls = WallPlacement.Instance.placedWalls;
         // resources
         currentPlayerData.Balance = FinancialSpending.Instance.Balance;
         currentPlayerData.Food = PlayerResources.Instance.Food;
@@ -133,33 +105,8 @@ public class SaveHandler : MonoBehaviour
         // pet flags
         PetHelper.petFlagManager.SetFlags(playerData.PetFlags);
 
-        // clear existing furniture
-        for (int i = homeFurnitureTransform.childCount - 1; i >= 0; i--)
-        {
-            Destroy(homeFurnitureTransform.GetChild(i).gameObject);
-        }
-
-        // spawn saved furniture
-        foreach (var furnitureData in playerData.PlacedFurniture)
-        {
-            FurnitureData furnitureItem = FurnitureDatabase.GetData(furnitureData.itemName);
-            if (furnitureItem == null)
-                continue;
-
-            GameObject spawnedFurniture = Instantiate(furnitureItem.prefab, homeFurnitureTransform);
-            spawnedFurniture.transform.SetPositionAndRotation(furnitureData.position, furnitureData.rotation);
-
-            // restore furniture data
-            var functionality = spawnedFurniture.GetComponent<BaseFunctionality>();
-            var placementHandler = spawnedFurniture.GetComponent<PlacementHandler>();
-            placementHandler.SetPlacementMode(PlacementMode.Fixed);
-            if (functionality is FeedingFunctionality feedingFunctionality)
-                feedingFunctionality.SetFilled(furnitureData.isFilled);
-        }
-
         // spawn saved walls
-        WallPlacement.Instance.SetWalls(playerData.PlacedWalls);
-        WallPlacement.Instance.ReloadPlacedWalls();
+        PlacementManager.Instance.LoadHouseData(playerData.PlacedWalls, playerData.PlacedFurniture);
         // inventory
         InventoryHelper.Instance.SetInventory(playerData.PlayerInventory);
         InventoryHelper.Instance.Rebuild(); // Rebuild FurnitureData references

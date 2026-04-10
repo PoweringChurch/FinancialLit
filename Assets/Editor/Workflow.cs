@@ -277,10 +277,10 @@ public class FurnitureWorkflowWindow : EditorWindow
             box.isTrigger = true;
             
             // Add PlacementHandler
-            PlacementHandler handler = prefabInstance.GetComponent<PlacementHandler>();
+            PlacementData handler = prefabInstance.GetComponent<PlacementData>();
             if (handler == null)
             {
-                handler = prefabInstance.AddComponent<PlacementHandler>();
+                handler = prefabInstance.AddComponent<PlacementData>();
                 handler.meshComponents = prefabInstance.GetComponentsInChildren<MeshRenderer>();
                 handler.itemName = prefabInstance.name;
             }
@@ -475,10 +475,10 @@ public class FurnitureWorkflowWindow : EditorWindow
         box.isTrigger = true;
         
         // PlacementHandler
-        PlacementHandler handler = obj.GetComponent<PlacementHandler>();
+        PlacementData handler = obj.GetComponent<PlacementData>();
         if (handler == null)
         {
-            handler = obj.AddComponent<PlacementHandler>();
+            handler = obj.AddComponent<PlacementData>();
             handler.meshComponents = obj.GetComponentsInChildren<MeshRenderer>();
             handler.itemName = obj.name;
         }
