@@ -33,7 +33,7 @@ public class Interaction : MonoBehaviour
     }
     void Update()
     {
-        if (currentMenu || FurniturePlacement.Instance._objectPrefab) {
+        if (currentMenu || PlacementManager.Instance.Furniture._objectPrefab) {
             if (currentHoveringName)
             {
                 Destroy(currentHoveringName);

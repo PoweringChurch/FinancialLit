@@ -72,9 +72,9 @@ public class CameraHandler : MonoBehaviour
         gameCamera.orthographicSize = currentZoom;
     }
     float hideableMinDistance = 18;
-    float minDistance = 10;
-    float maxDistance = 18;
-    float minAlpha = 0.1f;
+    float minDistance = 6;
+    float maxDistance = 20;
+    float minAlpha = 0f;
     private void HideObjects()
     {
         float zoomScale = currentZoom / 10f;
@@ -83,8 +83,8 @@ public class CameraHandler : MonoBehaviour
         {
             if (renderer == null) continue;
             float distance = Vector3.Distance(gameCamera.transform.position, renderer.transform.position);
-            float t = Mathf.InverseLerp(minDistance / zoomScale, maxDistance / zoomScale, distance);
-            float alpha = Mathf.Lerp(1f, minAlpha, t);
+            float t = Mathf.InverseLerp(minDistance / zoomScale, maxDistance / zoomScale, distance); // get amount zoomed in
+            float alpha = Mathf.Lerp(1f, minAlpha, t); // dither
             foreach (var mat in renderer.materials)
             {
                 mat.SetFloat("_Alpha", alpha);

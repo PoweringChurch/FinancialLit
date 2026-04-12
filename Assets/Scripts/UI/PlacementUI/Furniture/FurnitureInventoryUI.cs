@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class UIInventory : MonoBehaviour
+public class FurnitureInventoryUI : MonoBehaviour
 {
-    public static UIInventory Instance;
+    public static FurnitureInventoryUI Instance;
 
     [SerializeField] private GameObject itemButtonTemplate;
     [SerializeField] private Transform contentTransform;
@@ -110,6 +110,6 @@ public class UIInventory : MonoBehaviour
             return;
         }
         // set the current selected furniture
-        FurniturePlacement.Instance.SetCurrentFurniture(entry.itemName);
+        PlacementManager.Instance.Furniture.SetCurrentFurniture(entry.itemName);
     }
 }

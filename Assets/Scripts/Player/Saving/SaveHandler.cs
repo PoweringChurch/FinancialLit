@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public enum PetBreed {Corgi, Cur, Pug}
@@ -38,8 +39,8 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.PetFlags = PetHelper.petFlagManager.CurrentFlags;
         
         // save house
-        currentPlayerData.PlacedFurniture = PlacementManager.Instance.GetPlacedFurniture();
-        currentPlayerData.PlacedWalls = PlacementManager.Instance.GetPlacedWalls();
+        currentPlayerData.PlacedFurniture = PlacementManager.Instance.Furniture.GetPlacedFurniture();
+        currentPlayerData.PlacedWalls = PlacementManager.Instance.Wall.GetAllWalls().ToArray();
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
         // resources
         currentPlayerData.Balance = FinancialSpending.Instance.Balance;

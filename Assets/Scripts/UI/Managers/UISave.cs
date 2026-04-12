@@ -83,7 +83,7 @@ public class UISave : MonoBehaviour
         PetHelper.petAnimation.SetBoolParameter("IsSitting",false);
         PetHelper.petAnimation.SetBoolParameter("IsSick",false);
 
-        UIInventory.Instance.UpdateInventoryUI();
+        FurnitureInventoryUI.Instance.UpdateInventoryUI();
     }
     // formats the play time into hours and minutes
     string FormatPlaytime(float seconds)
@@ -164,7 +164,7 @@ public class UISave : MonoBehaviour
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
         // update ui
         UIOverlay.Instance.UpdateResourcesAndBal();
-        UIInventory.Instance.UpdateInventoryUI();
+        FurnitureInventoryUI.Instance.UpdateInventoryUI();
     }
     // deletes the current save
     public void DeleteCurrentSave()

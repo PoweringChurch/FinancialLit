@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Linq;
 
 public enum PetFlag {Sick, Immune, Content, WornOut, Playful, Loved, _ALL} // all enum is only meant to be used in ClearFlags and SetFlags
 

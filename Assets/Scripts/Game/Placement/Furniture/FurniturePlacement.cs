@@ -1,18 +1,16 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 public class FurniturePlacement : MonoBehaviour
 {
-      // core of furniture placement, made by modifying this tutorial
+      // made by modifying this tutorial
       // https://github.com/MinaPecheux/unity-tutorials/tree/main/Assets/07-BuildingPlacement
-      public static FurniturePlacement Instance;
       public Transform furnitureHolder;
       public Transform minydisplay;
       public AudioClip placeSfx;
 
-      [HideInInspector] public GameObject _objectPrefab; // could make a bool property that just checks if this exists
+      [HideInInspector] public GameObject _objectPrefab;
       private GameObject _toBuild;
       private PlacementData _handler;
 
@@ -28,12 +26,7 @@ public class FurniturePlacement : MonoBehaviour
       private Quaternion previousRotation;
       [HideInInspector] public bool isMoving = false;
       public event Action<string> OnItemPlaced;
-
-      void Awake()
-      {
-            Instance = this;
-            _objectPrefab = null;
-      }
+      
       public void Tick(RaycastHit hit)
       {
             if (!_objectPrefab) return;
@@ -51,18 +44,19 @@ public class FurniturePlacement : MonoBehaviour
             }
             _toBuild.transform.position += new Vector3(0,currentyoffset,0);
       }
-      public void LoadFurniture(List<FurnitureObjectData> furnitureData)
+      public void LoadFurniture(FurnitureObjectData[] furnitureData)
       {
             // clear existing furniture
             for (int i = furnitureHolder.childCount - 1; i >= 0; i--)
                   Destroy(furnitureHolder.GetChild(i).gameObject);
-            
+            if (furnitureData == null)
+                  return;
             // spawn saved furniture
             foreach (var furniture in furnitureData)
             {
                   FurnitureData furnitureItem = FurnitureDatabase.GetData(furniture.itemName);
                   if (furnitureItem == null)
-                  continue;
+                        continue;
 
                   GameObject spawnedFurniture = Instantiate(furnitureItem.prefab, furnitureHolder);
                   spawnedFurniture.transform.SetPositionAndRotation(furniture.position, furniture.rotation);
@@ -76,9 +70,9 @@ public class FurniturePlacement : MonoBehaviour
                         feedingFunctionality.SetFilled(furniture.isFilled);
             }
       }
-      public List<FurnitureObjectData> GetPlacedFurniture()
+      public FurnitureObjectData[] GetPlacedFurniture()
       {
-            List<FurnitureObjectData> placedFurnitureData = new();
+            FurnitureObjectData[] placedFurnitureData = new FurnitureObjectData[furnitureHolder.childCount];
             for (int i = 0; i < furnitureHolder.childCount; i++)
             {
                   var childTransform = furnitureHolder.GetChild(i);
@@ -87,22 +81,20 @@ public class FurniturePlacement : MonoBehaviour
 
                   FurnitureObjectData newFurnitureObjData = new()
                   {
-                  position = childTransform.position,
-                  rotation = childTransform.rotation,
-                  itemName = placementHandler.itemName
+                        position = childTransform.position,
+                        rotation = childTransform.rotation,
+                        itemName = placementHandler.itemName
                   };
 
                   var childFunctionality = childTransform.GetComponent<BaseFunctionality>();
                   if (childFunctionality is FeedingFunctionality feedingFunctionality)
-                  {
-                  newFurnitureObjData.isFilled = feedingFunctionality.filled;
-                  }
-                  placedFurnitureData.Add(newFurnitureObjData);
+                        newFurnitureObjData.isFilled = feedingFunctionality.filled;
+                  placedFurnitureData[i] = newFurnitureObjData;
             }
             return placedFurnitureData;
       }
       // places the current object
-      public void TryPlace(RaycastHit hit)
+      public void TryPlace(LayerMask placementLayerMask)
       {
             // check if cursor over ui
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
@@ -111,7 +103,8 @@ public class FurniturePlacement : MonoBehaviour
             if (_objectPrefab == null || !_handler.hasValidPlacement) 
                   return;
             string itemName = _handler.itemName;
-
+            var groundRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (!Physics.Raycast(groundRay, out RaycastHit hit, 1000f, placementLayerMask)) return;
             // remove the item from the players inventory            
             InventoryHelper.Instance.RemoveItem(itemName, 1);
             // set the placement mode of the object were placing to fixed

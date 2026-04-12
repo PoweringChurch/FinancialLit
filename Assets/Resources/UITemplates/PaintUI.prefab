@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5792995188088586562}
   - component: {fileID: 6548829874865934938}
   m_Layer: 5
-  m_Name: PlaceButton
+  m_Name: PaintUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

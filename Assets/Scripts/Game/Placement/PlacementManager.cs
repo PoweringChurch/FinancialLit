@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlacementManager : MonoBehaviour
@@ -34,22 +32,33 @@ public class PlacementManager : MonoBehaviour
 
     public void SetMode(Mode mode)
     {
-        if (ActiveMode == Mode.Furniture) Furniture.Cancel();
-        if (ActiveMode == Mode.Wall)      Wall.Cancel();
-        if (ActiveMode == Mode.None)      { Furniture.Cancel(); Wall.Cancel();}
+        Furniture.Cancel(); 
+        Wall.Cancel();
         ActiveMode = mode;
+        switch (mode)
+        {
+            case Mode.Wall:
+                Wall.SetMode(WallPlacement.Mode.Wall); 
+                UICursor.Instance.SetCursor(UICursor.Instance.wallCursor);
+                break;
+            default:
+                UICursor.Instance.SetCursor(UICursor.Instance.defaultCursor);
+                break;
+        }
     }
 
     public void TryPlace()
     {
-        if (!onPlacement) return;
-        if (ActiveMode == Mode.Furniture) Furniture.TryPlace(_hit);
+        if (ActiveMode == Mode.Furniture) 
+            Furniture.TryPlace(placementLayerMask);
         else if (ActiveMode == Mode.Wall)
         {
-            if (!Wall.inDestroy)
+            if (Wall.CurrentMode == WallPlacement.Mode.Wall || Wall.CurrentMode == WallPlacement.Mode.Door )
                 Wall.TryPlace();
-            else
+            else if (Wall.CurrentMode == WallPlacement.Mode.Destroy)
                 Wall.DestroyWall();
+            else if (Wall.CurrentMode == WallPlacement.Mode.Paint)
+                Wall.PaintWall();
         };
     }
     public void CancelPlace()
@@ -57,12 +66,9 @@ public class PlacementManager : MonoBehaviour
         Furniture.Cancel();
         Wall.Cancel();
     }
-    public void LoadHouseData(List<WallData> wallData, List<FurnitureObjectData> furnitureData)
+    public void LoadHouseData(WallData[] wallData, FurnitureObjectData[] furnitureData)
     {
         Wall.LoadWalls(wallData);
         Furniture.LoadFurniture(furnitureData);
     }
-    public List<FurnitureObjectData> GetPlacedFurniture() => Furniture.GetPlacedFurniture();
-    public List<WallData> GetPlacedWalls() => Wall.GetPlacedWalls();
-
 }

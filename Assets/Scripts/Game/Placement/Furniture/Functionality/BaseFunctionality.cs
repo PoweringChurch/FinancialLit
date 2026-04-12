@@ -41,9 +41,9 @@ public class BaseFunctionality : MonoBehaviour
         var item = FurnitureDatabase.GetData(handler.itemName);
         
         InventoryHelper.Instance.AddItem(item, 1); // add the item back into inventory so furniture can be placed
-        FurniturePlacement.Instance.isMoving = true; // set moving on the furnitureplacer
-        FurniturePlacement.Instance.OverrideRotation(transform.rotation); // override the player's furniture rotation for a more natural experience
-        FurniturePlacement.Instance.SetCurrentFurniture(handler.itemName); // set the current active furniture to the object that is being moved
+        PlacementManager.Instance.Furniture.isMoving = true; // set moving on the furnitureplacer
+        PlacementManager.Instance.Furniture.OverrideRotation(transform.rotation); // override the player's furniture rotation for a more natural experience
+        PlacementManager.Instance.Furniture.SetCurrentFurniture(handler.itemName); // set the current active furniture to the object that is being moved
 
         // queue previously set down furniture for destruction so that the player cannot duplicate items
         Destroy(gameObject);
