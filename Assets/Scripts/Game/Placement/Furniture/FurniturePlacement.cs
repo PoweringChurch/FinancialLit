@@ -2,6 +2,18 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+
+[Serializable]
+public class FurnitureObjectData
+{
+    public Vector3 position;
+    public Quaternion rotation;
+    public string itemName; // to know which prefab to spawn
+
+    // furniture-specific data
+    public bool isFilled = false; // for food bowl
+}
+
 public class FurniturePlacement : MonoBehaviour
 {
       // made by modifying this tutorial
@@ -13,6 +25,7 @@ public class FurniturePlacement : MonoBehaviour
       [HideInInspector] public GameObject _objectPrefab;
       private GameObject _toBuild;
       private PlacementData _handler;
+      public LayerMask furniturePlacementMask;
 
       // grid placement
       private const float cellSize = 0.25f;
@@ -21,7 +34,7 @@ public class FurniturePlacement : MonoBehaviour
       // y placement
       private const float minyoffset = 0f;
       private const float maxyoffset = 3f;
-      private float currentyoffset = 0.5f;
+      private float currentyoffset = 0f; // it has to be .51 otherwise it wont work cause it collides with thefloor
 
       private Quaternion previousRotation;
       [HideInInspector] public bool isMoving = false;

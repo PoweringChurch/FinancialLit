@@ -19,6 +19,8 @@ public class UICursor : MonoBehaviour
     public Texture2D paintCursor;
     public Texture2D wallCursor;
     public Texture2D doorCursor;
+    public Texture2D floorCursor;
+    public Texture2D scrapeCursor;
 
 
     public void Awake()

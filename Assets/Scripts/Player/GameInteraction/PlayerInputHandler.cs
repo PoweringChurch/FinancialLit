@@ -58,7 +58,12 @@ public class PlayerInputHandler : MonoBehaviour
                 if (interact.WasPressedThisFrame())
                     PlacementManager.Instance.TryPlace();
                 break;
-
+            case PlacementManager.Mode.Floor:
+                if (cancel.WasPressedThisFrame())
+                    PlacementManager.Instance.CancelPlace();
+                if (interact.WasPressedThisFrame())
+                    PlacementManager.Instance.TryPlace();
+                break;
             case PlacementManager.Mode.None:
             default:
                 break;

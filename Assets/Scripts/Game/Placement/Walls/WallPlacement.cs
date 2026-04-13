@@ -54,10 +54,6 @@ public class WallPlacement : MonoBehaviour
     
     // door placement
     public GameObject doorFramePrefab;
-
-    private Material validPlacementMaterial;
-    private Material invalidPlacementMaterial;
-
     // grid placement
     private const float cellSize = 2f;
     
@@ -68,16 +64,9 @@ public class WallPlacement : MonoBehaviour
     WallData previewWallData = new();
     void Awake()
     {
-        validPlacementMaterial = Resources.Load<Material>("Materials/Furniture/ValidPlacement");
-        invalidPlacementMaterial = Resources.Load<Material>("Materials/Furniture/InvalidPlacement");
-        Init();
-    }
-    void Init()
-    {
+        // build paint dict
         foreach (WallPaint wallPaint in wallPaints)
-            {
-                wallMaterialDict.Add(wallPaint.key, wallPaint.material); // build dictionary
-            }
+            wallMaterialDict.Add(wallPaint.key, wallPaint.material); // build dictionary
     }
     public void Tick(RaycastHit hit)
     {
@@ -88,12 +77,12 @@ public class WallPlacement : MonoBehaviour
         {
             if (!previewWall.gameObject.activeSelf)
                 previewWall.gameObject.SetActive(true);
-            previewWallRenderer.material = validPlacementMaterial;
+            previewWallRenderer.material = PlacementManager.Instance.validPlacementMaterial;
             previewWallData.p0 = _currentPosition;
             previewWallData.p1 = (Vector3)_positionA;
 
             if (!IsWallValid(previewWallData))
-                previewWallRenderer.material = invalidPlacementMaterial;
+                previewWallRenderer.material = PlacementManager.Instance.invalidPlacementMaterial;
             previewWall.position = (_currentPosition+(Vector3)_positionA)/2;
             previewWall.localScale = new Vector3(Vector3.Distance(_currentPosition,(Vector3)_positionA)/2, 1, 1);
             previewWall.LookAt(_currentPosition);
@@ -146,15 +135,16 @@ public class WallPlacement : MonoBehaviour
         foreach (var wall in wallData)
         {
             if (wall.isDoor)
-                SpawnDoor(wall, wall.sellVal*1.2f);
+                SpawnDoor(wall);
             else
-                SpawnWall(wall, wall.sellVal*1.2f);
+                SpawnWall(wall);
         }
         CameraHandler.Instance.RefreshRenderers(); //refresh
     }
-    public IEnumerable<WallData> GetAllWalls() => 
+    public WallData[] GetAllWalls() => 
         wallHolder.GetComponentsInChildren<WallComponent>()
-                .Select(w => w.wallData);
+                .Select(w => w.wallData)
+                .ToArray();
     
     // store positionA for placement in the future
     private Vector3 _currentPosition;
@@ -169,24 +159,22 @@ public class WallPlacement : MonoBehaviour
 
         if (_positionA.HasValue)
         {
+            float cost = baseCost * Vector3.Distance((Vector3)_positionA, _currentPosition);
+            if (!FinancialSpending.Instance.CanAfford(cost)) return;
             WallData newWall = new() 
             { 
                 p0 = _currentPosition + offset, 
                 p1 = (Vector3)_positionA + offset,
                 isDoor = currentMode == Mode.Door,
-                innerMat = "default", outerMat = "default"
+                innerMat = "default", outerMat = "default",
+                sellVal = cost*0.8f
             };
-
             if (!IsWallValid(newWall)) return;
-
-            float cost = baseCost * Vector3.Distance((Vector3)_positionA, _currentPosition);
-            if (!FinancialSpending.Instance.CanAfford(cost)) return;
             FinancialSpending.Instance.Spend(cost);
-
             if (newWall.isDoor)
-                SpawnDoor(newWall, cost);
+                SpawnDoor(newWall);
             else
-                SpawnWall(newWall, cost);
+                SpawnWall(newWall);
 
             _positionA = null;
             CameraHandler.Instance.RefreshRenderers();
@@ -196,7 +184,7 @@ public class WallPlacement : MonoBehaviour
             _positionA = _currentPosition;
         }
     }
-    private void SpawnDoor(WallData wall, float cost = -1)
+    private void SpawnDoor(WallData wall)
     {
         Vector3 mid = (wall.p0 + wall.p1) / 2;
         Vector3 wallDir = (wall.p1 - wall.p0).normalized;
@@ -225,19 +213,17 @@ public class WallPlacement : MonoBehaviour
 
         if (Vector3.Distance(wall.p0, doorEdgeLeft) > 0.1f)
         {
-            WallData leftWall = new() { p0 = wall.p0, p1 = doorEdgeLeft, innerMat = wall.innerMat, outerMat = wall.outerMat };
-            SpawnWall(leftWall, 0); // cost already paid
+            WallData leftWall = new() { p0 = wall.p0, p1 = doorEdgeLeft, innerMat = wall.innerMat, outerMat = wall.outerMat, sellVal = 0 };
+            SpawnWall(leftWall); // cost already paid
         }
         if (Vector3.Distance(wall.p1, doorEdgeRight) > 0.1f)
         {
-            WallData rightWall = new() { p0 = doorEdgeRight, p1 = wall.p1, innerMat = wall.innerMat, outerMat = wall.outerMat };
-            SpawnWall(rightWall, 0);
+            WallData rightWall = new() { p0 = doorEdgeRight, p1 = wall.p1, innerMat = wall.innerMat, outerMat = wall.outerMat, sellVal = 0 };
+            SpawnWall(rightWall);
         }
-        if (cost != -1)
-            wall.sellVal = cost * 0.8f;
         doorModelTransform.GetComponent<WallComponent>().wallData = wall;
     }
-    private void SpawnWall(WallData wall, float cost = -1)
+    private void SpawnWall(WallData wall)
     {
         GameObject wallObj = Instantiate(wallPrefab, wallHolder);
 
@@ -274,8 +260,6 @@ public class WallPlacement : MonoBehaviour
             cornerRenderer.materials = cornerMats;
         }
 
-        if (cost != -1)
-            wall.sellVal = cost * 0.8f;
         wallModelTransform.GetComponent<WallComponent>().wallData = wall;
     }
     public string selectedPaint = "purple";

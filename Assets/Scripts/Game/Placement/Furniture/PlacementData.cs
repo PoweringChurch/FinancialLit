@@ -16,9 +16,6 @@ public class PlacementData : MonoBehaviour
         Valid,
         Invalid
     }
-
-    private Material validPlacementMaterial;
-    private Material invalidPlacementMaterial;
     // to put the materials on
     public MeshRenderer[] meshComponents;
     // so that we can set our materials to their originals when placing
@@ -30,15 +27,16 @@ public class PlacementData : MonoBehaviour
 
     private void Awake()
     {
-        validPlacementMaterial = Resources.Load<Material>("Materials/Furniture/ValidPlacement");
-        invalidPlacementMaterial = Resources.Load<Material>("Materials/Furniture/InvalidPlacement");
         _InitializeMaterials();
     }
     void OnTriggerEnter(Collider other)
     {
+        print(other.name);
+        print("on enter");
+        print(other.gameObject.layer);
         // if the object is placed, return
-        if (isFixed) return;
-        if (IsIgnored(other.gameObject)) return;
+        if (isFixed) {print("is fixed"); return;};
+        if (IsIgnored(other.gameObject)) {print("is ignored"); return;}
         // increment the number of obstacles by 1
         _nObstacles++;
         /* if (UISave.Instance.debugToggle.isOn) 
@@ -47,14 +45,19 @@ public class PlacementData : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
+        print(other.name);
+        print("on exit");
         // if the object is placed, return
-        if (isFixed) return;
-        if (IsIgnored(other.gameObject)) return;
+        if (isFixed) {print("is fixed"); return;};
+        if (IsIgnored(other.gameObject)) {print("is ignored"); return;}
 
         // decrease the number of obstacles by 1
         _nObstacles--;
+        print("obstacles: "+_nObstacles);
         if (_nObstacles <= 0)
+        {
             SetPlacementMode(State.Valid);
+        }
     }
     // try to init materials in the editor
 #if UNITY_EDITOR
@@ -102,7 +105,7 @@ public class PlacementData : MonoBehaviour
         {
             // determine what material to apply
             Material matToApply = mode == State.Valid
-                ? validPlacementMaterial : invalidPlacementMaterial;
+                ? PlacementManager.Instance.validPlacementMaterial : PlacementManager.Instance.invalidPlacementMaterial;
                 
             Material[] m; int nMaterials;
             // loop through materials and 
@@ -131,5 +134,7 @@ public class PlacementData : MonoBehaviour
         foreach (MeshRenderer r in meshComponents)
             initialMaterials[r] = new List<Material>(r.sharedMaterials);
     }
-    private bool IsIgnored(GameObject o) => o.layer != PlacementManager.Instance.placementLayerMask;
+    private bool IsIgnored(GameObject o) => 
+    (PlacementManager.Instance.Floor.floorLayerMask.value & (1 << o.layer)) != 0
+    || (PlacementManager.Instance.placementLayerMask.value & (1 << o.layer)) != 0;
 }

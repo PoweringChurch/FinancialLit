@@ -41,6 +41,7 @@ public class SaveHandler : MonoBehaviour
         // save house
         currentPlayerData.PlacedFurniture = PlacementManager.Instance.Furniture.GetPlacedFurniture();
         currentPlayerData.PlacedWalls = PlacementManager.Instance.Wall.GetAllWalls().ToArray();
+        currentPlayerData.PlacedFloors = PlacementManager.Instance.Floor.GetAllFloors();
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
         // resources
         currentPlayerData.Balance = FinancialSpending.Instance.Balance;
@@ -106,8 +107,8 @@ public class SaveHandler : MonoBehaviour
         // pet flags
         PetHelper.petFlagManager.SetFlags(playerData.PetFlags);
 
-        // spawn saved walls
-        PlacementManager.Instance.LoadHouseData(playerData.PlacedWalls, playerData.PlacedFurniture);
+        // load house
+        PlacementManager.Instance.LoadHouseData(playerData.PlacedWalls, playerData.PlacedFurniture, playerData.PlacedFloors);
         // inventory
         InventoryHelper.Instance.SetInventory(playerData.PlayerInventory);
         InventoryHelper.Instance.Rebuild(); // Rebuild FurnitureData references

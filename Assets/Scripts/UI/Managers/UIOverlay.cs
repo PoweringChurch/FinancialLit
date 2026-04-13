@@ -21,19 +21,6 @@ public class UIOverlay : MonoBehaviour
         Instance = this;
         UpdateResourcesAndBal();
     }
-
-    public void OpenFurnitureTab()
-    {
-        PlacementManager.Instance.SetMode(PlacementManager.Mode.Furniture);
-    }
-    public void OpenWallsTab()
-    {
-        PlacementManager.Instance.SetMode(PlacementManager.Mode.Wall);
-    }
-    public void ClosePlacement()
-    {
-        PlacementManager.Instance.SetMode(PlacementManager.Mode.None);
-    }
     // update the player's resources and balance
     public void UpdateResourcesAndBal()
     {

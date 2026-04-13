@@ -10,10 +10,15 @@ public class PlacementManager : MonoBehaviour
     private RaycastHit _hit;
     public bool onPlacement = false;
 
+    public Material validPlacementMaterial;
+    public Material invalidPlacementMaterial;
+
     // modules 
     public FurniturePlacement Furniture;
     public WallPlacement Wall;
-    public enum Mode { None, Furniture, Wall }
+    public FloorPlacement Floor;
+    
+    public enum Mode { None, Furniture, Wall, Floor }
     public Mode ActiveMode { get; private set; } = Mode.None;
 
     void Awake() => Instance = this;
@@ -28,8 +33,9 @@ public class PlacementManager : MonoBehaviour
 
         if (ActiveMode == Mode.Furniture) Furniture.Tick(_hit);
         else if (ActiveMode == Mode.Wall)  Wall.Tick(_hit);
+        else if (ActiveMode == Mode.Floor) Floor.Tick(_hit);
     }
-
+    public void SetMode(int mode) => SetMode((Mode)mode);
     public void SetMode(Mode mode)
     {
         Furniture.Cancel(); 
@@ -41,12 +47,15 @@ public class PlacementManager : MonoBehaviour
                 Wall.SetMode(WallPlacement.Mode.Wall); 
                 UICursor.Instance.SetCursor(UICursor.Instance.wallCursor);
                 break;
+            case Mode.Floor:
+                Floor.SetMode(FloorPlacement.Mode.Floor);
+                UICursor.Instance.SetCursor(UICursor.Instance.floorCursor);
+                break;
             default:
                 UICursor.Instance.SetCursor(UICursor.Instance.defaultCursor);
                 break;
         }
     }
-
     public void TryPlace()
     {
         if (ActiveMode == Mode.Furniture) 
@@ -59,15 +68,26 @@ public class PlacementManager : MonoBehaviour
                 Wall.DestroyWall();
             else if (Wall.CurrentMode == WallPlacement.Mode.Paint)
                 Wall.PaintWall();
-        };
+        }
+        else if (ActiveMode == Mode.Floor)
+        {
+            if (Floor.CurrentMode == FloorPlacement.Mode.Floor)
+            {
+                Floor.TryPlace();
+            }
+            else if (Floor.CurrentMode == FloorPlacement.Mode.Destroy)
+                Floor.DestroyFloor();
+        }
     }
     public void CancelPlace()
     {
         Furniture.Cancel();
         Wall.Cancel();
+        Floor.Cancel();
     }
-    public void LoadHouseData(WallData[] wallData, FurnitureObjectData[] furnitureData)
+    public void LoadHouseData(WallData[] wallData, FurnitureObjectData[] furnitureData, FloorData[] floorData)
     {
+        Floor.LoadFloors(floorData);
         Wall.LoadWalls(wallData);
         Furniture.LoadFurniture(furnitureData);
     }

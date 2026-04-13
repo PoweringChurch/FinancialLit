@@ -1,17 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class FurnitureObjectData
-{
-    public Vector3 position;
-    public Quaternion rotation;
-    public string itemName; // to know which prefab to spawn
-
-    // furniture-specific data
-    public bool isFilled = false; // for food bowl
-}
-
 // class that is exported to json and loaded
 [System.Serializable]
 public class PlayerData
@@ -32,6 +21,7 @@ public class PlayerData
     // furniture
     public FurnitureObjectData[] PlacedFurniture;
     public WallData[] PlacedWalls;
+    public FloorData[] PlacedFloors;
     public Inventory PlayerInventory;
     // rooms
     // resources

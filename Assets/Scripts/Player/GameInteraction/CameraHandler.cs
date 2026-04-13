@@ -84,11 +84,9 @@ public class CameraHandler : MonoBehaviour
             if (renderer == null) continue;
             float distance = Vector3.Distance(gameCamera.transform.position, renderer.transform.position);
             float t = Mathf.InverseLerp(minDistance / zoomScale, maxDistance / zoomScale, distance); // get amount zoomed in
-            float alpha = Mathf.Lerp(1f, minAlpha, t); // dither
+            float alpha = Mathf.Lerp(0.8f, minAlpha, t); // dither
             foreach (var mat in renderer.materials)
-            {
                 mat.SetFloat("_Alpha", alpha);
-            }
         }
         
         // hide objects
