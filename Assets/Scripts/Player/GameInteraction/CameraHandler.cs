@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
+using PrimeTween;
 public class CameraHandler : MonoBehaviour
 {
     public static CameraHandler Instance;
@@ -21,6 +21,9 @@ public class CameraHandler : MonoBehaviour
 
     private Renderer[] wallRenderers;
     private Renderer[] hideableRenderers;
+    
+    private Vector3 origin = Vector3.zero;
+    private float bounds = 40;
 
     void Awake()
     {
@@ -34,13 +37,16 @@ public class CameraHandler : MonoBehaviour
         menuCamera.enabled = !state;
         scrollGameobj.SetActive(!state); 
     }
+    public void RotateCamera(float by)
+    {
+        gameCamera.transform.RotateAround(origin, Vector3.up, 45f);
+    }
     // refresh the renderers for the walls and objects, allowing them to become transparent when zoomed in
     public void RefreshRenderers()
     {
         wallRenderers = GetRenderersFromTags("Wall");
         hideableRenderers = GetRenderersFromTags("Hideable");
     }
-
     void Update()
     {
         if (gameCamera != null && gameCamera.enabled)
@@ -51,12 +57,18 @@ public class CameraHandler : MonoBehaviour
         }
     }
     // move the camera around, called in the update function
-    private Vector3 directions = new Vector3(1, 0, 1);
     private void MoveCamera()
     {
+        var directions = new Vector3 (
+            Mathf.Clamp(gameCamera.transform.forward.x, -1, 1), 
+            0, 
+            Mathf.Clamp(gameCamera.transform.forward.z, -1, 1));
         Vector2 input = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;
         gameCamera.transform.position += (directions * input.y + gameCamera.transform.right * input.x) * Time.deltaTime * moveSpeed * camSpeedMultiplier.value;
-        gameCamera.transform.position = new Vector3(Mathf.Clamp(gameCamera.transform.position.x,-30,10),20,Mathf.Clamp(gameCamera.transform.position.z,-30,10));
+        gameCamera.transform.position = new Vector3(
+            Mathf.Clamp(gameCamera.transform.position.x,-bounds+origin.x,bounds+origin.y),
+            20,
+            Mathf.Clamp(gameCamera.transform.position.z,-bounds+origin.x,bounds+origin.y));
     }
     // zoom the camera out and in, called in the update function
     private void ZoomCamera()

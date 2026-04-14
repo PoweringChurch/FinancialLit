@@ -72,21 +72,24 @@ public class WallPlacement : MonoBehaviour
     {
         // set active on first frame
         _currentPosition = PlacementUtils.ClampToNearest(hit.point, cellSize, gridOffset);
+        _currentPosition.y = 0;
         // preview the wall
         if (_positionA.HasValue)
         {
             if (!previewWall.gameObject.activeSelf)
                 previewWall.gameObject.SetActive(true);
-            previewWallRenderer.material = PlacementManager.Instance.validPlacementMaterial;
             previewWallData.p0 = _currentPosition;
             previewWallData.p1 = (Vector3)_positionA;
 
-            if (!IsWallValid(previewWallData))
-                previewWallRenderer.material = PlacementManager.Instance.invalidPlacementMaterial;
             previewWall.position = (_currentPosition+(Vector3)_positionA)/2;
             previewWall.localScale = new Vector3(Vector3.Distance(_currentPosition,(Vector3)_positionA)/2, 1, 1);
             previewWall.LookAt(_currentPosition);
             previewWall.Rotate(0,-90,0);
+            
+            if (!IsWallValid(previewWallData))
+                previewWallRenderer.material = PlacementManager.Instance.invalidPlacementMaterial;
+            else
+                previewWallRenderer.material = PlacementManager.Instance.validPlacementMaterial;
         }
         else if (!_positionA.HasValue && previewWall.gameObject.activeSelf)
             previewWall.gameObject.SetActive(false);
@@ -166,7 +169,7 @@ public class WallPlacement : MonoBehaviour
                 p0 = _currentPosition + offset, 
                 p1 = (Vector3)_positionA + offset,
                 isDoor = currentMode == Mode.Door,
-                innerMat = "default", outerMat = "default",
+                innerMat = "white", outerMat = "white",
                 sellVal = cost*0.8f
             };
             if (!IsWallValid(newWall)) return;
@@ -202,9 +205,9 @@ public class WallPlacement : MonoBehaviour
         Vector3 doorEdgeRight = mid + wallDir; // * (wall.doorWidth / 2)
 
         if (wall.innerMat == null)
-            wall.innerMat = "default";
+            wall.innerMat = "white";
         if (wall.outerMat == null)
-            wall.outerMat = "default";
+            wall.outerMat = "white";
         
         Material[] mats = doorRenderer.materials;
         mats[0] = wallMaterialDict[wall.innerMat];
@@ -228,9 +231,9 @@ public class WallPlacement : MonoBehaviour
         GameObject wallObj = Instantiate(wallPrefab, wallHolder);
 
         if (wall.innerMat == null)
-            wall.innerMat = "default";
+            wall.innerMat = "white";
         if (wall.outerMat == null)
-            wall.outerMat = "default";
+            wall.outerMat = "white";
         
         Transform wallModelTransform = wallObj.transform.Find("WallModel");
 
@@ -262,7 +265,7 @@ public class WallPlacement : MonoBehaviour
 
         wallModelTransform.GetComponent<WallComponent>().wallData = wall;
     }
-    public string selectedPaint = "purple";
+    public string selectedPaint = "black";
     public void PaintWall()
     {
         if (selectedPaint == null) return;
