@@ -19,6 +19,7 @@ public class FloorData
 public class FloorMaterial
 {
     public string key;
+    public Sprite previewImage;
     public Material material;
 }
 
@@ -83,12 +84,30 @@ public class FloorPlacement : MonoBehaviour
         {
             if (_positionA.HasValue)
             {
+                floorPreview.gameObject.SetActive(true);
                 // show a preview rect between positionA and current
                 Vector3 center = (_positionA.Value + _currentPosition) / 2f;
-                float length = Mathf.Abs(_currentPosition.x - _positionA.Value.x);
-                float width  = Mathf.Abs(_currentPosition.z - _positionA.Value.z);
+                float rawLength = _currentPosition.x - _positionA.Value.x;
+                float rawWidth = _currentPosition.z - _positionA.Value.z;
+                float length = Mathf.Abs(rawLength);
+                float width  = Mathf.Abs(rawWidth);
 
-                floorPreview.gameObject.SetActive(length * width >= minArea);
+                if (length <= 0 || width <= 0)
+                {
+                    if (length <= 0)
+                    {
+                        float snapDir = rawLength >= 0 ? cellSize : -cellSize;
+                        _currentPosition.x = _positionA.Value.x + snapDir;
+                        length = cellSize;
+                    }
+                    if (width <= 0)
+                    {
+                        float snapDir = rawWidth >= 0 ? cellSize : -cellSize;
+                        _currentPosition.z = _positionA.Value.z + snapDir;
+                        width = cellSize;
+                    }
+                    center = (_positionA.Value + _currentPosition) / 2f;
+                }
                 floorPreview.position = center;
                 floorPreview.localScale = new Vector3(length, 1f, width);
 
@@ -123,7 +142,6 @@ public class FloorPlacement : MonoBehaviour
     }
     public void TryPlace()
     {
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
         if (_positionA.HasValue)
         {
             Vector3 p0 = _positionA.Value;
@@ -176,7 +194,8 @@ public class FloorPlacement : MonoBehaviour
         {
             Renderer r    = floorObj.GetComponentInChildren<Renderer>();
             Material[] ms = r.materials;
-            ms[0]         = mat;
+            ms[0]         = new Material(mat);
+            ms[0].mainTextureScale = new Vector2(floor.length/2f, floor.width/2f); 
             r.materials   = ms;
         }
     }

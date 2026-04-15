@@ -31,29 +31,21 @@ public class PlacementData : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        print(other.name);
-        print("on enter");
-        print(other.gameObject.layer);
         // if the object is placed, return
-        if (isFixed) {print("is fixed"); return;};
-        if (IsIgnored(other.gameObject)) {print("is ignored"); return;}
-        // increment the number of obstacles by 1
+        if (isFixed) return;
+        if (IsIgnored(other.gameObject)) return;
+        // increment the number of obstacles
         _nObstacles++;
-        /* if (UISave.Instance.debugToggle.isOn) 
-            { print("debug mode is enabled"); return; }*/
         SetPlacementMode(State.Invalid);
     }
     void OnTriggerExit(Collider other)
     {
-        print(other.name);
-        print("on exit");
         // if the object is placed, return
-        if (isFixed) {print("is fixed"); return;};
-        if (IsIgnored(other.gameObject)) {print("is ignored"); return;}
+        if (isFixed)  return;
+        if (IsIgnored(other.gameObject))  return;
 
         // decrease the number of obstacles by 1
         _nObstacles--;
-        print("obstacles: "+_nObstacles);
         if (_nObstacles <= 0)
         {
             SetPlacementMode(State.Valid);

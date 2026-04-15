@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 public class PlacementManager : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class PlacementManager : MonoBehaviour
     {
         Furniture.Cancel(); 
         Wall.Cancel();
+        Floor.Cancel();
         ActiveMode = mode;
         switch (mode)
         {
@@ -58,6 +60,8 @@ public class PlacementManager : MonoBehaviour
     }
     public void TryPlace()
     {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                  return;
         if (ActiveMode == Mode.Furniture) 
             Furniture.TryPlace(placementLayerMask);
         else if (ActiveMode == Mode.Wall)

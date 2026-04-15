@@ -83,13 +83,11 @@ public class Interaction : MonoBehaviour
         if (isOverUi) return; // because we are not in an action menu
         
         Vector2 mousePos = Mouse.current.position.ReadValue();
-        Ray ray = gameCamera.ScreenPointToRay(mousePos);
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
         
         bool isSamePosition = Vector2.Distance(mousePos, lastClickPos) < clickPositionThreshold;
         if (!isSamePosition)
-        {
             currentHitIndex = 0; // Reset index for new position
-        }
         lastClickPos = mousePos;
         
         int hitCount = Physics.RaycastNonAlloc(ray, hitBuffer, raycastDistance, interactableLayer);

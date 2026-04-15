@@ -6,8 +6,6 @@ using PrimeTween;
 public class CameraHandler : MonoBehaviour
 {
     public static CameraHandler Instance;
-    [SerializeField] private Camera gameCamera;
-    [SerializeField] private Camera menuCamera;
     [SerializeField] private GameObject scrollGameobj;
 
     private float moveSpeed = 15f;
@@ -31,15 +29,20 @@ public class CameraHandler : MonoBehaviour
         RefreshRenderers();
     }
     // toggles the game cameras
-    public void ToggleGamecam(bool state)
+    public void ToggleScrollerBG(bool state)
     {
-        gameCamera.enabled = state;
-        menuCamera.enabled = !state;
         scrollGameobj.SetActive(!state); 
     }
     public void RotateCamera(float by)
     {
-        gameCamera.transform.RotateAround(origin, Vector3.up, 45f);
+        float startAngle = 0f;
+        float endAngle = 45f;
+
+        Tween.Custom(startAngle, endAngle, duration: 0.5f, ease: Ease.OutExpo, onValueChange: angle =>
+        {
+            Camera.main.transform.RotateAround(origin, Vector3.up, angle - startAngle);
+            startAngle = angle;
+        });
     }
     // refresh the renderers for the walls and objects, allowing them to become transparent when zoomed in
     public void RefreshRenderers()
@@ -49,7 +52,7 @@ public class CameraHandler : MonoBehaviour
     }
     void Update()
     {
-        if (gameCamera != null && gameCamera.enabled)
+        if (Camera.main != null && Camera.main.enabled)
         {
             MoveCamera();
             ZoomCamera();
@@ -60,15 +63,15 @@ public class CameraHandler : MonoBehaviour
     private void MoveCamera()
     {
         var directions = new Vector3 (
-            Mathf.Clamp(gameCamera.transform.forward.x, -1, 1), 
+            Mathf.Clamp(Camera.main.transform.forward.x, -1, 1), 
             0, 
-            Mathf.Clamp(gameCamera.transform.forward.z, -1, 1));
+            Mathf.Clamp(Camera.main.transform.forward.z, -1, 1));
         Vector2 input = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;
-        gameCamera.transform.position += (directions * input.y + gameCamera.transform.right * input.x) * Time.deltaTime * moveSpeed * camSpeedMultiplier.value;
-        gameCamera.transform.position = new Vector3(
-            Mathf.Clamp(gameCamera.transform.position.x,-bounds+origin.x,bounds+origin.y),
+        Camera.main.transform.position += (directions * input.y + Camera.main.transform.right * input.x) * Time.deltaTime * moveSpeed * camSpeedMultiplier.value;
+        Camera.main.transform.position = new Vector3(
+            Mathf.Clamp(Camera.main.transform.position.x,-bounds+origin.x,bounds+origin.y),
             20,
-            Mathf.Clamp(gameCamera.transform.position.z,-bounds+origin.x,bounds+origin.y));
+            Mathf.Clamp(Camera.main.transform.position.z,-bounds+origin.x,bounds+origin.y));
     }
     // zoom the camera out and in, called in the update function
     private void ZoomCamera()
@@ -81,7 +84,7 @@ public class CameraHandler : MonoBehaviour
             currentZoom = Mathf.Clamp(currentZoom - 0.1f * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
         else if (InputSystem.actions.FindAction("ZoomOutKey").IsPressed())
             currentZoom = Mathf.Clamp(currentZoom + 0.1f * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
-        gameCamera.orthographicSize = currentZoom;
+        Camera.main.orthographicSize = currentZoom;
     }
     float hideableMinDistance = 18;
     float minDistance = 6;
@@ -94,7 +97,7 @@ public class CameraHandler : MonoBehaviour
         foreach (Renderer renderer in wallRenderers)
         {
             if (renderer == null) continue;
-            float distance = Vector3.Distance(gameCamera.transform.position, renderer.transform.position);
+            float distance = Vector3.Distance(Camera.main.transform.position, renderer.transform.position);
             float t = Mathf.InverseLerp(minDistance / zoomScale, maxDistance / zoomScale, distance); // get amount zoomed in
             float alpha = Mathf.Lerp(0.8f, minAlpha, t); // dither
             foreach (var mat in renderer.materials)
@@ -105,14 +108,9 @@ public class CameraHandler : MonoBehaviour
         foreach (Renderer renderer in hideableRenderers)
         {
             if (renderer == null) continue;
-            float distance = Vector3.Distance(gameCamera.transform.position, renderer.transform.position);
+            float distance = Vector3.Distance(Camera.main.transform.position, renderer.transform.position);
             renderer.enabled = distance >= hideableMinDistance / zoomScale;
         }
-    }
-    // helpers
-    public bool GameCamEnabled()
-    {
-        return gameCamera.enabled;
     }
     // get the renderers from tags
     Renderer[] GetRenderersFromTags(string tag)

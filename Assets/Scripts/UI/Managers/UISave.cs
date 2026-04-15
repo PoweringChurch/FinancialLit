@@ -75,7 +75,7 @@ public class UISave : MonoBehaviour
         ingameOverlay.SetActive(true);
         savesScreen.SetActive(false);
         
-        CameraHandler.Instance.ToggleGamecam(true);
+        CameraHandler.Instance.ToggleScrollerBG(true);
         UIOverlay.Instance.UpdateResourcesAndBal();
 
         PetHelper.petStateMachine.SetState(PetState.Idle);
@@ -177,7 +177,7 @@ public class UISave : MonoBehaviour
             ingameOverlay.SetActive(false);
             savesScreen.SetActive(true);
 
-            CameraHandler.Instance.ToggleGamecam(false);
+            CameraHandler.Instance.ToggleScrollerBG(false);
             
             SaveHandler.Instance.DeleteSave(SaveHandler.Instance.currentSaveFile);
             DisplaySaves();

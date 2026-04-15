@@ -349,25 +349,34 @@ public class WallPlacement : MonoBehaviour
     }
     public bool DoIntersect(WallData a, WallData b)
     {
-        // allows for walls to be placed on corners
+        // a = existing wall, b = newWall
+
+        // shared endpoints are always fine
         if (a.p0 == b.p0 || a.p0 == b.p1 || a.p1 == b.p0 || a.p1 == b.p1)
             return false;
-        
+
         int o1 = Orientation(a.p0, a.p1, b.p0);
         int o2 = Orientation(a.p0, a.p1, b.p1);
         int o3 = Orientation(b.p0, b.p1, a.p0);
         int o4 = Orientation(b.p0, b.p1, a.p1);
 
-        // general case
-        /* IF p1, q1, and p2 orientations (o1) DOES NOT EQUAL p1, q1, and q2 orientations (o2) 
-        AND p2, q2, and p1 orientations (o3) DOES NOT EQUAL p2, q2, and q1 orientations (o4)
-        THEN the lines intersect */
+        // check if exactly one of newWalls points lies on the existing segment
+        bool b0OnA = (o1 == 0 && OnSegment(a.p0, b.p0, a.p1));
+        bool b1OnA = (o2 == 0 && OnSegment(a.p0, b.p1, a.p1));
+        bool a0OnB = (o3 == 0 && OnSegment(b.p0, a.p0, b.p1));
+        bool a1OnB = (o4 == 0 && OnSegment(b.p0, a.p1, b.p1));
+        // exactly one endpoint touching the existing segment is fine
+        if (b0OnA ^ b1OnA) return false;
+        if (a0OnB ^ a1OnB) return false;
+
+        // both endpoints on segment is block
+        if (b0OnA && b1OnA) return true;
+        if (a0OnB && a1OnB) return true;
+        // general crossing intersection is block
         if (o1 != o2 && o3 != o4)
             return true;
 
-        // collinear special cases
-        if (o1 == 0 && OnSegment(a.p0, b.p0, a.p1)) return true;
-        if (o2 == 0 && OnSegment(a.p0, b.p1, a.p1)) return true;
+        // collinear cases for existing wall's points on newWall = block
         if (o3 == 0 && OnSegment(b.p0, a.p0, b.p1)) return true;
         if (o4 == 0 && OnSegment(b.p0, a.p1, b.p1)) return true;
 
@@ -381,7 +390,7 @@ public class WallPlacement : MonoBehaviour
 
         foreach (WallData wall in GetAllWalls())
         {
-            if (DoIntersect(newWall, wall))
+            if (DoIntersect(wall, newWall))
                 return false;
         }
 

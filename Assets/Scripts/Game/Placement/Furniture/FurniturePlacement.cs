@@ -109,9 +109,6 @@ public class FurniturePlacement : MonoBehaviour
       // places the current object
       public void TryPlace(LayerMask placementLayerMask)
       {
-            // check if cursor over ui
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-                  return;
             // check if we have an object to place, and if the object has a valid position
             if (_objectPrefab == null || !_handler.hasValidPlacement) 
                   return;

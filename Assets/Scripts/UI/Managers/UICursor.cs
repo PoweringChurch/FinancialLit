@@ -7,7 +7,7 @@ public class UICursor : MonoBehaviour
 {
     public static UICursor Instance;
 
-    private static Vector2 cursorHotspot = new(-1, -1);
+    private static Vector2 cursorHotspot = new(8, 8);
     private static CursorMode cursorMode = CursorMode.Auto;
 
     [SerializeField] private LayerMask interactableLayer;
