@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public enum PetBreed {Corgi, Cur, Pug}
@@ -22,7 +23,7 @@ public class SaveHandler : MonoBehaviour
     public void SaveGame()
     {
         currentPlayerData.IsNewSave = false;
-
+        
         //pet stats
         currentPlayerData.Breed = PetHelper.petStats.breed;
         currentPlayerData.PetName = PetHelper.petStats.petName;
@@ -32,46 +33,16 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.Entertainment = PetHelper.petStats.Status["entertainment"];
         currentPlayerData.Energy = PetHelper.petStats.Status["energy"];
 
-
-        float hygiene = currentPlayerData.Hygiene;
-        float hunger = currentPlayerData.Hunger;
-        float fun = currentPlayerData.Entertainment;
-        float energy = currentPlayerData.Energy;
-
-        float total = (hygiene + hunger + fun + energy)/400;
-
         currentPlayerData.PetPosition = PetHelper.petMover.petTransform.position;
         currentPlayerData.PetRotation = PetHelper.petMover.petTransform.rotation;
 
         currentPlayerData.PetFlags = PetHelper.petFlagManager.CurrentFlags;
         
-        // furniture
-
-        List<FurnitureObjectData> placedFurnitureData = new();
-        for (int i = 0; i < homeFurnitureTransform.childCount; i++)
-        {
-            var childTransform = homeFurnitureTransform.GetChild(i);
-            var placementHandler = childTransform.GetComponent<PlacementHandler>();
-            if (placementHandler == null) continue; // skip if no PlacementHandler
-
-            FurnitureObjectData newFurnitureObjData = new()
-            {
-                position = childTransform.position,
-                rotation = childTransform.rotation,
-                itemName = placementHandler.itemName
-            };
-
-            var childFunctionality = childTransform.GetComponent<BaseFunctionality>();
-            if (childFunctionality is FeedingFunctionality feedingFunctionality)
-            {
-                newFurnitureObjData.isFilled = feedingFunctionality.filled;
-            }
-            placedFurnitureData.Add(newFurnitureObjData);
-        }
-        currentPlayerData.PlacedFurniture = placedFurnitureData;
-
+        // save house
+        currentPlayerData.PlacedFurniture = PlacementManager.Instance.Furniture.GetPlacedFurniture();
+        currentPlayerData.PlacedWalls = PlacementManager.Instance.Wall.GetAllWalls().ToArray();
+        currentPlayerData.PlacedFloors = PlacementManager.Instance.Floor.GetAllFloors();
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
-
         // resources
         currentPlayerData.Balance = FinancialSpending.Instance.Balance;
         currentPlayerData.Food = PlayerResources.Instance.Food;
@@ -89,7 +60,7 @@ public class SaveHandler : MonoBehaviour
 
         sessionStartTime = Time.time; //reset for next save
         // save to file
-        string json = JsonUtility.ToJson(currentPlayerData, true); // true = pretty print
+        string json = JsonUtility.ToJson(currentPlayerData, true); // true here pretty print
         string savePath = Application.persistentDataPath + "/" + currentSaveFile;
         File.WriteAllText(savePath, json);
         Debug.Log($"Game saved to {savePath}");
@@ -103,29 +74,26 @@ public class SaveHandler : MonoBehaviour
     public void LoadSaveData(PlayerData playerData)
     {
         playerData.IsNewSave = false;
+        // if there is a pet
         if (PetHelper.CurrentActivePet != null)
-        {
-            Destroy(PetHelper.CurrentActivePet);
-        }
+            Destroy(PetHelper.CurrentActivePet); // destroy it and
         GameObject dog = null;
+        // load the new pet
         switch (playerData.Breed)
         {
             case PetBreed.Corgi:
                 dog = Instantiate(corgiPrefab,gameSpace);
-                Debug.Log("instantiated corgi");
                 break;
             case PetBreed.Cur:
-                Debug.Log("instantiated cur");
                 dog = Instantiate(curPrefab,gameSpace);
                 break;
             case PetBreed.Pug:
-                Debug.Log("instantiated pug");
                 dog = Instantiate(pugPrefab,gameSpace);
                 break;
         }
         if (!dog) return;
         PetHelper.CurrentActivePet = dog;
-        // Pet stats
+        // pet stats
         PetHelper.petStats.petName = playerData.PetName;
         PetHelper.petStats.breed = playerData.Breed;
 
@@ -136,46 +104,25 @@ public class SaveHandler : MonoBehaviour
 
         PetHelper.petMover.agent.Warp(playerData.PetPosition);
         PetHelper.petMover.petTransform.rotation = playerData.PetRotation;
-        // Pet flags
+        // pet flags
         PetHelper.petFlagManager.SetFlags(playerData.PetFlags);
 
-        //clear existing furniture
-        for (int i = homeFurnitureTransform.childCount - 1; i >= 0; i--)
-        {
-            Destroy(homeFurnitureTransform.GetChild(i).gameObject);
-        }
-
-        // Spawn saved furniture
-        foreach (var furnitureData in playerData.PlacedFurniture)
-        {
-            FurnitureData furnitureItem = FurnitureDatabase.GetData(furnitureData.itemName);
-            if (furnitureItem == null)
-                continue;
-
-            GameObject spawnedFurniture = Instantiate(furnitureItem.prefab, homeFurnitureTransform);
-            spawnedFurniture.transform.SetPositionAndRotation(furnitureData.position, furnitureData.rotation);
-
-            // Restore furniture data
-            var functionality = spawnedFurniture.GetComponent<BaseFunctionality>();
-            var placementHandler = spawnedFurniture.GetComponent<PlacementHandler>();
-            placementHandler.SetPlacementMode(PlacementMode.Fixed);
-            if (functionality is FeedingFunctionality feedingFunctionality)
-                feedingFunctionality.SetFilled(furnitureData.isFilled);
-        }
-
-        // Inventory
+        // load house
+        PlacementManager.Instance.LoadHouseData(playerData.PlacedWalls, playerData.PlacedFurniture, playerData.PlacedFloors);
+        // inventory
         InventoryHelper.Instance.SetInventory(playerData.PlayerInventory);
         InventoryHelper.Instance.Rebuild(); // Rebuild FurnitureData references
 
-        // Igt
+        // igt
         GameTime.Instance.SetTime(playerData.Minute,playerData.Day,playerData.Week);
-        // Resources
+        // resources
         FinancialSpending.Instance.SetBalance(playerData.Balance);
         PlayerResources.Instance.SetFood(playerData.Food);
         PlayerResources.Instance.SetShampoo(playerData.Shampoo);
 
         sessionStartTime = Time.time; // reset when loading
     }
+    // delete a save by file name
     public bool DeleteSave(string fileName)
     {
         string savePath = Application.persistentDataPath + "/" + fileName;
@@ -190,7 +137,7 @@ public class SaveHandler : MonoBehaviour
             File.Delete(savePath);
             Debug.Log($"Deleted save file: {savePath}");
             
-            //if deleted the currently active save, reset it (should happen but juuust in case)
+            // if deleted the currently active save, reset it (should happen but just in case)
             if (currentSaveFile == fileName)
             {
                 currentSaveFile = "default.json";
@@ -205,10 +152,11 @@ public class SaveHandler : MonoBehaviour
             return false;
         }
     }
+    // load player data from a file name
     public PlayerData PlayerDataFromFile(string fileName)
     {
         string savePath = Application.persistentDataPath + "/"+ fileName;
-
+        // ensure the fle exists
         if (!File.Exists(savePath))
         {
             Debug.LogWarning("Save file not found");

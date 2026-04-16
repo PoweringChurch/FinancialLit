@@ -1,17 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class FurnitureObjectData
-{
-    public Vector3 position;
-    public Quaternion rotation;
-    public string itemName; // to know which prefab to spawn
-
-    // furniture-specific data
-    public bool isFilled = false; // for food bowl
-}
-
 // class that is exported to json and loaded
 [System.Serializable]
 public class PlayerData
@@ -27,11 +16,14 @@ public class PlayerData
     public Vector3 PetPosition;
     public Quaternion PetRotation;
 
-    public List<PetFlag> PetFlags; //enum
-    // furniture
-    public List<FurnitureObjectData> PlacedFurniture;
-    public Inventory PlayerInventory;
+    public List<PetFlag> PetFlags; // enum
 
+    // furniture
+    public FurnitureObjectData[] PlacedFurniture;
+    public WallData[] PlacedWalls;
+    public FloorData[] PlacedFloors;
+    public Inventory PlayerInventory;
+    // rooms
     // resources
     public float Balance;
     public int Shampoo;
@@ -58,9 +50,8 @@ public class PlayerData
         // Default values for new game
         PetName = "Pet";
         Hygiene = Entertainment = Hunger = Energy = 100f;
-        PetFlags = new List<PetFlag>();
-        PlacedFurniture = new List<FurnitureObjectData>();
-        PlayerInventory = new Inventory();
+        PlayerInventory = new();
+        PetFlags = new();
         Minute = 480;
         Balance = 200f;
         Shampoo = 8;

@@ -139,7 +139,7 @@ public class UIWorkManager : MonoBehaviour
         UIPopups.Instance.PopupYN(header,body, () =>
         {
             WorkHandler.Instance.CancelShift();
-            CameraHandler.Instance.ToggleGamecam(true);
+            CameraHandler.Instance.ToggleScrollerBG(true);
             ingameOverlayUI.SetActive(true);
             workoverlayUI.SetActive(false);
         }, () => {});
@@ -151,7 +151,7 @@ public class UIWorkManager : MonoBehaviour
         string body = "Do you want to start working?";
         UIPopups.Instance.PopupYN(header,body, () =>
         {
-            CameraHandler.Instance.ToggleGamecam(false);
+            CameraHandler.Instance.ToggleScrollerBG(false);
             workoverlayUI.SetActive(true);
             ingameOverlayUI.SetActive(false);
 
@@ -165,7 +165,7 @@ public class UIWorkManager : MonoBehaviour
         UIPopups.Instance.PopupInfo("Job well done!",body,"Yay!",() =>
         {
             WorkHandler.Instance.EndShift();
-            CameraHandler.Instance.ToggleGamecam(true);
+            CameraHandler.Instance.ToggleScrollerBG(true);
             ingameOverlayUI.SetActive(true);
             workoverlayUI.SetActive(false);
         });

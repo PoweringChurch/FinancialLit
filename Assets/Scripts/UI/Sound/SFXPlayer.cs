@@ -7,16 +7,13 @@ public class SFXPlayer : MonoBehaviour
     public AudioSource audioSource;
     public Slider sfxVolSlider;
     private float volume = 0.2f;
-    //public Slider sfxVolSlider;
-    
+
     void Awake()
     {
         Instance = this;
-        
+        // ensure an audio source exists
         if (audioSource == null)
-        {
             audioSource = gameObject.AddComponent<AudioSource>();
-        }
         
         audioSource.playOnAwake = false;
         audioSource.loop = false;
@@ -30,16 +27,12 @@ public class SFXPlayer : MonoBehaviour
     public void Play(AudioClip clip)
     {
         if (clip != null)
-        {
             audioSource.PlayOneShot(clip, volume);
-        }
     }
     
     public void Play(AudioClip clip, float volumeMultiplier)
     {
         if (clip != null)
-        {
             audioSource.PlayOneShot(clip, volume * volumeMultiplier);
-        }
     }
 }

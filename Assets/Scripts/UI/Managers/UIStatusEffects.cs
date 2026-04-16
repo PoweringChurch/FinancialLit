@@ -27,18 +27,22 @@ public class UIStatusEffects : MonoBehaviour
     void Start()
     {
         flagIconMap = new Dictionary<PetFlag, FlagIcon>();
+        // for each icon in the flag icon
         foreach (var icon in flagIcons)
         {
             flagIconMap[icon.petFlag] = icon;
             icon.gameObject.SetActive(false);
-            
+
             var eventTrigger = icon.gameObject.GetComponent<EventTrigger>();
-            if (eventTrigger == null) eventTrigger = icon.gameObject.AddComponent<EventTrigger>();
             
+            if (eventTrigger == null) 
+                eventTrigger = icon.gameObject.AddComponent<EventTrigger>();
+            
+            // when the pointer enters a status effect icon
             var pointerEnter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
             pointerEnter.callback.AddListener((data) => ShowDescription(icon));
             eventTrigger.triggers.Add(pointerEnter);
-            
+            // when the pointer exits an icon
             var pointerExit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
             pointerExit.callback.AddListener((data) => HideDescription());
             eventTrigger.triggers.Add(pointerExit);
@@ -49,6 +53,7 @@ public class UIStatusEffects : MonoBehaviour
     {
         pet.GetComponent<PetFlagManager>().OnFlagChanged += UpdateFlags;
     }
+    // update the flags, occurs whenever flags are changed
     void UpdateFlags(PetFlag _)
     {
         foreach (var icon in flagIcons)
@@ -57,11 +62,10 @@ public class UIStatusEffects : MonoBehaviour
             icon.gameObject.SetActive(hasFlag);
             
             if (!hasFlag && currentDescription != null && currentDescriptionIcon == icon)
-            {
                 HideDescription();
-            }
         }
     }
+    // shows the description of the status effect
     void ShowDescription(FlagIcon icon)
     {
         HideDescription();
@@ -72,6 +76,7 @@ public class UIStatusEffects : MonoBehaviour
         texts[1].text = icon.Effect;
         texts[2].text = icon.Description;
     }
+    // hides the description of the status effect
     void HideDescription()
     {
         if (currentDescription != null) UnityEngine.Object.Destroy(currentDescription);

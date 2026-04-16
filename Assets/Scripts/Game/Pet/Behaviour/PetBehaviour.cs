@@ -22,8 +22,6 @@ public class PetBehaviour : MonoBehaviour
     {
         // do not do anything if moving
         if (!PetHelper.petMover.reachedGoal) return;
-        // just in case, but shouldnt be an issue
-        if (!CameraHandler.Instance.GameCamEnabled()) return;
         // increment timer
         actionTimer -= Time.deltaTime;
         if (actionTimer <= 0)

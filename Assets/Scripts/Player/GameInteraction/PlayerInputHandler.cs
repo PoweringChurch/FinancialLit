@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+// this script exclusively handles player input so as to minimize forms of input not being centralized and difficult to manage
 public class PlayerInputHandler : MonoBehaviour
 {
     // technically not necessary, but makes it a lot more terse
@@ -25,29 +26,48 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void Update()
     {
-        HandleFurniturePlacer();
+        HandlePlacement();
         HandleInteraction();
         HandleMisc();
     }
-    void HandleFurniturePlacer()
+
+    void HandlePlacement()
     {
-        if (cancel.WasPressedThisFrame())
+        switch (PlacementManager.Instance.ActiveMode)
         {
-            FurniturePlacer.Instance.CancelPlacement();
+            case PlacementManager.Mode.Furniture:
+                if (cancel.WasPressedThisFrame())
+                    PlacementManager.Instance.CancelPlace();
+                if (interact.WasPressedThisFrame())
+                    PlacementManager.Instance.TryPlace();
+                if (rotate.WasPressedThisFrame())
+                    PlacementManager.Instance.Furniture.RotateFurniture();
+                if (setFreemove.WasPressedThisFrame())
+                    PlacementManager.Instance.Furniture.SetFreemove(true);
+                else if (setFreemove.WasReleasedThisFrame())
+                    PlacementManager.Instance.Furniture.SetFreemove(false);
+                if (raiseFurniture.IsPressed())
+                    PlacementManager.Instance.Furniture.AddYOffset(Time.deltaTime);
+                else if (lowerFurniture.IsPressed())
+                    PlacementManager.Instance.Furniture.AddYOffset(-Time.deltaTime);
+                break;
+
+            case PlacementManager.Mode.Wall:
+                if (cancel.WasPressedThisFrame())
+                    PlacementManager.Instance.CancelPlace();
+                if (interact.WasPressedThisFrame())
+                    PlacementManager.Instance.TryPlace();
+                break;
+            case PlacementManager.Mode.Floor:
+                if (cancel.WasPressedThisFrame())
+                    PlacementManager.Instance.CancelPlace();
+                if (interact.WasPressedThisFrame())
+                    PlacementManager.Instance.TryPlace();
+                break;
+            case PlacementManager.Mode.None:
+            default:
+                break;
         }
-        if (rotate.WasPressedThisFrame())
-        {
-            FurniturePlacer.Instance.RotateFurniture();
-        }
-        if (interact.WasPressedThisFrame() && FurniturePlacer.Instance.onPlacement)
-        {
-            FurniturePlacer.Instance.Place();
-        }
-        if (setFreemove.WasPressedThisFrame()) FurniturePlacer.Instance.SetFreemove(true);
-        else if (setFreemove.WasReleasedThisFrame()) FurniturePlacer.Instance.SetFreemove(false);
-        
-        if (raiseFurniture.IsPressed()) FurniturePlacer.Instance.AddYOffset(Time.deltaTime);
-        else if (lowerFurniture.IsPressed()) FurniturePlacer.Instance.AddYOffset(-Time.deltaTime);
     }
     void HandleMisc()
     {
@@ -55,7 +75,6 @@ public class PlayerInputHandler : MonoBehaviour
         var (goalPosition,overInteractableLayer) = UICursor.Instance.CursorToVector3(1);
         if (PlayerFlagManager.HasFlag(PlayerFlag.SetFollow) && interact.WasPressedThisFrame() && overInteractableLayer)
         {
-            print("clicked");
             bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
             if (isOverUi)
             {   
@@ -73,9 +92,8 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void HandleInteraction()
     {
+        if (PlacementManager.Instance.ActiveMode != PlacementManager.Mode.None) return;
         if (interact.WasPressedThisFrame())
-        {
             Interaction.Instance.HandleClick();
-        }
     }
 }

@@ -18,6 +18,7 @@ public class UIPopups : MonoBehaviour
     {
         Instance = this;
     }
+    // pops up the provided info; only has a dismiss button
     public void PopupInfo(string header, string body, string dismiss = "OK", Action action = null)
     {
         UISFXPlayer.Instance.Play(popupsfx);
@@ -37,6 +38,7 @@ public class UIPopups : MonoBehaviour
             if (action != null) action.Invoke();
         });
     }
+    // pops up the provided Yes/No info; has a yes/no button response
     public void PopupYN(string header, string body, Action onYes, Action onNo = null, string y = "Yes", string n = "No")
     {
         UISFXPlayer.Instance.Play(popupsfx);
@@ -66,6 +68,7 @@ public class UIPopups : MonoBehaviour
             Destroy(newYNPanel);
         });
     }
+    // pops up the provided task
     public GameObject PopupTask(string header, string body) 
     {
         UISFXPlayer.Instance.Play(popupsfx);
@@ -77,6 +80,7 @@ public class UIPopups : MonoBehaviour
 
         return newTaskPanel;
     }
+    // closes all popups
     public void CloseAllPopups()
     {
         if (PopupsTransform == null) return;
@@ -85,9 +89,7 @@ public class UIPopups : MonoBehaviour
         {
             Transform child = PopupsTransform.GetChild(i);
             if (child != null)
-            {
                 Destroy(child.gameObject);
-            }
         }
     }
 }

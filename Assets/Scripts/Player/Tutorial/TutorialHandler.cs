@@ -38,14 +38,10 @@ public class TutorialManager : MonoBehaviour
         if (moodDisplay != null)
             moodDisplay.onClick.RemoveListener(ShowNeedsAcknowledgement);
         
-        if (FurniturePlacer.Instance != null)
-            FurniturePlacer.Instance.OnItemPlaced -= ShowPlacementAcknowledgement;
+        PlacementManager.Instance.Furniture.OnItemPlaced -= ShowPlacementAcknowledgement;
         
-        if (WorkHandler.Instance != null)
-        {
-            WorkHandler.Instance.OnWorkStarted -= OnWorkStartedHandler;
-            WorkHandler.Instance.OnWorkEnded -= ShowWorkAcknowledgement;
-        }
+        WorkHandler.Instance.OnWorkStarted -= OnWorkStartedHandler;
+        WorkHandler.Instance.OnWorkEnded -= ShowWorkAcknowledgement;
         
         if (currentTaskUI != null)
             Destroy(currentTaskUI);
@@ -131,9 +127,8 @@ public class TutorialManager : MonoBehaviour
         string body = "Open the placement menu and place down an old monitor";
         currentTaskUI = Popups.PopupTask(header, body);
         
-        if (FurniturePlacer.Instance != null)
-            FurniturePlacer.Instance.OnItemPlaced += ShowPlacementAcknowledgement;
-        if (FurniturePlacer.Instance.IsItemPlaced("Old Monitor"))
+        PlacementManager.Instance.Furniture.OnItemPlaced += ShowPlacementAcknowledgement;
+        if (PlacementManager.Instance.Furniture.IsItemPlaced("Old Monitor"))
         {
             ShowPlacementAcknowledgement("Old Monitor");
         }
@@ -144,8 +139,7 @@ public class TutorialManager : MonoBehaviour
         if (itemName != "Old Monitor")
             return;
         
-        if (FurniturePlacer.Instance != null)
-            FurniturePlacer.Instance.OnItemPlaced -= ShowPlacementAcknowledgement;
+        PlacementManager.Instance.Furniture.OnItemPlaced -= ShowPlacementAcknowledgement;
         
         string header = "Nice work!";
         string body = "You've successfully placed your first item. You can use this system to decorate your home with furniture and equipment.";
@@ -224,7 +218,7 @@ public class TutorialManager : MonoBehaviour
      Popups.PopupInfo(header, body, dismiss, ShowFinal);
     }
     
-    // Step 6
+    // Step 7
     void ShowFinal()
     {
         string header = "Take on the world";
