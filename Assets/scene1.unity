@@ -1401,7 +1401,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8123,7 +8123,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 16.25, y: 1, z: 16.25}
+  m_LocalScale: {x: 32, y: 1, z: 32}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1257933965}
@@ -13272,7 +13272,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15505,7 +15505,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17252,7 +17252,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20262,7 +20262,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21502,7 +21502,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 16, y: 1, z: 16}
+  m_LocalScale: {x: 32, y: 1, z: 32}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1257933965}
@@ -21532,7 +21532,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc6f9e902fc0b4e8fa3b05f688259764, type: 2}
+  - {fileID: 2100000, guid: 39cb410ce082f524dae90aded678c0e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -23912,7 +23912,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -28536,7 +28536,19 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1880617076}
+        m_TargetAssemblyTypeName: PlacementManager, Assembly-CSharp
+        m_MethodName: SetMode
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -31777,7 +31789,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34596,7 +34608,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34838,7 +34850,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0000002682209, y: 0, z: 2.5}
-  m_LocalScale: {x: 16, y: 1, z: 21}
+  m_LocalScale: {x: 32, y: 1, z: 32}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1257933965}
@@ -37522,7 +37534,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -38358,7 +38370,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -38665,7 +38677,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 291994500}
         m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
-        m_MethodName: ToggleGamecam
+        m_MethodName: ToggleScrollerBG
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
