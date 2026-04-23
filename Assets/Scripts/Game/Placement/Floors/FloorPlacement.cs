@@ -52,12 +52,12 @@ public class FloorPlacement : MonoBehaviour
         switch (newMode)
         {
             case Mode.Floor:
-                UICursor.Instance.SetCursor(UICursor.Instance.floorCursor);
-                floorPreview.gameObject.SetActive(true);
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.floorCursor);
+                floorRenderer.enabled = true;
                 break;
             case Mode.Destroy:
-                UICursor.Instance.SetCursor(UICursor.Instance.scrapeCursor);
-                floorPreview.gameObject.SetActive(false);
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.scrapeCursor);
+                floorRenderer.enabled = false;
                 _positionA = null;
                 break;
         }
@@ -84,7 +84,7 @@ public class FloorPlacement : MonoBehaviour
         {
             if (_positionA.HasValue)
             {
-                floorPreview.gameObject.SetActive(true);
+                floorRenderer.enabled = true;
                 // show a preview rect between positionA and current
                 Vector3 center = (_positionA.Value + _currentPosition) / 2f;
                 float rawLength = _currentPosition.x - _positionA.Value.x;
@@ -122,13 +122,14 @@ public class FloorPlacement : MonoBehaviour
                     floorRenderer.material = PlacementManager.Instance.validPlacementMaterial; 
             }
             else
-            {
-                // snap preview to a single cell at cursor
-                floorPreview.gameObject.SetActive(false);
-            }
+                floorRenderer.enabled = false;
         }
     }
-    public void Cancel() => _positionA = null;
+    public void Cancel() 
+    { 
+        _positionA = null; 
+        floorRenderer.enabled = false;
+    }
     public void LoadFloors(FloorData[] floorData)
     {
         // clear existing floors
@@ -154,7 +155,8 @@ public class FloorPlacement : MonoBehaviour
             if (IsOverlapping(p0, p1)) return;
 
             float cost = baseCost * length * width;
-            if (!FinancialSpending.Instance.CanAfford(cost)) return;
+            if (!FinancialSpending.Instance.CanAfford(cost)) 
+                { PlacementUtils.Message("Too expensive!", null, Color.softRed); return; }
             FinancialSpending.Instance.Spend(cost);
 
             FloorData newFloor = new()
@@ -195,7 +197,7 @@ public class FloorPlacement : MonoBehaviour
             Renderer r    = floorObj.GetComponentInChildren<Renderer>();
             Material[] ms = r.materials;
             ms[0]         = new Material(mat);
-            ms[0].mainTextureScale = new Vector2(floor.length/2f, floor.width/2f); 
+            ms[0].mainTextureScale = new Vector2(ms[0].mainTextureScale.x*floor.length, ms[0].mainTextureScale.y*floor.width); 
             r.materials   = ms;
         }
     }

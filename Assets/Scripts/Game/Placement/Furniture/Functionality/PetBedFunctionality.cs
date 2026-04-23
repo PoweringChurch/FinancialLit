@@ -48,7 +48,7 @@ public class PetBedFunctionality : BaseFunctionality
     {
         if (inUse)
         {
-            Message("In use!");
+            PlacementUtils.Message("The bed is in use!", transform.position);
             return;
         }
         base.Move();
@@ -58,7 +58,7 @@ public class PetBedFunctionality : BaseFunctionality
     {
         if (inUse)
         {
-            Message("In use!");
+            PlacementUtils.Message("The bed is in use!", transform.position);
             return;
         } 
         base.Remove();

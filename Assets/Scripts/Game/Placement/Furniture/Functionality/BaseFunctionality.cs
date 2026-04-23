@@ -43,6 +43,8 @@ public class BaseFunctionality : MonoBehaviour
         InventoryHelper.Instance.AddItem(item, 1); // add the item back into inventory so furniture can be placed
         PlacementManager.Instance.Furniture.isMoving = true; // set moving on the furnitureplacer
         PlacementManager.Instance.Furniture.OverrideRotation(transform.rotation); // override the player's furniture rotation for a more natural experience
+        PlacementManager.Instance.SetMode(PlacementManager.Mode.Furniture);
+
         PlacementManager.Instance.Furniture.SetCurrentFurniture(handler.itemName); // set the current active furniture to the object that is being moved
 
         // queue previously set down furniture for destruction so that the player cannot duplicate items
@@ -74,29 +76,6 @@ public class BaseFunctionality : MonoBehaviour
         if (!FinancialSpending.Instance.CanAfford(price)) return;
         FinancialSpending.Instance.Spend(price);
     }
-    // show message popup; different from an info popup
-    protected void Message(string message)
-    {
-        // create object from prefab
-        GameObject textObj = Instantiate(floatingTextPrefab, transform.position + Vector3.up * 0.5f - (Camera.main.transform.forward*2), Camera.main.transform.rotation);
-        TextMeshPro tmp = textObj.GetComponent<TextMeshPro>();
-        // set message
-        tmp.text = message;
-        // move up and fade message
-        const float tweenDur = 1.5f;
-
-        Vector3 goalPos = new Vector3(0,5,0) + textObj.transform.position;
-        Tween.Position(textObj.transform, endValue: goalPos, duration: tweenDur, ease: Ease.InSine);
-        Tween.Color(tmp, endValue: new Color(tmp.color.r, tmp.color.g, tmp.color.b, 0f), duration: tweenDur);
-        // delete after 1.5 sec
-        StartCoroutine(WaitSecsDestroyObj(1.5f,textObj));
-    }
-    //for use in Message func
-    IEnumerator WaitSecsDestroyObj(float dur, GameObject obj)
-    {
-        yield return new WaitForSeconds(dur);
-        Destroy(obj);
-    }
     // helper functions
     public Dictionary<string, Action> GetAvailableActions() 
     {
@@ -121,7 +100,7 @@ public class BaseFunctionality : MonoBehaviour
         // check if pet is idle
         if (!PetHelper.petStateMachine.IsInState(PetState.Idle))
         {
-            Message($"{PetHelper.petStats.petName} is occupied!");
+            PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
             return true;
         }
         return false;

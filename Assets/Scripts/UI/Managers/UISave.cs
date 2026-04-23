@@ -44,7 +44,7 @@ public class UISave : MonoBehaviour
             // try to load the save data to display info
             try
             {
-                string json = System.IO.File.ReadAllText(filePath);
+                string json = System.IO.File.ReadAllText(filePath); // <-- but this works?
                 PlayerData saveData = JsonUtility.FromJson<PlayerData>(json);
 
                 // create slot UI
@@ -68,7 +68,8 @@ public class UISave : MonoBehaviour
     // called when the load button is clicked
     private void OnLoadClick(string fileName)
     {
-        LoadThisSave(fileName);
+        var plrData = SaveHandler.Instance.PlayerDataFromFile(fileName);
+        SaveHandler.Instance.LoadSaveData(plrData);
         AreaHandler.Instance.EnterHome();
         
         // enter game
@@ -98,13 +99,6 @@ public class UISave : MonoBehaviour
         DateTime dateTime = DateTimeOffset.FromUnixTimeSeconds(timestamp).LocalDateTime;
         return dateTime.ToString("MMM dd, HH:mm");
     }
-
-    // loads a save based on file name
-    void LoadThisSave(string fileName)
-    {
-        var plrData = SaveHandler.Instance.PlayerDataFromFile(fileName);
-        SaveHandler.Instance.LoadSaveData(plrData);
-    }
     PetBreed selectedBreed = PetBreed.Corgi;
 
     // called externally from a button
@@ -117,11 +111,10 @@ public class UISave : MonoBehaviour
     {
         if (petNameInput.text == "")
             return; // cant have empty name
-        PlayerData newData = new()
-        {
-            PetName = petNameInput.text,
-            Breed = selectedBreed,
-        };
+        TextAsset jsonFile = Resources.Load<TextAsset>("Other/defaultsave"); // the file is in Resources/Other/defaultsave.hsib
+        PlayerData newData = JsonUtility.FromJson<PlayerData>(jsonFile.text);
+        newData.PetName = petNameInput.text;
+        newData.Breed = selectedBreed;
         if (debugToggle.isOn)
         {
             FurnitureData[] allData = FurnitureDatabase.GetAllData();
@@ -131,7 +124,7 @@ public class UISave : MonoBehaviour
             }
             newData.Balance = 1000000;
             newData.Shampoo = 10000;
-            newData.Food = 1000;
+            newData.Food = 10000;
 
             UIPopups.Instance.PopupInfo(
                 "Hey!",

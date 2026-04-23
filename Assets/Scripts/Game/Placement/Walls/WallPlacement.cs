@@ -75,9 +75,8 @@ public class WallPlacement : MonoBehaviour
         _currentPosition.y = 0;
         // preview the wall
         if (_positionA.HasValue)
-        {
-            if (!previewWall.gameObject.activeSelf)
-                previewWall.gameObject.SetActive(true);
+        {   
+            previewWallRenderer.enabled = true;
             previewWallData.p0 = _currentPosition;
             previewWallData.p1 = (Vector3)_positionA;
 
@@ -92,7 +91,7 @@ public class WallPlacement : MonoBehaviour
                 previewWallRenderer.material = PlacementManager.Instance.validPlacementMaterial;
         }
         else if (!_positionA.HasValue && previewWall.gameObject.activeSelf)
-            previewWall.gameObject.SetActive(false);
+            previewWallRenderer.enabled = false;
     }
     public void DestroyWall()
     {
@@ -110,16 +109,16 @@ public class WallPlacement : MonoBehaviour
         switch (newMode)
         {
             case Mode.Wall:
-                UICursor.Instance.SetCursor(UICursor.Instance.wallCursor);
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.wallCursor);
                 break;
             case Mode.Destroy:
-                UICursor.Instance.SetCursor(UICursor.Instance.destroyCursor);
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.destroyCursor);
                 break;
             case Mode.Paint:
-                UICursor.Instance.SetCursor(UICursor.Instance.paintCursor);
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.paintCursor);
                 break;
             case Mode.Door:
-                UICursor.Instance.SetCursor(UICursor.Instance.doorCursor);
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.doorCursor);
                 break;
         };
     }
@@ -163,7 +162,8 @@ public class WallPlacement : MonoBehaviour
         if (_positionA.HasValue)
         {
             float cost = baseCost * Vector3.Distance((Vector3)_positionA, _currentPosition);
-            if (!FinancialSpending.Instance.CanAfford(cost)) return;
+            if (!FinancialSpending.Instance.CanAfford(cost)) 
+                { PlacementUtils.Message("Too expensive!", null, Color.softRed); return; }
             WallData newWall = new() 
             { 
                 p0 = _currentPosition + offset, 
@@ -325,6 +325,7 @@ public class WallPlacement : MonoBehaviour
     public void Cancel()
     {
         _positionA = null;
+        previewWallRenderer.enabled = false;
     }
     // approach from https://www.geeksforgeeks.org/dsa/check-if-two-given-line-segments-intersect/
     private bool OnSegment(Vector3 p, Vector3 q, Vector3 r)

@@ -29,12 +29,13 @@ public class FurniturePlacement : MonoBehaviour
 
       // grid placement
       private const float cellSize = 0.25f;
+      private Vector3 gridOffset = new (.25f,0,.25f);
       private bool freemove = false;
 
       // y placement
       private const float minyoffset = 0f;
       private const float maxyoffset = 3f;
-      private float currentyoffset = 0f; // it has to be .51 otherwise it wont work cause it collides with thefloor
+      private float currentyoffset = 0f;
 
       private Quaternion previousRotation;
       [HideInInspector] public bool isMoving = false;
@@ -44,18 +45,21 @@ public class FurniturePlacement : MonoBehaviour
       {
             if (!_objectPrefab) return;
             
-            if (!_toBuild.activeSelf) _toBuild.SetActive(true);
+            if (!_toBuild.activeSelf) 
+                  _toBuild.SetActive(true);
             if (freemove)
             {
-                  _toBuild.transform.position = new Vector3(hit.point.x,0,hit.point.z);
-                  minydisplay.position = new Vector3(hit.point.x, minyoffset+0.02f, hit.point.z);
+                  _toBuild.transform.position = new Vector3(hit.point.x, minyoffset, hit.point.z);
+                  minydisplay.position = new Vector3(hit.point.x, minyoffset + 0.02f, hit.point.z);
             }
             else
             {
-                  _toBuild.transform.position = PlacementUtils.ClampToNearest(hit.point, cellSize);
-                  minydisplay.position = new Vector3(_toBuild.transform.position.x, minyoffset+0.02f, _toBuild.transform.position.z);
+                  _toBuild.transform.position = PlacementUtils.ClampToNearest(hit.point, cellSize, gridOffset);
+                  minydisplay.position = new Vector3(_toBuild.transform.position.x, minyoffset + 0.02f, _toBuild.transform.position.z);
             }
-            _toBuild.transform.position += new Vector3(0,currentyoffset,0);
+
+            // clamp offset between 0 and max, base y is already minyoffset from both branches
+            _toBuild.transform.position += new Vector3(0, Math.Clamp(currentyoffset, 0, maxyoffset - minyoffset), 0);
       }
       public void LoadFurniture(FurnitureObjectData[] furnitureData)
       {
@@ -123,8 +127,8 @@ public class FurniturePlacement : MonoBehaviour
             if (freemove)
                   _toBuild.transform.position = new Vector3(hit.point.x,0,hit.point.z);
             else // else make it snap
-                  _toBuild.transform.position = PlacementUtils.ClampToNearest(hit.point, cellSize, Vector3.zero);
-            _toBuild.transform.position += new Vector3(0,currentyoffset,0);
+                  _toBuild.transform.position = PlacementUtils.ClampToNearest(hit.point, cellSize, gridOffset);
+            _toBuild.transform.position += new Vector3(0,Math.Clamp(currentyoffset,minyoffset,maxyoffset),0);
 
             // trigger the event
             OnItemPlaced?.Invoke(itemName);
@@ -133,6 +137,8 @@ public class FurniturePlacement : MonoBehaviour
             
             _toBuild = null;
             _PrepareObject();
+            if (isMoving)
+                  { isMoving = false; PlacementManager.Instance.SetMode(PlacementManager.Mode.None); Cancel(); }
             if (!InventoryHelper.Instance.GetInventory().HasItem(_handler.itemName) || isMoving) // if the item isnt in players inventory
                   Cancel(); // cancel the placement
       }
@@ -154,7 +160,8 @@ public class FurniturePlacement : MonoBehaviour
             // destroy what were about to build
             Destroy(_toBuild);
             // set isMoving to false
-            isMoving = false;
+            if (isMoving)
+                  { isMoving = false; PlacementManager.Instance.SetMode(PlacementManager.Mode.None); }
             // dereference
             _toBuild = null; 
             _objectPrefab = null;

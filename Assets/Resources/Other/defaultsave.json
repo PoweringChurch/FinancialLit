@@ -1,0 +1,1526 @@
+{
+    "Breed": 1,
+    "PetName": "unset",
+    "Hygiene": 100.0,
+    "Entertainment": 100.0,
+    "Hunger": 100.0,
+    "Energy": 100.0,
+    "PetPosition": {
+        "x": 0.0,
+        "y": 0,
+        "z": 0.0
+    },
+    "PetRotation": {
+        "x": 0.0,
+        "y": 0,
+        "z": 0.0,
+        "w": 0
+    },
+    "PetFlags": [],
+    "PlacedFurniture": [
+        {
+            "position": {
+                "x": 5.125,
+                "y": 0.5,
+                "z": 3.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.7071066498756409,
+                "z": 0.0,
+                "w": -0.7071070075035095
+            },
+            "itemName": "L-Sofa",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -5.375,
+                "y": 0.5,
+                "z": 5.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -2.682208730675484e-7,
+                "z": 0.0,
+                "w": -1.0
+            },
+            "itemName": "Lamp",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 1.125,
+                "y": 0.5,
+                "z": -9.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -2.682208730675484e-7,
+                "z": 0.0,
+                "w": -1.0
+            },
+            "itemName": "Bathroom Vanity",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 1.625,
+                "y": 1.9317700862884522,
+                "z": -9.125
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 2.682208730675484e-7,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "itemName": "Mirror",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 3.375,
+                "y": 1.2355458736419678,
+                "z": -9.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 2.682208730675484e-7,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "itemName": "Toilet Paper Roll",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 4.125,
+                "y": 0.5,
+                "z": -9.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 2.682208730675484e-7,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "itemName": "Toilet",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 5.375,
+                "y": 0.518657386302948,
+                "z": -9.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.7071066498756409,
+                "z": 0.0,
+                "w": -0.7071070075035095
+            },
+            "itemName": "Box Bath",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 3.375,
+                "y": 0.5,
+                "z": -9.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.7071066498756409,
+                "z": 0.0,
+                "w": -0.7071070075035095
+            },
+            "itemName": "Trash Bin",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -2.375,
+                "y": 0.5,
+                "z": -9.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -2.682208730675484e-7,
+                "z": 0.0,
+                "w": -1.0
+            },
+            "itemName": "Wooden Desk",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -2.125,
+                "y": 0.5,
+                "z": -8.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -1.0,
+                "z": 0.0,
+                "w": 2.682208730675484e-7
+            },
+            "itemName": "Wooden Chair",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -5.125,
+                "y": 0.5,
+                "z": -9.125
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 2.682208730675484e-7,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "itemName": "Small Bed",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -0.625,
+                "y": 0.5,
+                "z": -6.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": -2.682208730675484e-7
+            },
+            "itemName": "Pet Bed",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 4.625,
+                "y": 0.5,
+                "z": 1.125
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -2.682208730675484e-7,
+                "z": 0.0,
+                "w": -1.0
+            },
+            "itemName": "Standing Fan",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -5.375,
+                "y": 0.5,
+                "z": 9.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": -2.682208730675484e-7
+            },
+            "itemName": "Double Kitchen Cabinet",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -4.625,
+                "y": 0.5,
+                "z": 9.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": -2.682208730675484e-7
+            },
+            "itemName": "Double Kitchen Cabinet",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -3.625,
+                "y": 0.5,
+                "z": 9.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": -2.682208730675484e-7
+            },
+            "itemName": "Oven",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -2.625,
+                "y": 0.5,
+                "z": 9.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": -2.682208730675484e-7
+            },
+            "itemName": "Left Single Kitchen Cabinet",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -1.875,
+                "y": 0.5,
+                "z": 9.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": -2.682208730675484e-7
+            },
+            "itemName": "Tall Shelved Kitchen Cabinet",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 1.125,
+                "y": 0.5,
+                "z": -6.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -2.682208730675484e-7,
+                "z": 0.0,
+                "w": -1.0
+            },
+            "itemName": "Storage Box",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 3.125,
+                "y": 0.5,
+                "z": 3.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -0.7071070075035095,
+                "z": 0.0,
+                "w": -0.7071066498756409
+            },
+            "itemName": "Coffee Table",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 1.875,
+                "y": 0.5,
+                "z": 0.875
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -2.682208730675484e-7,
+                "z": 0.0,
+                "w": -1.0
+            },
+            "itemName": "Lamp",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 5.375,
+                "y": 0.5,
+                "z": -2.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -2.682208730675484e-7,
+                "z": 0.0,
+                "w": -1.0
+            },
+            "itemName": "Coat Rack",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -0.1249999925494194,
+                "y": 0.5,
+                "z": 5.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 2.682208730675484e-7,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "itemName": "White Teddy Bear",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 3.125,
+                "y": 1.119158148765564,
+                "z": 2.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -1.0,
+                "z": 0.0,
+                "w": 2.682208730675484e-7
+            },
+            "itemName": "Cactus Plant",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": 0.625,
+                "y": 0.5,
+                "z": -5.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -1.0,
+                "z": 0.0,
+                "w": 2.682208730675484e-7
+            },
+            "itemName": "Trash Bin",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -2.125,
+                "y": 0.5,
+                "z": 0.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.7071066498756409,
+                "z": 0.0,
+                "w": -0.7071070075035095
+            },
+            "itemName": "Square Table",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -2.625,
+                "y": 0.5,
+                "z": -0.625
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -2.682208730675484e-7,
+                "z": 0.0,
+                "w": -1.0
+            },
+            "itemName": "Standard Chair",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -1.125,
+                "y": 0.5,
+                "z": 1.125
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -0.7071066498756409,
+                "z": 0.0,
+                "w": 0.7071070075035095
+            },
+            "itemName": "Standard Chair",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -2.375,
+                "y": 0.5,
+                "z": 2.375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": -2.682208730675484e-7
+            },
+            "itemName": "Standard Chair",
+            "isFilled": false
+        },
+        {
+            "position": {
+                "x": -4.125,
+                "y": 0.5,
+                "z": 0.875
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": -0.7071070075035095,
+                "z": 0.0,
+                "w": -0.7071066498756409
+            },
+            "itemName": "Standard Chair",
+            "isFilled": false
+        }
+    ],
+    "PlacedWalls": [
+        {
+            "p0": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "grey",
+            "sellVal": 192.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": 10.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 64.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": 10.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": 10.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 96.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": 10.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 64.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -10.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 64.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -10.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 64.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -10.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -10.0
+            },
+            "innerMat": "grey",
+            "outerMat": "bright-blue",
+            "sellVal": 96.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "innerMat": "white",
+            "outerMat": "bright-blue",
+            "sellVal": 96.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 96.0,
+            "isDoor": true
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "p1": {
+                "x": -6.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 64.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "p1": {
+                "x": -2.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 32.0,
+            "isDoor": true
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 96.0,
+            "isDoor": true
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 4.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 2.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -10.0
+            },
+            "p1": {
+                "x": 0.0,
+                "y": 2.5,
+                "z": -10.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 96.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -2.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 64.0,
+            "isDoor": true
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -2.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -3.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -5.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -2.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -3.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -5.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -2.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -3.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -5.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -2.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -3.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -5.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -2.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -3.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -5.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -2.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -3.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -5.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -2.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -3.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -5.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 0.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": 6.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -2.0
+            },
+            "innerMat": "bright-blue",
+            "outerMat": "white",
+            "sellVal": 128.0,
+            "isDoor": false
+        },
+        {
+            "p0": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -10.0
+            },
+            "p1": {
+                "x": 6.0,
+                "y": 2.5,
+                "z": -6.0
+            },
+            "innerMat": "white",
+            "outerMat": "bright-blue",
+            "sellVal": 64.0,
+            "isDoor": false
+        }
+    ],
+    "PlacedFloors": [
+        {
+            "position": {
+                "x": -6.0,
+                "y": 0.5,
+                "z": -6.0
+            },
+            "length": 12.0,
+            "width": 12.0,
+            "floorMaterial": "checkered-planks",
+            "sellVal": 172.8000030517578
+        },
+        {
+            "position": {
+                "x": -6.0,
+                "y": 0.5,
+                "z": -10.0
+            },
+            "length": 6.0,
+            "width": 4.0,
+            "floorMaterial": "planks-1",
+            "sellVal": 28.80000114440918
+        },
+        {
+            "position": {
+                "x": -6.0,
+                "y": 0.5,
+                "z": 6.0
+            },
+            "length": 6.0,
+            "width": 4.0,
+            "floorMaterial": "kitchen-tiles-2",
+            "sellVal": 28.80000114440918
+        },
+        {
+            "position": {
+                "x": 0.0,
+                "y": 0.5,
+                "z": -10.0
+            },
+            "length": 6.0,
+            "width": 4.0,
+            "floorMaterial": "checkered",
+            "sellVal": 28.80000114440918
+        }
+    ],
+    "PlayerInventory": {},
+    "Balance": 200,
+    "Shampoo": 5,
+    "Food": 5,
+    "TotalPlaytimeSeconds": 0,
+    "LastSaveTimestamp": null,
+    "IsNewSave": true,
+    "VisitedPark": false,
+    "VisitedVet": false,
+    "VisitedSmartyPets": false,
+    "VisitedFurnitureStore": false,
+    "Minute": 0,
+    "Day": 0,
+    "Week": 0
+}

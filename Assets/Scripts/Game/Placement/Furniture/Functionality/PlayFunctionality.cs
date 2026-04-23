@@ -45,7 +45,7 @@ public class PlayFunctionality : BaseFunctionality
         // check if in use
         if (inUse)
         {
-            Message("In use!");
+            PlacementUtils.Message("In use!", transform.position);
             return;
         }
         base.Move();
@@ -56,7 +56,7 @@ public class PlayFunctionality : BaseFunctionality
         // check if in use
         if (inUse)
         {
-            Message("In use!");
+            PlacementUtils.Message("In use!", transform.position);
             return;
         } 
         base.Remove();

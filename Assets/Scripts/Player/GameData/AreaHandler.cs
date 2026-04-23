@@ -44,6 +44,7 @@ public class AreaHandler : MonoBehaviour
             Debug.LogError($"Area '{areaName}' not found");
             return;
         }
+        PlacementManager.Instance.SetMode(PlacementManager.Mode.None);
         if (home && home.activeSelf)
             home.SetActive(false);
         CleanupCurrentArea();
@@ -110,7 +111,7 @@ public class AreaHandler : MonoBehaviour
             }
             SaveHandler.Instance.currentPlayerData.VisitedFurnitureStore = true;
         }
-
+        PetHelper.CurrentActivePet.GetComponent<Collider>().enabled = area.bringPet;
         PetHelper.CurrentActivePet.transform.Find("PetModel").gameObject.SetActive(area.bringPet);
         PetHelper.CurrentActivePet.transform.Find("StinkyParticles").gameObject.SetActive(area.bringPet);
         UIButtons.Instance.DisableButton("Build");
@@ -118,7 +119,7 @@ public class AreaHandler : MonoBehaviour
     public void EnterHome()
     {
         CleanupCurrentArea();
-
+        PetHelper.CurrentActivePet.GetComponent<Collider>().enabled = true;
         home.SetActive(true);
         PetHelper.petStats.atPark = false;
         // reset pet's position

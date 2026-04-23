@@ -22,7 +22,7 @@ public class PlacementManager : MonoBehaviour
     public enum Mode { None, Furniture, Wall, Floor }
     public Mode ActiveMode { get; private set; } = Mode.None;
 
-    void Awake() => Instance = this;
+    void Awake() { Instance = this; PlacementUtils.Init(); }
 
     void Update()
     {
@@ -36,7 +36,8 @@ public class PlacementManager : MonoBehaviour
         else if (ActiveMode == Mode.Wall)  Wall.Tick(_hit);
         else if (ActiveMode == Mode.Floor) Floor.Tick(_hit);
     }
-    public void SetMode(int mode) => SetMode((Mode)mode);
+    public void SetMode(int mode) 
+        => SetMode((Mode)mode);
     public void SetMode(Mode mode)
     {
         Furniture.Cancel(); 
@@ -47,14 +48,17 @@ public class PlacementManager : MonoBehaviour
         {
             case Mode.Wall:
                 Wall.SetMode(WallPlacement.Mode.Wall); 
-                UICursor.Instance.SetCursor(UICursor.Instance.wallCursor);
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.wallCursor);
                 break;
             case Mode.Floor:
                 Floor.SetMode(FloorPlacement.Mode.Floor);
-                UICursor.Instance.SetCursor(UICursor.Instance.floorCursor);
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.floorCursor);
                 break;
-            default:
-                UICursor.Instance.SetCursor(UICursor.Instance.defaultCursor);
+            case Mode.Furniture:
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.defaultCursor);
+                break;
+            case Mode.None:
+                CursorUtils.Instance.SetCursor(CursorUtils.Instance.defaultCursor);
                 break;
         }
     }
