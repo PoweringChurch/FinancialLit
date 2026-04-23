@@ -17,7 +17,7 @@ public class AppointingFunctionality : BaseFunctionality
         if (!PetHelper.petFlagManager.HasFlag(PetFlag.Sick))
         {
             print(string.Join(", ", PetHelper.petFlagManager.CurrentFlags));
-            Message($"{PetHelper.petStats.petName} is not sick!");
+            PlacementUtils.Message($"{PetHelper.petStats.petName} is not sick!", transform.position);
             return;
         }
         // calculate fee
@@ -42,6 +42,6 @@ public class AppointingFunctionality : BaseFunctionality
         FinancialSpending.Instance.Spend(fee);
         PetHelper.petStats.CurePet();
         // inform player of cure
-        Message("Pet cured!");   
+        PlacementUtils.Message("Pet cured!", transform.position);
     }
 }

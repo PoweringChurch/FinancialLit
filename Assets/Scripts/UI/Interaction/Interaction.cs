@@ -75,11 +75,10 @@ public class Interaction : MonoBehaviour
     public void HandleClick()
     {
         bool isOverUi = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
-        bool hasPlacement = PlacementManager.Instance.ActiveMode != PlacementManager.Mode.None ;
-
+        bool hasSelected = PlacementManager.Instance.Furniture._objectPrefab != null;
         if (isOverUi && IsPointerOverActionMenu()) return; // because we are over an action
         CloseMenu();
-        if (hasPlacement) return; // because we are in placement, so we dont want to bring up action menu while placing something
+        if (hasSelected) return; // cause you dont wanna select the object u just placed
         if (isOverUi) return; // because we are not in an action menu
         
         Vector2 mousePos = Mouse.current.position.ReadValue();
@@ -96,12 +95,8 @@ public class Interaction : MonoBehaviour
         {
             var validHits = new List<RaycastHit>();
             for (int i = 0; i < hitCount; i++)
-            {
                 if (hitBuffer[i].transform.TryGetComponent(out BaseFunctionality _))
-                {
                     validHits.Add(hitBuffer[i]);
-                }
-            }
             
             if (validHits.Count > 0)
             {
@@ -116,9 +111,7 @@ public class Interaction : MonoBehaviour
                 selectedHit.transform.TryGetComponent(out BaseFunctionality functionality);
                 currentOutline = selectedHit.transform.GetComponentInChildren<Outline>();
                 if (currentOutline != null)
-                {
                     currentOutline.enabled = true;
-                }
                 ShowMenu(mousePos, functionality);
             }
         }
@@ -137,13 +130,9 @@ public class Interaction : MonoBehaviour
         EventSystem.current.RaycastAll(pointerData, results);
         
         foreach (var result in results)
-        {
             if (result.gameObject.transform.IsChildOf(currentMenu.transform) || 
                 result.gameObject == currentMenu)
-            {
                 return true;
-            }
-        }
         
         return false;
     }

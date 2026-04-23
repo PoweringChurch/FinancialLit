@@ -4,7 +4,7 @@ public class PetFunctionality : BaseFunctionality
 {
     protected override void Awake()
     {
-        // ignoring the base so that we dont allow the player to delete the desk
+        // ignoring the base so that we dont allow the player to delete the pet
         ignoreBase = true;
         base.Awake();
         globalActions["Follow"] = Follow;
@@ -12,20 +12,19 @@ public class PetFunctionality : BaseFunctionality
 
     }
     // occurs when the follow action is pressed. essentially just lets the player set the pet's goal position. most of the "stuff" of this script actually occurs in PlayerInputHandler's HandleMisc function
-    // might go back to fix
     void Follow()
     {
         // previously removed all instances of this exact line, but this one needs to stay
         if (!PetHelper.petStateMachine.IsInState(PetState.Idle) || PetHelper.petBehaviour.ActiveBehaviour == Behaviour.Occupied)
         {
-            Message($"{PetHelper.petStats.petName} is occupied!");
+            PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
             return;
         }
         // make pet stop sitting in prep to move
         PetHelper.petAnimation.SetBoolParameter("IsSitting",false);
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
         // set the cursor to the follow cursor
-        UICursor.Instance.SetCursor(UICursor.Instance.followingCursor);
+        CursorUtils.Instance.SetCursor(CursorUtils.Instance.followingCursor);
         PlayerFlagManager.AddFlag(PlayerFlag.SetFollow);
         
         PetHelper.petMover.OnReachedGoal += ReachedFollowTarget;
@@ -52,7 +51,7 @@ public class PetFunctionality : BaseFunctionality
         {
             if (!PetHelper.petStateMachine.IsInState(PetState.Idle)) // if the pet is not idle
             {
-                Message($"{PetHelper.petStats.petName} is occupied!"); // inform the player that the pet is busy
+                PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
                 return;
             }
             PetHelper.petStateMachine.SetState(PetState.Sitting); // make the petting in the state machine

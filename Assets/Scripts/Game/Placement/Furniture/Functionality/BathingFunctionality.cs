@@ -18,7 +18,7 @@ public class BathingFunctionality : BaseFunctionality
         // check if the player can consume shampoo
         if (!PlayerResources.Instance.CanConsumeShampoo())
         {
-            Message("No pet shampoo!");
+            PlacementUtils.Message("No pet shampoo!", transform.position);
             return;
         }
         // default checks
@@ -52,6 +52,20 @@ public class BathingFunctionality : BaseFunctionality
         homeActions["Stop bathing"] = StopBathing;
         // make pet sit
         PetHelper.petAnimation.SetBoolParameter("IsSitting", true);
+    }
+    protected override void Move()
+    {
+        if (!inUse)
+            base.Move();
+        else
+            PlacementUtils.Message("The bath is in use!", transform.position);
+    }
+    protected override void Remove()
+    {
+        if (!inUse)
+            base.Remove();
+        else
+            PlacementUtils.Message("The bath is in use!", transform.position);
     }
     // stop bathing pet, called when stop bathing action is called
     protected virtual void StopBathing()

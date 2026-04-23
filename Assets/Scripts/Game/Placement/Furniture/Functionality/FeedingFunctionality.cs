@@ -23,7 +23,7 @@ public class FeedingFunctionality : BaseFunctionality
         // check if food bowl is filled before letting pet eat
         if (!filled)
         {
-            Message("Not filled!");
+            PlacementUtils.Message("Not filled!", transform.position);
             return;
         }
         if (DefaultChecks()) // tb deleted
@@ -60,13 +60,13 @@ public class FeedingFunctionality : BaseFunctionality
         // check if already filled
         if (filled)
         {
-            Message("Already filled!");
+            PlacementUtils.Message("Already filled!", transform.position);
             return;
         }
         // check if the player has enough feed
         if (!PlayerResources.Instance.CanConsumeFood())
         {
-            Message("No pet food!");
+            PlacementUtils.Message("No pet food!", transform.position);
             return;
         }
         PlayerResources.Instance.ConsumeFood();

@@ -106,7 +106,8 @@ public class SaveHandler : MonoBehaviour
         PetHelper.petMover.petTransform.rotation = playerData.PetRotation;
         // pet flags
         PetHelper.petFlagManager.SetFlags(playerData.PetFlags);
-
+        // enter home
+        AreaHandler.Instance.EnterHome();
         // load house
         PlacementManager.Instance.LoadHouseData(playerData.PlacedWalls, playerData.PlacedFurniture, playerData.PlacedFloors);
         // inventory
