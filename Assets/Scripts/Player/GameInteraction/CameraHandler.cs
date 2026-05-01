@@ -21,7 +21,7 @@ public class CameraHandler : MonoBehaviour
     private Renderer[] hideableRenderers;
     
     private Vector3 origin = Vector3.zero;
-    private float bounds = 40;
+    private float bounds = 20;
 
     void Awake()
     {
