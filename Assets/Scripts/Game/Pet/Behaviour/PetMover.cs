@@ -20,7 +20,7 @@ public class PetMover : MonoBehaviour
         petTransform = transform;
         reachedGoal = true;
         agent = GetComponent<NavMeshAgent>();
-
+ 
         if (agent != null)
         {
             agent.speed = moveSpeed;

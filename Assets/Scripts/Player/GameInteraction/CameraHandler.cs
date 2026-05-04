@@ -28,10 +28,13 @@ public class CameraHandler : MonoBehaviour
         Instance = this;
         RefreshRenderers();
     }
-    // toggles the game cameras
+    // toggles the scroller bg
     public void ToggleScrollerBG(bool state)
+        => scrollGameobj.SetActive(!state); 
+    public void SetCameraOrigin(Vector3 to, float newBounds)
     {
-        scrollGameobj.SetActive(!state); 
+        origin = to;
+        bounds = newBounds;
     }
     public void RotateCamera(float by)
     {

@@ -12,10 +12,11 @@ public class PetStats : MonoBehaviour
     const float hungerRate = 0.12f;
     const float boredomRate = 0.24f;
     const float dirtinessRate = 0.14f;
+
     const float sleepRecoveryRate = 1.2f;
     const float entertainmentRecoveryRate = 1.8f;
     const float hygieneRecoveryRate = 1.5f;
-
+    // does not include hunger recovery, as hunger works a little different from "recovery based" stats
 
     // vars
     private int immuneTickTimer = 0;
