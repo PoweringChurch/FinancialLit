@@ -47,7 +47,7 @@ public class GameTime : MonoBehaviour
         switch (newState)
         {
             case PetState.Sleeping:
-                minuteDuration = 0.25f;
+                minuteDuration = 0.2f;
                 break;
             case PetState.Bathing:
                 minuteDuration = 0.35f;

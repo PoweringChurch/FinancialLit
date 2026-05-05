@@ -16,11 +16,12 @@ public class AreaHandler : MonoBehaviour
         public bool isShop;
     }
 
-    [Header("Area Setup")]
     [SerializeField] private GameObject home;
     [SerializeField] private AreaData[] areas;
     [SerializeField] private Transform gameSpace;
-    [SerializeField] private Light lighting;
+    [SerializeField] private Light mainLight;
+    
+    
     private Dictionary<string, AreaData> areaDict = new();
     
     private void Awake()
@@ -29,7 +30,6 @@ public class AreaHandler : MonoBehaviour
         foreach (var area in areas)
             areaDict[area.areaName] = area;
     }
-    
     public void EnterArea(string areaName)
     {
         if (!areaDict.TryGetValue(areaName, out AreaData area))
@@ -48,15 +48,14 @@ public class AreaHandler : MonoBehaviour
 
         CameraHandler.Instance.RefreshRenderers();
         
-        //lighting.shadows = LightShadows.None;
 
-        if (area.isShop) {
+        if (area.isShop) 
             PlayerFlagManager.AddFlag(PlayerFlag.Shopping);
-            }
-        //if (area.shadows) lighting.shadows = LightShadows.Soft;
-        if (area.bringPet) {
-            PetHelper.petMover.agent.Warp(Vector3.up);
-            }
+        if (area.shadows)
+            mainLight.shadows = LightShadows.None;
+        if (area.bringPet) 
+            PetHelper.petMover.agent.Warp(area.origin);
+            
 
         if (area.areaName == "Park")
             {
@@ -127,7 +126,7 @@ public class AreaHandler : MonoBehaviour
 
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
 
-        //lighting.shadows = LightShadows.None;
+        mainLight.shadows = LightShadows.Hard;
         // reactivate pet
         PetHelper.CurrentActivePet.transform.Find("PetModel").gameObject.SetActive(true);
         PetHelper.CurrentActivePet.transform.Find("StinkyParticles").gameObject.SetActive(true);
