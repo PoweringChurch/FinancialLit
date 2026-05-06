@@ -48,11 +48,11 @@ public class AreaHandler : MonoBehaviour
 
         CameraHandler.Instance.RefreshRenderers();
         
-
+        mainLight.shadows = LightShadows.None;
         if (area.isShop) 
             PlayerFlagManager.AddFlag(PlayerFlag.Shopping);
         if (area.shadows)
-            mainLight.shadows = LightShadows.None;
+            mainLight.shadows = LightShadows.Hard;
         if (area.bringPet) 
             PetHelper.petMover.agent.Warp(area.origin);
             

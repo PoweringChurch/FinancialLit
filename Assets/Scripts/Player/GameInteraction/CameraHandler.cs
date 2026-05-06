@@ -33,7 +33,7 @@ public class CameraHandler : MonoBehaviour
         => scrollGameobj.SetActive(!state); 
     public void SetCameraOrigin(Vector3 to, float newBounds)
     {
-        Camera.main.transform.position = new Vector3(to.x, 20, to.z);
+        Camera.main.transform.position = new Vector3(to.x, to.y+15, to.z);
         origin = to;
         bounds = newBounds;
     }
@@ -74,7 +74,7 @@ public class CameraHandler : MonoBehaviour
         Camera.main.transform.position += (directions * input.y + Camera.main.transform.right * input.x) * Time.deltaTime * moveSpeed * camSpeedMultiplier.value;
         Camera.main.transform.position = new Vector3(
             Mathf.Clamp(Camera.main.transform.position.x,origin.x-bounds,origin.x+bounds),
-            20,
+            origin.y+15,
             Mathf.Clamp(Camera.main.transform.position.z,origin.z-bounds,origin.z+bounds));
     }
     // zoom the camera out and in, called in the update function
