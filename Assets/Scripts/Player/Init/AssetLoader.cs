@@ -23,10 +23,9 @@ public class AssetLoader : MonoBehaviour
         SetContrast();
         StartCoroutine(LoadAssets());
     }
-    private List<Transform> toDeactivate;
+    private List<Transform> toDeactivate = new();
     void SetActiveAllDescendants(Transform parent)
     {
-        print(parent.name);
         parent.gameObject.SetActive(true);
         foreach (Transform child in parent)
         {

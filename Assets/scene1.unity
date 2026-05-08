@@ -27137,6 +27137,55 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1757045650}
   m_Enabled: 1
+--- !u!1 &390361356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 390361358}
+  - component: {fileID: 390361357}
+  m_Layer: 0
+  m_Name: PostProcess
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &390361357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390361356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Postprocessing.Runtime::UnityEngine.Rendering.PostProcessing.PostProcessVolume
+  sharedProfile: {fileID: 11400000, guid: c813e9be9d5e5436d84e1344623634b0, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!4 &390361358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390361356}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -498.0237, y: 3.16649, z: 3.04782}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &390651074
 GameObject:
   m_ObjectHideFlags: 0
@@ -40328,7 +40377,7 @@ MonoBehaviour:
     bringPet: 1
     isShop: 0
   - areaName: Veterinary
-    origin: {x: -500, y: 0, z: 0}
+    origin: {x: -500, y: -5, z: 0}
     bounds: 20
     shadows: 0
     bringPet: 0
@@ -74722,7 +74771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1130872542}
   - component: {fileID: 1130872541}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GameCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -138406,12 +138455,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2061597408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9af5dd36c885ac47936f0195c851ca7, type: 3}
+  m_Script: {fileID: 11500000, guid: a8ac0a2b7facb49a0bc9b7555260036b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AssetLoader
   loadingPanel: {fileID: 1701784589}
   progressBar: {fileID: 1397579412}
   loadingText: {fileID: 172085571}
+  canvas: {fileID: 1996418209}
 --- !u!1 &2064633493
 GameObject:
   m_ObjectHideFlags: 0
@@ -231795,3 +231845,4 @@ SceneRoots:
   - {fileID: 5516056145282987827}
   - {fileID: 3522561761154350083}
   - {fileID: 8186287068192450632}
+  - {fileID: 390361358}
