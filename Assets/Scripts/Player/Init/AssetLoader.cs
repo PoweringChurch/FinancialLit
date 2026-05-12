@@ -20,7 +20,7 @@ public class AssetLoader : MonoBehaviour
     }
     public void StartLoading()
     {
-        SetContrast();
+        //SetContrast();
         StartCoroutine(LoadAssets());
     }
     private List<Transform> toDeactivate = new();
