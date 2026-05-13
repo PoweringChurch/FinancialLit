@@ -109,7 +109,7 @@ public class UISave : MonoBehaviour
     // create a new save
     public void NewSave()
     {
-        if (petNameInput.text == "")
+        if (string.IsNullOrEmpty(petNameInput.text))
             return; // cant have empty name
         TextAsset jsonFile = Resources.Load<TextAsset>("Other/defaultsave"); // the file is in Resources/Other/defaultsave.json
         if (debugToggle.isOn)

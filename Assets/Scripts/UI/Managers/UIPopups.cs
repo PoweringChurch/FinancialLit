@@ -84,7 +84,6 @@ public class UIPopups : MonoBehaviour
     public void CloseAllPopups()
     {
         if (PopupsTransform == null) return;
-
         for (int i = PopupsTransform.childCount - 1; i >= 0; i--)
         {
             Transform child = PopupsTransform.GetChild(i);
