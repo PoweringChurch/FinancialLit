@@ -19,7 +19,9 @@ public class ParkGarbageFunctionality : BaseFunctionality
     }
     void OnReached()
     {
-        FinancialSpending.Instance.Earn(15, "Recycling");
+        FinancialSpending.Instance.Earn(25, "Recycling");
+        RecyclingJob.Instance.trashCount--;
+        PlacementUtils.Message("+$25.00",transform.position);
         Destroy(gameObject);
     }
     void OnDestroy()

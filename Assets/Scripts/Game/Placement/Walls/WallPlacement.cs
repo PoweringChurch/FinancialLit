@@ -99,7 +99,7 @@ public class WallPlacement : MonoBehaviour
         if (Physics.Raycast(wallRay, out RaycastHit hitWall, 1000f, wallLayerMask))
         {
             var wallComponent = hitWall.transform.gameObject.GetComponent<WallComponent>();
-            FinancialSpending.Instance.Earn(wallComponent.wallData.sellVal);
+            FinancialSpending.Instance.Earn(wallComponent.wallData.sellVal, "Returns");
             Destroy(hitWall.transform.parent.gameObject);
         }
     }

@@ -32,9 +32,19 @@ public class FinancialSpending : MonoBehaviour
         UIOverlay.Instance.UpdateResourcesAndBal();
     }
     // only for use in the load function in savehandler
-    public void SetBalance(float to)
+    public void SetInfo(PlayerData playerData) 
     {
-        balance = to;
+        balance = playerData.Balance;
+        spending["Healthcare"] = playerData.Healthcare;
+        spending["Pet care"] = playerData.PetCare;
+        spending["Home decor"] = playerData.HomeDecor;
+
+        earning["Work"] = playerData.Work;
+        earning["Recycling"] = playerData.Recycling;
+        earning["Returns"] = playerData.Returns;
+
+        UIOverlay.Instance.UpdateResourcesAndBal();
+        FinanceUI.Instance.UpdateAll();
     }
     public void Earn(float amount, string key = "Work")
     {
@@ -44,8 +54,5 @@ public class FinancialSpending : MonoBehaviour
         UIOverlay.Instance.UpdateResourcesAndBal();
     }
     // checks if the player can afford this amount
-    public bool CanAfford(float amount)
-    {
-        return balance - amount > 0;
-    }
+    public bool CanAfford(float amount) { return balance - amount > 0; }
 }

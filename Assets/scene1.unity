@@ -20815,6 +20815,12 @@ MonoBehaviour:
     Balance: 200
     Shampoo: 8
     Food: 8
+    Healthcare: 0
+    PetCare: 0
+    HomeDecor: 0
+    Work: 0
+    Recycling: 0
+    Returns: 0
     TotalPlaytimeSeconds: 0
     LastSaveTimestamp: 1763516380
     IsNewSave: 1
@@ -57842,6 +57848,37 @@ LODGroup:
     renderers:
     - renderer: {fileID: 566618884}
   m_Enabled: 1
+--- !u!1 &849049476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 849049477}
+  m_Layer: 0
+  m_Name: TrashHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &849049477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849049476}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3267501677796649210}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &850580507
 GameObject:
   m_ObjectHideFlags: 0
@@ -79716,6 +79753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1176842226}
   - component: {fileID: 1176842227}
+  - component: {fileID: 1176842228}
   m_Layer: 0
   m_Name: Work
   m_TagString: Untagged
@@ -79753,6 +79791,21 @@ MonoBehaviour:
   nextScenario: {fileID: 8300000, guid: 030294ecf3abaa246a10f171c769f8dd, type: 3}
   totalEarned: 0
   inReviewTime: 0
+--- !u!114 &1176842228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176842225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f09f63fb0f94e4b87b7d70ecf74589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RecyclingJob
+  trashHolder: {fileID: 849049477}
+  trashPrefab: {fileID: 8447553299894969900, guid: 23c1c96e9aa934675961320219269049, type: 3}
+  trashCount: 0
 --- !u!1 &1177239613
 GameObject:
   m_ObjectHideFlags: 0
@@ -173223,6 +173276,7 @@ Transform:
   - {fileID: 42390644}
   - {fileID: 895634344}
   - {fileID: 732187256}
+  - {fileID: 849049477}
   m_Father: {fileID: 1809660803}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3275499166560665125

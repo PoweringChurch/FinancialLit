@@ -23,13 +23,22 @@ public class PlayerData
     public WallData[] PlacedWalls;
     public FloorData[] PlacedFloors;
     public Inventory PlayerInventory;
-    // rooms
+    
     // resources
     public float Balance;
     public int Shampoo;
     public int Food;
 
-    //player stats
+    // spendings
+    public float Healthcare;
+    public float PetCare;
+    public float HomeDecor;
+    // earnings
+    public float Work;
+    public float Recycling;
+    public float Returns;
+
+    //player data
     public float TotalPlaytimeSeconds;
     public long LastSaveTimestamp;
 
@@ -58,7 +67,6 @@ public class PlayerData
         Food = 8;
         TotalPlaytimeSeconds = 0f;
         LastSaveTimestamp = System.DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-
         IsNewSave = true;
 
         VisitedPark = false;

@@ -92,7 +92,7 @@ public class CameraHandler : MonoBehaviour
     }
     float hideableMinDistance = 18;
     float minDistance = 6;
-    float maxDistance = 20;
+    float maxDistance = 18;
     float minAlpha = 0f;
     private void HideObjects()
     {

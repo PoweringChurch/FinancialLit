@@ -74,7 +74,7 @@ public class BaseFunctionality : MonoBehaviour
         InventoryHelper.Instance.AddItem(item, 1);
         // spend money
         if (!FinancialSpending.Instance.CanAfford(price)) return;
-        FinancialSpending.Instance.Spend(price);
+        FinancialSpending.Instance.Spend(price, "Home decor");
     }
     // helper functions
     public Dictionary<string, Action> GetAvailableActions() 

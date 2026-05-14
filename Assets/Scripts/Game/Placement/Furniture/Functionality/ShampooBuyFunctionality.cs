@@ -5,7 +5,7 @@ public class ShampooBuyFunctionality : BaseFunctionality
     {
         if (!FinancialSpending.Instance.CanAfford(price)) return;
         SFXPlayer.Instance.Play(purchaseSfx);
-        FinancialSpending.Instance.Spend(price);
+        FinancialSpending.Instance.Spend(price, "Pet care");
         PlayerResources.Instance.AddShampoo(1);
     }
 }

@@ -77,6 +77,7 @@ public class GameTime : MonoBehaviour
     {
         // tick the pet's stats
         PetHelper.petStats.Tick(passedMinutes,atWork);
+        RecyclingJob.Instance.Tick(passedMinutes);
         
         // add passed minutes to total
         minute += passedMinutes;
