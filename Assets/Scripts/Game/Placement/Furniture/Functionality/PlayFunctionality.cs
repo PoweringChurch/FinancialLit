@@ -9,9 +9,9 @@ public class PlayFunctionality : BaseFunctionality
     // called when go play action is pressed
     protected virtual void GoPlay()
     {
-        if (DefaultChecks())
-            return;
-        
+        if (PetHelper.petStateMachine.CurrentState != PetState.Idle || PetHelper.petBehaviour.ActiveBehaviour == Behaviour.Occupied) {
+            PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
+            return; }
         inUse = true;
         // make pet occupied
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;

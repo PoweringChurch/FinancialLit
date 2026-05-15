@@ -54,7 +54,7 @@ public class PetStats : MonoBehaviour
         // lower energy
         status["energy"] = Math.Max(0, status["energy"] - (tirednessRate * drainMultiplier * count));
         // check if the pet is sleeping
-        if (PetHelper.petStateMachine.IsInState(PetState.Sleeping))
+        if (PetHelper.petStateMachine.CurrentState == PetState.Sleeping)
         {
             // if the player has the worn out flag, add 15% more recovery for sleeping
             float sleepBonus = PetHelper.petFlagManager.HasFlag(PetFlag.WornOut) ? 1.15f : 1f;
@@ -64,7 +64,7 @@ public class PetStats : MonoBehaviour
         // lower entertainment
         status["entertainment"] = Math.Max(0, status["entertainment"] - (boredomRate * drainMultiplier * count));
         // check if the pet is playing
-        if (PetHelper.petStateMachine.IsInState(PetState.Playing) || atPark)
+        if (PetHelper.petStateMachine.CurrentState == PetState.Playing || atPark)
         {
             // if the player has the playful bonus, add 10% more entertainment recovery
             float playBonus = PetHelper.petFlagManager.HasFlag(PetFlag.Playful) ? 1.1f : 1f;
@@ -77,7 +77,7 @@ public class PetStats : MonoBehaviour
         float parkDirty = atPark ? 1.2f : 1f;
         status["hygiene"] = Math.Max(0, status["hygiene"] - (dirtinessRate * drainMultiplier * parkDirty * count));
         // check if the pet is bathing
-        if (PetHelper.petStateMachine.IsInState(PetState.Bathing))
+        if (PetHelper.petStateMachine.CurrentState == PetState.Bathing)
             status["hygiene"] = Math.Clamp(status["hygiene"] 
             + ((hygieneRecoveryRate + (drainMultiplier*dirtinessRate)) * count), 0, 100);
 
@@ -165,14 +165,14 @@ public class PetStats : MonoBehaviour
     // called when the pet stats bathing
     public void StartBathing()
     {
-        PetHelper.petStateMachine.SetState(PetState.Bathing);
+        PetHelper.petStateMachine.CurrentState = PetState.Bathing;
         var emission = BatheParticles.emission;
         emission.enabled = true;
     }
     // called when the pet stops bathing
     public void StopBathing()
     {
-        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.CurrentState = PetState.Idle;
         var emission = BatheParticles.emission;
         emission.enabled = false;
     }
@@ -183,10 +183,10 @@ public class PetStats : MonoBehaviour
         status["hunger"] = Math.Min(100, status["hunger"] + amount);
     }
     // called when the pet starts playing. these next few functions are really only written like this so incase anything should change further down the line I can know whats being called and how
-    public void StartPlay() { PetHelper.petStateMachine.SetState(PetState.Playing); }
-    public void StopPlay() { PetHelper.petStateMachine.SetState(PetState.Idle); }
-    public void StartSleep() { PetHelper.petStateMachine.SetState(PetState.Sleeping); }
-    public void StopSleep() { PetHelper.petStateMachine.SetState(PetState.Idle); }
+    public void StartPlay() { PetHelper.petStateMachine.CurrentState = PetState.Playing; }
+    public void StopPlay() { PetHelper.petStateMachine.CurrentState = PetState.Idle; }
+    public void StartSleep() { PetHelper.petStateMachine.CurrentState = PetState.Sleeping;  }
+    public void StopSleep() { PetHelper.petStateMachine.CurrentState = PetState.Idle; }
 
     // called when the pet is cured
     public void CurePet()

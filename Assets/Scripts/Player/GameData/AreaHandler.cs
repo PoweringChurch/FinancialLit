@@ -40,7 +40,7 @@ public class AreaHandler : MonoBehaviour
         PlacementManager.Instance.SetMode(PlacementManager.Mode.None);
         PlayerFlagManager.RemoveFlag(PlayerFlag.Home);
 
-        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.CurrentState = PetState.Idle;
         PetHelper.petAnimation.SetBoolParameter("IsPlaying", false);
         PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
 
@@ -120,7 +120,7 @@ public class AreaHandler : MonoBehaviour
         PlayerFlagManager.RemoveFlag(PlayerFlag.Shopping);
 
         // handle pets behaviour and animation
-        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.CurrentState = PetState.Idle;
         PetHelper.petAnimation.SetBoolParameter("IsPlaying", false);
         PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
 

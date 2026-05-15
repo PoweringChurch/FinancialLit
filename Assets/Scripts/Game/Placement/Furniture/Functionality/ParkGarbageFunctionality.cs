@@ -4,13 +4,13 @@ public class ParkGarbageFunctionality : BaseFunctionality
     protected override void Awake()
     {
         ignoreBase = true;
-        base.Awake();
-        homeActions["Clean up"] = CleanUp;
+        globalActions["Clean up"] = CleanUp;
     }
     public void CleanUp()
     {
-        if (DefaultChecks())
-            return;
+        if ( PetHelper.petStateMachine.CurrentState != PetState.Idle || PetHelper.petBehaviour.ActiveBehaviour == Behaviour.Occupied) {
+            PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
+            return; }
         inUse = true;
         // occupy pet with this task
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
@@ -22,10 +22,8 @@ public class ParkGarbageFunctionality : BaseFunctionality
         FinancialSpending.Instance.Earn(25, "Recycling");
         RecyclingJob.Instance.trashCount--;
         PlacementUtils.Message("+$25.00",transform.position);
+        PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
+        PetHelper.petMover.OnReachedGoal -= OnReached;
         Destroy(gameObject);
-    }
-    void OnDestroy()
-    {
-        if (PetHelper.petMover != null) PetHelper.petMover.OnReachedGoal -= OnReached;
     }
 }

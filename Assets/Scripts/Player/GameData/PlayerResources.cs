@@ -43,18 +43,16 @@ public class PlayerResources : MonoBehaviour
     public void SetShampoo(int to)
     {
         shampoo = to;
+        UIOverlay.Instance.UpdateResourcesAndBal();
     }
     public void SetFood(int to)
     {
         food = to;
+        UIOverlay.Instance.UpdateResourcesAndBal();
     }
     //helper
     public bool CanConsumeFood()
-    {
-        return (food - 1) >= 0;
-    }
+        => (food - 1) >= 0;
     public bool CanConsumeShampoo()
-    {
-        return (shampoo - 1) >= 0;
-    }
+        => (shampoo - 1) >= 0;
 }

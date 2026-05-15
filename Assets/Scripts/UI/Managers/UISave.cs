@@ -79,7 +79,7 @@ public class UISave : MonoBehaviour
         CameraHandler.Instance.ToggleScrollerBG(true);
         UIOverlay.Instance.UpdateResourcesAndBal();
 
-        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.CurrentState = PetState.Idle;;
 
         PetHelper.petAnimation.SetBoolParameter("IsSitting",false);
         PetHelper.petAnimation.SetBoolParameter("IsSick",false);
@@ -138,7 +138,7 @@ public class UISave : MonoBehaviour
             SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
 
             PetHelper.petFlagManager.ClearFlags();
-            PetHelper.petStateMachine.SetState(PetState.Idle);
+            PetHelper.petStateMachine.CurrentState = PetState.Idle;;
             PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
 
             // update ui
@@ -168,7 +168,7 @@ public class UISave : MonoBehaviour
         SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
 
         PetHelper.petFlagManager.ClearFlags();
-        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.CurrentState = PetState.Idle;;
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
         // update ui
         UIOverlay.Instance.UpdateResourcesAndBal();
