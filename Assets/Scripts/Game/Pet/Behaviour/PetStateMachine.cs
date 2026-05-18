@@ -14,5 +14,5 @@ public class PetStateMachine : MonoBehaviour
             currentState = value;
         }
     }
-    public  event Action<PetState, PetState> OnStateChanged;
+    public event Action<PetState, PetState> OnStateChanged;
 }
