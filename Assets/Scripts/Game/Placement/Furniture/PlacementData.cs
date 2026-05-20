@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 // https://github.com/MinaPecheux/unity-tutorials/blob/main/Assets/07-BuildingPlacement/Scripts/BuildingManager.cs
 // modified from this tutorial
@@ -89,8 +90,15 @@ public class PlacementData : MonoBehaviour
         {
             // loop through meshes and
             foreach (MeshRenderer r in meshComponents)
+            {
                 // apply the furnitures material
                 r.sharedMaterials = initialMaterials[r].ToArray();
+                // disable casting shadows
+                r.shadowCastingMode = ShadowCastingMode.Off;
+                // disable receiving shadows
+                r.receiveShadows = false;
+            }
+                
         }
         else
         {
