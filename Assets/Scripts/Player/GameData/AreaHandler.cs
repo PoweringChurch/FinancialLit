@@ -111,7 +111,7 @@ public class AreaHandler : MonoBehaviour
     }
     public void EnterHome()
     {
-        CameraHandler.Instance.SetCameraOrigin(Vector3.zero, 20);
+        CameraHandler.Instance.SetCameraOrigin(Vector3.zero, 30);
         PetHelper.CurrentActivePet.GetComponent<Collider>().enabled = true;
         PetHelper.petStats.atPark = false;
         // reset pet's position

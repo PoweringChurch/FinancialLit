@@ -5,7 +5,7 @@ public class RecyclingJob : MonoBehaviour
 {
     public static RecyclingJob Instance;
     public Transform trashHolder;
-    public GameObject trashPrefab;
+    public GameObject[] trashPrefabs;
     
     private float trashAppearChance = 0.02f; // every tick
     private float elapsed = 0f;
@@ -23,6 +23,7 @@ public class RecyclingJob : MonoBehaviour
             float z = UnityEngine.Random.Range(-32f,32f);
             Vector3 position = new(x,1,z);
             Vector3 parkOrigin = new(0,0,-510);
+            GameObject trashPrefab = trashPrefabs[UnityEngine.Random.Range(0, trashPrefabs.Length)];
             Instantiate(trashPrefab, parkOrigin+position, Quaternion.identity, trashHolder);
         }
     }

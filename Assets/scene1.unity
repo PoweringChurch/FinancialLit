@@ -41514,19 +41514,19 @@ MonoBehaviour:
     isShop: 1
   - areaName: Park
     origin: {x: 0, y: 0, z: -500}
-    bounds: 20
+    bounds: 30
     shadows: 1
     bringPet: 1
     isShop: 0
   - areaName: Veterinary
-    origin: {x: -500, y: -5, z: 0}
+    origin: {x: -500, y: -10, z: 0}
     bounds: 20
     shadows: 0
     bringPet: 0
     isShop: 0
   - areaName: FurnitureStore
     origin: {x: 0, y: 0, z: 500}
-    bounds: 20
+    bounds: 25
     shadows: 0
     bringPet: 0
     isShop: 1
@@ -79804,8 +79804,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RecyclingJob
   trashHolder: {fileID: 849049477}
-  trashPrefab: {fileID: 8447553299894969900, guid: 23c1c96e9aa934675961320219269049, type: 3}
-  trashCount: 0
+  trashPrefabs:
+  - {fileID: 9079580285254665744, guid: 5c5315a832f1fa040b2831c887de01f8, type: 3}
+  - {fileID: 937326242163579350, guid: 7690bf91c4240ca4b876e0de5b4034af, type: 3}
+  - {fileID: 8847306447234913185, guid: 86cd66e551e6e1748aee29ef7980b668, type: 3}
+  - {fileID: 3417596192309181735, guid: be2f3a70d7cff0d499d97d845208aafb, type: 3}
+  - {fileID: 3230034147011233538, guid: 5f6a44704381d674fbe683276b29b7aa, type: 3}
+  - {fileID: 5102017246056220404, guid: d346a7c25a992d94a9a1af7f234074b3, type: 3}
+  - {fileID: 3230034147011233538, guid: c840387747cb48f409bf9c9708a4d90d, type: 3}
+  - {fileID: 3230034147011233538, guid: f02a92e1ab7d32d4fad570cd12c80c3e, type: 3}
+  - {fileID: 7013320978822667758, guid: ee6951d938497174989b85bc977b2e7a, type: 3}
+  - {fileID: 8276625273990236846, guid: aa391fa7c7d49314785fa3f647c03048, type: 3}
+  - {fileID: 3230034147011233538, guid: dcbc01726f8551e4895aa72699112ee4, type: 3}
+  - {fileID: 3230034147011233538, guid: c8123449a980e6c438fa9bb06277785a, type: 3}
+  - {fileID: 124406358728296116, guid: 04de276320549a847b966b845005a946, type: 3}
+  - {fileID: 124406358728296116, guid: 0f19a732006400947981c8a94548a823, type: 3}
+  - {fileID: 1153803601918318987, guid: 95ba25c767eeddc46899aa0fd76f63be, type: 3}
+  - {fileID: 5438048726324099442, guid: 2d6b1262a50aace469e5f5bf10e390fb, type: 3}
+  - {fileID: 1171627040053429581, guid: 9f4eb6324d951e44db05ce09a003bb0f, type: 3}
+  - {fileID: 6143752882634769234, guid: 20f6fca5559075148b1e6d06957f81ea, type: 3}
+  - {fileID: 3406732096623023888, guid: b39bc46f5f5fc5243bb9c1ec0245b63a, type: 3}
+  - {fileID: 631681890585385247, guid: ba3d6d9d39ece864db4d23301290693f, type: 3}
+  - {fileID: 4179343635334113613, guid: 23aff9c48b65f194ebd7a8e6221879b7, type: 3}
+  - {fileID: 6287776600339200383, guid: f8a4b5315bc42194f804d87ec1096810, type: 3}
+  - {fileID: 8322863303335674192, guid: 77557de5dd98b0f4c9dc7532951a0960, type: 3}
+  - {fileID: 924935055946310828, guid: 64af0ad50f70dbf45b4cb158dbee515a, type: 3}
+  trashCount: 1
 --- !u!1 &1177239613
 GameObject:
   m_ObjectHideFlags: 0
