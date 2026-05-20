@@ -16,8 +16,8 @@ Event Links: [FBLA Overview](https://www.flfbla.org/fbla-event-introduction-to-p
 
 This project is currently in active development!
 
-![Sample Image 01](ReadmeImages/SamplePhotoCrop.jpg)
-
+![Sample Image 0](ReadmeImages/Image0.jpg)
+![Sample Image 1](ReadmeImages/Image1.jpg)
 ## How to view this project in the Unity editor
 
 This project is actively being developed, so this process may change!  
