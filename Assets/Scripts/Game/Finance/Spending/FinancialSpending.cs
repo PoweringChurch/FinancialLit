@@ -10,28 +10,49 @@ public class FinancialSpending : MonoBehaviour
     private float balance = 0; // players balance
     public float Balance => balance;
 
+    public Dictionary<string, float> spending = new()
+    {
+        { "Healthcare", 0f},
+        { "Pet care", 0f},
+        { "Home decor", 0f}
+    };
+    public Dictionary<string, float> earning = new()
+    {
+        { "Work", 0f},
+        { "Recycling", 0f},
+        { "Returns", 0f}
+    };
     void Awake() { Instance = this; }
-
     // spends the passed amount, also handles various other types of calcs
-    public void Spend(float amount)
+    public void Spend(float amount, string key = "Home decor")
     {
         balance -= amount;
+        spending[key] += amount;
+        FinanceUI.Instance.UpdateItem(key, true);
         UIOverlay.Instance.UpdateResourcesAndBal();
     }
     // only for use in the load function in savehandler
-    public void SetBalance(float to)
+    public void SetInfo(PlayerData playerData) 
     {
-        balance = to;
-        print("Set balance to "+ to);
+        balance = playerData.Balance;
+        spending["Healthcare"] = playerData.Healthcare;
+        spending["Pet care"] = playerData.PetCare;
+        spending["Home decor"] = playerData.HomeDecor;
+
+        earning["Work"] = playerData.Work;
+        earning["Recycling"] = playerData.Recycling;
+        earning["Returns"] = playerData.Returns;
+
+        UIOverlay.Instance.UpdateResourcesAndBal();
+        FinanceUI.Instance.UpdateAll();
     }
-    public void Earn(float amount)
+    public void Earn(float amount, string key = "Work")
     {
         balance += amount;
+        earning[key] += amount;
+        FinanceUI.Instance.UpdateItem(key, false);
         UIOverlay.Instance.UpdateResourcesAndBal();
     }
     // checks if the player can afford this amount
-    public bool CanAfford(float amount)
-    {
-        return balance - amount > 0;
-    }
+    public bool CanAfford(float amount) { return balance - amount > 0; }
 }

@@ -80,9 +80,7 @@ public class PlacementManager : MonoBehaviour
         else if (ActiveMode == Mode.Floor)
         {
             if (Floor.CurrentMode == FloorPlacement.Mode.Floor)
-            {
                 Floor.TryPlace();
-            }
             else if (Floor.CurrentMode == FloorPlacement.Mode.Destroy)
                 Floor.DestroyFloor();
         }

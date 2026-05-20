@@ -74,7 +74,7 @@ public class BaseFunctionality : MonoBehaviour
         InventoryHelper.Instance.AddItem(item, 1);
         // spend money
         if (!FinancialSpending.Instance.CanAfford(price)) return;
-        FinancialSpending.Instance.Spend(price);
+        FinancialSpending.Instance.Spend(price, "Home decor");
     }
     // helper functions
     public Dictionary<string, Action> GetAvailableActions() 
@@ -92,18 +92,6 @@ public class BaseFunctionality : MonoBehaviour
         if (shopping) availableActions.AddRange(shoppingActions);
 
         return availableActions;
-    }
-    // default checks for use in derived classes, returns true if check if failed. most furniture objects dont use this
-    // to be removed
-    protected virtual bool DefaultChecks()
-    {
-        // check if pet is idle
-        if (!PetHelper.petStateMachine.IsInState(PetState.Idle))
-        {
-            PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
-            return true;
-        }
-        return false;
     }
     // shorthand for getting the position of the furniture on the pet's y axis
     public Vector3 PositionPetY()  { return new Vector3(transform.position.x, 1, transform.position.z);}

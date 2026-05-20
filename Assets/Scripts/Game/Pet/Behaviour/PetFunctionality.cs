@@ -15,7 +15,7 @@ public class PetFunctionality : BaseFunctionality
     void Follow()
     {
         // previously removed all instances of this exact line, but this one needs to stay
-        if (!PetHelper.petStateMachine.IsInState(PetState.Idle) || PetHelper.petBehaviour.ActiveBehaviour == Behaviour.Occupied)
+        if (PetHelper.petStateMachine.CurrentState != PetState.Idle )
         {
             PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
             return;
@@ -38,9 +38,9 @@ public class PetFunctionality : BaseFunctionality
     // called when the sit action is pressed; does as the name says
     void ToggleSit()
     {
-        if (PetHelper.petStateMachine.IsInState(PetState.Sitting)) // if the pet is sitting 
+        if (PetHelper.petStateMachine.CurrentState == PetState.Sitting) // if the pet is sitting 
         {
-            PetHelper.petStateMachine.SetState(PetState.Idle); // make the pet idle in the state machine
+            PetHelper.petStateMachine.CurrentState = PetState.Idle; // make the pet idle in the state machine
             globalActions.Remove("Rise"); // remove the rise action, as the pet is now standing
             globalActions["Sit"] = ToggleSit; // and add the sit action
 
@@ -49,12 +49,12 @@ public class PetFunctionality : BaseFunctionality
         }
         else // if the pet is not sitting
         {
-            if (!PetHelper.petStateMachine.IsInState(PetState.Idle)) // if the pet is not idle
+            if ( PetHelper.petStateMachine.CurrentState != PetState.Idle || PetHelper.petBehaviour.ActiveBehaviour == Behaviour.Occupied) // if the pet is not idle
             {
                 PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
                 return;
             }
-            PetHelper.petStateMachine.SetState(PetState.Sitting); // make the petting in the state machine
+            PetHelper.petStateMachine.CurrentState = PetState.Sitting; // make the petting in the state machine
             globalActions.Remove("Sit"); // remove the sit action, as the pet is now sitting
             globalActions["Rise"] = ToggleSit; // and add the rise action
 

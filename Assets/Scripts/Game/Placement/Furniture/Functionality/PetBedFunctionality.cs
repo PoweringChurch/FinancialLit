@@ -9,8 +9,9 @@ public class PetBedFunctionality : BaseFunctionality
     // called when go rest action is pressed
     protected virtual void GoRest()
     {
-        if (DefaultChecks())
-            return;
+        if (PetHelper.petStateMachine.CurrentState != PetState.Idle || PetHelper.petBehaviour.ActiveBehaviour == Behaviour.Occupied) {
+            PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
+            return; }
         inUse = true;
         // occupy pet with this task
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;

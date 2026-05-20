@@ -22,15 +22,14 @@ public class BathingFunctionality : BaseFunctionality
             return;
         }
         // default checks
-        if (DefaultChecks())
-            return;
+        if (PetHelper.petStateMachine.CurrentState != PetState.Idle || PetHelper.petBehaviour.ActiveBehaviour == Behaviour.Occupied) {
+            PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
+            return; }
         // set pet as occupied
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
-
         // when pet has reached goal position, run onreached
         PetHelper.petMover.OnReachedGoal += OnReached;
         PetHelper.petMover.SetGoalPosition(PositionPetY());
-
         inUse = true;
     }
     // runs when pet reaches goal; should only ever be called when goes to bathe

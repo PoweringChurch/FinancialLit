@@ -79,7 +79,7 @@ public class UISave : MonoBehaviour
         CameraHandler.Instance.ToggleScrollerBG(true);
         UIOverlay.Instance.UpdateResourcesAndBal();
 
-        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.CurrentState = PetState.Idle;;
 
         PetHelper.petAnimation.SetBoolParameter("IsSitting",false);
         PetHelper.petAnimation.SetBoolParameter("IsSick",false);
@@ -109,33 +109,48 @@ public class UISave : MonoBehaviour
     // create a new save
     public void NewSave()
     {
-        if (petNameInput.text == "")
+        if (string.IsNullOrEmpty(petNameInput.text))
             return; // cant have empty name
-        TextAsset jsonFile = Resources.Load<TextAsset>("Other/defaultsave"); // the file is in Resources/Other/defaultsave.hsib
-        PlayerData newData = JsonUtility.FromJson<PlayerData>(jsonFile.text);
-        newData.PetName = petNameInput.text;
-        newData.Breed = selectedBreed;
+        TextAsset jsonFile = Resources.Load<TextAsset>("Other/defaultsave"); // the file is in Resources/Other/defaultsave.json
         if (debugToggle.isOn)
         {
+            PlayerData debugData = new();
+
+            debugData.PetName = petNameInput.text;
+            debugData.Breed = selectedBreed;
+
             FurnitureData[] allData = FurnitureDatabase.GetAllData();
             foreach (FurnitureData data in allData)
-            {
-                newData.PlayerInventory.AddItem(data, 1000);
-            }
-            newData.Balance = 1000000;
-            newData.Shampoo = 10000;
-            newData.Food = 10000;
+                debugData.PlayerInventory.AddItem(data, 1000);
+            
+            debugData.Balance = 100000;
+            debugData.Shampoo = 1000;
+            debugData.Food = 1000;
 
             UIPopups.Instance.PopupInfo(
                 "Hey!",
                 "Because debug mode is enabled, you start with a bunch of resources and every furniture item in the game, obtainable or not! This can be disabled in settings.",
-                "Sweet!"
+                "OK"
             );
+            // set as new data
+            SaveHandler.Instance.currentPlayerData = debugData;
+            SaveHandler.Instance.LoadSaveData(debugData);
+            SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
+
+            PetHelper.petFlagManager.ClearFlags();
+            PetHelper.petStateMachine.CurrentState = PetState.Idle;;
+            PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
+
+            // update ui
+            UIOverlay.Instance.UpdateResourcesAndBal();
+            FurnitureInventoryUI.Instance.UpdateInventoryUI();
+            return;
         }
-        else
-        {
-            TutorialManager.Instance.AskTutorial();
-        }
+        PlayerData newData = JsonUtility.FromJson<PlayerData>(jsonFile.text);
+        newData.PetName = petNameInput.text;
+        newData.Breed = selectedBreed;
+        newData.Minute = 600;
+        TutorialManager.Instance.AskTutorial();
         // give starter items
         string[] starterItems = { 
             "Pet Bed", "Small Bed", "Old Monitor", "Food Bowl", 
@@ -153,7 +168,7 @@ public class UISave : MonoBehaviour
         SaveHandler.Instance.currentSaveFile = $"save_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
 
         PetHelper.petFlagManager.ClearFlags();
-        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.CurrentState = PetState.Idle;;
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
         // update ui
         UIOverlay.Instance.UpdateResourcesAndBal();
@@ -173,13 +188,13 @@ public class UISave : MonoBehaviour
             CameraHandler.Instance.ToggleScrollerBG(false);
             
             SaveHandler.Instance.DeleteSave(SaveHandler.Instance.currentSaveFile);
+            UIPopups.Instance.CloseAllPopups();
             DisplaySaves();
             Debug.Log("Save deleted");
         },
         onNo: () => 
         {
             ingameMenu.SetActive(true);
-            Debug.Log("Cancelled");
         }
     );
         

@@ -11,7 +11,7 @@ public class CameraHandler : MonoBehaviour
     private float moveSpeed = 15f;
     private float currentZoom = 10f;
     private float minZoom = 2f;
-    private float maxZoom = 20f;
+    private float maxZoom = 23f;
     private float zoomSpeed = 75f;
 
     public Slider zoomSpeedMultiplier;
@@ -21,17 +21,21 @@ public class CameraHandler : MonoBehaviour
     private Renderer[] hideableRenderers;
     
     private Vector3 origin = Vector3.zero;
-    private float bounds = 40;
+    private float bounds = 30;
 
     void Awake()
     {
         Instance = this;
         RefreshRenderers();
     }
-    // toggles the game cameras
+    // toggles the scroller bg
     public void ToggleScrollerBG(bool state)
+        => scrollGameobj.SetActive(!state); 
+    public void SetCameraOrigin(Vector3 to, float newBounds)
     {
-        scrollGameobj.SetActive(!state); 
+        Camera.main.transform.position = new Vector3(to.x, to.y+20f, to.z);
+        origin = to;
+        bounds = newBounds;
     }
     public void RotateCamera(float by)
     {
@@ -69,9 +73,9 @@ public class CameraHandler : MonoBehaviour
         Vector2 input = InputSystem.actions.FindAction("Move").ReadValue<Vector2>().normalized;
         Camera.main.transform.position += (directions * input.y + Camera.main.transform.right * input.x) * Time.deltaTime * moveSpeed * camSpeedMultiplier.value;
         Camera.main.transform.position = new Vector3(
-            Mathf.Clamp(Camera.main.transform.position.x,-bounds+origin.x,bounds+origin.y),
-            20,
-            Mathf.Clamp(Camera.main.transform.position.z,-bounds+origin.x,bounds+origin.y));
+            Mathf.Clamp(Camera.main.transform.position.x,origin.x-bounds,origin.x+bounds),
+            origin.y+20f,
+            Mathf.Clamp(Camera.main.transform.position.z,origin.z-bounds,origin.z+bounds));
     }
     // zoom the camera out and in, called in the update function
     private void ZoomCamera()
@@ -86,7 +90,7 @@ public class CameraHandler : MonoBehaviour
             currentZoom = Mathf.Clamp(currentZoom + 0.1f * zoomSpeed * zoomSpeedMultiplier.value * Time.deltaTime, minZoom, maxZoom);
         Camera.main.orthographicSize = currentZoom;
     }
-    float hideableMinDistance = 18;
+    float hideableMinDistance = 20;
     float minDistance = 6;
     float maxDistance = 20;
     float minAlpha = 0f;

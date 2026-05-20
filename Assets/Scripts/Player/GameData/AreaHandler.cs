@@ -9,34 +9,27 @@ public class AreaHandler : MonoBehaviour
     public class AreaData
     {
         public string areaName;
+        public Vector3 origin;
+        public float bounds = 20;
         public bool shadows;
         public bool bringPet;
         public bool isShop;
-        public GameObject prefab;
     }
 
-    [Header("Area Setup")]
     [SerializeField] private GameObject home;
     [SerializeField] private AreaData[] areas;
     [SerializeField] private Transform gameSpace;
-    [SerializeField] private Light lighting;
+    [SerializeField] private Light mainLight;
+    
+    
     private Dictionary<string, AreaData> areaDict = new();
     
-    [Header("References")]
-    [SerializeField] private PetStats pet;
-
-    private GameObject currentArea;
     private void Awake()
     {
         Instance = this;
         foreach (var area in areas)
             areaDict[area.areaName] = area;
     }
-    private void Start()
-    {
-        if (home) home.SetActive(true);
-    }
-    
     public void EnterArea(string areaName)
     {
         if (!areaDict.TryGetValue(areaName, out AreaData area))
@@ -45,42 +38,39 @@ public class AreaHandler : MonoBehaviour
             return;
         }
         PlacementManager.Instance.SetMode(PlacementManager.Mode.None);
-        if (home && home.activeSelf)
-            home.SetActive(false);
-        CleanupCurrentArea();
         PlayerFlagManager.RemoveFlag(PlayerFlag.Home);
 
-        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.CurrentState = PetState.Idle;
         PetHelper.petAnimation.SetBoolParameter("IsPlaying", false);
         PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
 
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Roaming;
 
-        currentArea = Instantiate(area.prefab, gameSpace);
         CameraHandler.Instance.RefreshRenderers();
         
-        lighting.shadows = LightShadows.None;
-
-        if (area.isShop) {
+        mainLight.shadows = LightShadows.None;
+        if (area.isShop) 
             PlayerFlagManager.AddFlag(PlayerFlag.Shopping);
-            }
-        if (area.shadows) lighting.shadows = LightShadows.Soft;
-        if (area.bringPet) {
-            PetHelper.petMover.agent.Warp(Vector3.up);
-            }
+        if (area.shadows)
+            mainLight.shadows = LightShadows.Hard;
+        if (area.bringPet) 
+            PetHelper.petMover.agent.Warp(area.origin);
+            
 
         if (area.areaName == "Park")
-            {if (!SaveHandler.Instance.currentPlayerData.VisitedPark)
+            {
+                if (!SaveHandler.Instance.currentPlayerData.VisitedPark)
                 {
                     string header = "Park";
                     string body = "At the park, your dog passively gains entertainment, and can get worn out if you stay here for a while. After getting worn out, you pet will sleep much easier!";
                     UIPopups.Instance.PopupInfo(header,body);
                 }
-            SaveHandler.Instance.currentPlayerData.VisitedPark = true;
-            PetHelper.petStats.atPark = true;}
+                CameraHandler.Instance.SetCameraOrigin(area.origin, area.bounds);
+                SaveHandler.Instance.currentPlayerData.VisitedPark = true;
+                PetHelper.petStats.atPark = true;
+            }
         else
             PetHelper.petStats.atPark = false;
-
         if (area.areaName == "Veterinary")
         {
             if (!SaveHandler.Instance.currentPlayerData.VisitedVet)
@@ -89,6 +79,7 @@ public class AreaHandler : MonoBehaviour
                 string body = "If your pet ever gets sick, you can visit the vet to cure them for a fee!";
                 UIPopups.Instance.PopupInfo(header,body);
             }
+            CameraHandler.Instance.SetCameraOrigin(area.origin, area.bounds);
             SaveHandler.Instance.currentPlayerData.VisitedVet = true;
         }
         if (area.areaName == "SmartyPets")
@@ -99,6 +90,7 @@ public class AreaHandler : MonoBehaviour
                 string body = "Welcome to SmartyPets! Here you can purchase pet-related items, like pet beds, food, shampoo, or pet toys. Purchase items by selecting the item you wish to purchase and pressing buy.";
                 UIPopups.Instance.PopupInfo(header,body);
             }
+            CameraHandler.Instance.SetCameraOrigin(area.origin, area.bounds);
             SaveHandler.Instance.currentPlayerData.VisitedSmartyPets = true;
         }
         if (area.areaName == "FurnitureStore")
@@ -109,6 +101,7 @@ public class AreaHandler : MonoBehaviour
                 string body = "At the furniture store, you can purchase furniture to place in your home. Purchased furniture gets added to your inventory for placement in the placement menu.";
                 UIPopups.Instance.PopupInfo(header,body);
             }
+            CameraHandler.Instance.SetCameraOrigin(area.origin, area.bounds);
             SaveHandler.Instance.currentPlayerData.VisitedFurnitureStore = true;
         }
         PetHelper.CurrentActivePet.GetComponent<Collider>().enabled = area.bringPet;
@@ -118,9 +111,8 @@ public class AreaHandler : MonoBehaviour
     }
     public void EnterHome()
     {
-        CleanupCurrentArea();
+        CameraHandler.Instance.SetCameraOrigin(Vector3.zero, 30);
         PetHelper.CurrentActivePet.GetComponent<Collider>().enabled = true;
-        home.SetActive(true);
         PetHelper.petStats.atPark = false;
         // reset pet's position
         PetHelper.petMover.agent.Warp(Vector3.up);
@@ -128,32 +120,18 @@ public class AreaHandler : MonoBehaviour
         PlayerFlagManager.RemoveFlag(PlayerFlag.Shopping);
 
         // handle pets behaviour and animation
-        PetHelper.petStateMachine.SetState(PetState.Idle);
+        PetHelper.petStateMachine.CurrentState = PetState.Idle;
         PetHelper.petAnimation.SetBoolParameter("IsPlaying", false);
         PetHelper.petAnimation.SetBoolParameter("IsSitting", false);
 
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Default;
 
-        lighting.shadows = LightShadows.None;
+        mainLight.shadows = LightShadows.Hard;
         // reactivate pet
         PetHelper.CurrentActivePet.transform.Find("PetModel").gameObject.SetActive(true);
         PetHelper.CurrentActivePet.transform.Find("StinkyParticles").gameObject.SetActive(true);
         // refresh the pet's renderers
         CameraHandler.Instance.RefreshRenderers();
         UIButtons.Instance.EnableButton("Build");
-    }
-
-    private void CleanupCurrentArea()
-    {
-        if (currentArea != null)
-        {
-            Destroy(currentArea);
-            currentArea = null;
-        }
-    }
-
-    private void OnDestroy()
-    {
-        CleanupCurrentArea();
     }
 }

@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-//https://github.com/MinaPecheux/unity-tutorials/blob/main/Assets/07-BuildingPlacement/Scripts/BuildingManager.cs
-//modified a bit but mostly from this tutorial
+// https://github.com/MinaPecheux/unity-tutorials/blob/main/Assets/07-BuildingPlacement/Scripts/BuildingManager.cs
+// modified from this tutorial
 public class PlacementData : MonoBehaviour
 {
     // really should be a field and have property 

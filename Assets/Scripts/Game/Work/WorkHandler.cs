@@ -692,7 +692,7 @@ public class WorkHandler : MonoBehaviour
     public void EndShift()
     {
         shiftActive = false;
-        FinancialSpending.Instance.Earn(totalEarned);
+        FinancialSpending.Instance.Earn(totalEarned, "Work");
         
         // increase difficulty every 3 successful shifts
         if (completedScenarioCount >= totalScenarios)

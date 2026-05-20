@@ -26,8 +26,9 @@ public class FeedingFunctionality : BaseFunctionality
             PlacementUtils.Message("Not filled!", transform.position);
             return;
         }
-        if (DefaultChecks()) // tb deleted
-            return;
+        if (PetHelper.petStateMachine.CurrentState != PetState.Idle || PetHelper.petBehaviour.ActiveBehaviour == Behaviour.Occupied) {
+            PlacementUtils.Message($"{PetHelper.petStats.petName} is occupied!", transform.position);
+            return; }
         // make pet occupied
         PetHelper.petBehaviour.ActiveBehaviour = Behaviour.Occupied;
         PetHelper.petMover.OnReachedGoal += OnReached;

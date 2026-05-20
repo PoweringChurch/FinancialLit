@@ -47,7 +47,7 @@ public class GameTime : MonoBehaviour
         switch (newState)
         {
             case PetState.Sleeping:
-                minuteDuration = 0.25f;
+                minuteDuration = 0.2f;
                 break;
             case PetState.Bathing:
                 minuteDuration = 0.35f;
@@ -77,6 +77,7 @@ public class GameTime : MonoBehaviour
     {
         // tick the pet's stats
         PetHelper.petStats.Tick(passedMinutes,atWork);
+        RecyclingJob.Instance.Tick(passedMinutes);
         
         // add passed minutes to total
         minute += passedMinutes;
@@ -95,7 +96,10 @@ public class GameTime : MonoBehaviour
         // add passed weeks to total
         week += passedWeeks;
 
-        mainLight.intensity = 0.3f + 0.95f * Mathf.Sin(minute / 1440f * Mathf.PI);
+        // progress day
+        mainLight.intensity = 0.3f + 0.95f * Mathf.Sin((minute / 1440f) * Mathf.PI);
+        mainLight.transform.rotation = Quaternion.Euler((minute / 1440f)*180,0,0);
+        
         UIOverlay.Instance.UpdateTime();
     }
     // sets the time without ticking game, really only used when loading the game

@@ -209,7 +209,7 @@ public class FloorPlacement : MonoBehaviour
         {
             FloorComponent fc = hit.transform.GetComponentInParent<FloorComponent>();
             if (fc == null) return;
-            FinancialSpending.Instance.Earn(fc.floorData.sellVal);
+            FinancialSpending.Instance.Earn(fc.floorData.sellVal, "Returns");
             Destroy(fc.gameObject);
             CameraHandler.Instance.RefreshRenderers();
         }

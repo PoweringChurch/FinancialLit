@@ -43,8 +43,18 @@ public class SaveHandler : MonoBehaviour
         currentPlayerData.PlacedWalls = PlacementManager.Instance.Wall.GetAllWalls().ToArray();
         currentPlayerData.PlacedFloors = PlacementManager.Instance.Floor.GetAllFloors();
         currentPlayerData.PlayerInventory = InventoryHelper.Instance.GetInventory();
+        
         // resources
         currentPlayerData.Balance = FinancialSpending.Instance.Balance;
+        currentPlayerData.Healthcare = FinancialSpending.Instance.spending["Healthcare"];
+        currentPlayerData.PetCare = FinancialSpending.Instance.spending["Pet care"];
+        currentPlayerData.HomeDecor = FinancialSpending.Instance.spending["Home decor"];
+
+        currentPlayerData.Work = FinancialSpending.Instance.earning["Work"];
+        currentPlayerData.Recycling = FinancialSpending.Instance.earning["Recycling"];
+        currentPlayerData.Returns = FinancialSpending.Instance.earning["Returns"];
+
+
         currentPlayerData.Food = PlayerResources.Instance.Food;
         currentPlayerData.Shampoo = PlayerResources.Instance.Shampoo;
 
@@ -60,7 +70,7 @@ public class SaveHandler : MonoBehaviour
 
         sessionStartTime = Time.time; //reset for next save
         // save to file
-        string json = JsonUtility.ToJson(currentPlayerData, true); // true here pretty print
+        string json = JsonUtility.ToJson(currentPlayerData, true); // true here is pretty print
         string savePath = Application.persistentDataPath + "/" + currentSaveFile;
         File.WriteAllText(savePath, json);
         Debug.Log($"Game saved to {savePath}");
@@ -112,12 +122,11 @@ public class SaveHandler : MonoBehaviour
         PlacementManager.Instance.LoadHouseData(playerData.PlacedWalls, playerData.PlacedFurniture, playerData.PlacedFloors);
         // inventory
         InventoryHelper.Instance.SetInventory(playerData.PlayerInventory);
-        InventoryHelper.Instance.Rebuild(); // Rebuild FurnitureData references
-
+        InventoryHelper.Instance.Rebuild(); // rebuild FurnitureData references
         // igt
         GameTime.Instance.SetTime(playerData.Minute,playerData.Day,playerData.Week);
         // resources
-        FinancialSpending.Instance.SetBalance(playerData.Balance);
+        FinancialSpending.Instance.SetInfo(playerData);
         PlayerResources.Instance.SetFood(playerData.Food);
         PlayerResources.Instance.SetShampoo(playerData.Shampoo);
 

@@ -12,10 +12,8 @@ public class PetBehaviour : MonoBehaviour
         set { activeBehaviour = value; }
         get { return activeBehaviour;}
     }
-    void Awake()
-    {
+    void Awake() =>
         activeBehaviour = Behaviour.Roaming;
-    }
     // time until pet does something
     private float actionTimer = 5f;
     void Update()
@@ -99,5 +97,5 @@ public class PetBehaviour : MonoBehaviour
     }
     [SerializeField] private LayerMask interactableLayer;
     // determines if the passed vector is over the interactable layer
-    private bool VectorOverInteractable(Vector3 vector) { return Physics.Raycast(vector, Vector3.down, Mathf.Infinity, interactableLayer); }
+    private bool VectorOverInteractable(Vector3 vector) => Physics.Raycast(vector, Vector3.down, Mathf.Infinity, interactableLayer);
 }
