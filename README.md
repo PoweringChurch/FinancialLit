@@ -1,6 +1,6 @@
 # My Dog Home source files
 
-###### FinancialLit is the repository for the FBLA Intro to Programming 2025 - 2026 event submission source files, My Dog Home.
+###### FinancialLit is the repository for the FBLA Intro to Programming 2025 - 2026 event submission source files, My Dog Home. This project is no longer being developed.
 
 ## Overview
 
@@ -20,7 +20,6 @@ This project is currently in active development!
 
 ## How to view this project in the Unity editor
 
-This project is actively being developed, so this process may change!  
 To access My Dog Home's source files, you must have Unity Hub installed, as well as Unity Editor 6.0.
 
 1. Clone the repository
@@ -41,4 +40,4 @@ To maintain compliance with FBLA competitive event rules regarding original work
    * Pull requests are closed. Please do not submit pull requests to this repository.  
    * Issues are open. Suggestions, bug reports, and feedback via the "Issues" tab are highly encouraged and appreciated!
 
-Author: Xavier McCoy, Active development (Version 0.2)
+Author: Xavier McCoy
